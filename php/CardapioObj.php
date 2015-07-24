@@ -38,8 +38,8 @@ include_once 'Cardapios.class.php';
          <h2>Cadastro de Cardápios</h2>
          <form name="cadcardapio" method="post" action="<?php $SELF_PHP;?>"/>
            <label for=dia> Dia:
-           <select name='dia'>"
-           <option value=''>Selecione o dia</option>";
+           <select name='dia'>
+           <option value=''>Selecione o dia</option>;
             <?php $diaSelect = new Dia();
                   $diaSelect->diaSelect();
             ?>
