@@ -1,3 +1,14 @@
+#Meu Primeiro Projeto
+
+Meu Primeiro Projeto:
+
+Projeto voltado a criação de um painel de controle utilizando de PHP OO e Bootstrap para criação do projeto.
+
+Ass.
+
+Julian Cunha 
+
+
 # [Start Bootstrap](http://startbootstrap.com/) - [SB Admin 2](http://startbootstrap.com/template-overviews/sb-admin-2/)
 
 [SB Admin 2](http://startbootstrap.com/template-overviews/sb-admin-2/) is an open source, admin dashboard template for [Bootstrap](http://getbootstrap.com/) created by [Start Bootstrap](http://startbootstrap.com/).
