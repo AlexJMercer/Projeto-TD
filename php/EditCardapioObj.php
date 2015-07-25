@@ -1,20 +1,20 @@
 <?php
 
-include_once "../class/Carrega.class.php";
+ include_once "../class/Carrega.class.php";
 
-  if (isset($_POST['enviar']))
+  if (isset($_POST['atualizar']))
   {
       $object = new Cardapios();
+      $object->cod = $_POST['cod'];
       $object->dia = $_POST['dia'];
       $object->data = $_POST['data'];
       $object->texto = $_POST['cardapio'];
 
-      $object->inserir();
+      $object->atualizar();
 
       header("Location:ViewCardapioObj.php");
   }
 ?>
-
 <!DOCTYPE html>
 <html lang="pt-br">
 
@@ -400,8 +400,6 @@ include_once "../class/Carrega.class.php";
 
 <?php
 
-  include_once "../class/Carrega.class.php";
-
   $cod = $_POST["cod"];
 
   if (isset($_POST["editar"]))
@@ -421,14 +419,14 @@ include_once "../class/Carrega.class.php";
                                           <select class="form-control" name="dia" id="dia">
                                               <option value="">Selecione o dia</option>
                                               <?php $diaSelect = new Dia();
-                                                    $diaSelect->diaSelect($comp->$dia);
+                                                    $diaSelect->diaSelect($comp->dia);
                                               ?>
                                           </select>
                                           </label>
                                       </div>
                                       <div class="form-group">
                                           <label for="data">Data:
-                                          <input class="form-control" id='data' name="data" placeholder="DD/MM/AAAA" value=" <?php echo date('d/m/y',strtotime( $comp->data)) ?>">
+                                          <input class="form-control" id='data' name="data" placeholder="DD/MM/AAAA" value=" <?php echo date('d/m/Y',strtotime( $comp->data)) ?>">
                                           </label>
                                       </div>
                                       <div class="form-group">
@@ -455,6 +453,11 @@ include_once "../class/Carrega.class.php";
         </div>
         <!-- /#page-wrapper -->
     </div>
+
+    <?php
+          }
+        }
+    ?>
     <!-- /#wrapper -->
     <!-- jQuery -->
     <script src="../bower_components/jquery/dist/jquery.min.js"></script>
@@ -475,5 +478,6 @@ include_once "../class/Carrega.class.php";
       $('#data').mask("99/99/9999");
     });
     </script>
+
 </body>
 </html>

@@ -42,7 +42,7 @@ include "BD.class.php";
 
       public function listar()
       {
-         $sql = "SELECT * FROM cardapios, dia WHERE cardapios.card_day=dia.id ORDER BY card_day";
+         $sql = "SELECT * FROM cardapios, dia WHERE cardapios.card_day=dia.id ORDER BY cardapios.card_day";
          $result = pg_query($sql);
          $retorno = null;
 

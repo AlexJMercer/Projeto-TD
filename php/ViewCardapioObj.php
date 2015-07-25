@@ -416,7 +416,7 @@ include_once "../class/Carrega.class.php";
       {
 ?>
                             <tr class="odd gradeX">
-                              <form name="view" class="" action="EditCardapiosObj.php" method="post">
+                              <form name="view" class="" action="EditCardapioObj.php" method="post">
 <?php
                               echo "<td> ".$line->dia."</td>
                                     <td>" .date('d/m/Y',strtotime($line->data))."</td>
