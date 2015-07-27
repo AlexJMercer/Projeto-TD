@@ -42,7 +42,7 @@ include "BD.class.php";
 
       public function listar()
       {
-         $sql = "SELECT * FROM cardapios, dia WHERE cardapios.card_day=dia.id ORDER BY cardapios.card_day";
+         $sql = "SELECT * FROM cardapios, dia WHERE cardapios.card_day=dia.id ORDER BY cardapios.card_id";
          $result = pg_query($sql);
          $retorno = null;
 
@@ -90,6 +90,26 @@ include "BD.class.php";
            $obj = new Cardapios();
            $obj->cod = $reg["card_id"];
            $obj->dia = $reg["card_day"];
+           $obj->data = $reg["card_date"];
+           $obj->texto = $reg["card_text"];
+
+           $retorno = $obj;
+        }
+        return $retorno;
+      }
+
+
+      public function exibir($cod = "")
+      {
+        $sql = "SELECT * FROM cardapios, dia WHERE cardapios.card_day=dia.id AND cardapios.card_id=$cod ";
+        $result = pg_query($sql);
+        $retorno = NULL;
+
+        while ($reg = pg_fetch_assoc($result))
+        {
+           $obj = new Cardapios();
+           $obj->cod = $reg["card_id"];
+           $obj->dia = $reg["dia"];
            $obj->data = $reg["card_date"];
            $obj->texto = $reg["card_text"];
 
