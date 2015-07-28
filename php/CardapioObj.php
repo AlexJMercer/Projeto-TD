@@ -14,7 +14,6 @@ include_once "../class/Carrega.class.php";
       header("Location:ViewCardapioObj.php");
   }
 ?>
-
 <!DOCTYPE html>
 <html lang="pt-br">
 
@@ -421,8 +420,11 @@ include_once "../class/Carrega.class.php";
                                           <textarea placeholder="Digite o cardápio" name="cardapio" id="cardapio" rows="5" cols="50" class="form-control"></textarea>
                                           </label>
                                       </div>
-                                        <input type="submit" name="enviar" value="Enviar" class="btn btn-success btn-lg"/>
-                                        <input type="reset" name="limpar" value="Limpar dados" class="btn btn-danger btn-sm"/>
+                                        <button type="submit" name="enviar" value="enviar" class="btn btn-success btn-lg btn-block"><i class="fa fa-check"></i> Enviar </button>
+                                        <br>
+                                        <!--input type="submit" name="enviar" value="Enviar" class="btn btn-success btn-lg"/-->
+                                        <button type="reset" name="limpar" value="limpar" class="btn btn-danger btn-lg btn-block"><i class="fa fa-magic"></i> Limpar dados </button>
+                                        <!--input type="reset" name="limpar" value="Limpar dados" class="btn btn-danger btn-lg btn-block"/-->
                                     </form>
                                 </div>
                                 <!-- /.col-lg-6 (nested) -->

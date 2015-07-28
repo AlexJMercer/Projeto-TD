@@ -407,9 +407,11 @@
                                     </blockquote>
                                 <form class="" action="EditCardapioObj.php" method="post">
                                   <input type="hidden" name="cod" value="<?php echo $comp->cod; ?>"/>
-                                  <input type="submit" name="editar" value="Editar" class="btn btn-primary btn-lg btn-block"/>
+                                  <!--input type="submit" name="editar" value="Editar" class="btn btn-primary btn-lg btn-block"/-->
+                                  <button type="submit" name="editar" value="editar" class="btn btn-outline btn-warning btn-lg btn-block"><i class="fa fa-edit"></i> Editar </button>
                                   <br>
-                                  <input type="button" name="cancelar" value="Cancelar" onclick="history.go(-1)" class="btn btn-danger btn-lg btn-block"/>
+                                  <button type="button" name="voltar" onclick="history.go(-1)" class="btn btn-outline btn-default btn-lg btn-block"><i class="fa fa-undo"></i> Voltar </button>
+                                  <!--input type="button" name="cancelar" value="Cancelar" onclick="history.go(-1)" class="btn btn-danger btn-lg btn-block"/-->
                                 </form>
                                 </div>
                                 <!-- /.col-lg-6 (nested) -->

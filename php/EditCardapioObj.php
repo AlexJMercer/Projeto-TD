@@ -435,8 +435,11 @@
                                           </label>
                                       </div>
                                         <input type="hidden" name="cod" value="<?php echo $comp->cod; ?>"/>
-                                        <input type="submit" name="atualizar" value="Atualizar" class="btn btn-success btn-lg"/>
-                                        <input type="button" name="cancelar" value="Cancelar" onclick="history.go(-1)" class="btn btn-danger btn-sm"/>
+                                        <!--input type="submit" name="atualizar" value="Atualizar" class="btn btn-success btn-lg"/-->
+                                        <button type="submit" name="atualizar" value="atualizar" class="btn btn-success btn-lg btn-block"><i class="fa fa-refresh"></i> Atualizar </button>
+                                        <br>
+                                        <button type="button" name="cancelar" value="cancelar" onclick="location.href='ViewCardapioObj.php'" class="btn btn-outline btn-default btn-lg btn-block"><i class="fa fa-undo"></i> Cancelar </button>
+                                        <!--input type="button" name="cancelar" value="Cancelar" onclick="location.href='ViewCardapioObj.php'" class="btn btn-danger btn-lg btn-block"/-->
                                     </form>
                                 </div>
                                 <!-- /.col-lg-6 (nested) -->

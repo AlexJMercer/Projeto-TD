@@ -331,7 +331,7 @@
                             <a href="#"><i class="fa fa-file-text-o fa-fw"></i> Noticias<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
-                                    <a href="#">Adicionar Noticia</a>
+                                    <a href="#">Escrever Noticia</a>
                                 </li>
                                 <li>
                                     <a href="#">Listar Noticias</a>
@@ -422,12 +422,14 @@ include_once "../class/Carrega.class.php";
                                 <td><?php echo $line->texto; ?></td>
                                 <td class='center'>
                                   <input type='hidden' name='cod' value='<?php echo $line->cod; ?>'>
-                                  <input type='submit' class='btn btn-outline btn-info' name='exibir' value='Exibir' formaction='ExibCardapioObj.php' />
-                                  <input type='submit' class='btn btn-primary' name='editar' value='Editar'/>
-                                  <input type='submit' class='btn btn-danger' formaction='' name='excluir' value='Excluir'/></td>
-                              </tr>
+                                  <button type="submit" name="exibir" value="exibir" formaction="ExibCardapioObj.php" class="btn btn-outline btn-info"><i class="fa fa-expand"></i> Exibir </button>
+                                  <!--input type='submit' class='btn btn-outline btn-info' name='exibir' value='Exibir' formaction='ExibCardapioObj.php' /-->
+                                  <button type="submit" name="editar" value="editar" class="btn btn-outline btn-warning"><i class="fa fa-edit"></i> Editar </button>
+                                  <!--input type='submit' class='btn btn-outline btn-warning' name='editar' value='Editar'/-->
+                                  <button type="submit" name="excluir" value="excluir" formaction="" class='btn btn-danger'><i class="fa fa-times"></i> Excluir </button>
+                                  <!--input type='submit' class='btn btn-danger' formaction='' name='excluir' value='Excluir'/--></td>
                               </form>
-
+                            </tr>
 <?php
         }
       }
@@ -488,6 +490,7 @@ if (isset($_POST['excluir']))
 
     $object->excluir();
 
-    header("Location:ViewCardapioObj.php");
+    echo "<meta http-equiv='refresh' content='0;url=ViewCardapioObj.php'";
+    //header("Location:ViewCardapioObj.php");
 }
 ?>
