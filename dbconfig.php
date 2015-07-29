@@ -4,11 +4,10 @@
 
       "host" => "localhost",
       "usuario" => "postgres",
-      "senha" => "senha5",
+      "senha" => "gremio",
       "banco" => "todentro",
       "port" => "5432",
 
       );
-
 
 ?>
