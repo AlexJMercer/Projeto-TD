@@ -35,12 +35,53 @@
 
       public function inserir()
       {
-         $sql = "INSERT INTO usuarios (nome, email, senha, type)
-                 VALUES ('$this->nome', '$this->email', '$this->senha', '$this->type') ";
+         $sql = "INSERT INTO usuarios (username, email, senha, type)
+                 VALUES ('$this->nome', '$this->email', '$this->senha', '$this->type')";
+         $return = pg_query($sql);
+         return $return;
+      }
+
+      public function listar()
+      {
+         $sql = "SELECT * FROM usuarios, usertype WHERE usuarios.type=usertype.id Order by usuarios.id";
+         $result = pg_query($sql);
+         $return = null;
+
+         while (($reg = pg_fetch_assoc($result))
+         {
+            $object = new Usuarios();
+            $object->cod = $reg["id"];
+            $object->nome = $reg["username"];
+            $object->email = $reg["email"];
+            $object->type = $reg["type"];
+
+            $return[] = $object;
+         }
+
+         return $return;
+      }
+
+
+      public function excluir()
+      {
+         $sql = "DELETE from usuarios where id=$this->cod";
+         $return = pg_query($sql);
+         return $return;
+      }
+
+      public function atualizar()
+      {
+         $return = false;
+         $sql = "UPDATE usuarios
+                  set username='$this->nome',
+                      email='$this->email',
+                      senha='$this->senha',
+                      type='$this->type'
+                  where id=$this->cod";
+
          $return = pg_query($sql);
          return $return;
       }
 
    }
-
- ?>
+?>
