@@ -35,7 +35,7 @@
 
       public function inserir()
       {
-         $sql = "INSERT INTO usuarios (username, email, senha, type)
+         $sql = "INSERT INTO usuarios (username, email, senha, usertype)
                  VALUES ('$this->nome', '$this->email', '$this->senha', '$this->type')";
          $return = pg_query($sql);
          return $return;
@@ -43,11 +43,11 @@
 
       public function listar()
       {
-         $sql = "SELECT * FROM usuarios, usertype WHERE usuarios.type=usertype.id Order by usuarios.id";
+         $sql = "SELECT * FROM usuarios, usertype WHERE usuarios.usertype=usertype.id Order by usuarios.id";
          $result = pg_query($sql);
          $return = null;
 
-         while (($reg = pg_fetch_assoc($result))
+         while ($reg = pg_fetch_assoc($result))
          {
             $object = new Usuarios();
             $object->cod = $reg["id"];
@@ -57,7 +57,6 @@
 
             $return[] = $object;
          }
-
          return $return;
       }
 
@@ -80,6 +79,44 @@
                   where id=$this->cod";
 
          $return = pg_query($sql);
+         return $return;
+      }
+
+      public function exibir($cod = "")
+      {
+         $sql = "SELECT * FROM usuarios, usertype WHERE usuarios.usertype=usertype.id AND usuarios.id=$cod ";
+         $result = pg_query($sql);
+         $return = null;
+
+         while ($reg = pg_fetch_assoc($result))
+         {
+            $object = new Usuarios();
+            $object->cod = $reg["id"];
+            $object->nome = $reg["username"];
+            $object->email = $reg["email"];
+            $object->type = $reg["type"];
+
+            $return = $object;
+         }
+         return $return;
+      }
+
+      public function editar($cod = "")
+      {
+         $sql = "SELECT * FROM usuarios, usertype WHERE usuarios.usertype=usertype.id AND usuarios.id=$cod ";
+         $result = pg_query($sql);
+         $return = null;
+
+         while ($reg = pg_fetch_assoc($result))
+         {
+            $object = new Usuarios();
+            $object->cod = $reg["id"];
+            $object->nome = $reg["username"];
+            $object->email = $reg["email"];
+            $object->type = $reg["usertype"];
+
+            $return = $object;
+         }
          return $return;
       }
 

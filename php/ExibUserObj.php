@@ -1,25 +1,9 @@
 <?php
-
-include_once "../class/Carrega.class.php";
-
-  if (isset($_POST['enviar']))
-  {
-      $object = new Usuarios();
-      $object->nome = $_POST['nome'];
-      $object->email = $_POST['email'];
-      $object->senha = sha1($_POST['senha']);
-      $object->type = $_POST['type'];
-
-      $object->inserir();
-
-      echo "<meta http-equiv='refresh' content='0;url=UserObj.php'";
-  }
+ include_once "../class/Carrega.class.php";
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
-
 <head>
-
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -47,12 +31,10 @@ include_once "../class/Carrega.class.php";
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
 
+    <link rel="stylesheet" href="estilo.css" type="text/css">
 </head>
-
 <body>
-
     <div id="wrapper">
-
         <!-- Navigation -->
         <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
             <div class="navbar-header">
@@ -65,7 +47,6 @@ include_once "../class/Carrega.class.php";
                 <a class="navbar-brand" href="index.html">SB Admin v2.0</a>
             </div>
             <!-- /.navbar-header -->
-
             <ul class="nav navbar-top-links navbar-right">
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
@@ -275,7 +256,6 @@ include_once "../class/Carrega.class.php";
                 <!-- /.dropdown -->
             </ul>
             <!-- /.navbar-top-links -->
-
             <div class="navbar-default sidebar" role="navigation">
                 <div class="sidebar-nav navbar-collapse">
                     <ul class="nav" id="side-menu">
@@ -395,45 +375,44 @@ include_once "../class/Carrega.class.php";
                 <div class="col-lg-12">
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            Formulário de cadastro de usuários
+                            Usuário
                         </div>
+
+<?php
+
+  $cod = $_POST["cod"];
+
+  if (isset($_POST["exibir"]))
+  {
+    $exib = new Usuarios();
+    $comp = $exib->exibir($cod);
+
+      if ($exib != null)
+      {
+?>
                         <div class="panel-body">
                             <div class="row">
                                 <div class="col-lg-6">
-                                    <form role="form" name="caduser" method="post" action="<?php $SELF_PHP;?>">
-                                       <div class="form-group">
-                                          <label for="nome"> Username:
-                                          <input class="form-control" id="nome" name="nome" placeholder="Digite aqui seu nome de usuário">
-                                          </label>
-                                       </div>
-                                       <div class="form-group">
-                                             <label for="email"> E-mail:
-                                                 <input class="form-control"
-                                                  id="email" name="email" placeholder="Digite aqui seu e-mail">
-                                             </label>
-                                         </div>
-                                       <div class="form-group">
-                                             <label for="senha">Senha:
-                                                 <input class="form-control"
-                                                 type="password" id="senha" name="senha" placeholder="Digite aqui sua senha">
-                                             </label>
-                                         </div>
-                                         <div class="form-group">
-                                          <label for="type">Tipo de usuário:
-                                          <select class="form-control" name="type" id="type">
-                                              <option value="">Selecione tipo</option>
-                                              <?php $typeSelect = new Type();
-                                                    $typeSelect->typeSelect();
-                                              ?>
-                                          </select>
-                                          </label>
-                                      </div>
-                                        <button type="submit" name="enviar" value="enviar" class="btn btn-success btn-lg btn-block"><i class="fa fa-check"></i> Enviar </button>
-                                        <br>
-                                        <!--input type="submit" name="enviar" value="Enviar" class="btn btn-success btn-lg"/-->
-                                        <button type="reset" name="limpar" value="limpar" class="btn btn-danger btn-lg btn-block"><i class="fa fa-magic"></i> Limpar dados </button>
-                                        <!--input type="reset" name="limpar" value="Limpar dados" class="btn btn-danger btn-lg btn-block"/-->
-                                    </form>
+                                  <h4>Nome: </h4>
+                                    <blockquote>
+                                      <p><?php echo $comp->nome;?></p>
+                                    </blockquote>
+                                  <h4>E-mail: </h4>
+                                    <blockquote>
+                                      <p><?php echo $comp->email; ?></p>
+                                    </blockquote>
+                                  <h4>Permissão: </h4>
+                                    <blockquote>
+                                      <p><?php echo $comp->type; ?></p>
+                                    </blockquote>
+                                <form class="" action="EditUserObj.php" method="post">
+                                  <input type="hidden" name="cod" value="<?php echo $comp->cod; ?>"/>
+                                  <!--input type="submit" name="editar" value="Editar" class="btn btn-primary btn-lg btn-block"/-->
+                                  <button type="submit" name="editar" value="editar" class="btn btn-outline btn-warning btn-lg btn-block"><i class="fa fa-edit"></i> Editar </button>
+                                  <br>
+                                  <button type="button" name="voltar" onclick="history.go(-1)" class="btn btn-outline btn-default btn-lg btn-block"><i class="fa fa-undo"></i> Voltar </button>
+                                  <!--input type="button" name="cancelar" value="Cancelar" onclick="history.go(-1)" class="btn btn-danger btn-lg btn-block"/-->
+                                </form>
                                 </div>
                                 <!-- /.col-lg-6 (nested) -->
                             </div>
@@ -449,6 +428,11 @@ include_once "../class/Carrega.class.php";
         </div>
         <!-- /#page-wrapper -->
     </div>
+
+    <?php
+          }
+        }
+    ?>
     <!-- /#wrapper -->
     <!-- jQuery -->
     <script src="../bower_components/jquery/dist/jquery.min.js"></script>

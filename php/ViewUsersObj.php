@@ -1,23 +1,6 @@
-<?php
-
-include_once "../class/Carrega.class.php";
-
-  if (isset($_POST['enviar']))
-  {
-      $object = new Usuarios();
-      $object->nome = $_POST['nome'];
-      $object->email = $_POST['email'];
-      $object->senha = sha1($_POST['senha']);
-      $object->type = $_POST['type'];
-
-      $object->inserir();
-
-      echo "<meta http-equiv='refresh' content='0;url=UserObj.php'";
-  }
-?>
 <!DOCTYPE html>
 <html lang="pt-br">
-
+<!-- Editado por Julian 23/07/2015 -->
 <head>
 
     <meta charset="utf-8">
@@ -33,6 +16,15 @@ include_once "../class/Carrega.class.php";
 
     <!-- MetisMenu CSS -->
     <link href="../bower_components/metisMenu/dist/metisMenu.min.css" rel="stylesheet">
+
+    <!-- Social Buttons CSS -->
+    <link href="../bower_components/bootstrap-social/bootstrap-social.css" rel="stylesheet">
+
+    <!-- DataTables CSS -->
+    <link href="../bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.css" rel="stylesheet">
+
+    <!-- DataTables Responsive CSS -->
+    <link href="../bower_components/datatables-responsive/css/dataTables.responsive.css" rel="stylesheet">
 
     <!-- Custom CSS -->
     <link href="../dist/css/sb-admin-2.css" rel="stylesheet">
@@ -297,10 +289,10 @@ include_once "../class/Carrega.class.php";
                             <a href="#"><i class="fa fa-cutlery fa-fw"></i> Cardápios <span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
-                                    <a href="CardapioObj.php">Adicionar cardápio</a>
+                                    <a href="CardapioObj.php"><i class="fa fa-plus"></i> Adicionar cardápio </a>
                                 </li>
                                 <li>
-                                    <a href="ViewCardapioObj.php">Listar cardápios</a>
+                                    <a href="ViewCardapioObj.php"><i class="fa fa-list"></i> Listar cardápios</a>
                                 </li>
                             </ul>
                             <!-- /.nav-second-level -->
@@ -336,22 +328,22 @@ include_once "../class/Carrega.class.php";
                             <!-- /.nav-second-level -->
                         </li>
                         <li>
-                            <a href="#"><i class="fa fa-sitemap fa-fw"></i> Multi-Level Dropdown<span class="fa arrow"></span></a>
+                            <a href="#"><i class="fa fa-file-text-o fa-fw"></i> Noticias<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
-                                    <a href="#">Second Level Item</a>
+                                    <a href="#">Escrever Noticia</a>
                                 </li>
                                 <li>
-                                    <a href="#">Second Level Item</a>
+                                    <a href="#">Listar Noticias</a>
                                 </li>
                                 <li>
-                                    <a href="#">Third Level <span class="fa arrow"></span></a>
+                                    <a href="#">Categorias<span class="fa arrow"></span></a>
                                     <ul class="nav nav-third-level">
                                         <li>
-                                            <a href="#">Third Level Item</a>
+                                            <a href="#">Adicionar Categoria de Noticias</a>
                                         </li>
                                         <li>
-                                            <a href="#">Third Level Item</a>
+                                            <a href="#">Listar Categorias de Noticias</a>
                                         </li>
                                         <li>
                                             <a href="#">Third Level Item</a>
@@ -395,49 +387,62 @@ include_once "../class/Carrega.class.php";
                 <div class="col-lg-12">
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            Formulário de cadastro de usuários
+                            Listagem de Usuários
                         </div>
+                        <!-- /.panel-heading -->
                         <div class="panel-body">
-                            <div class="row">
-                                <div class="col-lg-6">
-                                    <form role="form" name="caduser" method="post" action="<?php $SELF_PHP;?>">
-                                       <div class="form-group">
-                                          <label for="nome"> Username:
-                                          <input class="form-control" id="nome" name="nome" placeholder="Digite aqui seu nome de usuário">
-                                          </label>
-                                       </div>
-                                       <div class="form-group">
-                                             <label for="email"> E-mail:
-                                                 <input class="form-control"
-                                                  id="email" name="email" placeholder="Digite aqui seu e-mail">
-                                             </label>
-                                         </div>
-                                       <div class="form-group">
-                                             <label for="senha">Senha:
-                                                 <input class="form-control"
-                                                 type="password" id="senha" name="senha" placeholder="Digite aqui sua senha">
-                                             </label>
-                                         </div>
-                                         <div class="form-group">
-                                          <label for="type">Tipo de usuário:
-                                          <select class="form-control" name="type" id="type">
-                                              <option value="">Selecione tipo</option>
-                                              <?php $typeSelect = new Type();
-                                                    $typeSelect->typeSelect();
-                                              ?>
-                                          </select>
-                                          </label>
-                                      </div>
-                                        <button type="submit" name="enviar" value="enviar" class="btn btn-success btn-lg btn-block"><i class="fa fa-check"></i> Enviar </button>
-                                        <br>
-                                        <!--input type="submit" name="enviar" value="Enviar" class="btn btn-success btn-lg"/-->
-                                        <button type="reset" name="limpar" value="limpar" class="btn btn-danger btn-lg btn-block"><i class="fa fa-magic"></i> Limpar dados </button>
-                                        <!--input type="reset" name="limpar" value="Limpar dados" class="btn btn-danger btn-lg btn-block"/-->
-                                    </form>
-                                </div>
-                                <!-- /.col-lg-6 (nested) -->
+                          <div class="table-responsive">
+                            <div class="dataTable_wrapper">
+                                <table class="table table-hover" id="dataTables-example">
+                                    <thead>
+                                        <tr>
+                                            <th>Nome</th>
+                                            <th>E-mail</th>
+                                            <th>Permissão</th>
+                                            <th>Opções</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+<?php
+
+include_once "../class/Carrega.class.php";
+
+  $listar = new Usuarios();
+  $list = $listar->listar();
+
+    if ($list != null)
+    {
+      foreach ($list as $line)
+      {
+?>
+                            <tr class="odd gradeX">
+                              <form name="view" class="" action="EditUserObj.php" method="post">
+                                <td><?php echo $line->nome; ?></td>
+                                <td><?php echo $line->email; ?></td>
+                                <td><?php echo $line->type; ?></td>
+                                <td class='center'>
+                                  <input type='hidden' name='cod' value='<?php echo $line->cod; ?>'>
+                                  <button type="submit" name="exibir" value="exibir" formaction="ExibUserObj.php" class="btn btn-outline btn-info"><i class="fa fa-expand"></i> Exibir </button>
+                                  <!--input type='submit' class='btn btn-outline btn-info' name='exibir' value='Exibir' formaction='ExibCardapioObj.php' /-->
+                                  <button type="submit" name="editar" value="editar" class="btn btn-outline btn-warning"><i class="fa fa-edit"></i> Editar </button>
+                                  <!--input type='submit' class='btn btn-outline btn-warning' name='editar' value='Editar'/-->
+                                  <button type="submit" name="excluir" value="excluir" formaction="" class='btn btn-danger'><i class="fa fa-times"></i> Excluir </button>
+                                  <!--input type='submit' class='btn btn-danger' formaction='' name='excluir' value='Excluir'/--></td>
+                              </form>
+                            </tr>
+<?php
+        }
+      }
+      else
+      {
+        echo "<h2> Nenhum usuário cadastrado!!</h2>";
+      }
+?>
+                                    </tbody>
+                                </table>
                             </div>
-                            <!-- /.row (nested) -->
+                            </div>
+                            <!-- /.table-responsive -->
                         </div>
                         <!-- /.panel-body -->
                     </div>
@@ -452,14 +457,40 @@ include_once "../class/Carrega.class.php";
     <!-- /#wrapper -->
     <!-- jQuery -->
     <script src="../bower_components/jquery/dist/jquery.min.js"></script>
+
     <!-- Bootstrap Core JavaScript -->
     <script src="../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 
     <!-- Metis Menu Plugin JavaScript -->
     <script src="../bower_components/metisMenu/dist/metisMenu.min.js"></script>
 
+    <!-- DataTables JavaScript -->
+    <script src="../bower_components/datatables/media/js/jquery.dataTables.min.js"></script>
+    <script src="../bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.min.js"></script>
+
     <!-- Custom Theme JavaScript -->
     <script src="../dist/js/sb-admin-2.js"></script>
 
+    <!-- Page-Level Demo Scripts - Tables - Use for reference -->
+    <script>
+    $(document).ready(function() {
+        $('#dataTables-example').DataTable({
+                responsive: true
+        });
+    });
+    </script>
 </body>
 </html>
+<?php
+
+if (isset($_POST['excluir']))
+{
+    $object = new Usuarios();
+    $object->cod = $_POST['cod'];
+
+    $object->excluir();
+
+    echo "<meta http-equiv='refresh' content='0;url=ViewUsersObj.php'";
+    //header("Location:ViewCardapioObj.php");
+}
+?>

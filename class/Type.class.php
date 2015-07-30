@@ -1,8 +1,9 @@
 <?php
+include_once 'Carrega.class.php';
 /**
  *
  */
-class ClassName extends AnotherClass
+class Type
 {
    private $cod;
    private $type;
