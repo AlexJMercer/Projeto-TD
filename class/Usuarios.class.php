@@ -12,6 +12,9 @@
       private $senha;
       private $bd;
       private $type;
+      private $inSession = true;
+
+
 
       public function __construct()
       {
@@ -35,8 +38,8 @@
 
       public function inserir()
       {
-         $sql = "INSERT INTO usuarios (username, email, senha, usertype)
-                 VALUES ('$this->nome', '$this->email', '$this->senha', '$this->type')";
+         $sql = "INSERT INTO usuarios (nome, email, senha, usertype, login)
+                 VALUES ('$this->nome', '$this->email', '$this->senha', '$this->type', '$this->login')";
          $return = pg_query($sql);
          return $return;
       }
@@ -51,7 +54,7 @@
          {
             $object = new Usuarios();
             $object->cod = $reg["id"];
-            $object->nome = $reg["username"];
+            $object->nome = $reg["nome"];
             $object->email = $reg["email"];
             $object->type = $reg["type"];
 
@@ -72,10 +75,11 @@
       {
          $return = false;
          $sql = "UPDATE usuarios
-                  set username='$this->nome',
+                  set nome='$this->nome',
                       email='$this->email',
                       senha='$this->senha',
-                      type='$this->type'
+                      type='$this->type',
+                      login='$this->login'
                   where id=$this->cod";
 
          $return = pg_query($sql);
@@ -92,9 +96,10 @@
          {
             $object = new Usuarios();
             $object->cod = $reg["id"];
-            $object->nome = $reg["username"];
+            $object->nome = $reg["nome"];
             $object->email = $reg["email"];
             $object->type = $reg["type"];
+            $object->login = $reg['login'];
 
             $return = $object;
          }
@@ -111,38 +116,35 @@
          {
             $object = new Usuarios();
             $object->cod = $reg["id"];
-            $object->nome = $reg["username"];
+            $object->nome = $reg["nome"];
             $object->email = $reg["email"];
             $object->type = $reg["usertype"];
+            $object->login = $reg['login'];
 
             $return = $object;
          }
          return $return;
       }
 
-      public function __codificaSenha($senha)
+      public function codificaSenha($senha)
       {
          // Altere aqui caso você use, por exemplo, o MD5:
          // return md5($senha);
          return sha1($senha);
       }
 
-      function validaUsuario($nome, $senha)
+      public function logar($login, $senha, $type)
       {
-         //Função para teste
-         $senha = $this->__codificaSenha($senha);
-         // Procura por usuários com o mesmo usuário e senha
-         $sql = "SELECT COUNT(*) FROM usuarios WHERE {$this->nome} = '{$nome}' AND '{$this->senha}' = '{$senha}'";
-                  $result = pg_query($sql);
-                  if ($result) {
-                        $total = pg_result($result, 0);
-                     } else {
-                        // A consulta foi mal sucedida, retorna false
-                        return false;
-                     }
-                     // Se houver apenas um usuário, retorna true
-                     return ($total == 1) ? true : false;
-                  }
+         $sql = "SELECT * FROM usuarios, usertype WHERE usuarios.login=$login, usuarios.senha=$senha, usuarios.usertype=$type";
+         $result = pg_query($sql);
+         $cont = pg_num_rows($result);
 
-   }
+         if ($cont==1 && $type==3)
+         {
+            session_start();
+            $_SESSION['login']=$login;
+            $_SESSION['logon']=true;
+         }
+      }
+}
 ?>
