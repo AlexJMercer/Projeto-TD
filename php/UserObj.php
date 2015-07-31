@@ -403,24 +403,24 @@ include_once "../class/Carrega.class.php";
                                     <form role="form" name="caduser" method="post" action="<?php $SELF_PHP;?>">
                                        <div class="form-group">
                                           <label for="nome"> Username:
-                                          <input class="form-control" id="nome" name="nome" placeholder="Digite aqui seu nome de usuário">
+                                          <input class="form-control" id="nome" name="nome" placeholder="Digite aqui seu nome de usuário" required>
                                           </label>
                                        </div>
                                        <div class="form-group">
                                              <label for="email"> E-mail:
                                                  <input class="form-control"
-                                                  id="email" name="email" placeholder="Digite aqui seu e-mail">
+                                                  id="email" name="email" placeholder="Digite aqui seu e-mail" required>
                                              </label>
                                          </div>
                                        <div class="form-group">
                                              <label for="senha">Senha:
                                                  <input class="form-control"
-                                                 type="password" id="senha" name="senha" placeholder="Digite aqui sua senha">
+                                                 type="password" id="senha" name="senha" placeholder="Digite aqui sua senha" required>
                                              </label>
                                          </div>
                                          <div class="form-group">
                                           <label for="type">Tipo de usuário:
-                                          <select class="form-control" name="type" id="type">
+                                          <select class="form-control" name="type" id="type" required>
                                               <option value="">Selecione tipo</option>
                                               <?php $typeSelect = new Type();
                                                     $typeSelect->typeSelect();

@@ -120,5 +120,29 @@
          return $return;
       }
 
+      public function __codificaSenha($senha)
+      {
+         // Altere aqui caso você use, por exemplo, o MD5:
+         // return md5($senha);
+         return sha1($senha);
+      }
+
+      function validaUsuario($nome, $senha)
+      {
+         //Função para teste
+         $senha = $this->__codificaSenha($senha);
+         // Procura por usuários com o mesmo usuário e senha
+         $sql = "SELECT COUNT(*) FROM usuarios WHERE {$this->nome} = '{$nome}' AND '{$this->senha}' = '{$senha}'";
+                  $result = pg_query($sql);
+                  if ($result) {
+                        $total = pg_result($result, 0);
+                     } else {
+                        // A consulta foi mal sucedida, retorna false
+                        return false;
+                     }
+                     // Se houver apenas um usuário, retorna true
+                     return ($total == 1) ? true : false;
+                  }
+
    }
 ?>

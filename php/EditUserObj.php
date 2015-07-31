@@ -8,11 +8,10 @@
       $object->cod = $_POST['cod'];
       $object->nome = $_POST['nome'];
       $object->email = $_POST['email'];
-      $object->type = $_POST['type'];
 
       $object->atualizar();
 
-      header("Location:ViewCardapioObj.php");
+      header("Location:ViewUsersObj.php");
   }
 ?>
 <!DOCTYPE html>
@@ -414,31 +413,32 @@
                             <div class="row">
                                 <div class="col-lg-6">
                                     <form role="form" name="editcardapio" method="post" action="<?php $SELF_PHP;?>">
-                                      <div class="form-group">
-                                          <label for="dia">Dia:
-                                          <select class="form-control" name="dia" id="dia">
-                                              <option value="">Selecione o dia</option>
-                                              <?php $diaSelect = new Dia();
-                                                    $diaSelect->diaSelect($comp->dia);
-                                              ?>
-                                          </select>
+                                       <div class="form-group">
+                                          <label for="nome"> Username:
+                                          <input class="form-control" id="nome" name="nome" placeholder="Digite aqui seu nome de usuário" value="<?php echo $comp->nome; ?>" required>
                                           </label>
-                                      </div>
-                                      <div class="form-group">
-                                          <label for="data">Data:
-                                          <input class="form-control" id='data' name="data" placeholder="DD/MM/AAAA" value=" <?php echo date('d/m/Y',strtotime( $comp->data)) ?>">
-                                          </label>
-                                      </div>
-                                      <div class="form-group">
-                                          <label for="cardapio">Cardápio:
-                                          <textarea placeholder="Digite o cardápio" name="cardapio" id="cardapio" rows="5" cols="50" class="form-control"><?php echo $comp->texto;  ?></textarea>
-                                          </label>
-                                      </div>
+                                       </div>
+                                       <div class="form-group">
+                                             <label for="email"> E-mail:
+                                                <input class="form-control"
+                                                  id="email" name="email" placeholder="Digite aqui seu e-mail" value="<?php echo $comp->email; ?>" required>
+                                             </label>
+                                        </div>
+                                        <div class="form-group">
+                                         <label for="type">Tipo de usuário:
+                                         <select disabled class="form-control" name="type" id="type" >
+                                             <option value="">Selecione tipo</option>
+                                             <?php $typeSelect = new Type();
+                                                   $typeSelect->typeSelect($comp->type);
+                                             ?>
+                                         </select>
+                                         </label>
+                                     </div>
                                         <input type="hidden" name="cod" value="<?php echo $comp->cod; ?>"/>
                                         <!--input type="submit" name="atualizar" value="Atualizar" class="btn btn-success btn-lg"/-->
                                         <button type="submit" name="atualizar" value="atualizar" class="btn btn-success btn-lg btn-block"><i class="fa fa-refresh"></i> Atualizar </button>
                                         <br>
-                                        <button type="button" name="cancelar" value="cancelar" onclick="location.href='ViewCardapioObj.php'" class="btn btn-outline btn-default btn-lg btn-block"><i class="fa fa-undo"></i> Cancelar </button>
+                                        <button type="button" name="cancelar" value="cancelar" onclick="location.href='ViewUsersObj.php'" class="btn btn-outline btn-default btn-lg btn-block"><i class="fa fa-undo"></i> Cancelar </button>
                                         <!--input type="button" name="cancelar" value="Cancelar" onclick="location.href='ViewCardapioObj.php'" class="btn btn-danger btn-lg btn-block"/-->
                                     </form>
                                 </div>

@@ -402,7 +402,7 @@ include_once "../class/Carrega.class.php";
                                     <form role="form" name="cadcardapio" method="post" action="<?php $SELF_PHP;?>">
                                       <div class="form-group">
                                           <label for="dia">Dia:
-                                          <select class="form-control" name="dia" id="dia">
+                                          <select class="form-control" name="dia" id="dia" required>
                                               <option value="">Selecione o dia</option>
                                               <?php $diaSelect = new Dia();
                                                     $diaSelect->diaSelect();
@@ -412,12 +412,12 @@ include_once "../class/Carrega.class.php";
                                       </div>
                                       <div class="form-group">
                                           <label for="data">Data:
-                                          <input class="form-control" id='data' name="data" placeholder="DD/MM/AAAA">
+                                          <input class="form-control" id='data' name="data" placeholder="DD/MM/AAAA" required>
                                           </label>
                                       </div>
                                       <div class="form-group">
                                           <label for="cardapio">Cardápio:
-                                          <textarea placeholder="Digite o cardápio" name="cardapio" id="cardapio" rows="5" cols="50" class="form-control"></textarea>
+                                          <textarea placeholder="Digite o cardápio" name="cardapio" id="cardapio" rows="5" cols="50" class="form-control" required></textarea>
                                           </label>
                                       </div>
                                         <button type="submit" name="enviar" value="enviar" class="btn btn-success btn-lg btn-block"><i class="fa fa-check"></i> Enviar </button>

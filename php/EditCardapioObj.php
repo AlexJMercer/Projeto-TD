@@ -416,7 +416,7 @@
                                     <form role="form" name="editcardapio" method="post" action="<?php $SELF_PHP;?>">
                                       <div class="form-group">
                                           <label for="dia">Dia:
-                                          <select class="form-control" name="dia" id="dia">
+                                          <select class="form-control" name="dia" id="dia" required>
                                               <option value="">Selecione o dia</option>
                                               <?php $diaSelect = new Dia();
                                                     $diaSelect->diaSelect($comp->dia);
@@ -426,12 +426,12 @@
                                       </div>
                                       <div class="form-group">
                                           <label for="data">Data:
-                                          <input class="form-control" id='data' name="data" placeholder="DD/MM/AAAA" value=" <?php echo date('d/m/Y',strtotime( $comp->data)) ?>">
+                                          <input class="form-control" id='data' name="data" placeholder="DD/MM/AAAA" value=" <?php echo date('d/m/Y',strtotime( $comp->data)) ?>" required>
                                           </label>
                                       </div>
                                       <div class="form-group">
                                           <label for="cardapio">Cardápio:
-                                          <textarea placeholder="Digite o cardápio" name="cardapio" id="cardapio" rows="5" cols="50" class="form-control"><?php echo $comp->texto;  ?></textarea>
+                                          <textarea placeholder="Digite o cardápio" name="cardapio" id="cardapio" rows="5" cols="50" class="form-control" required><?php echo $comp->texto;  ?></textarea>
                                           </label>
                                       </div>
                                         <input type="hidden" name="cod" value="<?php echo $comp->cod; ?>"/>
