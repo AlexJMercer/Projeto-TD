@@ -9,6 +9,7 @@ include_once "../class/Carrega.class.php";
       $object->email = $_POST['email'];
       $object->senha = sha1($_POST['senha']);
       $object->type = $_POST['type'];
+      $object->login = $_POST['login'];
 
       $object->inserir();
 
@@ -402,8 +403,8 @@ include_once "../class/Carrega.class.php";
                                 <div class="col-lg-6">
                                     <form role="form" name="caduser" method="post" action="<?php $SELF_PHP;?>">
                                        <div class="form-group">
-                                          <label for="nome"> Username:
-                                          <input class="form-control" id="nome" name="nome" placeholder="Digite aqui seu nome de usuário" required>
+                                          <label for="nome"> Nome:
+                                          <input class="form-control" id="nome" name="nome" placeholder="Digite aqui seu nome" required>
                                           </label>
                                        </div>
                                        <div class="form-group">
@@ -411,14 +412,14 @@ include_once "../class/Carrega.class.php";
                                                  <input class="form-control"
                                                   id="email" name="email" placeholder="Digite aqui seu e-mail" required>
                                              </label>
-                                         </div>
+                                       </div>
                                        <div class="form-group">
                                              <label for="senha">Senha:
                                                  <input class="form-control"
                                                  type="password" id="senha" name="senha" placeholder="Digite aqui sua senha" required>
                                              </label>
-                                         </div>
-                                         <div class="form-group">
+                                       </div>
+                                       <div class="form-group">
                                           <label for="type">Tipo de usuário:
                                           <select class="form-control" name="type" id="type" required>
                                               <option value="">Selecione tipo</option>
@@ -427,12 +428,15 @@ include_once "../class/Carrega.class.php";
                                               ?>
                                           </select>
                                           </label>
-                                      </div>
+                                       </div>
+                                       <div class="form-group">
+                                          <label for="login"> Login:
+                                             <input class="form-control" id="login" name="login" placeholder="Digite aqui seu login" required>
+                                          </label>
+                                       </div>
                                         <button type="submit" name="enviar" value="enviar" class="btn btn-success btn-lg btn-block"><i class="fa fa-check"></i> Enviar </button>
                                         <br>
-                                        <!--input type="submit" name="enviar" value="Enviar" class="btn btn-success btn-lg"/-->
                                         <button type="reset" name="limpar" value="limpar" class="btn btn-danger btn-lg btn-block"><i class="fa fa-magic"></i> Limpar dados </button>
-                                        <!--input type="reset" name="limpar" value="Limpar dados" class="btn btn-danger btn-lg btn-block"/-->
                                     </form>
                                 </div>
                                 <!-- /.col-lg-6 (nested) -->

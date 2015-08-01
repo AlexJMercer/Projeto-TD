@@ -1,3 +1,19 @@
+<?php
+
+   include '../class/Carrega.class.php';
+
+   if (isset($_POST['enviar']))
+   {
+      $object = new Usuarios();
+      //$object->login = $_POST['login'];
+      //$object->senha = sha1($_POST['senha']);
+      //$object->type = $_POST['type'];
+
+      $object->logar($_POST['login'], sha1($_POST['senha']),$_POST['type']);
+   }
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -12,7 +28,7 @@
     <title>Stylish Portfolio - Start Bootstrap Theme</title>
 
     <!-- Bootstrap Core CSS -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="../bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom CSS -->
     <link href="css/stylish-portfolio.css" rel="stylesheet">
@@ -78,13 +94,23 @@
                         </div>
                         <div class="modal-body">
                           <div class="panel-body">
-                              <form role="form">
+                              <form role="form" method="post" action="<?php $SELF_PHP;?>">
                                   <fieldset>
                                       <div class="form-group">
-                                          <input class="form-control" placeholder="E-mail" name="email" type="email" autofocus>
+                                          <input class="form-control" placeholder="Login" name="login" type="text" autofocus required>
                                       </div>
                                       <div class="form-group">
-                                          <input class="form-control" placeholder="Password" name="password" type="password" value="">
+                                          <input class="form-control" placeholder="Senha" name="senha" type="password" required>
+                                      </div>
+                                      <div class="form-group">
+                                         <label for="type">Tipo de usuário:
+                                         <select class="form-control" name="type" id="type" required>
+                                             <option value="">Selecione tipo</option>
+                                             <?php $typeSelect = new Type();
+                                                   $typeSelect->typeSelect();
+                                             ?>
+                                         </select>
+                                         </label>
                                       </div>
                                       <div class="checkbox">
                                           <label>
@@ -92,7 +118,8 @@
                                           </label>
                                       </div>
                                       <!-- Change this to a button or input when using this as a form -->
-                                      <a href="index.html" class="btn btn-lg btn-success btn-block">Login</a>
+                                      <button type="submit" name="enviar" value="enviar" class="btn btn-success btn-lg btn-block"><i class="fa fa-check"></i> Enviar </button>
+                                      <!--a href="index.html" class="btn btn-lg btn-success btn-block">Login</a-->
                                   </fieldset>
                               </form>
                           </div>

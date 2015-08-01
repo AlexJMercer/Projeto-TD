@@ -133,18 +133,29 @@
          return sha1($senha);
       }
 
-      public function logar($login, $senha, $type)
+      public function logar($login="", $senha="", $type="")
       {
-         $sql = "SELECT * FROM usuarios, usertype WHERE usuarios.login=$login, usuarios.senha=$senha, usuarios.usertype=$type";
-         $result = pg_query($sql);
-         $cont = pg_num_rows($result);
 
-         if ($cont==1 && $type==3)
-         {
+         //$senha = $this->codificaSenha($senha);
+
+         $sql = "SELECT * FROM usuarios WHERE usuarios.login='$login' AND usuarios.senha='$senha' AND usuarios.usertype='$type'";
+         $result = pg_query($sql);
+         $cont=pg_num_rows($result);
+         //$return= NULL;
+         if($cont=1){
+            while ($reg = pg_fetch_assoc($result))
+            {
             session_start();
-            $_SESSION['login']=$login;
-            $_SESSION['logon']=true;
+            echo $result;
+            header('location:../php/ViewCardapioObj.php');
+            }
          }
+         else
+         {
+            echo $result;die();
+            header('location:index.php');
+         }
+
       }
 }
 ?>
