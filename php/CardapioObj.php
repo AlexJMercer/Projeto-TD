@@ -398,17 +398,16 @@ include_once "../class/Carrega.class.php";
                         </div>
                         <div class="panel-body">
                             <div class="row">
-                                <div class="col-lg-6">
+                                <div class="col-lg-12">
                                     <form role="form" name="cadcardapio" method="post" action="<?php $SELF_PHP;?>">
                                       <div class="form-group">
-                                          <label for="dia">Dia:
+                                          <label for="dia">Dia:</label>
                                           <select class="form-control" name="dia" id="dia" required>
                                               <option value="">Selecione o dia</option>
                                               <?php $diaSelect = new Dia();
                                                     $diaSelect->diaSelect();
                                               ?>
                                           </select>
-                                          </label>
                                       </div>
                                       <div class="form-group">
                                           <label for="data">Data:
@@ -416,15 +415,14 @@ include_once "../class/Carrega.class.php";
                                           </label>
                                       </div>
                                       <div class="form-group">
-                                          <label for="cardapio">Cardápio:
+                                          <label for="cardapio">Cardápio:</label>
                                           <textarea placeholder="Digite o cardápio" name="cardapio" id="cardapio" rows="5" cols="50" class="form-control" required></textarea>
-                                          </label>
+
                                       </div>
-                                        <button type="submit" name="enviar" value="enviar" class="btn btn-success btn-lg btn-block"><i class="fa fa-check"></i> Enviar </button>
-                                        <br>
                                         <!--input type="submit" name="enviar" value="Enviar" class="btn btn-success btn-lg"/-->
-                                        <button type="reset" name="limpar" value="limpar" class="btn btn-danger btn-lg btn-block"><i class="fa fa-magic"></i> Limpar dados </button>
+                                        <button type="reset" name="limpar" value="limpar" class="btn btn-outline btn-danger btn-lg"><i class="fa fa-magic"></i> Limpar dados </button>
                                         <!--input type="reset" name="limpar" value="Limpar dados" class="btn btn-danger btn-lg btn-block"/-->
+                                        <button type="submit" name="enviar" value="enviar" class="btn btn-success btn-lg"><i class="fa fa-check"></i> Enviar </button>
                                     </form>
                                 </div>
                                 <!-- /.col-lg-6 (nested) -->

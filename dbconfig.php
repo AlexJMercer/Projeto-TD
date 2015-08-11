@@ -4,7 +4,7 @@
 
       "host" => "localhost",
       "usuario" => "postgres",
-      "senha" => "gremio",
+      "senha" => "senha5",
       "banco" => "todentro",
       "port" => "5432",
 
