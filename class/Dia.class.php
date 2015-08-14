@@ -1,5 +1,7 @@
 <?php
 
+  include_once 'Carrega.class.php';
+
    class Dia
    {
       private $id;
