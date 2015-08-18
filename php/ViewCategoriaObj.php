@@ -1,23 +1,6 @@
-<?php
-
- include_once "../class/Carrega.class.php";
-
-  if (isset($_POST['atualizar']))
-  {
-      $object = new Cardapios();
-      $object->cod = $_POST['cod'];
-      $object->dia = $_POST['dia'];
-      $object->data = $_POST['data'];
-      $object->texto = $_POST['cardapio'];
-
-      $object->atualizar();
-
-      header("Location:ViewCardapioObj.php");
-  }
-?>
 <!DOCTYPE html>
 <html lang="pt-br">
-
+<!-- Editado por Julian 23/07/2015 -->
 <head>
 
     <meta charset="utf-8">
@@ -33,6 +16,15 @@
 
     <!-- MetisMenu CSS -->
     <link href="../bower_components/metisMenu/dist/metisMenu.min.css" rel="stylesheet">
+
+    <!-- Social Buttons CSS -->
+    <link href="../bower_components/bootstrap-social/bootstrap-social.css" rel="stylesheet">
+
+    <!-- DataTables CSS -->
+    <link href="../bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.css" rel="stylesheet">
+
+    <!-- DataTables Responsive CSS -->
+    <link href="../bower_components/datatables-responsive/css/dataTables.responsive.css" rel="stylesheet">
 
     <!-- Custom CSS -->
     <link href="../dist/css/sb-admin-2.css" rel="stylesheet">
@@ -297,10 +289,10 @@
                             <a href="#"><i class="fa fa-cutlery fa-fw"></i> Cardápios <span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
-                                    <a href="CardapioObj.php">Adicionar cardápio</a>
+                                    <a href="CardapioObj.php"><i class="fa fa-plus"></i> Adicionar cardápio </a>
                                 </li>
                                 <li>
-                                    <a href="ViewCardapioObj.php">Listar cardápios</a>
+                                    <a href="ViewCardapioObj.php"><i class="fa fa-list"></i> Listar cardápios</a>
                                 </li>
                             </ul>
                             <!-- /.nav-second-level -->
@@ -336,22 +328,22 @@
                             <!-- /.nav-second-level -->
                         </li>
                         <li>
-                            <a href="#"><i class="fa fa-sitemap fa-fw"></i> Multi-Level Dropdown<span class="fa arrow"></span></a>
+                            <a href="#"><i class="fa fa-file-text-o fa-fw"></i> Noticias<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
-                                    <a href="#">Second Level Item</a>
+                                    <a href="#">Escrever Noticia</a>
                                 </li>
                                 <li>
-                                    <a href="#">Second Level Item</a>
+                                    <a href="#">Listar Noticias</a>
                                 </li>
                                 <li>
-                                    <a href="#">Third Level <span class="fa arrow"></span></a>
+                                    <a href="#">Categorias<span class="fa arrow"></span></a>
                                     <ul class="nav nav-third-level">
                                         <li>
-                                            <a href="#">Third Level Item</a>
+                                            <a href="#">Adicionar Categoria de Noticias</a>
                                         </li>
                                         <li>
-                                            <a href="#">Third Level Item</a>
+                                            <a href="#">Listar Categorias de Noticias</a>
                                         </li>
                                         <li>
                                             <a href="#">Third Level Item</a>
@@ -386,7 +378,7 @@
         <div id="page-wrapper">
             <div class="row">
                 <div class="col-lg-12">
-                    <h1 class="page-header">Cardápios</h1>
+                    <h1 class="page-header">Categorias</h1>
                 </div>
                 <!-- /.col-lg-12 -->
             </div>
@@ -395,56 +387,59 @@
                 <div class="col-lg-12">
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            Formulário de edição de cardápios
+                            Listagem de categorias
                         </div>
-
+                        <!-- /.panel-heading -->
+                        <div class="panel-body">
+                          <div class="table-responsive">
+                            <div class="dataTable_wrapper">
+                                <table class="table table-hover" id="dataTables-example">
+                                    <thead>
+                                        <tr>
+                                            <th>Categoria</th>
+                                            <th>Opções</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
 <?php
 
-  $cod = $_POST["cod"];
+include_once "../class/Carrega.class.php";
 
-  if (isset($_POST["editar"]))
-  {
-    $edit = new Cardapios();
-    $comp = $edit->editar($cod);
+  $listar = new Categorias();
+  $list = $listar->listar();
 
-      if ($edit != null)
+    if ($list != null)
+    {
+      foreach ($list as $line)
       {
 ?>
-                        <div class="panel-body">
-                            <div class="row">
-                                <div class="col-lg-12">
-                                    <form role="form" name="editcardapio" method="post" action="<?php $SELF_PHP;?>">
-                                      <div class="form-group">
-                                          <label for="dia">Dia:
-                                          <select class="form-control" name="dia" id="dia" required>
-                                              <option value="">Selecione o dia</option>
-                                              <?php $diaSelect = new Dia();
-                                                    $diaSelect->diaSelect($comp->dia);
-                                              ?>
-                                          </select>
-                                          </label>
-                                      </div>
-                                      <div class="form-group">
-                                          <label for="data">Data:
-                                          <input class="form-control" id='data' name="data" placeholder="DD/MM/AAAA" value=" <?php echo date('d/m/Y',strtotime( $comp->data)) ?>" required>
-                                          </label>
-                                      </div>
-                                      <div class="form-group">
-                                          <label for="cardapio">Cardápio:
-                                          <textarea placeholder="Digite o cardápio" name="cardapio" id="cardapio" rows="5" cols="50" class="form-control" required><?php echo $comp->texto;  ?></textarea>
-                                          </label>
-                                      </div>
-                                        <input type="hidden" name="cod" value="<?php echo $comp->cod; ?>"/>
-                                        <!--input type="submit" name="atualizar" value="Atualizar" class="btn btn-success btn-lg"/-->
-                                        <button type="submit" name="atualizar" value="atualizar" class="btn btn-success btn-lg btn-block"><i class="fa fa-refresh"></i> Atualizar </button>
-                                        <br>
-                                        <button type="button" name="cancelar" value="cancelar" onclick="location.href='ViewCardapioObj.php'" class="btn btn-outline btn-default btn-lg btn-block"><i class="fa fa-undo"></i> Cancelar </button>
-                                        <!--input type="button" name="cancelar" value="Cancelar" onclick="location.href='ViewCardapioObj.php'" class="btn btn-danger btn-lg btn-block"/-->
-                                    </form>
-                                </div>
-                                <!-- /.col-lg-6 (nested) -->
+                            <tr class="odd gradeX">
+                              <form name="view" class="" action="EditCardapioObj.php" method="post">
+                                <td><?php echo $line->categoria; ?></td>
+                                <td class='center'>
+                                  <input type='hidden' name='cod' value='<?php echo $line->id; ?>'>
+
+                                  <button type="submit" name="exibir" value="exibir" formaction="ExibCardapioObj.php" class="btn btn-outline btn-info"><i class="fa fa-expand"></i> Exibir </button>
+
+                                  <button type="submit" name="editar" value="editar" class="btn btn-outline btn-warning"><i class="fa fa-edit"></i> Editar </button>
+
+                                  <button type="submit" name="excluir" value="excluir" formaction="" class='btn btn-danger'><i class="fa fa-times"></i> Excluir </button>
+                                  </td>
+                              </form>
+                            </tr>
+<?php
+        }
+      }
+      else
+      {
+        echo "<h2> Nenhum categoria cadastrado!!</h2>";
+      }
+?>
+                                    </tbody>
+                                </table>
                             </div>
-                            <!-- /.row (nested) -->
+                            </div>
+                            <!-- /.table-responsive -->
                         </div>
                         <!-- /.panel-body -->
                     </div>
@@ -456,31 +451,43 @@
         </div>
         <!-- /#page-wrapper -->
     </div>
-
-    <?php
-          }
-        }
-    ?>
     <!-- /#wrapper -->
     <!-- jQuery -->
     <script src="../bower_components/jquery/dist/jquery.min.js"></script>
+
     <!-- Bootstrap Core JavaScript -->
     <script src="../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 
     <!-- Metis Menu Plugin JavaScript -->
     <script src="../bower_components/metisMenu/dist/metisMenu.min.js"></script>
 
+    <!-- DataTables JavaScript -->
+    <script src="../bower_components/datatables/media/js/jquery.dataTables.min.js"></script>
+    <script src="../bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.min.js"></script>
+
     <!-- Custom Theme JavaScript -->
     <script src="../dist/js/sb-admin-2.js"></script>
 
-    <script type="text/javascript" src="../js/jquery.maskedinput.min.js"></script>
-
-    <script type="text/javascript">
-    $(document).ready(function()
-    {
-      $('#data').mask("99/99/9999");
+    <!-- Page-Level Demo Scripts - Tables - Use for reference -->
+    <script>
+    $(document).ready(function() {
+        $('#dataTables-example').DataTable({
+                responsive: true
+        });
     });
     </script>
-
 </body>
 </html>
+<?php
+
+if (isset($_POST['excluir']))
+{
+    $object = new Categorias();
+    $object->cod = $_POST['cod'];
+
+    $object->excluir();
+
+    echo "<meta http-equiv='refresh' content='0;url=ViewCardapioObj.php'";
+    //header("Location:ViewCardapioObj.php");
+}
+?>

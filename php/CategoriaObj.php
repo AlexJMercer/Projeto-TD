@@ -1,18 +1,15 @@
 <?php
 
- include_once "../class/Carrega.class.php";
+include_once "../class/Carrega.class.php";
 
-  if (isset($_POST['atualizar']))
+  if (isset($_POST['enviar']))
   {
-      $object = new Cardapios();
-      $object->cod = $_POST['cod'];
-      $object->dia = $_POST['dia'];
-      $object->data = $_POST['data'];
-      $object->texto = $_POST['cardapio'];
+      $object = new Categorias();
+      $object->categoria = $_POST['categoria'];
 
-      $object->atualizar();
+      $object->inserir();
 
-      header("Location:ViewCardapioObj.php");
+      header("Location:ViewCategoriaObj.php");
   }
 ?>
 <!DOCTYPE html>
@@ -386,7 +383,7 @@
         <div id="page-wrapper">
             <div class="row">
                 <div class="col-lg-12">
-                    <h1 class="page-header">Cardápios</h1>
+                    <h1 class="page-header">Categorias</h1>
                 </div>
                 <!-- /.col-lg-12 -->
             </div>
@@ -395,51 +392,22 @@
                 <div class="col-lg-12">
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            Formulário de edição de cardápios
+                            Formulário de cadastro de categorias
                         </div>
-
-<?php
-
-  $cod = $_POST["cod"];
-
-  if (isset($_POST["editar"]))
-  {
-    $edit = new Cardapios();
-    $comp = $edit->editar($cod);
-
-      if ($edit != null)
-      {
-?>
                         <div class="panel-body">
                             <div class="row">
                                 <div class="col-lg-12">
-                                    <form role="form" name="editcardapio" method="post" action="<?php $SELF_PHP;?>">
+                                    <form role="form" name="cadcategoria" method="post" action="<?php $SELF_PHP;?>">
                                       <div class="form-group">
-                                          <label for="dia">Dia:
-                                          <select class="form-control" name="dia" id="dia" required>
-                                              <option value="">Selecione o dia</option>
-                                              <?php $diaSelect = new Dia();
-                                                    $diaSelect->diaSelect($comp->dia);
-                                              ?>
-                                          </select>
-                                          </label>
+                                          <label for="categoria">Categoria:</label>
+                                          <input type="text" class="form-control" name="categoria" placeholder="Digite o categoria aqui" autofocus required>
                                       </div>
-                                      <div class="form-group">
-                                          <label for="data">Data:
-                                          <input class="form-control" id='data' name="data" placeholder="DD/MM/AAAA" value=" <?php echo date('d/m/Y',strtotime( $comp->data)) ?>" required>
-                                          </label>
-                                      </div>
-                                      <div class="form-group">
-                                          <label for="cardapio">Cardápio:
-                                          <textarea placeholder="Digite o cardápio" name="cardapio" id="cardapio" rows="5" cols="50" class="form-control" required><?php echo $comp->texto;  ?></textarea>
-                                          </label>
-                                      </div>
-                                        <input type="hidden" name="cod" value="<?php echo $comp->cod; ?>"/>
-                                        <!--input type="submit" name="atualizar" value="Atualizar" class="btn btn-success btn-lg"/-->
-                                        <button type="submit" name="atualizar" value="atualizar" class="btn btn-success btn-lg btn-block"><i class="fa fa-refresh"></i> Atualizar </button>
-                                        <br>
-                                        <button type="button" name="cancelar" value="cancelar" onclick="location.href='ViewCardapioObj.php'" class="btn btn-outline btn-default btn-lg btn-block"><i class="fa fa-undo"></i> Cancelar </button>
-                                        <!--input type="button" name="cancelar" value="Cancelar" onclick="location.href='ViewCardapioObj.php'" class="btn btn-danger btn-lg btn-block"/-->
+
+                                      <br>
+                                      <button type="submit" name="enviar" value="enviar" class="btn btn-success btn-lg btn-block"><i class="fa fa-check"></i> Enviar </button>
+                                      <br>
+                                      <button type="reset" name="limpar" value="limpar" class="btn btn-outline btn-danger btn-lg btn-block"><i class="fa fa-magic"></i> Limpar </button>
+                                      
                                     </form>
                                 </div>
                                 <!-- /.col-lg-6 (nested) -->
@@ -456,11 +424,6 @@
         </div>
         <!-- /#page-wrapper -->
     </div>
-
-    <?php
-          }
-        }
-    ?>
     <!-- /#wrapper -->
     <!-- jQuery -->
     <script src="../bower_components/jquery/dist/jquery.min.js"></script>
@@ -472,15 +435,6 @@
 
     <!-- Custom Theme JavaScript -->
     <script src="../dist/js/sb-admin-2.js"></script>
-
-    <script type="text/javascript" src="../js/jquery.maskedinput.min.js"></script>
-
-    <script type="text/javascript">
-    $(document).ready(function()
-    {
-      $('#data').mask("99/99/9999");
-    });
-    </script>
 
 </body>
 </html>
