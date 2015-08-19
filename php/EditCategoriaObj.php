@@ -4,9 +4,9 @@
 
   if (isset($_POST['atualizar']))
   {
-      $object = new Alimentos();
+      $object = new Categorias();
       $object->id = $_POST['id'];
-      $object->alimento = $_POST['alimento'];
+      $object->categoria = $_POST['categoria'];
 
       $object->atualizar();
 
@@ -384,7 +384,7 @@
         <div id="page-wrapper">
             <div class="row">
                 <div class="col-lg-12">
-                    <h1 class="page-header">Alimentos</h1>
+                    <h1 class="page-header">Categorias</h1>
                 </div>
                 <!-- /.col-lg-12 -->
             </div>
@@ -393,7 +393,7 @@
                 <div class="col-lg-12">
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            Formulário de edição de alimentos
+                            Formulário de edição de categorias
                         </div>
 
 <?php
@@ -402,7 +402,7 @@
 
   if (isset($_POST["editar"]))
   {
-    $edit = new Alimentos();
+    $edit = new Categorias();
     $comp = $edit->editar($id);
 
       if ($edit != null)
@@ -411,10 +411,10 @@
                         <div class="panel-body">
                             <div class="row">
                                 <div class="col-lg-12">
-                                    <form role="form" name="editalimento" method="post" action="<?php $SELF_PHP;?>">
+                                    <form role="form" name="editcategoria" method="post" action="<?php $SELF_PHP;?>">
                                       <div class="form-group">
-                                          <label for="alimento">Alimento:</label>
-                                          <input type="text" class="form-control" name="alimento" placeholder="Digite o alimento aqui" value="<?php echo $comp->alimento; ?>" autofocus required>
+                                          <label for="categoria">Categoria:</label>
+                                          <input type="text" class="form-control" name="categoria" placeholder="Digite o categoria aqui" value="<?php echo $comp->categoria; ?>" autofocus required>
                                       </div>
                                         <input type="hidden" name="id" value="<?php echo $comp->id; ?>"/>
                                         <!--input type="submit" name="atualizar" value="Atualizar" class="btn btn-success btn-lg"/-->
