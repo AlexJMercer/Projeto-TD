@@ -91,7 +91,7 @@
 
       public function alimentoSelect($alimento ="")
       {
-         $sql = "SELECT * from alimento Order by id";
+         $sql = "SELECT * from alimentos Order by id";
          $result = pg_query($sql);
 
          $ln=pg_num_rows($result);

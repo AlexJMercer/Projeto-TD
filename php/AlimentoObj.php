@@ -9,7 +9,7 @@ include_once "../class/Carrega.class.php";
 
       $object->inserir();
 
-      header("Location:ViewAlimentoObj.php");
+      header("Location:AlimentoObj.php");
   }
 ?>
 <!DOCTYPE html>
@@ -402,7 +402,7 @@ include_once "../class/Carrega.class.php";
                                           <label for="alimento">Alimento:</label>
                                           <input type="text" class="form-control" name="alimento" placeholder="Digite o alimento aqui" autofocus required>
                                       </div>
-                                      
+
                                         <br>
                                         <button type="submit" name="enviar" value="enviar" class="btn btn-success btn-lg btn-block"><i class="fa fa-check"></i> Enviar </button>
                                         <br>

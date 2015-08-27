@@ -403,36 +403,36 @@ include_once "../class/Carrega.class.php";
                                 <div class="col-lg-6">
                                     <form role="form" name="caduser" method="post" action="<?php $SELF_PHP;?>">
                                        <div class="form-group">
-                                          <label for="nome"> Nome:
+                                          <label for="nome"> Nome: </label>
                                           <input class="form-control" id="nome" name="nome" placeholder="Digite aqui seu nome" required>
-                                          </label>
+
                                        </div>
                                        <div class="form-group">
-                                             <label for="email"> E-mail:
+                                             <label for="email"> E-mail: </label>
                                                  <input class="form-control"
                                                   id="email" name="email" placeholder="Digite aqui seu e-mail" required>
-                                             </label>
+
                                        </div>
                                        <div class="form-group">
-                                             <label for="senha">Senha:
+                                             <label for="senha">Senha:</label>
                                                  <input class="form-control"
                                                  type="password" id="senha" name="senha" placeholder="Digite aqui sua senha" required>
-                                             </label>
+
                                        </div>
                                        <div class="form-group">
-                                          <label for="type">Tipo de usuário:
+                                          <label for="type">Tipo de usuário:</label>
                                           <select class="form-control" name="type" id="type" required>
                                               <option value="">Selecione tipo</option>
                                               <?php $typeSelect = new Type();
                                                     $typeSelect->typeSelect();
                                               ?>
                                           </select>
-                                          </label>
+
                                        </div>
                                        <div class="form-group">
-                                          <label for="login"> Login:
+                                          <label for="login"> Login:</label>
                                              <input class="form-control" id="login" name="login" placeholder="Digite aqui seu login" required>
-                                          </label>
+
                                        </div>
                                         <button type="submit" name="enviar" value="enviar" class="btn btn-success btn-lg btn-block"><i class="fa fa-check"></i> Enviar </button>
                                         <br>

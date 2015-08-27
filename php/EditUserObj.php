@@ -415,13 +415,13 @@
                                     <form role="form" name="editcardapio" method="post" action="<?php $SELF_PHP;?>">
                                        <div class="form-group">
                                           <label for="nome"> Username:
-                                          <input class="form-control" id="nome" name="nome" placeholder="Digite aqui seu nome de usuário" value="<?php echo $comp->nome; ?>" required>
+                                          <input class="form-control" id="nome" name="nome" placeholder="Digite aqui seu nome de usuário" value="<?php echo $comp['nome']; ?>" required>
                                           </label>
                                        </div>
                                        <div class="form-group">
                                              <label for="email"> E-mail:
                                                 <input class="form-control"
-                                                  id="email" name="email" placeholder="Digite aqui seu e-mail" value="<?php echo $comp->email; ?>" required>
+                                                  id="email" name="email" placeholder="Digite aqui seu e-mail" value="<?php echo $comp['email']; ?>" required>
                                              </label>
                                         </div>
                                         <div class="form-group">
@@ -429,12 +429,12 @@
                                          <select disabled class="form-control" name="type" id="type" >
                                              <option value="">Selecione tipo</option>
                                              <?php $typeSelect = new Type();
-                                                   $typeSelect->typeSelect($comp->type);
+                                                   $typeSelect->typeSelect($comp['type']);
                                              ?>
                                          </select>
                                          </label>
                                      </div>
-                                        <input type="hidden" name="cod" value="<?php echo $comp->cod; ?>"/>
+                                        <input type="hidden" name="cod" value="<?php echo $comp['id']; ?>"/>
                                         <!--input type="submit" name="atualizar" value="Atualizar" class="btn btn-success btn-lg"/-->
                                         <button type="submit" name="atualizar" value="atualizar" class="btn btn-success btn-lg btn-block"><i class="fa fa-refresh"></i> Atualizar </button>
                                         <br>

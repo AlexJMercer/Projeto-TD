@@ -1,5 +1,4 @@
 <?php
-
    include_once 'Carrega.class.php';
    /**
     * Editado dia 29/07/2015
@@ -12,9 +11,7 @@
       private $senha;
       private $bd;
       private $type;
-      private $inSession = true;
-
-
+      //private $inSession = true;
 
       public function __construct()
       {
@@ -49,7 +46,6 @@
          $sql = "SELECT * FROM usuarios, usertype WHERE usuarios.usertype=usertype.id Order by usuarios.id";
          $result = pg_query($sql);
          $return = null;
-
          while ($reg = pg_fetch_assoc($result))
          {
             $object = new Usuarios();
@@ -57,12 +53,10 @@
             $object->nome = $reg["nome"];
             $object->email = $reg["email"];
             $object->type = $reg["type"];
-
             $return[] = $object;
          }
          return $return;
       }
-
 
       public function excluir()
       {
@@ -81,7 +75,6 @@
                       type='$this->type',
                       login='$this->login'
                   where id=$this->cod";
-
          $return = pg_query($sql);
          return $return;
       }
@@ -91,7 +84,6 @@
          $sql = "SELECT * FROM usuarios, usertype WHERE usuarios.usertype=usertype.id AND usuarios.id=$cod ";
          $result = pg_query($sql);
          $return = null;
-
          while ($reg = pg_fetch_assoc($result))
          {
             $object = new Usuarios();
@@ -100,7 +92,6 @@
             $object->email = $reg["email"];
             $object->type = $reg["type"];
             $object->login = $reg['login'];
-
             $return = $object;
          }
          return $return;
@@ -111,7 +102,6 @@
          $sql = "SELECT * FROM usuarios, usertype WHERE usuarios.usertype=usertype.id AND usuarios.id=$cod ";
          $result = pg_query($sql);
          $return = null;
-
          while ($reg = pg_fetch_assoc($result))
          {
             $object = new Usuarios();
@@ -120,7 +110,6 @@
             $object->email = $reg["email"];
             $object->type = $reg["usertype"];
             $object->login = $reg['login'];
-
             $return = $object;
          }
          return $return;
@@ -128,16 +117,15 @@
 
       public function codificaSenha($senha)
       {
-         // Altere aqui caso você use, por exemplo, o MD5:
-         // return md5($senha);
+          // Teste codificação
+          // Altere aqui caso você use, por exemplo, o MD5:
+          // return md5($senha);
          return sha1($senha);
       }
 
-      public function logar($login="", $senha="", $type="")
+      public function logar($login="", $senha="")
       {
-
          //$senha = $this->codificaSenha($senha);
-
          $sql = "SELECT * FROM usuarios WHERE usuarios.login='$login' AND usuarios.senha='$senha' AND usuarios.usertype='$type'";
          $result = pg_query($sql);
          $cont=pg_num_rows($result);
@@ -155,7 +143,6 @@
             echo $result;die();
             header('location:index.php');
          }
-
       }
 }
 ?>

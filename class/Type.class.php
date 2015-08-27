@@ -1,23 +1,16 @@
 <?php
 include_once 'Carrega.class.php';
+
 /**
  *
  */
+
 class Type
 {
    private $cod;
    private $type;
    private $bd;
 
-   function __construct()
-   {
-      $this->bd = new BD();
-   }
-
-   function __destruct()
-   {
-     unset($this->bd);
-   }
 
    function __get($key)
    {
@@ -33,9 +26,7 @@ class Type
    {
       $sql = "SELECT * from usertype Order by id";
       $result = pg_query($sql);
-
       $ln=pg_num_rows($result);
-
      if ($ln==0)
      {
         echo "<option value=''>Nada Encontrado!!</option>";
@@ -46,7 +37,6 @@ class Type
        {
          $this->cod = $a['id'];
          $this->type = $a['type'];
-
          if ($type==$this->cod)
          {
            print "<option selected value='{$this->cod}'>{$this->type}</option>";
@@ -58,5 +48,23 @@ class Type
        }
      }
    }
+
+   /* Exemplo redbeans
+   public function typeSelect($type = 0)
+   {
+      $select = R::findAll('usertype', 'order by id asc');
+
+      foreach ($select as $object)
+      {
+        if($type==$object->id)
+        {
+          echo  "<option selected value='$object->id'>$object->type</option>";
+        }
+        else
+        {
+          echo  "<option value='$object->id'>$object->type</option>";
+        }
+      }
+    }*/
 }
- ?>
+?>

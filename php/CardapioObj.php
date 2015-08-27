@@ -7,7 +7,7 @@ include_once "../class/Carrega.class.php";
       $object = new Cardapios();
       $object->dia = $_POST['dia'];
       $object->data = $_POST['data'];
-      $object->texto = $_POST['cardapio'];
+    //  $object->texto = $_POST['cardapio'];
 
       $object->inserir();
 
@@ -45,6 +45,34 @@ include_once "../class/Carrega.class.php";
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
+    <script type="text/javascript" src="../js/jquery.js"></script>
+
+    <script type="text/javascript" language="javascript">
+    $(document).ready(function()
+    {
+        $("#carrega").click(function(event)
+        {
+        var select = $("#alimentos ").val();
+
+        $.post('requireAlimento.php', {select: alimentos}, function(resposta)
+        {
+
+                $("#teste").slideDown();
+
+                if (resposta != false)
+                {
+
+                    $("#teste").html(resposta);
+                }
+                else
+                {
+                    // Coloca a mensagem no div de mensagens
+                    $("#teste").html(resposta);
+                }
+            });
+        });
+    });
+    </script>
 
 </head>
 
@@ -399,7 +427,7 @@ include_once "../class/Carrega.class.php";
                         <div class="panel-body">
                             <div class="row">
                                 <div class="col-lg-12">
-                                    <form role="form" name="cadcardapio" method="post" action="<?php $SELF_PHP;?>">
+                                    <form role="form" name="cadcardapio" id="form" method="post" action="<?php $SELF_PHP;?>">
                                       <div class="form-group">
                                           <label for="dia">Dia:</label>
                                           <select class="form-control" name="dia" id="dia" required>
@@ -408,18 +436,32 @@ include_once "../class/Carrega.class.php";
                                                     $diaSelect->diaSelect();
                                               ?>
                                           </select>
-                                      </div>
-                                      <div class="form-group">
-                                          <label for="data">Data:
-                                          <input class="form-control" id='data' name="data" placeholder="DD/MM/AAAA" required>
-                                          </label>
-                                      </div>
-                                      <div class="form-group">
-                                          <label for="cardapio">Cardápio:</label>
-                                          <textarea placeholder="Digite o cardápio" name="cardapio" id="cardapio" rows="5" cols="50" class="form-control" required></textarea>
 
                                       </div>
+                                      <div class="form-group">
+                                          <label for="data">Data:</label>
+                                          <input class="form-control" id='data' name="data" placeholder="DD/MM/AAAA" required>
+
+                                      </div>
+                                      <div class="form-group">
+                                          <label for="alimentos"> Alimentos: </label>
+                                          <select class="form-control" name="alimentos[]" id="alimentos" multiple required>
+                                              <option value="">Selecione o alimento</option>
+                                              <?php $alimentoSelect = new Alimentos();
+                                                    $alimentoSelect->alimentoSelect();
+                                              ?>
+                                          </select><br><button type="button" name="carrega" value="carrega" class="btn btn-info btn-sm" formaction="<?php $SELF_PHP;?>"><i class="fa fa-retweet"></i> Carrega Alimento </button>
+                                          <div class="box">
+                                            <br>
+                                            <div class='alert alert-info alert-dismissable'>
+                                                <button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button>
+                                                Nenhum Alimento Selecionado<p id="teste"></p>
+                                            </div>
+
+                                          </div>
+                                      </div>
                                         <!--input type="submit" name="enviar" value="Enviar" class="btn btn-success btn-lg"/-->
+                                        <br>
                                         <button type="reset" name="limpar" value="limpar" class="btn btn-outline btn-danger btn-lg"><i class="fa fa-magic"></i> Limpar dados </button>
                                         <!--input type="reset" name="limpar" value="Limpar dados" class="btn btn-danger btn-lg btn-block"/-->
                                         <button type="submit" name="enviar" value="enviar" class="btn btn-success btn-lg"><i class="fa fa-check"></i> Enviar </button>
@@ -459,5 +501,7 @@ include_once "../class/Carrega.class.php";
       $('#data').mask("99/99/9999");
     });
     </script>
+
+
 </body>
 </html>

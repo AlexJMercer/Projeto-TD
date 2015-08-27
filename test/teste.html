@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Teste ajax</title>
+</head>
+<body>
+	
+	<script src="jquery-1.11.3.min.js"></script>
+	<script>
+		$(document).ready(function() {
+			$.post('teste.php', {x: 1} ,function(data) {
+				alert(data);
+			},
+			'JSON');
+		});
+	</script>
+</body>
+</html>
