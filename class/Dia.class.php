@@ -61,16 +61,16 @@
         {
           while ($a = pg_fetch_array($result))
           {
-            $this->cod = $a['id'];
+            $this->id = $a['id'];
             $this->dia = $a['dia'];
 
-            if ($dia==$this->cod)
+            if ($dia==$this->id)
             {
-              print "<option selected value='{$this->cod}'>{$this->dia}</option>";
+              print "<option selected value='{$this->id}'>{$this->dia}</option>";
             }
             else
             {
-              print "<option value='{$this->cod}'>{$this->dia}</option>";
+              print "<option value='{$this->id}'>{$this->dia}</option>";
             }
           }
         }

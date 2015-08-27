@@ -7,9 +7,19 @@ include_once 'Carrega.class.php';
 
 class Type
 {
-   private $cod;
+   private $id;
    private $type;
    private $bd;
+
+   public function __construct()
+   {
+      $this->bd = new BD();
+   }
+
+   public function __destruct()
+   {
+      unset($this->bd);
+   }
 
 
    function __get($key)
@@ -35,15 +45,15 @@ class Type
      {
        while ($a = pg_fetch_array($result))
        {
-         $this->cod = $a['id'];
+         $this->id = $a['id'];
          $this->type = $a['type'];
-         if ($type==$this->cod)
+         if ($type==$this->id)
          {
-           print "<option selected value='{$this->cod}'>{$this->type}</option>";
+           print "<option selected value='{$this->idd}'>{$this->type}</option>";
          }
          else
          {
-           print "<option value='{$this->cod}'>{$this->type}</option>";
+           print "<option value='{$this->id}'>{$this->type}</option>";
          }
        }
      }
