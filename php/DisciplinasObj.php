@@ -4,14 +4,13 @@ include_once "../class/Carrega.class.php";
 
   if (isset($_POST['enviar']))
   {
-      $object = new Cardapios();
-      $object->dia = $_POST['dia'];
-      $object->data = $_POST['data'];
-    //  $object->texto = $_POST['cardapio'];
+      $object = new Disciplinas();
+      $object->disciplina = $_POST['disciplina'];
+      $object->curso = $_POST['curso'];
 
-      $object->inserir();
+      $object->Inserir();
 
-      header("Location:ViewCardapioObj.php");
+      header("Location:ViewDisciplinaObj.php");
   }
 ?>
 <!DOCTYPE html>
@@ -46,11 +45,8 @@ include_once "../class/Carrega.class.php";
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
 
-    <!--link rel="stylesheet" href="../chosen/docsupport/style.css"-->
-    <!--link rel="stylesheet" href="../chosen/docsupport/prism.css"-->
-    <link rel="stylesheet" href="../chosen/chosen.css">
-
-    <script type="text/javascript" src="../js/jquery.js"></script>
+    <link rel="stylesheet" href="../plugins/select2/select2.css">
+    <link rel="stylesheet" href="../plugins/select2/select2-bootstrap.css">
 
 </head>
 
@@ -391,7 +387,7 @@ include_once "../class/Carrega.class.php";
         <div id="page-wrapper">
             <div class="row">
                 <div class="col-lg-12">
-                    <h1 class="page-header">Cardápios</h1>
+                    <h1 class="page-header">Disciplinas</h1>
                 </div>
                 <!-- /.col-lg-12 -->
             </div>
@@ -400,41 +396,31 @@ include_once "../class/Carrega.class.php";
                 <div class="col-lg-12">
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            Formulário de cadastro de cardápios
+                            Formulário de cadastro de disciplina
                         </div>
                         <div class="panel-body">
                             <div class="row">
                                 <div class="col-lg-12">
-                                    <form role="form" name="cadcardapio" id="form" method="post" action="<?php $SELF_PHP;?>">
+                                    <form role="form" name="caddisciplina" method="post" action="<?php $SELF_PHP;?>">
                                       <div class="form-group">
-                                          <label for="dia">Dia:</label>
-                                          <select class="form-control" name="dia" id="dia" required>
-                                              <option value="">Selecione o dia</option>
-                                              <?php $diaSelect = new Dia();
-                                                    $diaSelect->diaSelect();
-                                              ?>
-                                          </select>
+                                          <label for="disciplina">Disciplina:</label>
+                                          <input type="text" class="form-control" id="disciplina" name="disciplina" placeholder="Digite a disciplina aqui" autofocus required>
+                                      </div>
+                                      <div class="form-group">
+                                        <label for="curso">Curso:</label>
+                                        <select class="form-control select2-multiple" name="curso" id="curso">
+                                          <option value="">Selecione o cursos</option>
+                                          <?php $cursoSelect = new Cursos();
+                                                $cursoSelect->cursoSelect();
+                                          ?>
+                                        </select>
+                                      </div>
 
-                                      </div>
-                                      <div class="form-group">
-                                          <label for="data">Data:</label>
-                                          <input class="form-control" id='data' name="data" placeholder="DD/MM/AAAA" required>
-
-                                      </div>
-                                      <div class="form-group">
-                                          <label for="alimentos"> Alimentos: </label>
-                                          <select data-placeholder="Selecione o alimento" class="chosen-select form-control" multiple tabindex="4" required>
-                                              <option value=""></option>
-                                              <?php $alimentoSelect = new Alimentos();
-                                                    $alimentoSelect->alimentoSelect();
-                                              ?>
-                                          </select>
-                                      </div>
-                                        <!--input type="submit" name="enviar" value="Enviar" class="btn btn-success btn-lg"/-->
                                         <br>
-                                        <button type="reset" name="limpar" value="limpar" class="btn btn-outline btn-danger btn-lg"><i class="fa fa-magic"></i> Limpar dados </button>
-                                        <!--input type="reset" name="limpar" value="Limpar dados" class="btn btn-danger btn-lg btn-block"/-->
-                                        <button type="submit" name="enviar" value="enviar" class="btn btn-success btn-lg"><i class="fa fa-check"></i> Enviar </button>
+                                        <button type="submit" name="enviar" value="enviar" class="btn btn-success btn-lg btn-block"><i class="fa fa-check"></i> Enviar </button>
+                                        <br>
+                                        <button type="reset" name="limpar" value="limpar" class="btn btn-outline btn-danger btn-lg btn-block"><i class="fa fa-magic"></i> Limpar </button>
+
                                     </form>
                                 </div>
                                 <!-- /.col-lg-6 (nested) -->
@@ -462,31 +448,6 @@ include_once "../class/Carrega.class.php";
 
     <!-- Custom Theme JavaScript -->
     <script src="../dist/js/sb-admin-2.js"></script>
-
-    <script type="text/javascript" src="../js/jquery.maskedinput.min.js"></script>
-
-    <script type="text/javascript">
-    $(document).ready(function()
-    {
-      $('#data').mask("99/99/9999");
-    });
-    </script>
-
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js" type="text/javascript"></script>
-    <script src="../chosen/chosen.jquery.js" type="text/javascript"></script>
-    <script src="../chosen/docsupport/prism.js" type="text/javascript" charset="utf-8"></script>
-    <script type="text/javascript">
-    var config = {
-      '.chosen-select'           : {},
-      '.chosen-select-deselect'  : {allow_single_deselect:true},
-      '.chosen-select-no-single' : {disable_search_threshold:10},
-      '.chosen-select-no-results': {no_results_text:'Nada encontrado!'},
-      '.chosen-select-width'     : {width:"100%"}
-    }
-    for (var selector in config) {
-      $(selector).chosen(config[selector]);
-    }
-    </script>
 
 </body>
 </html>

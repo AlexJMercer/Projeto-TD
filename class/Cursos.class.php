@@ -7,7 +7,6 @@
   {
     private $id;
     private $nome;
-    private $sigla;
     private $texto;
     private $logo;
     private $bd;
@@ -35,8 +34,8 @@
 
     public function Inserir()
     {
-      $sql = "INSERT INTO cursos (nome, sigla, texto, logo)
-              VALUES ('$this->nome', '$this->sigla', '$this->texto', '$this->logo')";
+      $sql = "INSERT INTO cursos (nome, texto, logo)
+              VALUES ('$this->nome', '$this->texto', '$this->logo')";
       $return = pg_query($sql);
       return $return;
     }
@@ -52,8 +51,6 @@
          $object = new Cursos();
          $object->id = $reg["id"];
          $object->nome = $reg["nome"];
-         $object->texto = $reg["texto"];
-         $object->logo = $reg["logo"];
 
          $return[] = $object;
       }
@@ -74,7 +71,6 @@
       $return = false;
       $sql = "UPDATE cursos
                 set nome='$this->nome',
-                    sigla='$this->sigla',
                     texto='$this->texto',
                     logo='$this->logo'
                 where id=$this->id";
@@ -125,7 +121,7 @@
 
     public function cursoSelect($id ="")
     {
-       $sql = "SELECT id, nome from curso Order by id";
+       $sql = "SELECT * from cursos Order by id";
        $result = pg_query($sql);
        $ln=pg_num_rows($result);
 

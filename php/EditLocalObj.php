@@ -1,17 +1,16 @@
 <?php
 
-include_once "../class/Carrega.class.php";
+ include_once "../class/Carrega.class.php";
 
-  if (isset($_POST['enviar']))
+  if (isset($_POST['atualizar']))
   {
-      $object = new Cardapios();
-      $object->dia = $_POST['dia'];
-      $object->data = $_POST['data'];
-    //  $object->texto = $_POST['cardapio'];
+      $object = new Local();
+      $object->id = $_POST['id'];
+      $object->sala = $_POST['sala'];
 
-      $object->inserir();
+      $object->Atualizar();
 
-      header("Location:ViewCardapioObj.php");
+      header("Location:ViewLocalObj.php");
   }
 ?>
 <!DOCTYPE html>
@@ -45,12 +44,6 @@ include_once "../class/Carrega.class.php";
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
-
-    <!--link rel="stylesheet" href="../chosen/docsupport/style.css"-->
-    <!--link rel="stylesheet" href="../chosen/docsupport/prism.css"-->
-    <link rel="stylesheet" href="../chosen/chosen.css">
-
-    <script type="text/javascript" src="../js/jquery.js"></script>
 
 </head>
 
@@ -302,10 +295,10 @@ include_once "../class/Carrega.class.php";
                             <a href="#"><i class="fa fa-cutlery fa-fw"></i> Cardápios <span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
-                                    <a href="CardapioObj.php">Adicionar cardápio</a>
+                                    <a href="AlimentoObj.php">Adicionar cardápio</a>
                                 </li>
                                 <li>
-                                    <a href="ViewCardapioObj.php">Listar cardápios</a>
+                                    <a href="ViewAlimentoObj.php">Listar cardápios</a>
                                 </li>
                             </ul>
                             <!-- /.nav-second-level -->
@@ -391,7 +384,7 @@ include_once "../class/Carrega.class.php";
         <div id="page-wrapper">
             <div class="row">
                 <div class="col-lg-12">
-                    <h1 class="page-header">Cardápios</h1>
+                    <h1 class="page-header">Salas</h1>
                 </div>
                 <!-- /.col-lg-12 -->
             </div>
@@ -400,41 +393,35 @@ include_once "../class/Carrega.class.php";
                 <div class="col-lg-12">
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            Formulário de cadastro de cardápios
+                            Formulário de edição de salas
                         </div>
+
+<?php
+
+  $id = $_POST["id"];
+
+  if (isset($_POST["editar"]))
+  {
+    $edit = new Local();
+    $comp = $edit->Editar($id);
+
+      if ($edit != null)
+      {
+?>
                         <div class="panel-body">
                             <div class="row">
                                 <div class="col-lg-12">
-                                    <form role="form" name="cadcardapio" id="form" method="post" action="<?php $SELF_PHP;?>">
+                                    <form role="form" name="editsala" method="post" action="<?php $SELF_PHP;?>">
                                       <div class="form-group">
-                                          <label for="dia">Dia:</label>
-                                          <select class="form-control" name="dia" id="dia" required>
-                                              <option value="">Selecione o dia</option>
-                                              <?php $diaSelect = new Dia();
-                                                    $diaSelect->diaSelect();
-                                              ?>
-                                          </select>
-
+                                          <label for="sala">Sala:</label>
+                                          <input type="text" class="form-control" id="sala" name="sala" placeholder="Digite o sala aqui" value="<?php echo $comp->sala; ?>" autofocus required>
                                       </div>
-                                      <div class="form-group">
-                                          <label for="data">Data:</label>
-                                          <input class="form-control" id='data' name="data" placeholder="DD/MM/AAAA" required>
-
-                                      </div>
-                                      <div class="form-group">
-                                          <label for="alimentos"> Alimentos: </label>
-                                          <select data-placeholder="Selecione o alimento" class="chosen-select form-control" multiple tabindex="4" required>
-                                              <option value=""></option>
-                                              <?php $alimentoSelect = new Alimentos();
-                                                    $alimentoSelect->alimentoSelect();
-                                              ?>
-                                          </select>
-                                      </div>
-                                        <!--input type="submit" name="enviar" value="Enviar" class="btn btn-success btn-lg"/-->
+                                        <input type="hidden" name="id" value="<?php echo $comp->id; ?>"/>
+                                        <!--input type="submit" name="atualizar" value="Atualizar" class="btn btn-success btn-lg"/-->
+                                        <button type="submit" name="atualizar" value="atualizar" class="btn btn-success btn-lg btn-block"><i class="fa fa-refresh"></i> Atualizar </button>
                                         <br>
-                                        <button type="reset" name="limpar" value="limpar" class="btn btn-outline btn-danger btn-lg"><i class="fa fa-magic"></i> Limpar dados </button>
-                                        <!--input type="reset" name="limpar" value="Limpar dados" class="btn btn-danger btn-lg btn-block"/-->
-                                        <button type="submit" name="enviar" value="enviar" class="btn btn-success btn-lg"><i class="fa fa-check"></i> Enviar </button>
+                                        <button type="button" name="cancelar" value="cancelar" onclick="location.href='ViewLocalObj.php'" class="btn btn-outline btn-default btn-lg btn-block"><i class="fa fa-undo"></i> Cancelar </button>
+
                                     </form>
                                 </div>
                                 <!-- /.col-lg-6 (nested) -->
@@ -451,6 +438,11 @@ include_once "../class/Carrega.class.php";
         </div>
         <!-- /#page-wrapper -->
     </div>
+
+    <?php
+          }
+        }
+    ?>
     <!-- /#wrapper -->
     <!-- jQuery -->
     <script src="../bower_components/jquery/dist/jquery.min.js"></script>
@@ -470,22 +462,6 @@ include_once "../class/Carrega.class.php";
     {
       $('#data').mask("99/99/9999");
     });
-    </script>
-
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js" type="text/javascript"></script>
-    <script src="../chosen/chosen.jquery.js" type="text/javascript"></script>
-    <script src="../chosen/docsupport/prism.js" type="text/javascript" charset="utf-8"></script>
-    <script type="text/javascript">
-    var config = {
-      '.chosen-select'           : {},
-      '.chosen-select-deselect'  : {allow_single_deselect:true},
-      '.chosen-select-no-single' : {disable_search_threshold:10},
-      '.chosen-select-no-results': {no_results_text:'Nada encontrado!'},
-      '.chosen-select-width'     : {width:"100%"}
-    }
-    for (var selector in config) {
-      $(selector).chosen(config[selector]);
-    }
     </script>
 
 </body>

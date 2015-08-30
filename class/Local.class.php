@@ -6,7 +6,7 @@ include_once 'Carrega.class.php';
 class Local
 {
   private $id;
-  private $local;
+  private $sala;
   private $bd;
 
     public function __construct()
@@ -31,23 +31,42 @@ class Local
 
     public function Inserir()
     {
-      $sql = "INSERT INTO local (local) VALUES ('$this->local')";
+      $sql = "INSERT INTO local (sala) VALUES ('$this->sala')";
       $return = pg_query($sql);
       return $return;
     }
 
     public function Listar()
     {
-      $sql = "SELECT * FROM local"
+      $sql = "SELECT * FROM local";
       $result = pg_query($sql);
+      $return = null;
 
       while ($reg = pg_fetch_assoc($result))
       {
         $obj = new Local();
         $obj->id = $reg["id"];
-        $obj->local = $reg["local"];
+        $obj->sala = $reg["sala"];
 
         $return[] = $obj;
+      }
+
+      return $return;
+    }
+
+    public function Editar($id = "")
+    {
+      $sql = "SELECT * FROM local AS l WHERE l.id=$id";
+      $result = pg_query($sql);
+      $return = null;
+
+      while ($reg = pg_fetch_assoc($result))
+      {
+        $obj = new Local();
+        $obj->id = $reg["id"];
+        $obj->sala = $reg["sala"];
+
+        $return = $obj;
       }
 
       return $return;
@@ -63,13 +82,13 @@ class Local
     public function Atualizar()
     {
         $return = false;
-        $sql = "UPDATE local set local = '$this->local' WHERE id = '$this->id'";
+        $sql = "UPDATE local set sala = '$this->sala' WHERE id = '$this->id'";
         $return = pg_query($sql);
 
         return $return;
     }
 
-    public function localSelect($id ="")
+    public function salaSelect($id ="")
     {
        $sql = "SELECT * from local Order by id";
        $result = pg_query($sql);
@@ -86,15 +105,15 @@ class Local
         {
 
           $this->id = $a['id'];
-          $this->local = $a['local'];
+          $this->sala = $a['sala'];
 
           if ($id==$this->id)
           {
-            print "<option selected value='{$this->id}'>{$this->local}</option>";
+            print "<option selected value='{$this->id}'>{$this->sala}</option>";
           }
           else
           {
-            print "<option value='{$this->id}'>{$this->local}</option>";
+            print "<option value='{$this->id}'>{$this->sala}</option>";
           }
         }
       }

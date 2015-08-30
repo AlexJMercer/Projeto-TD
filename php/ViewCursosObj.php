@@ -1,22 +1,6 @@
-<?php
-
-include_once "../class/Carrega.class.php";
-
-  if (isset($_POST['enviar']))
-  {
-      $object = new Cardapios();
-      $object->dia = $_POST['dia'];
-      $object->data = $_POST['data'];
-    //  $object->texto = $_POST['cardapio'];
-
-      $object->inserir();
-
-      header("Location:ViewCardapioObj.php");
-  }
-?>
 <!DOCTYPE html>
 <html lang="pt-br">
-
+<!-- Editado por Julian 23/07/2015 -->
 <head>
 
     <meta charset="utf-8">
@@ -33,6 +17,15 @@ include_once "../class/Carrega.class.php";
     <!-- MetisMenu CSS -->
     <link href="../bower_components/metisMenu/dist/metisMenu.min.css" rel="stylesheet">
 
+    <!-- Social Buttons CSS -->
+    <link href="../bower_components/bootstrap-social/bootstrap-social.css" rel="stylesheet">
+
+    <!-- DataTables CSS -->
+    <link href="../bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.css" rel="stylesheet">
+
+    <!-- DataTables Responsive CSS -->
+    <link href="../bower_components/datatables-responsive/css/dataTables.responsive.css" rel="stylesheet">
+
     <!-- Custom CSS -->
     <link href="../dist/css/sb-admin-2.css" rel="stylesheet">
 
@@ -45,12 +38,6 @@ include_once "../class/Carrega.class.php";
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
-
-    <!--link rel="stylesheet" href="../chosen/docsupport/style.css"-->
-    <!--link rel="stylesheet" href="../chosen/docsupport/prism.css"-->
-    <link rel="stylesheet" href="../chosen/chosen.css">
-
-    <script type="text/javascript" src="../js/jquery.js"></script>
 
 </head>
 
@@ -302,10 +289,10 @@ include_once "../class/Carrega.class.php";
                             <a href="#"><i class="fa fa-cutlery fa-fw"></i> Cardápios <span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
-                                    <a href="CardapioObj.php">Adicionar cardápio</a>
+                                    <a href="CardapioObj.php"><i class="fa fa-plus"></i> Adicionar cardápio </a>
                                 </li>
                                 <li>
-                                    <a href="ViewCardapioObj.php">Listar cardápios</a>
+                                    <a href="ViewCardapioObj.php"><i class="fa fa-list"></i> Listar cardápios</a>
                                 </li>
                             </ul>
                             <!-- /.nav-second-level -->
@@ -341,22 +328,22 @@ include_once "../class/Carrega.class.php";
                             <!-- /.nav-second-level -->
                         </li>
                         <li>
-                            <a href="#"><i class="fa fa-sitemap fa-fw"></i> Multi-Level Dropdown<span class="fa arrow"></span></a>
+                            <a href="#"><i class="fa fa-file-text-o fa-fw"></i> Noticias<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
-                                    <a href="#">Second Level Item</a>
+                                    <a href="#">Escrever Noticia</a>
                                 </li>
                                 <li>
-                                    <a href="#">Second Level Item</a>
+                                    <a href="#">Listar Noticias</a>
                                 </li>
                                 <li>
-                                    <a href="#">Third Level <span class="fa arrow"></span></a>
+                                    <a href="#">Categorias<span class="fa arrow"></span></a>
                                     <ul class="nav nav-third-level">
                                         <li>
-                                            <a href="#">Third Level Item</a>
+                                            <a href="#">Adicionar Categoria de Noticias</a>
                                         </li>
                                         <li>
-                                            <a href="#">Third Level Item</a>
+                                            <a href="#">Listar Categorias de Noticias</a>
                                         </li>
                                         <li>
                                             <a href="#">Third Level Item</a>
@@ -391,7 +378,7 @@ include_once "../class/Carrega.class.php";
         <div id="page-wrapper">
             <div class="row">
                 <div class="col-lg-12">
-                    <h1 class="page-header">Cardápios</h1>
+                    <h1 class="page-header">Cursos</h1>
                 </div>
                 <!-- /.col-lg-12 -->
             </div>
@@ -400,46 +387,59 @@ include_once "../class/Carrega.class.php";
                 <div class="col-lg-12">
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            Formulário de cadastro de cardápios
+                            Listagem de Cursos
                         </div>
+                        <!-- /.panel-heading -->
                         <div class="panel-body">
-                            <div class="row">
-                                <div class="col-lg-12">
-                                    <form role="form" name="cadcardapio" id="form" method="post" action="<?php $SELF_PHP;?>">
-                                      <div class="form-group">
-                                          <label for="dia">Dia:</label>
-                                          <select class="form-control" name="dia" id="dia" required>
-                                              <option value="">Selecione o dia</option>
-                                              <?php $diaSelect = new Dia();
-                                                    $diaSelect->diaSelect();
-                                              ?>
-                                          </select>
+                          <div class="table-responsive">
+                            <div class="dataTable_wrapper">
+                                <table class="table table-hover" id="dataTables-example">
+                                    <thead>
+                                        <tr>
+                                            <th>Curso</th>
+                                            <th>Opções</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+<?php
 
-                                      </div>
-                                      <div class="form-group">
-                                          <label for="data">Data:</label>
-                                          <input class="form-control" id='data' name="data" placeholder="DD/MM/AAAA" required>
+include_once "../class/Carrega.class.php";
 
-                                      </div>
-                                      <div class="form-group">
-                                          <label for="alimentos"> Alimentos: </label>
-                                          <select data-placeholder="Selecione o alimento" class="chosen-select form-control" multiple tabindex="4" required>
-                                              <option value=""></option>
-                                              <?php $alimentoSelect = new Alimentos();
-                                                    $alimentoSelect->alimentoSelect();
-                                              ?>
-                                          </select>
-                                      </div>
-                                        <!--input type="submit" name="enviar" value="Enviar" class="btn btn-success btn-lg"/-->
-                                        <br>
-                                        <button type="reset" name="limpar" value="limpar" class="btn btn-outline btn-danger btn-lg"><i class="fa fa-magic"></i> Limpar dados </button>
-                                        <!--input type="reset" name="limpar" value="Limpar dados" class="btn btn-danger btn-lg btn-block"/-->
-                                        <button type="submit" name="enviar" value="enviar" class="btn btn-success btn-lg"><i class="fa fa-check"></i> Enviar </button>
-                                    </form>
-                                </div>
-                                <!-- /.col-lg-6 (nested) -->
+  $listar = new Cursos();
+  $list = $listar->Listar();
+
+    if ($list != null)
+    {
+      foreach ($list as $line)
+      {
+?>
+                            <tr class="odd gradeX">
+                              <form name="view" class="" action="EditCursosObj.php" method="post">
+                                <td><?php echo $line->nome; ?></td>
+                                <td class='center'>
+                                  <input type='hidden' name='id' value='<?php echo $line->id; ?>'>
+
+                                  <button type="submit" name="exibir" value="exibir" formaction="ExibCardapioObj.php" class="btn btn-outline btn-info"><i class="fa fa-expand"></i> Exibir </button>
+
+                                  <button type="submit" name="editar" value="editar" class="btn btn-outline btn-warning"><i class="fa fa-edit"></i> Editar </button>
+
+                                  <button type="submit" name="excluir" value="excluir" formaction="" class='btn btn-outline btn-danger'><i class="fa fa-times"></i> Excluir </button>
+                                  </td>
+                              </form>
+                            </tr>
+<?php
+        }
+      }
+      else
+      {
+        echo "<h2> Nenhum alimento cadastrado!!</h2>";
+      }
+?>
+                                    </tbody>
+                                </table>
                             </div>
-                            <!-- /.row (nested) -->
+                            </div>
+                            <!-- /.table-responsive -->
                         </div>
                         <!-- /.panel-body -->
                     </div>
@@ -454,39 +454,40 @@ include_once "../class/Carrega.class.php";
     <!-- /#wrapper -->
     <!-- jQuery -->
     <script src="../bower_components/jquery/dist/jquery.min.js"></script>
+
     <!-- Bootstrap Core JavaScript -->
     <script src="../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 
     <!-- Metis Menu Plugin JavaScript -->
     <script src="../bower_components/metisMenu/dist/metisMenu.min.js"></script>
 
+    <!-- DataTables JavaScript -->
+    <script src="../bower_components/datatables/media/js/jquery.dataTables.min.js"></script>
+    <script src="../bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.min.js"></script>
+
     <!-- Custom Theme JavaScript -->
     <script src="../dist/js/sb-admin-2.js"></script>
 
-    <script type="text/javascript" src="../js/jquery.maskedinput.min.js"></script>
-
-    <script type="text/javascript">
-    $(document).ready(function()
-    {
-      $('#data').mask("99/99/9999");
+    <!-- Page-Level Demo Scripts - Tables - Use for reference -->
+    <script>
+    $(document).ready(function() {
+        $('#dataTables-example').DataTable({
+                responsive: true
+        });
     });
     </script>
-
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js" type="text/javascript"></script>
-    <script src="../chosen/chosen.jquery.js" type="text/javascript"></script>
-    <script src="../chosen/docsupport/prism.js" type="text/javascript" charset="utf-8"></script>
-    <script type="text/javascript">
-    var config = {
-      '.chosen-select'           : {},
-      '.chosen-select-deselect'  : {allow_single_deselect:true},
-      '.chosen-select-no-single' : {disable_search_threshold:10},
-      '.chosen-select-no-results': {no_results_text:'Nada encontrado!'},
-      '.chosen-select-width'     : {width:"100%"}
-    }
-    for (var selector in config) {
-      $(selector).chosen(config[selector]);
-    }
-    </script>
-
 </body>
 </html>
+<?php
+
+if (isset($_POST['excluir']))
+{
+    $object = new Local();
+    $object->id = $_POST['id'];
+
+    $object->Excluir();
+
+    echo "<meta http-equiv='refresh' content='0;url=ViewCardapioObj.php'";
+    //header("Location:ViewCardapioObj.php");
+}
+?>
