@@ -416,7 +416,7 @@ $( "#dropdown" ).select2({
                                       </div>
                                       <div class="form-group">
                                         <label for="curso">Curso:</label>
-                                        <select class="form-control select2"  name="curso" id="curso">
+                                        <select class="form-control select2"  name="curso[]" id="curso" multiple="multiple">
                                           <option value="">Selecione o cursos</option>
                                           <?php $cursoSelect = new Cursos();
                                                 $cursoSelect->cursoSelect();

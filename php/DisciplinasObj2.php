@@ -45,16 +45,18 @@ include_once "../class/Carrega.class.php";
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
 
-    <link rel="stylesheet" href="../plugins/select2/select2.css">
-    <link rel="stylesheet" href="../plugins/select2/select2-bootstrap.css">
+    <link rel="stylesheet" href="../select/select2.css">
+    <link rel="stylesheet" href="../select/select2-bootstrap.css">
 
     <!--link href="//cdnjs.cloudflare.com/ajax/libs/select2/4.0.0/css/select2.min.css" rel="stylesheet" />
 <script src="//cdnjs.cloudflare.com/ajax/libs/select2/4.0.0/js/select2.min.js"></script-->
+
 <script type="text/javascript">
 $( "#dropdown" ).select2({
   theme: "bootstrap"
 });
 </script>
+
 
 </head>
 
@@ -415,8 +417,8 @@ $( "#dropdown" ).select2({
                                           <input type="text" class="form-control" id="disciplina" name="disciplina" placeholder="Digite a disciplina aqui" autofocus required>
                                       </div>
                                       <div class="form-group">
-                                        <label for="curso">Curso:</label>
-                                        <select class="form-control select2"  name="curso" id="curso">
+                                        <label for="multiple" class="control-label">Curso:</label>
+                                        <select class="form-control select2"  name="curso" id="multiple" multiple="multiple">
                                           <option value="">Selecione o cursos</option>
                                           <?php $cursoSelect = new Cursos();
                                                 $cursoSelect->cursoSelect();
@@ -459,9 +461,10 @@ $( "#dropdown" ).select2({
 
     <script type="text/javascript" src="../plugins/select2/select2.js"></script>
     <script type="text/javascript">
+
     $( ".select2" ).select2({
-      theme: "bootstrap"
-    });
-</script>
+    theme: "bootstrap"
+});
+    </script>
 </body>
 </html>
