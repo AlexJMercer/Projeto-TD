@@ -48,6 +48,14 @@ include_once "../class/Carrega.class.php";
     <link rel="stylesheet" href="../plugins/select2/select2.css">
     <link rel="stylesheet" href="../plugins/select2/select2-bootstrap.css">
 
+    <!--link href="//cdnjs.cloudflare.com/ajax/libs/select2/4.0.0/css/select2.min.css" rel="stylesheet" />
+<script src="//cdnjs.cloudflare.com/ajax/libs/select2/4.0.0/js/select2.min.js"></script-->
+<script type="text/javascript">
+$( "#dropdown" ).select2({
+  theme: "bootstrap"
+});
+</script>
+
 </head>
 
 <body>
@@ -408,7 +416,7 @@ include_once "../class/Carrega.class.php";
                                       </div>
                                       <div class="form-group">
                                         <label for="curso">Curso:</label>
-                                        <select class="form-control select2-multiple" name="curso" id="curso">
+                                        <select class="form-control select2-multiple"  name="curso" id="curso" multiple="multiple">
                                           <option value="">Selecione o cursos</option>
                                           <?php $cursoSelect = new Cursos();
                                                 $cursoSelect->cursoSelect();
@@ -449,5 +457,11 @@ include_once "../class/Carrega.class.php";
     <!-- Custom Theme JavaScript -->
     <script src="../dist/js/sb-admin-2.js"></script>
 
+    <script type="text/javascript" src="../plugins/select2/select2.js"></script>
+    <script type="text/javascript">
+    $( "#dropdown" ).select2({
+      theme: "bootstrap"
+    });
+</script>
 </body>
 </html>
