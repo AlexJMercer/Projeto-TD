@@ -65,7 +65,7 @@
       {
          $return = false;
          $sql = "UPDATE categorias
-                  set categorias=$this->categorias
+                  set categoria='$this->categoria'
                   where id=$this->id";
 
          $return = pg_query($sql);

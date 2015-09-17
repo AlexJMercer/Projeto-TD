@@ -2,16 +2,6 @@
 
  include_once "../class/Carrega.class.php";
 
-  if (isset($_POST['atualizar']))
-  {
-      $object = new Local();
-      $object->id = $_POST['id'];
-      $object->sala = $_POST['sala'];
-
-      $object->Atualizar();
-
-      header("Location:ViewLocalObj.php");
-  }
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -411,13 +401,13 @@
                         <div class="panel-body">
                             <div class="row">
                                 <div class="col-lg-12">
-                                    <form role="form" name="editsala" method="post" action="<?php $SELF_PHP;?>">
+                                    <form role="form" name="editsala" method="post" action="CrudLocal.php">
                                       <div class="form-group">
                                           <label for="sala">Sala:</label>
                                           <input type="text" class="form-control" id="sala" name="sala" placeholder="Digite o sala aqui" value="<?php echo $comp->sala; ?>" autofocus required>
                                       </div>
                                         <input type="hidden" name="id" value="<?php echo $comp->id; ?>"/>
-                                        <!--input type="submit" name="atualizar" value="Atualizar" class="btn btn-success btn-lg"/-->
+                                        
                                         <button type="submit" name="atualizar" value="atualizar" class="btn btn-success btn-lg btn-block"><i class="fa fa-refresh"></i> Atualizar </button>
                                         <br>
                                         <button type="button" name="cancelar" value="cancelar" onclick="location.href='ViewLocalObj.php'" class="btn btn-outline btn-default btn-lg btn-block"><i class="fa fa-undo"></i> Cancelar </button>

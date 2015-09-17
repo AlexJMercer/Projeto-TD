@@ -391,9 +391,9 @@
                         </div>
                         <!-- /.panel-heading -->
                         <div class="panel-body">
-                          <div class="table-responsive">
+
                             <div class="dataTable_wrapper">
-                                <table class="table table-hover" id="dataTables-example">
+                                <table class="table table-hover table-bordered table-responsive" id="dataTables">
                                     <thead>
                                         <tr>
                                             <th>Alimento</th>
@@ -414,16 +414,14 @@ include_once "../class/Carrega.class.php";
       {
 ?>
                             <tr class="odd gradeX">
-                              <form name="view" class="" action="EditCardapioObj.php" method="post">
+                              <form name="view" class="" action="EditAlimentoObj.php" method="post">
                                 <td><?php echo $line->alimento; ?></td>
                                 <td class='center'>
-                                  <input type='hidden' name='cod' value='<?php echo $line->id; ?>'>
-
-                                  <button type="submit" name="exibir" value="exibir" formaction="ExibCardapioObj.php" class="btn btn-outline btn-info"><i class="fa fa-expand"></i> Exibir </button>
+                                  <input type='hidden' name='id' value='<?php echo $line->id; ?>'>
 
                                   <button type="submit" name="editar" value="editar" class="btn btn-outline btn-warning"><i class="fa fa-edit"></i> Editar </button>
 
-                                  <button type="submit" name="excluir" value="excluir" formaction="" class='btn btn-danger'><i class="fa fa-times"></i> Excluir </button>
+                                  <button type="submit" name="excluir" value="excluir" formaction="CrudAlimento.php" class='btn btn-outline btn-danger'><i class="fa fa-times"></i> Excluir </button>
                                   </td>
                               </form>
                             </tr>
@@ -438,7 +436,7 @@ include_once "../class/Carrega.class.php";
                                     </tbody>
                                 </table>
                             </div>
-                            </div>
+
                             <!-- /.table-responsive -->
                         </div>
                         <!-- /.panel-body -->
@@ -471,23 +469,17 @@ include_once "../class/Carrega.class.php";
     <!-- Page-Level Demo Scripts - Tables - Use for reference -->
     <script>
     $(document).ready(function() {
-        $('#dataTables-example').DataTable({
-                responsive: true
+        $('#dataTables').DataTable({
+                responsive:true,
+                "oLanguage": { "sSearch": "",
+                               "sInfo": "Um total de _TOTAL_ alimentos (_START_ de _END_)",
+                               "sLengthMenu": "Listar _MENU_ alimentos"},
+                "columnDefs": [ { "targets": 1, "orderable": false } ]
         });
+        $('.dataTables_filter input').attr("placeholder", "Pesquise alimentos aqui");
     });
+
+
     </script>
 </body>
 </html>
-<?php
-
-if (isset($_POST['excluir']))
-{
-    $object = new Alimentos();
-    $object->cod = $_POST['cod'];
-
-    $object->excluir();
-
-    echo "<meta http-equiv='refresh' content='0;url=ViewCardapioObj.php'";
-    //header("Location:ViewCardapioObj.php");
-}
-?>

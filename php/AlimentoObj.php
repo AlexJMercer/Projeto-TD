@@ -397,7 +397,7 @@ include_once "../class/Carrega.class.php";
                         <div class="panel-body">
                             <div class="row">
                                 <div class="col-lg-12">
-                                    <form role="form" name="cadalimento" method="post" action="<?php $SELF_PHP;?>">
+                                    <form role="form" name="cadalimento" method="post" action="CrudAlimento.php">
                                       <div class="form-group">
                                           <label for="alimento">Alimento:</label>
                                           <input type="text" class="form-control" name="alimento" placeholder="Digite o alimento aqui" autofocus required>

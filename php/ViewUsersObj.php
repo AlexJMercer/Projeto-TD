@@ -393,7 +393,7 @@
                         <div class="panel-body">
                           <div class="table-responsive">
                             <div class="dataTable_wrapper">
-                                <table class="table table-hover" id="dataTables-example">
+                                <table class="table table-hover table-bordered" id="dataTables">
                                     <thead>
                                         <tr>
                                             <th>Nome</th>
@@ -474,7 +474,7 @@ include_once "../class/Carrega.class.php";
     <!-- Page-Level Demo Scripts - Tables - Use for reference -->
     <script>
     $(document).ready(function() {
-        $('#dataTables-example').DataTable({
+        $('#dataTables').DataTable({
                 responsive: true
         });
     });

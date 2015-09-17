@@ -65,7 +65,7 @@
       {
          $return = false;
          $sql = "UPDATE alimentos
-                  set alimentos=$this->alimentos
+                  set alimento='$this->alimento'
                   where id=$this->id";
 
          $return = pg_query($sql);
@@ -74,7 +74,7 @@
 
       public function editar($id = "")
       {
-        $sql = "SELECT * FROM alimentos WHERE alimentos.id=$id ";
+        $sql = "SELECT * FROM alimentos WHERE alimentos.id=$id";
         $result = pg_query($sql);
         $return = NULL;
 

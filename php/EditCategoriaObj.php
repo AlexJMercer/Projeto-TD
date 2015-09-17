@@ -2,16 +2,6 @@
 
  include_once "../class/Carrega.class.php";
 
-  if (isset($_POST['atualizar']))
-  {
-      $object = new Categorias();
-      $object->id = $_POST['id'];
-      $object->categoria = $_POST['categoria'];
-
-      $object->atualizar();
-
-      header("Location:ViewAlimentoObj.php");
-  }
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -411,7 +401,7 @@
                         <div class="panel-body">
                             <div class="row">
                                 <div class="col-lg-12">
-                                    <form role="form" name="editcategoria" method="post" action="<?php $SELF_PHP;?>">
+                                    <form role="form" name="editcategoria" method="post" action="CrudCategoria.php">
                                       <div class="form-group">
                                           <label for="categoria">Categoria:</label>
                                           <input type="text" class="form-control" name="categoria" placeholder="Digite o categoria aqui" value="<?php echo $comp->categoria; ?>" autofocus required>
@@ -454,15 +444,6 @@
 
     <!-- Custom Theme JavaScript -->
     <script src="../dist/js/sb-admin-2.js"></script>
-
-    <script type="text/javascript" src="../js/jquery.maskedinput.min.js"></script>
-
-    <script type="text/javascript">
-    $(document).ready(function()
-    {
-      $('#data').mask("99/99/9999");
-    });
-    </script>
 
 </body>
 </html>

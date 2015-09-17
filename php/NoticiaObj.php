@@ -1,19 +1,3 @@
-<?php
-
-include_once "../class/Carrega.class.php";
-
-  if (isset($_POST['enviar']))
-  {
-      $object = new Cardapios();
-      $object->dia = $_POST['dia'];
-      $object->data = $_POST['data'];
-      $object->texto = $_POST['cardapio'];
-
-      $object->inserir();
-
-      header("Location:ViewCardapioObj.php");
-  }
-?>
 <!DOCTYPE html>
 <html lang="pt-br">
 
@@ -45,6 +29,8 @@ include_once "../class/Carrega.class.php";
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
+
+    <link rel="stylesheet" href="../plugins/jquery.steps.css" type="text/css">
 
 </head>
 
@@ -398,34 +384,23 @@ include_once "../class/Carrega.class.php";
                         </div>
                         <div class="panel-body">
                             <div class="row">
-                                <div class="col-lg-6">
-                                    <form role="form" name="cadcardapio" method="post" action="<?php $SELF_PHP;?>">
-                                      <div class="form-group">
-                                          <label for="dia">Dia:
-                                          <select class="form-control" name="dia" id="dia">
-                                              <option value="">Selecione o dia</option>
-                                              <?php $diaSelect = new Dia();
-                                                    $diaSelect->diaSelect();
-                                              ?>
-                                          </select>
-                                          </label>
-                                      </div>
-                                      <div class="form-group">
-                                          <label for="data">Data:
-                                          <input class="form-control" id='data' name="data" placeholder="DD/MM/AAAA">
-                                          </label>
-                                      </div>
-                                      <div class="form-group">
-                                          <label for="cardapio">Cardápio:
-                                          <textarea placeholder="Digite o cardápio" name="cardapio" id="cardapio" rows="5" cols="50" class="form-control"></textarea>
-                                          </label>
-                                      </div>
-                                        <button type="submit" name="enviar" value="enviar" class="btn btn-success btn-lg btn-block"><i class="fa fa-check"></i> Enviar </button>
-                                        <br>
-                                        <!--input type="submit" name="enviar" value="Enviar" class="btn btn-success btn-lg"/-->
-                                        <button type="reset" name="limpar" value="limpar" class="btn btn-danger btn-lg btn-block"><i class="fa fa-magic"></i> Limpar dados </button>
-                                        <!--input type="reset" name="limpar" value="Limpar dados" class="btn btn-danger btn-lg btn-block"/-->
-                                    </form>
+                                <div class="col-lg-12">
+
+                                  <div id="wizard">
+                                    <h3 class="btn btn-primary">Keyboard</h3>
+                                      <section>
+                                        <p>Try the keyboard navigation by clicking arrow left or right!</p>
+                                      </section>
+                                    <h3 class="btn btn-primary">Effects</h3>
+                                      <section>
+                                        <p>Wonderful transition effects.</p>
+                                      </section>
+                                    <h3 class="btn btn-primary">Pager</h3>
+                                      <section>
+                                        <p>The next and previous buttons help you to navigate through your content.</p>
+                                      </section>
+                                  </div>
+                                  </div>
                                 </div>
                                 <!-- /.col-lg-6 (nested) -->
                             </div>
@@ -455,11 +430,18 @@ include_once "../class/Carrega.class.php";
 
     <script type="text/javascript" src="../js/jquery.maskedinput.min.js"></script>
 
+    <script type="text/javascript" src="../plugins/jquery.steps.js"></script>
+
     <script type="text/javascript">
-    $(document).ready(function()
-    {
-      $('#data').mask("99/99/9999");
-    });
+
+
+      $("#wizard").steps({
+          headerTag: "h3",
+          bodyTag: "section",
+          transitionEffect: "slideLeft",
+          autoFocus: true
+      });
+
     </script>
 </body>
 </html>

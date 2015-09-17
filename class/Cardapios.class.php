@@ -7,7 +7,7 @@ include "BD.class.php";
     private $id;
     private $dia;
     private $data;
-    private $alimento[];
+    private $alimento;
     private $bd;
 
       public function __construct()
@@ -41,6 +41,7 @@ include "BD.class.php";
       public function inserir()
       {
 
+
         $this->transacao("BEGIN");
 
         $sql = "INSERT INTO cardapios (dia, data) VALUES ('$this->dia', '$this->data')";
@@ -49,16 +50,26 @@ include "BD.class.php";
 
           if($return)
           {
-            $sql_id_card= "SELECT CURRVAL('cardapios_id_seq')";
-            $faz = pg_query($sql_id_card);
-            $this->id = $faz;
 
-            $sql2 = "INSERT INTO alimentos_cardapios (id_card, id_ali) VALUES ('$this->id', '$this->alimento[]')";
-            $return2 = pg_query($sql2);
+            $count = count($this->alimento);
+
+            $sql_id_card= "SELECT CURRVAL('cardapios_id_seq')";
+            $last = pg_query($sql_id_card);
+            $idcard = pg_fetch_array($last);
+
+            $this->id = $idcard[0];
+
+            foreach ($this->alimento as $value)
+            {
+
+              $sql2 = "INSERT INTO alimentos_cardapios (id_card, id_ali) VALUES ('$this->id', '$value')";
+              $return2 = pg_query($sql2);
+
+            }
 
             if ($return2)
             {
-              $this->transacao("COMMIT");
+             $this->transacao("COMMIT");
             }
             else
             {
@@ -70,17 +81,16 @@ include "BD.class.php";
 
       public function listar()
       {
-         $sql = "SELECT * FROM cardapios, dia WHERE cardapios.dia=dia.id ORDER BY cardapios.id";
+         $sql = "SELECT * FROM cardapios c, dia d WHERE c.dia=d.id ORDER BY c.id";
          $result = pg_query($sql);
          $retorno = null;
 
          while ($reg = pg_fetch_assoc($result))
          {
             $obj = new Cardapios();
-            $obj->cod = $reg["id"];
+            $obj->id = $reg["id"];
             $obj->dia = $reg["dia"];
             $obj->data = $reg["data"];
-            $obj->alimento = $reg["card_text"];
 
             $retorno[] = $obj;
          }
@@ -89,7 +99,7 @@ include "BD.class.php";
 
       public function excluir()
       {
-         $sql = "DELETE from $this->tabel where id=$this->cod";
+         $sql = "DELETE from $this->tabel where id=$this->id";
          $retorno = pg_query($sql);
          return $retorno;
       }
@@ -101,22 +111,22 @@ include "BD.class.php";
                   set dia='$this->dia',
                       data='$this->data',
                       card_text='$this->alimento'
-                  where id=$this->cod";
+                  where id=$this->id";
 
          $retorno = pg_query($sql);
          return $retorno;
       }
 
-      public function editar($cod = "")
+      public function editar($d = "")
       {
-        $sql = "SELECT * FROM cardapios, dia WHERE cardapios.dia=dia.id AND cardapios.id=$cod ";
+        $sql = "SELECT * FROM cardapios, dia WHERE cardapios.dia=dia.id AND cardapios.id=$id ";
         $result = pg_query($sql);
         $retorno = NULL;
 
         while ($reg = pg_fetch_assoc($result))
         {
            $obj = new Cardapios();
-           $obj->cod = $reg["id"];
+           $obj->id = $reg["id"];
            $obj->dia = $reg["dia"];
            $obj->data = $reg["data"];
            $obj->alimento = $reg["card_text"];
@@ -127,16 +137,16 @@ include "BD.class.php";
       }
 
 
-      public function exibir($cod = "")
+      public function exibir($id = "")
       {
-        $sql = "SELECT * FROM cardapios, dia WHERE cardapios.dia=dia.id AND cardapios.id=$cod ";
+        $sql = "SELECT * FROM cardapios, dia WHERE cardapios.dia=dia.id AND cardapios.id=$id ";
         $result = pg_query($sql);
         $retorno = NULL;
 
         while ($reg = pg_fetch_assoc($result))
         {
            $obj = new Cardapios();
-           $obj->cod = $reg["id"];
+           $obj->id = $reg["id"];
            $obj->dia = $reg["dia"];
            $obj->data = $reg["data"];
            $obj->alimento = $reg["card_text"];

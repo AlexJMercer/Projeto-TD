@@ -42,7 +42,7 @@
     public function Listar()
     {
 
-      $sql = "SELECT * FROM disciplinas d Order by d.id";
+      $sql = "SELECT * FROM disciplinas as d Order by d.id";
       $result = pg_query($sql);
       $return = null;
 
@@ -84,7 +84,7 @@
 
     public function Editar($id = "")
     {
-      $sql = "SELECT * FROM disciplinas d WHERE d.id=$id";
+      $sql = "SELECT * FROM disciplinas as d WHERE d.id=$id";
       $result = pg_query($sql);
       $return = null;
 

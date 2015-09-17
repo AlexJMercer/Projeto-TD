@@ -476,16 +476,3 @@ include_once "../class/Carrega.class.php";
     </script>
 </body>
 </html>
-<?php
-
-if (isset($_POST['excluir']))
-{
-    $object = new Local();
-    $object->id = $_POST['id'];
-
-    $object->Excluir();
-
-    echo "<meta http-equiv='refresh' content='0;url=ViewCardapioObj.php'";
-    //header("Location:ViewCardapioObj.php");
-}
-?>

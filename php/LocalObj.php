@@ -1,17 +1,3 @@
-<?php
-
-include_once "../class/Carrega.class.php";
-
-  if (isset($_POST['enviar']))
-  {
-      $object = new Local();
-      $object->sala = $_POST['sala'];
-
-      $object->Inserir();
-
-      header("Location:ViewLocalObj.php");
-  }
-?>
 <!DOCTYPE html>
 <html lang="pt-br">
 
@@ -397,7 +383,7 @@ include_once "../class/Carrega.class.php";
                         <div class="panel-body">
                             <div class="row">
                                 <div class="col-lg-12">
-                                    <form role="form" name="cadlocal" method="post" action="<?php $SELF_PHP;?>">
+                                    <form role="form" name="cadlocal" method="post" action="CrudLocal.php">
                                       <div class="form-group">
                                           <label for="sala">Sala:</label>
                                           <input type="text" class="form-control" id="sala" name="sala" placeholder="Digite a sala aqui" autofocus required>

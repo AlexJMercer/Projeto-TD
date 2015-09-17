@@ -414,16 +414,14 @@ include_once "../class/Carrega.class.php";
       {
 ?>
                             <tr class="odd gradeX">
-                              <form name="view" class="" action="EditCardapioObj.php" method="post">
+                              <form name="view" class="" action="EditCategoriaObj.php" method="post">
                                 <td><?php echo $line->categoria; ?></td>
                                 <td class='center'>
-                                  <input type='hidden' name='cod' value='<?php echo $line->id; ?>'>
-
-                                  <button type="submit" name="exibir" value="exibir" formaction="ExibCardapioObj.php" class="btn btn-outline btn-info"><i class="fa fa-expand"></i> Exibir </button>
+                                  <input type='hidden' name='id' value='<?php echo $line->id; ?>'>
 
                                   <button type="submit" name="editar" value="editar" class="btn btn-outline btn-warning"><i class="fa fa-edit"></i> Editar </button>
 
-                                  <button type="submit" name="excluir" value="excluir" formaction="" class='btn btn-danger'><i class="fa fa-times"></i> Excluir </button>
+                                  <button type="submit" name="excluir" value="excluir" formaction="CrudCategoria.php" class='btn btn-outline btn-danger'><i class="fa fa-times"></i> Excluir </button>
                                   </td>
                               </form>
                             </tr>
@@ -478,16 +476,3 @@ include_once "../class/Carrega.class.php";
     </script>
 </body>
 </html>
-<?php
-
-if (isset($_POST['excluir']))
-{
-    $object = new Categorias();
-    $object->cod = $_POST['cod'];
-
-    $object->excluir();
-
-    echo "<meta http-equiv='refresh' content='0;url=ViewCardapioObj.php'";
-    //header("Location:ViewCardapioObj.php");
-}
-?>

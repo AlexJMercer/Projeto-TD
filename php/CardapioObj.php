@@ -7,7 +7,7 @@ include_once "../class/Carrega.class.php";
       $object = new Cardapios();
       $object->dia = $_POST['dia'];
       $object->data = $_POST['data'];
-    //  $object->texto = $_POST['cardapio'];
+      $object->alimento = $_POST['alimento'];
 
       $object->inserir();
 
@@ -48,9 +48,11 @@ include_once "../class/Carrega.class.php";
 
     <!--link rel="stylesheet" href="../chosen/docsupport/style.css"-->
     <!--link rel="stylesheet" href="../chosen/docsupport/prism.css"-->
-    <link rel="stylesheet" href="../chosen/chosen.css">
+    <!--link rel="stylesheet" href="../chosen/chosen.css"-->
+    <link rel="stylesheet" href="../plugins/select2/select2.css">
+    <link rel="stylesheet" href="../plugins/select2/select2-bootstrap.css">
 
-    <script type="text/javascript" src="../js/jquery.js"></script>
+
 
 </head>
 
@@ -417,24 +419,25 @@ include_once "../class/Carrega.class.php";
 
                                       </div>
                                       <div class="form-group">
-                                          <label for="data">Data:</label>
-                                          <input class="form-control" id='data' name="data" placeholder="DD/MM/AAAA" required>
+                                          <label for="datepicker">Data:</label>
+                                          <input class="form-control" id='datepicker' name="data" placeholder="DD/MM/AAAA" required>
 
                                       </div>
                                       <div class="form-group">
                                           <label for="alimentos"> Alimentos: </label>
-                                          <select data-placeholder="Selecione o alimento" class="chosen-select form-control" multiple tabindex="4" required>
+                                          <select class="form-control select2"  name="alimento[]" id="alimentos" multiple="multiple">
                                               <option value=""></option>
                                               <?php $alimentoSelect = new Alimentos();
                                                     $alimentoSelect->alimentoSelect();
                                               ?>
                                           </select>
                                       </div>
-                                        <!--input type="submit" name="enviar" value="Enviar" class="btn btn-success btn-lg"/-->
+
                                         <br>
-                                        <button type="reset" name="limpar" value="limpar" class="btn btn-outline btn-danger btn-lg"><i class="fa fa-magic"></i> Limpar dados </button>
-                                        <!--input type="reset" name="limpar" value="Limpar dados" class="btn btn-danger btn-lg btn-block"/-->
+                                        <button type="reset" name="limpar" value="limpar" class="btn btn-outline btn-danger btn-lg"><i class="fa fa-magic"></i> Limpar </button>
+
                                         <button type="submit" name="enviar" value="enviar" class="btn btn-success btn-lg"><i class="fa fa-check"></i> Enviar </button>
+
                                     </form>
                                 </div>
                                 <!-- /.col-lg-6 (nested) -->
@@ -472,21 +475,24 @@ include_once "../class/Carrega.class.php";
     });
     </script>
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js" type="text/javascript"></script>
-    <script src="../chosen/chosen.jquery.js" type="text/javascript"></script>
-    <script src="../chosen/docsupport/prism.js" type="text/javascript" charset="utf-8"></script>
+    <script type="text/javascript" src="../plugins/select2/select2.js"></script>
     <script type="text/javascript">
-    var config = {
-      '.chosen-select'           : {},
-      '.chosen-select-deselect'  : {allow_single_deselect:true},
-      '.chosen-select-no-single' : {disable_search_threshold:10},
-      '.chosen-select-no-results': {no_results_text:'Nada encontrado!'},
-      '.chosen-select-width'     : {width:"100%"}
-    }
-    for (var selector in config) {
-      $(selector).chosen(config[selector]);
-    }
+    $( ".select2" ).select2({
+      theme: "bootstrap"
+    });
+    </script>
+    <script>
+      $(document).ready(function () {
+        $('#datepicker').datepicker({
+            language: "pt-BR",
+            format: "dd/mm/yyyy",
+            orientation: "top right"
+
+        });
+      });
     </script>
 
+    <script src="../utilities/datepicker/js/bootstrap-datepicker.js"></script>
+    <script src="../utilities/datepicker/locales/bootstrap-datepicker.pt-BR.min.js"></script>
 </body>
 </html>

@@ -1,17 +1,3 @@
-<?php
-
-include_once "../class/Carrega.class.php";
-
-  if (isset($_POST['enviar']))
-  {
-      $object = new Categorias();
-      $object->categoria = $_POST['categoria'];
-
-      $object->inserir();
-
-      header("Location:ViewCategoriaObj.php");
-  }
-?>
 <!DOCTYPE html>
 <html lang="pt-br">
 
@@ -397,7 +383,7 @@ include_once "../class/Carrega.class.php";
                         <div class="panel-body">
                             <div class="row">
                                 <div class="col-lg-12">
-                                    <form role="form" name="cadcategoria" method="post" action="<?php $SELF_PHP;?>">
+                                    <form role="form" name="cadcategoria" method="post" action="CrudCategoria.php">
                                       <div class="form-group">
                                           <label for="categoria">Categoria:</label>
                                           <input type="text" class="form-control" name="categoria" placeholder="Digite o categoria aqui" autofocus required>
@@ -407,7 +393,7 @@ include_once "../class/Carrega.class.php";
                                       <button type="submit" name="enviar" value="enviar" class="btn btn-success btn-lg btn-block"><i class="fa fa-check"></i> Enviar </button>
                                       <br>
                                       <button type="reset" name="limpar" value="limpar" class="btn btn-outline btn-danger btn-lg btn-block"><i class="fa fa-magic"></i> Limpar </button>
-                                      
+
                                     </form>
                                 </div>
                                 <!-- /.col-lg-6 (nested) -->
