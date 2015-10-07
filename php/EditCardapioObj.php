@@ -5,10 +5,10 @@
   if (isset($_POST['atualizar']))
   {
       $object = new Cardapios();
-      $object->cod = $_POST['cod'];
+      $object->id = $_POST['id'];
       $object->dia = $_POST['dia'];
       $object->data = $_POST['data'];
-      $object->texto = $_POST['cardapio'];
+      $object->alimento = $_POST['alimento'];
 
       $object->atualizar();
 
@@ -46,6 +46,9 @@
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
+
+    <link rel="stylesheet" href="../plugins/select2/select2.css">
+    <link rel="stylesheet" href="../plugins/select2/select2-bootstrap.css">
 
 </head>
 
@@ -400,12 +403,15 @@
 
 <?php
 
-  $cod = $_POST["cod"];
+  $id = $_POST["id"];
 
   if (isset($_POST["editar"]))
   {
+
     $edit = new Cardapios();
-    $comp = $edit->editar($cod);
+    $comp = $edit->editar($id);
+
+    print_r($comp);
 
       if ($edit != null)
       {
@@ -415,31 +421,33 @@
                                 <div class="col-lg-12">
                                     <form role="form" name="editcardapio" method="post" action="<?php $SELF_PHP;?>">
                                       <div class="form-group">
-                                          <label for="dia">Dia:
+                                          <label for="dia">Dia:</label>
                                           <select class="form-control" name="dia" id="dia" required>
                                               <option value="">Selecione o dia</option>
                                               <?php $diaSelect = new Dia();
                                                     $diaSelect->diaSelect($comp->dia);
                                               ?>
                                           </select>
-                                          </label>
                                       </div>
                                       <div class="form-group">
-                                          <label for="data">Data:
-                                          <input class="form-control" id='data' name="data" placeholder="DD/MM/AAAA" value=" <?php echo date('d/m/Y',strtotime( $comp->data)) ?>" required>
-                                          </label>
+                                          <label for="datepicker">Data:</label>
+                                          <input class="form-control" id='datepicker' name="data" placeholder="DD/MM/AAAA" value="<?php echo date('d/m/Y',strtotime($comp->data)); ?>" required>
                                       </div>
                                       <div class="form-group">
-                                          <label for="cardapio">Cardápio:
-                                          <textarea placeholder="Digite o cardápio" name="cardapio" id="cardapio" rows="5" cols="50" class="form-control" required><?php echo $comp->texto;  ?></textarea>
-                                          </label>
+                                          <label for="alimentos"> Alimentos: </label>
+                                          <select class="form-control select2"  name="alimento[]" id="alimentos" multiple="multiple">
+                                              <option value=""></option>
+                                              <?php $alimentoSelect = new Alimentos();
+                                                    $alimentoSelect->alimentoSelect($comp->alimento);
+                                              ?>
+                                          </select>
                                       </div>
-                                        <input type="hidden" name="cod" value="<?php echo $comp->cod; ?>"/>
-                                        <!--input type="submit" name="atualizar" value="Atualizar" class="btn btn-success btn-lg"/-->
+                                        <input type="hidden" name="id" value="<?php echo $comp->id; ?>"/>
+
                                         <button type="submit" name="atualizar" value="atualizar" class="btn btn-success btn-lg btn-block"><i class="fa fa-refresh"></i> Atualizar </button>
                                         <br>
                                         <button type="button" name="cancelar" value="cancelar" onclick="location.href='ViewCardapioObj.php'" class="btn btn-outline btn-default btn-lg btn-block"><i class="fa fa-undo"></i> Cancelar </button>
-                                        <!--input type="button" name="cancelar" value="Cancelar" onclick="location.href='ViewCardapioObj.php'" class="btn btn-danger btn-lg btn-block"/-->
+
                                     </form>
                                 </div>
                                 <!-- /.col-lg-6 (nested) -->
@@ -475,12 +483,25 @@
 
     <script type="text/javascript" src="../js/jquery.maskedinput.min.js"></script>
 
+    <script type="text/javascript" src="../plugins/select2/select2.js"></script>
     <script type="text/javascript">
-    $(document).ready(function()
-    {
-      $('#data').mask("99/99/9999");
+    $( ".select2" ).select2({
+      theme: "bootstrap"
     });
     </script>
+
+    <script>
+      $(document).ready(function () {
+        $('#datepicker').datepicker({
+            language: "pt-BR",
+            format: "dd/mm/yyyy",
+            orientation: "top right"
+        });
+      });
+    </script>
+
+    <script src="../utilities/datepicker/js/bootstrap-datepicker.js"></script>
+    <script src="../utilities/datepicker/locales/bootstrap-datepicker.pt-BR.min.js"></script>
 
 </body>
 </html>

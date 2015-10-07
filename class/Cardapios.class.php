@@ -41,12 +41,10 @@ include "BD.class.php";
       public function inserir()
       {
 
-
         $this->transacao("BEGIN");
 
         $sql = "INSERT INTO cardapios (dia, data) VALUES ('$this->dia', '$this->data')";
         $return = pg_query($sql);
-
 
           if($return)
           {
@@ -81,14 +79,14 @@ include "BD.class.php";
 
       public function listar()
       {
-         $sql = "SELECT * FROM cardapios c, dia d WHERE c.dia=d.id ORDER BY c.id";
+         $sql = "SELECT * FROM cardapios c, dia d WHERE d.id_dia=c.dia ORDER BY d.id_dia";
          $result = pg_query($sql);
          $retorno = null;
 
          while ($reg = pg_fetch_assoc($result))
          {
             $obj = new Cardapios();
-            $obj->id = $reg["id"];
+            $obj->id = $reg["id_card"];
             $obj->dia = $reg["dia"];
             $obj->data = $reg["data"];
 
@@ -110,26 +108,36 @@ include "BD.class.php";
          $sql = "UPDATE $this->tabel
                   set dia='$this->dia',
                       data='$this->data',
-                      card_text='$this->alimento'
                   where id=$this->id";
 
          $retorno = pg_query($sql);
          return $retorno;
       }
 
-      public function editar($d = "")
+      public function editar($id = "")
       {
-        $sql = "SELECT * FROM cardapios, dia WHERE cardapios.dia=dia.id AND cardapios.id=$id ";
+        $sql = "SELECT * FROM cardapios c JOIN dia d ON d.id_dia=c.dia
+                                          JOIN alimentos_cardapios ac ON ac.id_card=c.id_card
+                                          WHERE ac.id_card=$id";
+        $sql2 = "SELECT a.id, a.alimento FROM alimentos a LEFT OUTER JOIN alimentos_cardapios ac ON a.id=ac.id_ali JOIN cardapios c ON c.id_card=ac.id_card";
+
         $result = pg_query($sql);
+        $result2 = pg_query($sql2);
         $retorno = NULL;
 
         while ($reg = pg_fetch_assoc($result))
         {
            $obj = new Cardapios();
-           $obj->id = $reg["id"];
-           $obj->dia = $reg["dia"];
+           $obj->id = $reg["id_card"];
+           $obj->dia = $reg["id_dia"];
            $obj->data = $reg["data"];
-           $obj->alimento = $reg["card_text"];
+
+           foreach (pg_fetch_assoc($result2) as $value)
+           {
+              $temp[] = $value;
+
+           }
+          $obj->alimento = $temp;
 
            $retorno = $obj;
         }

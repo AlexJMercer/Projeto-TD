@@ -391,14 +391,13 @@
                         </div>
                         <!-- /.panel-heading -->
                         <div class="panel-body">
-                          <div class="table-responsive">
+
                             <div class="dataTable_wrapper">
-                                <table class="table table-hover" id="dataTables-example">
+                                <table class="table table-hover table-bordered table-responsive" id="dataTables">
                                     <thead>
                                         <tr>
                                             <th>Dia</th>
                                             <th>Data</th>
-                                            <th>Cardápio</th>
                                             <th>Opções</th>
                                         </tr>
                                     </thead>
@@ -410,6 +409,7 @@ include_once "../class/Carrega.class.php";
   $listar = new Cardapios();
   $list = $listar->listar();
 
+  print_r($list);
     if ($list != null)
     {
       foreach ($list as $line)
@@ -419,15 +419,15 @@ include_once "../class/Carrega.class.php";
                               <form name="view" class="" action="EditCardapioObj.php" method="post">
                                 <td><?php echo $line->dia; ?></td>
                                 <td><?php echo date('d/m/Y',strtotime($line->data)); ?></td>
-                                <td><?php echo $line->texto; ?></td>
                                 <td class='center'>
-                                  <input type='hidden' name='cod' value='<?php echo $line->cod; ?>'>
+                                  <input type='hidden' name='id' value='<?php echo $line->id; ?>'>
+                                  
                                   <button type="submit" name="exibir" value="exibir" formaction="ExibCardapioObj.php" class="btn btn-outline btn-info"><i class="fa fa-expand"></i> Exibir </button>
-                                  <!--input type='submit' class='btn btn-outline btn-info' name='exibir' value='Exibir' formaction='ExibCardapioObj.php' /-->
+
                                   <button type="submit" name="editar" value="editar" class="btn btn-outline btn-warning"><i class="fa fa-edit"></i> Editar </button>
-                                  <!--input type='submit' class='btn btn-outline btn-warning' name='editar' value='Editar'/-->
-                                  <button type="submit" name="excluir" value="excluir" formaction="" class='btn btn-danger'><i class="fa fa-times"></i> Excluir </button>
-                                  <!--input type='submit' class='btn btn-danger' formaction='' name='excluir' value='Excluir'/--></td>
+
+                                  <button type="submit" name="excluir" value="excluir" formaction="" class='btn btn-outline btn-danger'><i class="fa fa-times"></i> Excluir </button>
+                                </td>
                               </form>
                             </tr>
 <?php
@@ -441,7 +441,7 @@ include_once "../class/Carrega.class.php";
                                     </tbody>
                                 </table>
                             </div>
-                            </div>
+
                             <!-- /.table-responsive -->
                         </div>
                         <!-- /.panel-body -->
@@ -474,10 +474,16 @@ include_once "../class/Carrega.class.php";
     <!-- Page-Level Demo Scripts - Tables - Use for reference -->
     <script>
     $(document).ready(function() {
-        $('#dataTables-example').DataTable({
-                responsive: true
+        $('#dataTables').DataTable({
+                responsive:true,
+                "oLanguage": { "sSearch": "",
+                               "sInfo": "Um total de _TOTAL_ cardápios (_START_ de _END_)",
+                               "sLengthMenu": "Listar _MENU_ cardápios"},
+                "columnDefs": [ { "targets": 2, "orderable": false } ]
         });
+        $('.dataTables_filter input').attr("placeholder", "Pesquise aqui");
     });
+
     </script>
 </body>
 </html>
@@ -486,7 +492,7 @@ include_once "../class/Carrega.class.php";
 if (isset($_POST['excluir']))
 {
     $object = new Cardapios();
-    $object->cod = $_POST['cod'];
+    $object->id = $_POST['id'];
 
     $object->excluir();
 

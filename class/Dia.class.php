@@ -48,7 +48,7 @@
 
       public function diaSelect($dia ="")
       {
-         $sql = "SELECT * from dia Order by id";
+         $sql = "SELECT * from dia Order by id_dia";
          $result = pg_query($sql);
 
          $ln=pg_num_rows($result);
@@ -61,16 +61,16 @@
         {
           while ($a = pg_fetch_array($result))
           {
-            $this->id = $a['id'];
+            $this->id = $a['id_dia'];
             $this->dia = $a['dia'];
 
             if ($dia==$this->id)
             {
-              print "<option selected value='{$this->id}'>{$this->dia}</option>";
+              print "<option selected value='{$this->id_dia}'>{$this->dia}</option>";
             }
             else
             {
-              print "<option value='{$this->id}'>{$this->dia}</option>";
+              print "<option value='{$this->id_dia}'>{$this->dia}</option>";
             }
           }
         }

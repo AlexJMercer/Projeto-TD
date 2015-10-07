@@ -46,13 +46,10 @@ include_once "../class/Carrega.class.php";
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
 
-    <!--link rel="stylesheet" href="../chosen/docsupport/style.css"-->
-    <!--link rel="stylesheet" href="../chosen/docsupport/prism.css"-->
-    <!--link rel="stylesheet" href="../chosen/chosen.css"-->
     <link rel="stylesheet" href="../plugins/select2/select2.css">
     <link rel="stylesheet" href="../plugins/select2/select2-bootstrap.css">
 
-
+  
 
 </head>
 

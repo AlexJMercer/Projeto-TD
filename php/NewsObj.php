@@ -39,6 +39,10 @@ include_once "../class/Carrega.class.php";
     <!-- Custom Fonts -->
     <link href="../bower_components/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 
+    <!-- Bootstrap time Picker -->
+    <link href="../style/timepicker/bootstrap-timepicker.min.css" rel="stylesheet"/>
+
+
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -385,7 +389,7 @@ include_once "../class/Carrega.class.php";
         <div id="page-wrapper">
             <div class="row">
                 <div class="col-lg-12">
-                    <h1 class="page-header">Cardápios</h1>
+                    <h1 class="page-header">Noticias</h1>
                 </div>
                 <!-- /.col-lg-12 -->
             </div>
@@ -394,37 +398,38 @@ include_once "../class/Carrega.class.php";
                 <div class="col-lg-12">
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            Formulário de cadastro de cardápios
+                            Formulário de cadastro de noticias
                         </div>
                         <div class="panel-body">
                             <div class="row">
-                                <div class="col-lg-6">
-                                    <form role="form" name="cadcardapio" method="post" action="<?php $SELF_PHP;?>">
+                                <div class="col-lg-12">
+                                    <form role="form" name="cadnoticias" method="post" action="<?php $SELF_PHP;?>">
                                       <div class="form-group">
-                                          <label for="dia">Dia:
-                                          <select class="form-control" name="dia" id="dia">
-                                              <option value="">Selecione o dia</option>
-                                              <?php $diaSelect = new Dia();
-                                                    $diaSelect->diaSelect();
-                                              ?>
-                                          </select>
-                                          </label>
+                                            <label>Autor</label>
+                                            <p class="form-control-static">Mercer</p>
                                       </div>
                                       <div class="form-group">
-                                          <label for="data">Data:
-                                          <input class="form-control" id='data' name="data" placeholder="DD/MM/AAAA">
-                                          </label>
+                                          <label for="titulo">Titulo:</label>
+                                          <input type="text" class="form-control" name="titulo" id="titulo" placeholder="Digite aqui o titulo da noticia">
                                       </div>
                                       <div class="form-group">
-                                          <label for="cardapio">Cardápio:
-                                          <textarea placeholder="Digite o cardápio" name="cardapio" id="cardapio" rows="5" cols="50" class="form-control"></textarea>
-                                          </label>
+                                          <label for="datepicker">Data:</label>
+                                          <input class="form-control" id='datepicker' name="data" placeholder="DD/MM/AAAA" required>
+                                      </div>
+                                      <div class="bootstrap-timepicker">
+                                      <div class="form-group">
+                                        <label for="hora">Hora:</label>
+                                        <input class="form-control timepicker" type="text" name="hora" id="hora" value="">
+                                      </div>
+                                    </div>
+                                      <div class="form-group">
+
                                       </div>
                                         <button type="submit" name="enviar" value="enviar" class="btn btn-success btn-lg btn-block"><i class="fa fa-check"></i> Enviar </button>
                                         <br>
-                                        <!--input type="submit" name="enviar" value="Enviar" class="btn btn-success btn-lg"/-->
+
                                         <button type="reset" name="limpar" value="limpar" class="btn btn-danger btn-lg btn-block"><i class="fa fa-magic"></i> Limpar dados </button>
-                                        <!--input type="reset" name="limpar" value="Limpar dados" class="btn btn-danger btn-lg btn-block"/-->
+
                                     </form>
                                 </div>
                                 <!-- /.col-lg-6 (nested) -->
@@ -455,11 +460,31 @@ include_once "../class/Carrega.class.php";
 
     <script type="text/javascript" src="../js/jquery.maskedinput.min.js"></script>
 
+    <!-- bootstrap time picker -->
+    <script src="../plugins/timepicker/bootstrap-timepicker.min.js" type="text/javascript"></script>
+
+    <script src="../utilities/datepicker/js/bootstrap-datepicker.js"></script>
+    <script src="../utilities/datepicker/locales/bootstrap-datepicker.pt-BR.min.js"></script>
+
     <script type="text/javascript">
-    $(document).ready(function()
-    {
-      $('#data').mask("99/99/9999");
-    });
+      $(function() {
+        //Timepicker
+              $(".timepicker").timepicker({
+                  showInputs: false,
+                  maxHours:24,
+                  showMeridian: false
+              });
+          });
+    </script>
+    <script>
+      $(document).ready(function () {
+        $('#datepicker').datepicker({
+            language: "pt-BR",
+            format: "dd/mm/yyyy",
+            orientation: "top left"
+
+        });
+      });
     </script>
 </body>
 </html>
