@@ -421,10 +421,10 @@ include_once "../class/Carrega.class.php";
                                 <td><?php echo date('d/m/Y',strtotime($line->data)); ?></td>
                                 <td class='center'>
                                   <input type='hidden' name='id' value='<?php echo $line->id; ?>'>
-                                  
-                                  <button type="submit" name="exibir" value="exibir" formaction="ExibCardapioObj.php" class="btn btn-outline btn-info"><i class="fa fa-expand"></i> Exibir </button>
 
-                                  <button type="submit" name="editar" value="editar" class="btn btn-outline btn-warning"><i class="fa fa-edit"></i> Editar </button>
+                                  <button type="submit" name="exibir" value="exibir" formaction="ExibCardapioObj.php" class="btn btn-info disabled"><i class="fa fa-expand"></i> Exibir </button>
+
+                                  <button type="submit" name="editar" value="editar" class="btn btn-outline btn-warning "><i class="fa fa-edit"></i> Editar </button>
 
                                   <button type="submit" name="excluir" value="excluir" formaction="" class='btn btn-outline btn-danger'><i class="fa fa-times"></i> Excluir </button>
                                 </td>

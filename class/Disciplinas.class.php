@@ -42,16 +42,16 @@
     public function Listar()
     {
 
-      $sql = "SELECT * FROM disciplinas as d Order by d.id";
+      $sql = "SELECT * FROM disciplinas as d, cursos as c WHERE d.curso=c.id";
       $result = pg_query($sql);
       $return = null;
 
       while ($reg = pg_fetch_assoc($result))
       {
          $object = new Disciplinas();
-         $object->id = $reg["id"];
+         $object->id = $reg["id_disc"];
          $object->disciplina = $reg["disciplina"];
-         $object->curso = $reg["curso"];
+         $object->curso = $reg["nome"];
 
          $return[] = $object;
       }
@@ -62,7 +62,7 @@
 
     public function Excluir()
     {
-      $sql = "DELETE from disciplinas where id=$this->id";
+      $sql = "DELETE from disciplinas where id_disc=$this->id";
       $return = pg_query($sql);
       return $return;
     }
@@ -75,7 +75,7 @@
                 set disciplina='$this->disciplina',
                     curso='$this->curso',
 
-                where id=$this->id";
+                where id_disc=$this->id";
 
       $return = pg_query($sql);
 
@@ -84,14 +84,14 @@
 
     public function Editar($id = "")
     {
-      $sql = "SELECT * FROM disciplinas as d WHERE d.id=$id";
+      $sql = "SELECT * FROM disciplinas as d, cursos as c WHERE d.curso=c.id AND d.id_disc=$id";
       $result = pg_query($sql);
       $return = null;
 
       while ($reg = pg_fetch_assoc($result))
       {
          $object = new Disciplinas();
-         $object->id = $reg["id"];
+         $object->id = $reg["id_disc"];
          $object->disciplina = $reg["disciplina"];
          $object->curso = $reg["curso"];
 

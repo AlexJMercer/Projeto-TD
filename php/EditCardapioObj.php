@@ -434,14 +434,14 @@
                                           <input class="form-control" id='datepicker' name="data" placeholder="DD/MM/AAAA" value="<?php echo date('d/m/Y',strtotime($comp->data)); ?>" required>
                                       </div>
                                       <div class="form-group">
-                                          <label for="alimentos"> Alimentos: </label>
-                                          <select class="form-control select2"  name="alimento[]" id="alimentos" multiple="multiple">
-                                              <option value=""></option>
-                                              <?php $alimentoSelect = new Alimentos();
-                                                    $alimentoSelect->alimentoSelect($comp->alimento);
-                                              ?>
-                                          </select>
-                                      </div>
+                                           <label for="alimentos"> Alimentos: </label>
+                                           <select class="form-control select2"  name="alimento[]" id="alimentos" multiple="multiple">
+                                               <option value=""></option>
+                                               <?php $alimentoSelect = new Alimentos();
+                                                     $alimentoSelect->alimentoSelect($comp->alimento);
+                                               ?>
+                                           </select>
+                                       </div>
                                         <input type="hidden" name="id" value="<?php echo $comp->id; ?>"/>
 
                                         <button type="submit" name="atualizar" value="atualizar" class="btn btn-success btn-lg btn-block"><i class="fa fa-refresh"></i> Atualizar </button>

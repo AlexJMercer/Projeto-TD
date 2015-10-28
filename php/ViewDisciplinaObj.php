@@ -378,7 +378,7 @@
         <div id="page-wrapper">
             <div class="row">
                 <div class="col-lg-12">
-                    <h1 class="page-header">Cursos</h1>
+                    <h1 class="page-header">Disciplinas</h1>
                 </div>
                 <!-- /.col-lg-12 -->
             </div>
@@ -387,17 +387,19 @@
                 <div class="col-lg-12">
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            Listagem de Cursos
+                            Listagem de disciplinas
                         </div>
                         <!-- /.panel-heading -->
                         <div class="panel-body">
-                          <div class="table-responsive">
+
                             <div class="dataTable_wrapper">
-                                <table class="table table-hover" id="dataTables-example">
+                                <table class="table table-hover table-bordered table-responsive" id="dataTables">
                                     <thead>
                                         <tr>
-                                            <th>Curso</th>
-                                            <th>Opções</th>
+                                          <th>Código</th>
+                                          <th>Disciplina</th>
+                                          <th>Curso</th>
+                                          <th>Opções</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -405,8 +407,8 @@
 
 include_once "../class/Carrega.class.php";
 
-  $listar = new Cursos();
-  $list = $listar->Listar();
+  $listar = new Disciplinas();
+  $list = $listar->listar();
 
     if ($list != null)
     {
@@ -414,16 +416,16 @@ include_once "../class/Carrega.class.php";
       {
 ?>
                             <tr class="odd gradeX">
-                              <form name="view" class="" action="EditCursosObj.php" method="post">
-                                <td><?php echo $line->nome; ?></td>
+                              <form name="view" class="" action="EditDisciplinaObj.php" method="post">
+                                <td><?php echo $line->id; ?></td>
+                                <td><?php echo $line->disciplina; ?></td>
+                                <td><?php echo $line->curso; ?></td>
                                 <td class='center'>
-                                  <input type='hidden' name='id' value='<?php echo $line->id; ?>'>
-
-                                  <!--button type="submit" name="exibir" value="exibir" formaction="ExibCardapioObj.php" class="btn btn-outline btn-info "><i class="fa fa-expand"></i> Exibir </button-->
+                                    <input type='hidden' name='id' value='<?php echo $line->id; ?>'>
 
                                   <button type="submit" name="editar" value="editar" class="btn btn-outline btn-warning"><i class="fa fa-edit"></i> Editar </button>
 
-                                  <button type="submit" name="excluir" value="excluir" formaction="" class='btn btn-outline btn-danger'><i class="fa fa-times"></i> Excluir </button>
+                                  <button type="submit" name="excluir" value="excluir" formaction="CrudDisciplina.php" class='btn btn-outline btn-danger'><i class="fa fa-times"></i> Excluir </button>
                                   </td>
                               </form>
                             </tr>
@@ -432,13 +434,13 @@ include_once "../class/Carrega.class.php";
       }
       else
       {
-        echo "<h2> Nenhum alimento cadastrado!!</h2>";
+        echo "<h2> Nenhuma disciplina cadastrada!!</h2>";
       }
 ?>
                                     </tbody>
                                 </table>
                             </div>
-                            </div>
+
                             <!-- /.table-responsive -->
                         </div>
                         <!-- /.panel-body -->
@@ -471,23 +473,18 @@ include_once "../class/Carrega.class.php";
     <!-- Page-Level Demo Scripts - Tables - Use for reference -->
     <script>
     $(document).ready(function() {
-        $('#dataTables-example').DataTable({
-                responsive: true
+        $('#dataTables').DataTable({
+                responsive:true,
+                "oLanguage": { "sSearch": "",
+                               "sInfo": "Um total de _TOTAL_ disciplinas (_START_ de _END_)",
+                               "sLengthMenu": "Listar _MENU_ disciplinas"},
+
+
         });
+        $('.dataTables_filter input').attr("placeholder", "Pesquise disciplinas aqui");
     });
+
+
     </script>
 </body>
 </html>
-<?php
-
-if (isset($_POST['excluir']))
-{
-    $object = new Local();
-    $object->id = $_POST['id'];
-
-    $object->Excluir();
-
-    echo "<meta http-equiv='refresh' content='0;url=ViewCardapioObj.php'";
-    //header("Location:ViewCardapioObj.php");
-}
-?>
