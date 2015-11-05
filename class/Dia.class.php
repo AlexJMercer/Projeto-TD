@@ -38,7 +38,7 @@
          while ($reg = pg_fetch_assoc($result))
          {
             $obj = new Dia();
-            $obj->id = $reg["id"];
+            $obj->id = $reg["id_dia"];
             $obj->dia = $reg["dia"];
 
             $retorno[] = $obj;
