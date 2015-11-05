@@ -118,7 +118,7 @@ include_once "Carrega.class.php";
         $sql = "SELECT * FROM cardapios c JOIN dia d ON d.id_dia=c.dia
                                           JOIN alimentos_cardapios ac ON ac.id_card=c.id_card
                                           WHERE ac.id_card=$id";
-        $sql2 = "SELECT a.id, a.alimento FROM alimentos a LEFT OUTER JOIN alimentos_cardapios ac ON a.id=ac.id_ali JOIN cardapios c ON c.id_card=ac.id_card";
+        $sql2 = "SELECT a.id FROM alimentos a LEFT OUTER JOIN alimentos_cardapios ac ON a.id=ac.id_ali JOIN cardapios c ON c.id_card=ac.id_card";
 
         $result = pg_query($sql);
         $result2 = pg_query($sql2);

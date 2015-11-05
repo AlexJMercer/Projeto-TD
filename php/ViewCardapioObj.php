@@ -409,7 +409,7 @@ include_once "../class/Carrega.class.php";
   $listar = new Cardapios();
   $list = $listar->listar();
 
-  print_r($list);
+  /*print_r($list);*/
     if ($list != null)
     {
       foreach ($list as $line)
