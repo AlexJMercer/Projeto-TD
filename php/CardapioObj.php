@@ -8,10 +8,10 @@ include_once "../class/Carrega.class.php";
       $object->dia = $_POST['dia'];
       $object->data = $_POST['data'];
       $object->alimento = $_POST['alimento'];
-      print_r($object);
-      /*$object->inserir();
+      /*var_dump($object);*/
+      $object->inserir();
 
-      header("Location:ViewCardapioObj.php");*/
+      header("Location:ViewCardapioObj.php");
   }
 ?>
 <!DOCTYPE html>
@@ -407,8 +407,8 @@ include_once "../class/Carrega.class.php";
                                     <form role="form" name="cadcardapio" id="form" method="post" action="<?php $SELF_PHP;?>">
                                       <div class="form-group">
                                           <label for="dia">Dia:</label>
-                                          <select class="form-control" name="dia" id="dia">
-                                              <option value="">Selecione o dia</option>
+                                          <select class="form-control" name="dia" id="dia" required>
+                                              <option value=""></option>
                                               <?php $diaSelect = new Dia();
                                                     $diaSelect->diaSelect();
                                               ?>
@@ -422,7 +422,7 @@ include_once "../class/Carrega.class.php";
                                       </div>
                                       <div class="form-group">
                                           <label for="alimentos"> Alimentos: </label>
-                                          <select class="form-control select2"  name="alimento[]" id="alimentos" multiple="multiple">
+                                          <select class="form-control select2"  name="alimento[]" id="alimentos" multiple="multiple" required>
                                               <option value=""></option>
                                               <?php $alimentoSelect = new Alimentos();
                                                     $alimentoSelect->alimentoSelect();

@@ -66,11 +66,11 @@
 
             if ($dia==$this->id)
             {
-              print "<option selected value='{$this->id_dia}'>{$this->dia}</option>";
+              print "<option selected value='{$this->id}'>{$this->dia}</option>";
             }
             else
             {
-              print "<option value='{$this->id_dia}'>{$this->dia}</option>";
+              print "<option value='{$this->id}'>{$this->dia}</option>";
             }
           }
         }

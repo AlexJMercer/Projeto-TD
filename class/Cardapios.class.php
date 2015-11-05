@@ -1,6 +1,6 @@
 <?php
 
-include "BD.class.php";
+include_once "Carrega.class.php";
 
   class Cardapios
   {
@@ -13,7 +13,6 @@ include "BD.class.php";
       public function __construct()
       {
          $this->bd = new BD();
-
       }
 
       public function __destruct()
