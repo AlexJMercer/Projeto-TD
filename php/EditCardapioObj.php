@@ -411,7 +411,7 @@
     $edit = new Cardapios();
     $comp = $edit->editar($id);
 
-    print_r($comp);
+    //var_dump($comp->alimento);
 
       if ($edit != null)
       {

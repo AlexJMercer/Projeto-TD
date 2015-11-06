@@ -96,14 +96,50 @@
 
          $ln=pg_num_rows($result);
 
-        if ($ln==0)
-        {
-           echo "<option value=''>Nada Encontrado!!</option>";
+         if ($ln==0)
+         {
+            echo "<option value=''>Nada Encontrado!!</option>";
+         }
+         else
+         {
+           while ($a = pg_fetch_array($result))
+           {
+            $this->id = $a['id'];
+            $this->alimento = $a['alimento'];
+
+            foreach ($alimento as $key)
+            {
+
+               if ($key==$this->id)
+               {
+                 print "<option selected value='{$this->id}'>{$this->alimento}</option>";
+               }
+
+            }
+
+
+              print "<option value='{$this->id}'>{$this->alimento}</option>";
+            
+          }
         }
-        else
-        {
-          while ($a = pg_fetch_array($result))
-          {
+      }
+
+
+      public function alimentoMulti($alimento ="")
+      {
+         $sql = "SELECT * from alimentos Order by id";
+         $result = pg_query($sql);
+
+         $ln=pg_num_rows($result);
+
+         if ($ln==0)
+         {
+            echo "<option value=''>Nada Encontrado!!</option>";
+         }
+         else
+         {
+           while ($a = pg_fetch_array($result))
+           {
             $this->id = $a['id'];
             $this->alimento = $a['alimento'];
 
@@ -119,7 +155,5 @@
         }
       }
 
-
-      
    }
 ?>

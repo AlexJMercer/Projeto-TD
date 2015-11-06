@@ -96,7 +96,7 @@ include_once "Carrega.class.php";
 
       public function excluir()
       {
-         $sql = "DELETE from $this->tabel where id=$this->id";
+         $sql = "DELETE from $this->tabel where id_card=$this->id";
          $retorno = pg_query($sql);
          return $retorno;
       }
