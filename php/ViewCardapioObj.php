@@ -426,7 +426,7 @@ include_once "../class/Carrega.class.php";
 
                                   <button type="submit" name="editar" value="editar" class="btn btn-outline btn-warning "><i class="fa fa-edit"></i> Editar </button>
 
-                                  <button type="submit" name="excluir" value="excluir" formaction="" class='btn btn-outline btn-danger'><i class="fa fa-times"></i> Excluir </button>
+                                  <button type="submit" name="excluir" value="excluir" formaction="CrudCardapio.php" class='btn btn-outline btn-danger'><i class="fa fa-times"></i> Excluir </button>
                                 </td>
                               </form>
                             </tr>
@@ -487,16 +487,3 @@ include_once "../class/Carrega.class.php";
     </script>
 </body>
 </html>
-<?php
-
-if (isset($_POST['excluir']))
-{
-    $object = new Cardapios();
-    $object->id = $_POST['id'];
-
-    $object->excluir();
-
-    echo "<meta http-equiv='refresh' content='0;url=ViewCardapioObj.php'";
-    //header("Location:ViewCardapioObj.php");
-}
-?>

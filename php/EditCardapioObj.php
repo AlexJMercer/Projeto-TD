@@ -10,6 +10,7 @@
       $object->data = $_POST['data'];
       $object->alimento = $_POST['alimento'];
 
+      //print_r($object);
       $object->atualizar();
 
       header("Location:ViewCardapioObj.php");

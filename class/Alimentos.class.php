@@ -116,8 +116,6 @@
                }
 
             }
-
-
               print "<option value='{$this->id}'>{$this->alimento}</option>";
             
           }

@@ -59,7 +59,7 @@ include_once "Carrega.class.php";
             foreach ($this->alimento as $value)
             {
 
-              $sql2 = "INSERT INTO alimentos_cardapios (id_card, id_ali) VALUES ('$this->id', '$value')";
+              $sql2 = "INSERT INTO alimentos_cardapios (id_cad, id_ali) VALUES ('$this->id', '$value')";
               $return2 = pg_query($sql2);
 
             }
@@ -96,29 +96,40 @@ include_once "Carrega.class.php";
 
       public function excluir()
       {
-         $sql = "DELETE from $this->tabel where id_card=$this->id";
+         $sql = "DELETE from cardapios where id_card=$this->id";
          $retorno = pg_query($sql);
          return $retorno;
       }
 
       public function atualizar()
       {
-         $retorno = false;
-         $sql = "UPDATE $this->tabel
-                  set dia='$this->dia',
-                      data='$this->data',
-                  where id=$this->id";
+          $this->transacao("BEGIN");
 
-         $retorno = pg_query($sql);
-         return $retorno;
+          $retorno = false;
+          $sql = "UPDATE cardapios, alimentos_cardapios
+                  set dia='$this->dia',
+                      data='$this->data'
+                  where id_card=$this->id";
+          $retorno = pg_query($sql);
+
+          $return = false;
+          $sql2 = "UPDATE alimentos_cardapios
+                   set id_ali='$this->alimento'
+                   where id_cad=$this->id";
+
+          $return = pg_query($sql2);
+
+          $this->transacao("COMMIT");
+
+        $this->transacao("ROLLBACK");
       }
 
       public function editar($id = "")
       {
         $sql = "SELECT * FROM cardapios c JOIN dia d ON d.id_dia=c.dia
-                                          JOIN alimentos_cardapios ac ON ac.id_card=c.id_card
-                                          WHERE ac.id_card=$id";
-        $sql2 = "SELECT a.id FROM alimentos a LEFT OUTER JOIN alimentos_cardapios ac ON a.id=ac.id_ali JOIN cardapios c ON c.id_card=ac.id_card";
+                                          JOIN alimentos_cardapios ac ON ac.id_cad=c.id_card
+                                          WHERE ac.id_cad=$id";
+        $sql2 = "SELECT a.id FROM alimentos a LEFT OUTER JOIN alimentos_cardapios ac ON a.id=ac.id_ali JOIN cardapios c ON c.id_card=ac.id_cad";
 
         $result = pg_query($sql);
         $result2 = pg_query($sql2);
@@ -146,6 +157,7 @@ include_once "Carrega.class.php";
 
       public function exibir($id = "")
       {
+        //Não adaptado as alterações recentes
         $sql = "SELECT * FROM cardapios, dia WHERE cardapios.dia=dia.id AND cardapios.id=$id ";
         $result = pg_query($sql);
         $retorno = NULL;
