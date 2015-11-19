@@ -120,5 +120,40 @@
       return $return;
     }
 
+    public function disciplinaSelect($disciplina ="")
+    {
+       $sql = "SELECT * from disciplina Order by id_disc";
+       $result = pg_query($sql);
+
+       $ln=pg_num_rows($result);
+
+      if ($ln==0)
+      {
+         echo "<option value=''>Nada Encontrado!!</option>";
+      }
+      else
+      {
+        while ($a = pg_fetch_array($result))
+        {
+          $this->id = $a['id_disc'];
+          $this->disciplina = $a['disciplina'];
+
+          if ($disciplina==$this->id)
+          {
+            print "<option selected value='{$this->id}'>{$this->disciplina}</option>";
+          }
+          else
+          {
+            print "<option value='{$this->id}'>{$this->disciplina}</option>";
+          }
+        }
+      }
+    }
+
+    public function disciplinaAjax($curso ='')
+    {
+      
+    }
+
 }
 ?>

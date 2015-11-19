@@ -10,6 +10,8 @@ include_once 'Carrega.class.php';
    private $sala;
    private $disciplina;
    private $info;
+   private $curso;
+   private $semestre;
    private $bd;
 
 
@@ -36,8 +38,8 @@ include_once 'Carrega.class.php';
 
    public function Inserir()
    {
-      $sql="INSERT INTO monitorias (curso_m, disciplina_m, sala_m, info)
-                  VALUES ('$this->curso', '$this->disciplina', '$this->sala', '$this->info')";
+      $sql="INSERT INTO monitorias (curso_m, semestre_m, sala_m, disciplina_m,  info_m)
+                  VALUES ('$this->curso', '$this->semestre', '$this->sala', '$this->disciplina', '$this->info')";
       $return = pg_query($sql);
       return $return;
    }
@@ -52,8 +54,25 @@ include_once 'Carrega.class.php';
      {
        $object = new Monitorias();
        $object->id = $reg["id_monit"];
-       $object->curso =
+       $object->curso = $reg["curso_m"];
+       $object->disciplina = $reg["disciplina_m"];
      }
+   }
+
+   public function Excluir()
+   {
+     $sql = "DELETE * FROM monitorias where id_monit=$this->id";
+     $return = pg_query($sql);
+     return $return;
+   }
+
+   public function Atualizar()
+   {
+       $return = false;
+       $sql = "UPDATE monitorias set   WHERE id_monit='$this->id'";
+       $return = pg_query($sql);
+
+       return $return;
    }
  }
 ?>
