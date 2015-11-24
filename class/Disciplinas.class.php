@@ -150,10 +150,6 @@
       }
     }
 
-    public function disciplinaAjax($curso ='')
-    {
-      
-    }
 
 }
 ?>

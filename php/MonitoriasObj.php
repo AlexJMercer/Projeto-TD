@@ -36,6 +36,13 @@ include_once "../class/Carrega.class.php";
 
     <!-- Custom Fonts -->
     <link href="../bower_components/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <style type="text/css">
+    .carregando
+    {
+      color:#666;
+      display:none;
+    }
+    </style>
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -401,7 +408,7 @@ include_once "../class/Carrega.class.php";
                                       <div class="form-group">
                                           <label for="curso">Curso:</label>
                                           <select class="form-control"  name="curso" id="curso">
-                                            <option value="">Selecione o cursos</option>
+                                            <option value="">Selecione o curso</option>
                                             <?php $cursoSelect = new Cursos();
                                                   $cursoSelect->cursoSelect();
                                             ?>
@@ -410,10 +417,31 @@ include_once "../class/Carrega.class.php";
                                       <div class="form-group">
                                           <label for="disciplina">Disciplina:</label>
                                           <span class="carregando">Aguarde, carregando...</span>
-                                          <select class="form-control"  name="disciplina" id="disciplina">
+                                          <select class="form-control" name="disciplina" id="disciplina">
                                             <option value="">Selecione a disciplina</option>
-
                                           </select>
+                                      </div>
+                                      <div class="form-group">
+                                          <label for="semestre">Semestre:</label>
+                                          <select class="form-control"  name="semestre" id="semestre">
+                                            <option value="">Selecione o semestre</option>
+                                            <?php $semestreSelect = new Select();
+                                                  $semestreSelect->semestreSelect();
+                                            ?>
+                                          </select>
+                                      </div>
+                                      <div class="form-group">
+                                          <label for="sala">Sala:</label>
+                                          <select class="form-control"  name="sala" id="sala">
+                                            <option value="">Selecione o sala</option>
+                                            <?php $localSelect = new Select();
+                                                  $localSelect->localSelect();
+                                            ?>
+                                          </select>
+                                      </div>
+                                      <div class="form-group">
+                                        <label for="info">Informações adicionais:</label>
+                                        <textarea class="form-control" name="info" rows="6" placeholder="Digite as informações aqui"></textarea>
                                       </div>
 
                                         <br>
@@ -456,8 +484,9 @@ include_once "../class/Carrega.class.php";
         {
           $('#disciplina').hide();
           $('.carregando').show();
-          $.getJSON('disciplina.ajax.php?search=',{curso: $(this).val(), ajax: 'true'}, function(j)
+          $.getJSON('disciplina.ajax.php',{curso: $(this).val(), ajax: 'true'}, function(j)
           {
+            //var vehicle = $('#vehicle');
             var options = '<option value=""></option>';
             for (var i = 0; i < j.length; i++)
             {
@@ -467,7 +496,7 @@ include_once "../class/Carrega.class.php";
             $('.carregando').hide();
           });
         } else {
-          $('#disciplina').html('<option value="">Nada encontrado :( !!</option>');
+          $('#disciplina').html('<option value="">Nada encontrado !!</option>');
         }
 });
 });
