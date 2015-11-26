@@ -12,7 +12,6 @@
       function __construct()
       {
          $this->bd = new BD();
-
       }
 
       function __destruct()
@@ -162,19 +161,6 @@
         }
 
 
-/*
-      public function alimentoSel($alimento = "")
-      {
-         $count = count($alimento);
 
-         echo $count;
-
-         $sql = "SELECT * FROM alimentos";
-         $return = pg_query($sql);
-
-         $ln=pg_num_rows($return);
-         }
-
-*/
 }
 ?>

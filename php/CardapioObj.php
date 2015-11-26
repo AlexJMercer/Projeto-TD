@@ -281,22 +281,8 @@ include_once "../class/Carrega.class.php";
             <!-- /.navbar-top-links -->
 
             <div class="navbar-default sidebar" role="navigation">
-                <div class="sidebar-nav navbar-collapse">
+               <div class="sidebar-nav navbar-collapse">
                     <ul class="nav" id="side-menu">
-                        <li class="sidebar-search">
-                            <div class="input-group custom-search-form">
-                                <input type="text" class="form-control" placeholder="Search...">
-                                <span class="input-group-btn">
-                                <button class="btn btn-default" type="button">
-                                    <i class="fa fa-search"></i>
-                                </button>
-                            </span>
-                            </div>
-                            <!-- /input-group -->
-                        </li>
-                        <li>
-                            <a href="index.html"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
-                        </li>
                         <li>
                             <a href="#"><i class="fa fa-cutlery fa-fw"></i> Cardápios <span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
@@ -306,47 +292,119 @@ include_once "../class/Carrega.class.php";
                                 <li>
                                     <a href="ViewCardapioObj.php">Listar cardápios</a>
                                 </li>
+                                <li>
+                                   <li>
+                                      <a href="#">Alimentos<span class="fa arrow"></span></a>
+                                      <ul class="nav nav-third-level">
+                                         <li>
+                                            <a href="AlimentoObj.php">Cadastrar alimentos</a>
+                                         </li>
+                                         <li>
+                                            <a href="ViewAlimentoObj.php">Listar alimentos</a>
+                                        </li>
+                                      </ul>
+                                      <!-- /.nav-third-level -->
+                                  </li>
+
+
                             </ul>
                             <!-- /.nav-second-level -->
                         </li>
                         <li>
-                            <a href="tables.html"><i class="fa fa-table fa-fw"></i> Tables</a>
+                            <a href="tables.html"><i class="fa fa-table fa-fw"></i> Noticias<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                               <li>
+                                   <a href="NewsObj.php">Adicionar noticias</a>
+                               </li>
+                               <li>
+                                   <a href="ViewNewsObj.php">Listar noticias</a>
+                               </li>
+                               <li>
+                                  <li>
+                                      <a href="#">Categorias<span class="fa arrow"></span></a>
+                                      <ul class="nav nav-third-level">
+                                         <li>
+                                            <a href="CategoriaObj.php">Cadastrar categoria</a>
+                                         </li>
+                                         <li>
+                                            <a href="ViewCategoriaObj.php">Listar categoria</a>
+                                        </li>
+                                      </ul>
+                                      <!-- /.nav-third-level -->
+                                  </li>
+
+                                   </li>
+
+                          </ul>
                         </li>
                         <li>
-                            <a href="forms.html"><i class="fa fa-edit fa-fw"></i> Forms</a>
+                            <a href=""><i class="fa fa-edit fa-fw"></i> Monitorias<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                               <li>
+                                   <a href="MonitoriasObj.php">Cadastrar monitorias</a>
+                               </li>
+                               <li>
+                                  <a href="ViewMonitoriasObj.php">Listar monitorias</a>
+                               </li>
+                               <li>
+                                   <a href="#">Local<span class="fa arrow"></span></a>
+                                   <ul class="nav nav-third-level">
+                                      <li>
+                                          <a href="LocalObj.php">Cadastrar local</a>
+                                      </li>
+                                      <li>
+                                          <a href="ViewLocalObj.php">Listar locais</a>
+                                      </li>
+                                   </ul>
+                                   <!-- /.nav-third-level -->
+                               </li>
+                            </ul>
                         </li>
                         <li>
-                            <a href="#"><i class="fa fa-wrench fa-fw"></i> UI Elements<span class="fa arrow"></span></a>
+                            <a href="#"><i class="fa fa-wrench fa-fw"></i> Cursos<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
-                                    <a href="panels-wells.html">Panels and Wells</a>
+                                    <a href="CursosObj.php">Cadastrar curso</a>
                                 </li>
                                 <li>
-                                    <a href="buttons.html">Buttons</a>
+                                    <a href="ViewCursosObj.php">Listar cursos</a>
                                 </li>
                                 <li>
-                                    <a href="notifications.html">Notifications</a>
+                                   <li>
+                                       <a href="#">Disciplinas<span class="fa arrow"></span></a>
+                                       <ul class="nav nav-third-level">
+                                          <li>
+                                               <a href="DisciplinasObj.php">Cadastrar disciplina</a>
+                                          </li>
+                                          <li>
+                                               <a href="ViewDisciplinaObj.php">Listar disciplinas</a>
+                                          </li>
+                                       </ul>
+                                       <!-- /.nav-third-level -->
+                                   </li>
+                               </ul>
                                 </li>
-                                <li>
-                                    <a href="typography.html">Typography</a>
-                                </li>
-                                <li>
-                                    <a href="icons.html"> Icons</a>
-                                </li>
-                                <li>
-                                    <a href="grid.html">Grid</a>
-                                </li>
-                            </ul>
+
                             <!-- /.nav-second-level -->
                         </li>
+                        </li>
                         <li>
-                            <a href="#"><i class="fa fa-sitemap fa-fw"></i> Multi-Level Dropdown<span class="fa arrow"></span></a>
+                            <a href="#"><i class="fa fa-sitemap fa-fw"></i> Outros<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
-                                    <a href="#">Second Level Item</a>
+                                    <a href="NoticiaObj2.php">Noticias teste</a>
                                 </li>
                                 <li>
-                                    <a href="#">Second Level Item</a>
+                                    <a href="DisciplinaObj2.php">Disciplina teste 1</a>
+                                </li>
+                                <li>
+                                    <a href="DisciplinaObjSelect2MWorks.php">Disciplina teste 2</a>
+                                </li>
+                                <li>
+                                    <a href="ImageObj.php"> Imagem upload teste</a>
+                                </li>
+                                <li>
+                                    <a href="Wizard.html">Wizard</a>
                                 </li>
                                 <li>
                                     <a href="#">Third Level <span class="fa arrow"></span></a>
@@ -370,20 +428,20 @@ include_once "../class/Carrega.class.php";
                             <!-- /.nav-second-level -->
                         </li>
                         <li>
-                            <a href="#"><i class="fa fa-files-o fa-fw"></i> Sample Pages<span class="fa arrow"></span></a>
+                            <a href="#"><i class="fa fa-files-o fa-fw"></i>Usuários<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
-                                    <a href="blank.html">Blank Page</a>
+                                    <a href="UserObj.php">Cadastrar usuários</a>
                                 </li>
                                 <li>
-                                    <a href="login.html">Login Page</a>
+                                    <a href="ViewUsersObj.php">Listar usuários</a>
                                 </li>
                             </ul>
                             <!-- /.nav-second-level -->
                         </li>
                     </ul>
-                </div>
-                <!-- /.sidebar-collapse -->
+               </div>
+               <!-- /.sidebar-collapse -->
             </div>
             <!-- /.navbar-static-side -->
         </nav>
@@ -424,11 +482,37 @@ include_once "../class/Carrega.class.php";
                                           <label for="alimentos"> Alimentos: </label>
                                           <select class="form-control select2"  name="alimento[]" id="alimentos" multiple="multiple" required>
                                               <option value=""></option>
-                                              <?php $alimentoSelect = new Alimentos();
-                                                    $alimentoSelect->alimentoMulti();
+                                              <?php $alimentoSelect = new Select();
+                                                    $alimentoSelect->alimentoSelect();
                                               ?>
                                           </select>
                                       </div>
+
+                                      <button class="btn btn-default btn-sm" data-toggle="modal" data-target="#myModal">
+                                         Cadastrar alimento
+                                      </button>
+                                      <br>
+                                      <!-- Modal -->
+                                      <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                         <div class="modal-dialog">
+                                              <div class="modal-content">
+                                                 <div class="modal-header">
+                                                      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                                      <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+                                                 </div>
+                                                 <div class="modal-body">
+                                                      oi
+                                                 </div>
+                                                 <div class="modal-footer">
+                                                      <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                                      <button type="button" class="btn btn-primary">Save changes</button>
+                                                 </div>
+                                              </div>
+                                              <!-- /.modal-content -->
+                                         </div>
+                                         <!-- /.modal-dialog -->
+                                      </div>
+                                      <!-- /.modal -->
 
                                         <br>
                                         <button type="reset" name="limpar" value="limpar" class="btn btn-outline btn-danger btn-lg"><i class="fa fa-magic"></i> Limpar </button>
@@ -464,13 +548,6 @@ include_once "../class/Carrega.class.php";
     <script src="../dist/js/sb-admin-2.js"></script>
 
     <script type="text/javascript" src="../js/jquery.maskedinput.min.js"></script>
-
-    <script type="text/javascript">
-    $(document).ready(function()
-    {
-      $('#data').mask("99/99/9999");
-    });
-    </script>
 
     <script type="text/javascript" src="../plugins/select2/select2.js"></script>
     <script type="text/javascript">
