@@ -91,7 +91,7 @@
 
       public function alimentoSelect($alimento ="")
       {
-         $sql = "SELECT * from alimentos Order by id";
+         $sql = "SELECT * from alimentos as a where a.id= ";
          $result = pg_query($sql);
 
          $ln=pg_num_rows($result);
@@ -116,8 +116,7 @@
                }
 
             }
-              print "<option value='{$this->id}'>{$this->alimento}</option>";
-            
+            echo "<option value='{$this->id}'>{$this->alimento}</option>";
           }
         }
       }
@@ -125,7 +124,7 @@
 
       public function alimentoMulti($alimento ="")
       {
-         $sql = "SELECT * from alimentos Order by id";
+         $sql = "SELECT * from alimentos";
          $result = pg_query($sql);
 
          $ln=pg_num_rows($result);
@@ -136,22 +135,46 @@
          }
          else
          {
-           while ($a = pg_fetch_array($result))
-           {
-            $this->id = $a['id'];
-            $this->alimento = $a['alimento'];
 
-            if ($alimento==$this->id)
+
+            while ($a = pg_fetch_array($result))
             {
-              print "<option selected value='{$this->id}'>{$this->alimento}</option>";
-            }
-            else
+             $this->id = $a['id'];
+             $this->alimento = $a['alimento'];
+             $count=count($a);
+
+             foreach ($alimento as $key)
             {
-              print "<option value='{$this->id}'>{$this->alimento}</option>";
+
+               if ($key==$this->id)
+               {
+                 print "<option selected value='{$this->id}'>{$this->alimento}</option>";
+               }
             }
+
+
+
+               }
+
+
           }
-        }
-      }
 
-   }
+        }
+
+
+/*
+      public function alimentoSel($alimento = "")
+      {
+         $count = count($alimento);
+
+         echo $count;
+
+         $sql = "SELECT * FROM alimentos";
+         $return = pg_query($sql);
+
+         $ln=pg_num_rows($return);
+         }
+
+*/
+}
 ?>

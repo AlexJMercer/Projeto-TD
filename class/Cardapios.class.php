@@ -126,10 +126,11 @@ include_once "Carrega.class.php";
 
       public function editar($id = "")
       {
-        $sql = "SELECT * FROM cardapios c JOIN dia d ON d.id_dia=c.dia
-                                          JOIN alimentos_cardapios ac ON ac.id_cad=c.id_card
-                                          WHERE ac.id_cad=$id";
-        $sql2 = "SELECT a.id FROM alimentos a LEFT OUTER JOIN alimentos_cardapios ac ON a.id=ac.id_ali JOIN cardapios c ON c.id_card=ac.id_cad";
+         $sql = "SELECT * FROM cardapios c JOIN dia d ON d.id_dia=c.dia
+                                           JOIN alimentos_cardapios ac ON ac.id_cad=c.id_card
+                                           WHERE ac.id_cad=$id";
+         $sql2 = "SELECT a.id FROM alimentos a, alimentos_cardapios ac WHERE
+                                       ac.id_cad = $id AND a.id = ac.id_ali";
 
         $result = pg_query($sql);
         $result2 = pg_query($sql2);

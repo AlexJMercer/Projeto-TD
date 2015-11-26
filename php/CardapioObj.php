@@ -425,7 +425,7 @@ include_once "../class/Carrega.class.php";
                                           <select class="form-control select2"  name="alimento[]" id="alimentos" multiple="multiple" required>
                                               <option value=""></option>
                                               <?php $alimentoSelect = new Alimentos();
-                                                    $alimentoSelect->alimentoSelect();
+                                                    $alimentoSelect->alimentoMulti();
                                               ?>
                                           </select>
                                       </div>

@@ -46,14 +46,14 @@ class Select
 
       $ln=pg_num_rows($result);
 
-     if ($ln==0)
-     {
+      if ($ln==0)
+      {
         echo "<option value=''>Nada Encontrado!!</option>";
-     }
-     else
-     {
-       while ($a = pg_fetch_array($result))
-       {
+      }
+      else
+      {
+        while ($a = pg_fetch_array($result))
+        {
          $this->id = $a['id_sem'];
          $this->semestre = $a['semestre'];
 

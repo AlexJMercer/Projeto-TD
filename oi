@@ -1,0 +1,29 @@
+<?php
+
+public function testeSelect(){
+$sql = "SELECT * FROM alimentos WHERE alimentos.id = '$alimento'";
+$result = pg_query($sql);
+$ln = pg_fetch_array($result);
+$ali = $ln['alimento'];
+
+print "<select class='form-control select2' name='alimento[]' id='alimentos' multiple='multiple'>";
+
+
+$alimento[] = explode(', ',$ali);
+$alimento[] = sort($alimento);
+
+$sql2 = "SELECT * FROM alimentos ORDER BY id";
+$resp = pg_query($sql2);
+while($lnh = pg_fetch_array($rst)){
+if(in_array($lnh[0],$alimento[0])){
+
+print "<option value="<?=$lnh['id'];?>" selected="selected"><?=$lnh['alimento'];?></option>""
+
+
+ }else{
+
+<option value="<?=$lnh['id'];?>"><?=$lnh['titulo'];?></option>
+
+}}
+</select>
+}
