@@ -2,15 +2,6 @@
 
 include_once "../class/Carrega.class.php";
 
-  if (isset($_POST['enviar']))
-  {
-      $object = new Monitorias();
-      $object->alimento = $_POST['alimento'];
-
-      $object->inserir();
-
-      header("Location:MonitoriasObj.php");
-  }
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">

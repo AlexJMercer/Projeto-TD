@@ -84,7 +84,7 @@ include_once "../class/Carrega.class.php";
                         </div>
                         <div class="panel-body">
                             <div class="row">
-                                <div class="col-lg-6">
+                                <div class="col-lg-12">
                                     <form role="form" name="cadcardapio" id="form" method="post" action="<?php $SELF_PHP;?>">
                                       <div class="form-group">
                                           <label for="dia">Dia:</label>

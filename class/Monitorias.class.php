@@ -38,15 +38,15 @@ include_once 'Carrega.class.php';
 
    public function Inserir()
    {
-      $sql="INSERT INTO monitorias (curso_m, semestre_m, sala_m, disciplina_m,  info_m)
-                  VALUES ('$this->curso', '$this->semestre', '$this->sala', '$this->disciplina', '$this->info')";
+      $sql="INSERT INTO monitorias (curso_m, disciplina_m, semestre_m, sala_m, info_m)
+                  VALUES ('$this->curso', '$this->disciplina', '$this->semestre', '$this->sala',  '$this->info')";
       $return = pg_query($sql);
       return $return;
    }
 
    public function ListarEspecify($curso="")
    {
-     $sql = "SELECT * FROM monitorias as m, cursos as c WHERE m.curso_m=c.id_curso AND m.curso_m=$curso";
+     $sql = "SELECT * FROM monitorias as m, disciplinas as d, cursos as c WHERE m.curso_m=c.id_curso AND m.disciplina_m=d.id_disc AND m.curso_m=$curso";
      $result = pg_query($sql);
      $return = null;
 
@@ -54,9 +54,13 @@ include_once 'Carrega.class.php';
      {
        $object = new Monitorias();
        $object->id = $reg["id_monit"];
-       $object->curso = $reg["curso_m"];
-       $object->disciplina = $reg["disciplina_m"];
+       $object->curso = $reg["nome"];
+       $object->disciplina = $reg["disciplina"];
+
+       $return[] = $object;
      }
+
+     return $return;
    }
 
    public function Excluir()
