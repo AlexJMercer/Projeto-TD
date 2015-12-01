@@ -84,9 +84,10 @@
                           <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                              <div class="modal-dialog">
                                   <div class="modal-content">
+                                    <form class="" action="ViewMonitoriasObj.php" method="post">
                                      <div class="modal-header">
                                           <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                                          <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+                                          <h4 class="modal-title" id="myModalLabel">Selecione o curso</h4>
                                      </div>
                                      <div class="modal-body">
                                        <div class="form-group">
@@ -100,9 +101,10 @@
                                        </div>
                                      </div>
                                      <div class="modal-footer">
-                                          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                          <button type="button" class="btn btn-primary">Save changes</button>
+                                        <button type="button" name="pesquisar" value="pesquisar" class="btn btn-primary btn-lg btn-block">Pesquisar monitorias</button>
+
                                      </div>
+                                    </form>
                                   </div>
                                   <!-- /.modal-content -->
                              </div>

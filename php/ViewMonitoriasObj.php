@@ -85,8 +85,13 @@
 
 include_once "../class/Carrega.class.php";
 
-  $listar = new Monitorias();
-  $list = $listar->ListarEspecify();
+$curso = $_POST["curso"];
+
+  if (isset($_POST['pesquisar']))
+  {
+
+    $listar = new Monitorias();
+    $list = $listar->ListarEspecify($curso);
 
     if ($list != null)
     {
@@ -112,6 +117,7 @@ include_once "../class/Carrega.class.php";
       {
         echo "<h2> Nenhum alimento cadastrado!!</h2>";
       }
+    }
 ?>
                                     </tbody>
                                 </table>
