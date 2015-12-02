@@ -114,7 +114,7 @@ include_once "../class/Carrega.class.php";
                                       </div>
                                       <div class="form-group">
                                         <label for="info">Informações adicionais:</label>
-                                        <textarea class="form-control" name="info" rows="6" placeholder="Digite as informações aqui"></textarea>
+                                        <textarea class="form-control" name="info" rows="4" placeholder="Digite as informações aqui"></textarea>
                                       </div>
                                         <br>
                                         <button type="submit" name="enviar" value="enviar" class="btn btn-success btn-lg btn-block"><i class="fa fa-check"></i> Enviar </button>

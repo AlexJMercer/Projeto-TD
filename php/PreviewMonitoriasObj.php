@@ -81,13 +81,13 @@
                             <span title="The tooltip" data-toggle="tooltip" data-placement="bottom"><button class="btn btn-primary btn-lg btn-block" data-toggle="modal" data-target="#myModal">Selecionar curso</button></span>
                           <br>
                           <!-- Modal -->
-                          <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                          <div class="modal fade" id="myModal" tabindex="0" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                              <div class="modal-dialog">
                                   <div class="modal-content">
                                     <form class="" action="ViewMonitoriasObj.php" method="post">
                                      <div class="modal-header">
                                           <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                                          <h4 class="modal-title" id="myModalLabel">Selecione o curso</h4>
+                                          <h4 class="modal-title" id="myModalLabel">Selecione o curso para filtrar as monitorias</h4>
                                      </div>
                                      <div class="modal-body">
                                        <div class="form-group">
@@ -101,7 +101,7 @@
                                        </div>
                                      </div>
                                      <div class="modal-footer">
-                                        <button type="button" name="pesquisar" value="pesquisar" class="btn btn-primary btn-lg btn-block">Pesquisar monitorias</button>
+                                        <button type="submit" name="pesquisar" value="pesquisar" class="btn btn-primary btn-lg btn-block">Pesquisar monitorias</button>
 
                                      </div>
                                     </form>
@@ -139,11 +139,19 @@
     <!-- Custom Theme JavaScript -->
     <script src="../dist/js/sb-admin-2.js"></script>
 
-    <script>
+    <script type="text/javascript">
     // tooltip
-    $( document ).ready(function() {
-    $('[data-toggle="tooltip"]').tooltip({{'placement': 'bottom'}});
+    $( document ).ready(function()
+    {
+      $('[data-toggle="tooltip"]').tooltip({{'placement': 'bottom'}});
     });
     </script>
+
+    <script type="text/javascript">
+    $(window).load(function()
+    {
+        $('#myModal').modal('show');
+    });
+</script>
 </body>
 </html>

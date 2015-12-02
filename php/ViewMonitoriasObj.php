@@ -115,7 +115,7 @@ $curso = $_POST["curso"];
       }
       else
       {
-        echo "<h2> Nenhum alimento cadastrado!!</h2>";
+        echo "<h2> Nada Aqui!!</h2>";
       }
     }
 ?>
