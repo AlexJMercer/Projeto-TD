@@ -65,7 +65,7 @@ include_once 'Carrega.class.php';
 
    public function Excluir()
    {
-     $sql = "DELETE * FROM monitorias WHERE id_monit=$this->id";
+     $sql = "DELETE FROM monitorias WHERE id_monit=$this->id";
      $return = pg_query($sql);
      return $return;
    }
@@ -73,7 +73,7 @@ include_once 'Carrega.class.php';
    public function Atualizar()
    {
        $return = false;
-       $sql = "UPDATE monitorias set   WHERE id_monit='$this->id'";
+       //$sql = "UPDATE monitorias set   WHERE id_monit='$this->id'";
        $return = pg_query($sql);
 
        return $return;
@@ -81,7 +81,7 @@ include_once 'Carrega.class.php';
 
    public function Editar($id="")
    {
-    $sql = "SELECT * FROM monitorias as m, disciplinas as d, cursos as c WHERE m.curso_m=c.id_curso AND m.disciplina_m=d.id_disc AND m.curso_m=$curso";
+    $sql = "SELECT * FROM monitorias as m, disciplinas as d, cursos as c WHERE m.curso_m=c.id_curso AND m.disciplina_m=d.id_disc AND m.id_monit=$id";
     $result = pg_query($sql);
     $return = null;
 
@@ -91,14 +91,18 @@ include_once 'Carrega.class.php';
       $object->id = $reg["id_monit"];
       $object->curso = $reg["nome"];
       $object->disciplina = $reg["disciplina"];
+      $object->semestre = $reg["semestre_m"];
+      $object->sala = $reg["sala_m"];
+      $object->info = $reg["info_m"];
 
-      $return[] = $object;
+      $return = $object;
     }
+    return $return;
   }
 
   public function ShowMonitoria($id='')
   {
-    $sql="";
+    $sql="SELECT * FROM monitorias as m, disciplinas as d, cursos as c WHERE m.curso_m=c.id_curso AND m.disciplina_m=d.id_disc AND m.id_monit=$id";
     $result= pg_query($sql);
     $return = null;
 

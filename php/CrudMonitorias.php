@@ -1,4 +1,5 @@
 <?php
+
 include_once "../class/Carrega.class.php";
 
   if (isset($_POST['enviar']))
@@ -22,7 +23,7 @@ include_once "../class/Carrega.class.php";
 
      $object->Excluir();
 
-     header("Location:ViewMonitoriasObj.php");
+     header("Location:PreviewMonitoriasObj.php");
   }
 
   else if (isset($_POST['atualizar']))

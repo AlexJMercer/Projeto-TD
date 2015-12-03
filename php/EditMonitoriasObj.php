@@ -93,22 +93,12 @@ $id = $_POST["id"];
                                 <div class="col-lg-12">
                                     <form role="form" name="cadmonitorias" method="post" action="CrudMonitorias.php">
                                       <div class="form-group">
-                                          <label for="curso">Curso:</label>
-                                          <select class="form-control"  name="curso" id="curso">
-                                            <option value="">Selecione o curso</option>
-                                            <?php $cursoSelect = new Select();
-                                                  $cursoSelect->cursoSelect($comp->curso);
-                                            ?>
-                                          </select>
+                                          <label>Curso:</label>
+                                          <p class="form-control-static"><?php echo $comp->curso; ?></p>
                                       </div>
                                       <div class="form-group">
-                                          <label for="disciplina">Disciplina:</label>
-                                          <span class="carregando">Aguarde, carregando...</span>
-                                          <input type="hidden" name="disc" value=" <?php echo $comp->disciplina; ?>">
-                                          <select class="form-control" name="disciplina" id="disciplina">
-
-                                            <option value="">Selecione a disciplina</option>
-                                          </select>
+                                          <label>Disciplina:</label>
+                                          <p class="form-control-static"> <?php echo $comp->disciplina; ?></p>
                                       </div>
                                       <div class="form-group">
                                           <label for="semestre">Semestre:</label>
@@ -124,16 +114,17 @@ $id = $_POST["id"];
                                           <select class="form-control"  name="sala" id="sala">
                                             <option value="">Selecione o sala</option>
                                             <?php $localSelect = new Select();
-                                                  $localSelect->localSelect();
+                                                  $localSelect->localSelect($comp->sala);
                                             ?>
                                           </select>
                                       </div>
                                       <div class="form-group">
                                         <label for="info">Informações adicionais:</label>
-                                        <textarea class="form-control" name="info" rows="4" placeholder="Digite as informações aqui"></textarea>
+                                        <textarea class="form-control" name="info" rows="4" placeholder="Digite as informações aqui"><?php echo $comp->info; ?></textarea>
                                       </div>
                                         <br>
-                                        <button type="submit" name="enviar" value="enviar" class="btn btn-success btn-lg btn-block"><i class="fa fa-check"></i> Enviar </button>
+                                        <input type="hidden" name="id" value="<?php echo $comp->id; ?>">
+                                        <button type="submit" name="enviar" value="enviar" class="btn btn-success btn-lg btn-block"><i class="fa fa-check"></i> Editar </button>
                                         <br>
                                         <button type="reset" name="limpar" value="limpar" class="btn btn-outline btn-danger btn-lg btn-block"><i class="fa fa-magic"></i> Limpar </button>
 
@@ -153,6 +144,11 @@ $id = $_POST["id"];
         </div>
         <!-- /#page-wrapper -->
     </div>
+
+    <?php
+          }
+        }
+    ?>
     <!-- /#wrapper -->
     <!-- jQuery -->
     <script src="../bower_components/jquery/dist/jquery.min.js"></script>
@@ -164,37 +160,6 @@ $id = $_POST["id"];
 
     <!-- Custom Theme JavaScript -->
     <script src="../dist/js/sb-admin-2.js"></script>
-
-    <script type="text/javascript">
-    $(function(){
-      $('#curso').change(function(){
-        if( $(this).val() )
-        {
-
-          //var disciplina = $('#disc');
-          $('#disciplina').hide();
-          $('.carregando').show();
-          $.getJSON('disciplina.ajax.php',{curso: $(this).val(), disc: $(this).val(), ajax: 'true'}, function(j)
-          {
-            //var vehicle = $('#vehicle');
-            var options = '<option value=""></option>';
-            for (var i = 0; i < j.length; i++)
-            {
-              options += '<option value="' + j[i].id_disc + '">' + j[i].disciplina + '</option>';7
-              if (j[i].id_disc==) 
-              {
-
-              }
-            }
-            $('#disciplina').html(options).show();
-            $('.carregando').hide();
-          });
-        } else {
-          $('#disciplina').html('<option value="">Nada encontrado !!</option>');
-        }
-});
-});
-    </script>
 
 </body>
 </html>

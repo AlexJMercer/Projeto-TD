@@ -99,14 +99,16 @@ $curso = $_POST["curso"];
       {
 ?>
                             <tr class="odd gradeX">
-                              <form name="view" class="" action="EditLocalObj.php" method="post">
+                              <form name="view" class="" action="EditMonitoriasObj.php" method="post">
                                 <td><?php echo $line->disciplina; ?></td>
                                 <td class='center'>
                                   <input type='hidden' name='id' value='<?php echo $line->id; ?>'>
 
+                                  <button type="button" name="exibir" value="exibir"  class="btn btn-outline btn-info"><i class="fa fa-edit" ></i> Exibir </button>
+
                                   <button type="submit" name="editar" value="editar" class="btn btn-outline btn-warning"><i class="fa fa-edit"></i> Editar </button>
 
-                                  <button type="submit" name="excluir" value="excluir" formaction="" class='btn btn-danger'><i class="fa fa-times"></i> Excluir </button>
+                                  <button type="submit" name="excluir" value="excluir" formaction="CrudMonitorias.php" class='btn btn-outline btn-danger'><i class="fa fa-times"></i> Excluir </button>
                                   </td>
                               </form>
                             </tr>
@@ -159,6 +161,17 @@ $curso = $_POST["curso"];
                 responsive: true
         });
     });
+
+    $("#exibir").click(function () {
+    // get needed html
+    $.get("modalExibMonitoria.php", function (result) {
+        // append response to body
+        $('body').append(result);
+        // open modal
+        $('#myModal2').modal();
+
+    });
+  });
     </script>
 </body>
 </html>

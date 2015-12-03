@@ -69,7 +69,7 @@ class Select
      }
     }
 
-    public function localSelect($local="")
+    public function localSelect($sala="")
     {
       $sql = "SELECT * from local Order by id";
       $result = pg_query($sql);
@@ -87,7 +87,7 @@ class Select
          $this->id = $a['id'];
          $this->sala = $a['sala'];
 
-         if ($semestre==$this->id)
+         if ($sala==$this->id)
          {
            print "<option selected value='{$this->id}'>{$this->sala}</option>";
          }

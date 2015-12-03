@@ -74,7 +74,7 @@ class Local
 
     public function Excluir()
     {
-      $sql = "DELETE * FROM local WHERE id=$this->id";
+      $sql = "DELETE FROM local WHERE id=$this->id";
       $return = pg_query($sql);
       return $return;
     }

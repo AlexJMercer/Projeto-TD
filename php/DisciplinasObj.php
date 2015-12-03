@@ -98,7 +98,7 @@ $( "#dropdown" ).select2({
                                         <label for="curso">Curso:</label>
                                         <select class="form-control select2"  name="curso" id="curso">
                                           <option value="">Selecione o cursos</option>
-                                          <?php $cursoSelect = new Cursos();
+                                          <?php $cursoSelect = new Select();
                                                 $cursoSelect->cursoSelect();
                                           ?>
                                         </select>
