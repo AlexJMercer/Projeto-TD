@@ -74,6 +74,20 @@ include_once "../class/Carrega.class.php";
                         <div class="panel-heading">
                             Formulário de cadastro de Monitorias
                         </div>
+<?php
+
+$id = $_POST["id"];
+
+   if (isset($_POST["editar"]))
+   {
+      $edit = new Monitorias();
+      $comp = $edit->Editar($id);
+
+      if ($edit != null)
+      {
+
+?>
+
                         <div class="panel-body">
                             <div class="row">
                                 <div class="col-lg-12">
@@ -83,14 +97,16 @@ include_once "../class/Carrega.class.php";
                                           <select class="form-control"  name="curso" id="curso">
                                             <option value="">Selecione o curso</option>
                                             <?php $cursoSelect = new Select();
-                                                  $cursoSelect->cursoSelect();
+                                                  $cursoSelect->cursoSelect($comp->curso);
                                             ?>
                                           </select>
                                       </div>
                                       <div class="form-group">
                                           <label for="disciplina">Disciplina:</label>
                                           <span class="carregando">Aguarde, carregando...</span>
+                                          <input type="hidden" name="disc" value=" <?php echo $comp->disciplina; ?>">
                                           <select class="form-control" name="disciplina" id="disciplina">
+
                                             <option value="">Selecione a disciplina</option>
                                           </select>
                                       </div>
@@ -99,7 +115,7 @@ include_once "../class/Carrega.class.php";
                                           <select class="form-control"  name="semestre" id="semestre">
                                             <option value="">Selecione o semestre</option>
                                             <?php $semestreSelect = new Select();
-                                                  $semestreSelect->semestreSelect();
+                                                  $semestreSelect->semestreSelect($comp->semestre);
                                             ?>
                                           </select>
                                       </div>
@@ -154,15 +170,21 @@ include_once "../class/Carrega.class.php";
       $('#curso').change(function(){
         if( $(this).val() )
         {
+
+          //var disciplina = $('#disc');
           $('#disciplina').hide();
           $('.carregando').show();
-          $.getJSON('disciplina.ajax.php',{curso: $(this).val(), ajax: 'true'}, function(j)
+          $.getJSON('disciplina.ajax.php',{curso: $(this).val(), disc: $(this).val(), ajax: 'true'}, function(j)
           {
             //var vehicle = $('#vehicle');
             var options = '<option value=""></option>';
             for (var i = 0; i < j.length; i++)
             {
-              options += '<option value="' + j[i].id_disc + '">' + j[i].disciplina + '</option>';
+              options += '<option value="' + j[i].id_disc + '">' + j[i].disciplina + '</option>';7
+              if (j[i].id_disc==) 
+              {
+
+              }
             }
             $('#disciplina').html(options).show();
             $('.carregando').hide();

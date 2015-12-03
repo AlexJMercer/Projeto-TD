@@ -94,7 +94,7 @@
                                            <label for="curso">Curso:</label>
                                            <select class="form-control"  name="curso" id="curso">
                                              <option value="">Selecione o curso</option>
-                                             <?php $cursoSelect = new Cursos();
+                                             <?php $cursoSelect = new Select();
                                                    $cursoSelect->cursoSelect();
                                              ?>
                                            </select>

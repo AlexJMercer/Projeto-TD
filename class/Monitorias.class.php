@@ -46,7 +46,7 @@ include_once 'Carrega.class.php';
 
    public function ListarEspecify($curso="")
    {
-      $sql = "SELECT * FROM monitorias as m, disciplinas as d, cursos as c WHERE m.curso_m=c.id AND m.disciplina_m=d.id_disc AND m.curso_m=$curso";
+      $sql = "SELECT * FROM monitorias as m, disciplinas as d, cursos as c WHERE m.curso_m=c.id_curso AND m.disciplina_m=d.id_disc AND m.curso_m=$curso";
       $result = pg_query($sql);
       $return = null;
 
@@ -65,7 +65,7 @@ include_once 'Carrega.class.php';
 
    public function Excluir()
    {
-     $sql = "DELETE * FROM monitorias where id_monit=$this->id";
+     $sql = "DELETE * FROM monitorias WHERE id_monit=$this->id";
      $return = pg_query($sql);
      return $return;
    }
@@ -81,7 +81,7 @@ include_once 'Carrega.class.php';
 
    public function Editar($id="")
    {
-    $sql = "SELECT * FROM monitorias as m, disciplinas as d, cursos as c WHERE m.curso_m=c.id AND m.disciplina_m=d.id_disc AND m.curso_m=$curso";
+    $sql = "SELECT * FROM monitorias as m, disciplinas as d, cursos as c WHERE m.curso_m=c.id_curso AND m.disciplina_m=d.id_disc AND m.curso_m=$curso";
     $result = pg_query($sql);
     $return = null;
 
@@ -98,7 +98,7 @@ include_once 'Carrega.class.php';
 
   public function ShowMonitoria($id='')
   {
-    $sql=""
+    $sql="";
     $result= pg_query($sql);
     $return = null;
 

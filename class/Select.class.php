@@ -175,8 +175,8 @@ class Select
 
           while ($a = pg_fetch_array($result))
           {
-            $this->id = $a['id'];
-            $this->nome = $a['nome'];
+            $this->id = $a['id_curso'];
+            $this->curso = $a['nome'];
 
             if ($curso==$this->curso)
             {
