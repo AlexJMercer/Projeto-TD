@@ -42,14 +42,14 @@
 
     public function Listar()
     {
-      $sql = "SELECT * FROM cursos Order by cursos.id";
+      $sql = "SELECT * FROM cursos Order by cursos.id_curso";
       $result = pg_query($sql);
       $return = null;
 
       while ($reg = pg_fetch_assoc($result))
       {
          $object = new Cursos();
-         $object->id = $reg["id"];
+         $object->id = $reg["id_curso"];
          $object->nome = $reg["nome"];
 
          $return[] = $object;
@@ -61,7 +61,7 @@
 
     public function Excluir()
     {
-      $sql = "DELETE from cursos where id=$this->id";
+      $sql = "DELETE from cursos where id_curso=$this->id";
       $return = pg_query($sql);
       return $return;
     }
@@ -73,7 +73,7 @@
                 set nome='$this->nome',
                     texto='$this->texto',
                     logo='$this->logo'
-                where id=$this->id";
+                where id_curso=$this->id";
       $return = pg_query($sql);
 
       return $return;
@@ -81,14 +81,14 @@
 
     public function Editar($id = "")
     {
-      $sql = "SELECT * FROM cursos c WHERE c.id=$id";
+      $sql = "SELECT * FROM cursos c WHERE c.id_curso=$id";
       $result = pg_query($sql);
       $return = null;
 
       while ($reg = pg_fetch_assoc($result))
       {
          $object = new Cursos();
-         $object->id = $reg["id"];
+         $object->id = $reg["id_curso"];
          $object->nome = $reg["nome"];
          $object->texto = $reg["texto"];
          $object->logo = $reg["logo"];
@@ -101,14 +101,14 @@
 
     public function Exibir($id = "")
     {
-      $sql = "SELECT * FROM cursos c WHERE c.id=$id";
+      $sql = "SELECT * FROM cursos c WHERE c.id_curso=$id";
       $result = pg_query($sql);
       $return = null;
 
       while ($reg = pg_fetch_assoc($result))
       {
          $object = new Cursos();
-         $object->id = $reg["id"];
+         $object->id = $reg["id_curso"];
          $object->nome = $reg["nome"];
          $object->texto = $reg["texto"];
          $object->logo = $reg["logo"];
@@ -117,37 +117,6 @@
       }
 
       return $return;
-    }
-
-    public function cursoSelect($id ="")
-    {
-       $sql = "SELECT * from cursos Order by id";
-       $result = pg_query($sql);
-       $ln=pg_num_rows($result);
-
-      if ($ln==0)
-      {
-         echo "<option value=''>Nada Encontrado!!</option>";
-      }
-      else
-      {
-
-        while ($a = pg_fetch_array($result))
-        {
-
-          $this->id = $a['id'];
-          $this->nome = $a['nome'];
-
-          if ($id==$this->id)
-          {
-            print "<option selected value='{$this->id}'>{$this->nome}</option>";
-          }
-          else
-          {
-            print "<option value='{$this->id}'>{$this->nome}</option>";
-          }
-        }
-      }
     }
 
 }

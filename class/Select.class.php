@@ -12,7 +12,7 @@ class Select
     public $sala;
     public $dia;
     public $alimento;
-    //public $;
+    public $curso;
     //public $;
     //public $;
     //public $;
@@ -106,58 +106,89 @@ class Select
 
       $ln=pg_num_rows($result);
 
-     if ($ln==0)
-     {
+      if ($ln==0)
+      {
         echo "<option value=''>Nada Encontrado!!</option>";
-     }
-     else
-     {
-      while ($a = pg_fetch_array($result))
-      {
-         $this->id = $a['id_dia'];
-         $this->dia = $a['dia'];
-
-         if ($dia==$this->id)
-         {
-           print "<option selected value='{$this->id}'>{$this->dia}</option>";
-         }
-         else
-         {
-           print "<option value='{$this->id}'>{$this->dia}</option>";
-         }
       }
-     }
-   }
-
-   public function alimentoSelect($alimento ="")
-   {
-     $sql = "SELECT * from alimentos Order by id";
-     $result = pg_query($sql);
-
-     $ln=pg_num_rows($result);
-
-    if ($ln==0)
-    {
-       echo "<option value=''>Nada Encontrado!!</option>";
-    }
-    else
-    {
-      while ($a = pg_fetch_array($result))
+      else
       {
-        $this->id = $a['id'];
-        $this->alimento = $a['alimento'];
-
-        if ($alimento==$this->id)
+        while ($a = pg_fetch_array($result))
         {
-          print "<option selected value='{$this->id}'>{$this->alimento}</option>";
+          $this->id = $a['id_dia'];
+          $this->dia = $a['dia'];
+
+          if ($dia==$this->id)
+          {
+            print "<option selected value='{$this->id}'>{$this->dia}</option>";
+          }
+          else
+          {
+            print "<option value='{$this->id}'>{$this->dia}</option>";
+          }
+        }
+      }
+    }
+
+    public function alimentoSelect($alimento ="")
+    {
+      $sql = "SELECT * from alimentos Order by id";
+      $result = pg_query($sql);
+
+      $ln=pg_num_rows($result);
+
+      if ($ln==0)
+      {
+       echo "<option value=''>Nada Encontrado!!</option>";
+      }
+      else
+      {
+        while ($a = pg_fetch_array($result))
+        {
+          $this->id = $a['id'];
+          $this->alimento = $a['alimento'];
+
+            if ($alimento==$this->id)
+            {
+              print "<option selected value='{$this->id}'>{$this->alimento}</option>";
+            }
+            else
+            {
+              print "<option value='{$this->id}'>{$this->alimento}</option>";
+            }
+        }
+      }
+    }
+
+    public function cursoSelect($curso ="")
+    {
+        $sql = "SELECT * from cursos Order by id_curso";
+        $result = pg_query($sql);
+
+        $ln=pg_num_rows($result);
+
+        if ($ln==0)
+        {
+          echo "<option value=''>Nada Encontrado!!</option>";
         }
         else
         {
-          print "<option value='{$this->id}'>{$this->alimento}</option>";
+
+          while ($a = pg_fetch_array($result))
+          {
+            $this->id = $a['id'];
+            $this->nome = $a['nome'];
+
+            if ($curso==$this->curso)
+            {
+              print "<option selected value='{$this->id}'>{$this->curso}</option>";
+            }
+            else
+            {
+              print "<option value='{$this->id}'>{$this->curso}</option>";
+            }
+          }
         }
-      }
     }
-  }
 
 }
 ?>

@@ -46,21 +46,21 @@ include_once 'Carrega.class.php';
 
    public function ListarEspecify($curso="")
    {
-     $sql = "SELECT * FROM monitorias as m, disciplinas as d, cursos as c WHERE m.curso_m=c.id AND m.disciplina_m=d.id_disc AND m.curso_m=$curso";
-     $result = pg_query($sql);
-     $return = null;
+      $sql = "SELECT * FROM monitorias as m, disciplinas as d, cursos as c WHERE m.curso_m=c.id AND m.disciplina_m=d.id_disc AND m.curso_m=$curso";
+      $result = pg_query($sql);
+      $return = null;
 
      while ($reg = pg_fetch_assoc($result))
      {
-       $object = new Monitorias();
-       $object->id = $reg["id_monit"];
-       $object->curso = $reg["nome"];
-       $object->disciplina = $reg["disciplina"];
+        $object = new Monitorias();
+        $object->id = $reg["id_monit"];
+        $object->curso = $reg["nome"];
+        $object->disciplina = $reg["disciplina"];
 
-       $return[] = $object;
+        $return[] = $object;
      }
 
-     return $return;
+      return $return;
    }
 
    public function Excluir()
@@ -78,21 +78,40 @@ include_once 'Carrega.class.php';
 
        return $return;
    }
- }
 
-  public function Editar($id="")
-  {
-   $sql = "SELECT * FROM monitorias as m, disciplinas as d, cursos as c WHERE m.curso_m=c.id AND m.disciplina_m=d.id_disc AND m.curso_m=$curso";
-   $result = pg_query($sql);
-   $return = null;
-
-   while ($reg = pg_fetch_assoc($result))
+   public function Editar($id="")
    {
-     $object = new Monitorias();
-     $object->id = $reg["id_monit"];
-     $object->curso = $reg["nome"];
-     $object->disciplina = $reg["disciplina"];
+    $sql = "SELECT * FROM monitorias as m, disciplinas as d, cursos as c WHERE m.curso_m=c.id AND m.disciplina_m=d.id_disc AND m.curso_m=$curso";
+    $result = pg_query($sql);
+    $return = null;
 
-     $return[] = $object;
-   }
+    while ($reg = pg_fetch_assoc($result))
+    {
+      $object = new Monitorias();
+      $object->id = $reg["id_monit"];
+      $object->curso = $reg["nome"];
+      $object->disciplina = $reg["disciplina"];
+
+      $return[] = $object;
+    }
+  }
+
+  public function ShowMonitoria($id='')
+  {
+    $sql=""
+    $result= pg_query($sql);
+    $return = null;
+
+    while ($reg = pg_fetch_assoc($result))
+    {
+      $object = new Monitorias();
+      $object->id = $reg["id_monit"];
+      $return = $object;
+    }
+
+  }
+
+
+
+  }
 ?>
