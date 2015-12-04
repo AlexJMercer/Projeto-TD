@@ -104,6 +104,8 @@
                                   <!--input type="submit" name="editar" value="Editar" class="btn btn-primary btn-lg btn-block"/-->
                                   <button type="submit" name="editar" value="editar" class="btn btn-outline btn-warning btn-lg btn-block"><i class="fa fa-edit"></i> Editar </button>
                                   <br>
+                                  <button type="submit" name="retornar" value="retornar" class="btn btn-outline btn-info btn-lg btn-block" formaction="ViewMonitoriasObj.php"><i class="fa fa-edit"></i> Retornar para lista </button>
+                                  <br>
                                   <button type="button" name="voltar" onclick="history.go(-1)" class="btn btn-outline btn-default btn-lg btn-block"><i class="fa fa-undo"></i> Voltar </button>
                                   <!--input type="button" name="cancelar" value="Cancelar" onclick="history.go(-1)" class="btn btn-danger btn-lg btn-block"/-->
                                 </form>

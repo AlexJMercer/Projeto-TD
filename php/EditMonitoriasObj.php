@@ -124,7 +124,7 @@ $id = $_POST["id"];
                                       </div>
                                         <br>
                                         <input type="hidden" name="id" value="<?php echo $comp->id; ?>">
-                                        <button type="submit" name="enviar" value="enviar" class="btn btn-success btn-lg btn-block"><i class="fa fa-check"></i> Editar </button>
+                                        <button type="submit" name="atualizar" value="atualizar" class="btn btn-success btn-lg btn-block"><i class="fa fa-check"></i> Atualizar </button>
                                         <br>
                                         <button type="reset" name="limpar" value="limpar" class="btn btn-outline btn-danger btn-lg btn-block"><i class="fa fa-magic"></i> Limpar </button>
 

@@ -78,23 +78,25 @@
   {
 
     $edit = new Disciplinas();
-    $comp = $edit->editar($id);
+    $comp = $edit->Editar($id);
 
+    //print_r($comp);
+    var_dump($comp);
       if ($edit != null)
       {
 ?>
                         <div class="panel-body">
                             <div class="row">
                                 <div class="col-lg-12">
-                                  <form role="form" name="caddisciplina" method="post" action="<?php $SELF_PHP;?>">
+                                  <form role="form" name="caddisciplina" method="post" action="CrudDisciplinas.php">
                                     <div class="form-group">
                                         <label for="disciplina">Disciplina:</label>
                                         <input type="text" class="form-control" id="disciplina" name="disciplina" placeholder="Digite a disciplina aqui" value="<?php echo $comp->disciplina; ?>" autofocus required>
                                     </div>
                                     <div class="form-group">
                                       <label for="curso">Curso:</label>
-                                      <select class="form-control select2"  name="curso" id="curso">
-                                        <option value="">Selecione o cursos</option>
+                                      <select class="form-control"  name="curso" id="curso">
+                                        <option value=""></option>
                                         <?php $cursoSelect = new Select();
                                               $cursoSelect->cursoSelect($comp->curso);
                                         ?>
@@ -102,8 +104,8 @@
                                     </div>
 
                                       <br>
-                                      <input type="hidden" name="cod" value="<?php echo $comp->id; ?>">
-                                      <button type="submit" name="enviar" value="enviar" class="btn btn-success btn-lg btn-block"><i class="fa fa-check"></i> Enviar </button>
+                                      <input type="hidden" name="id" value="<?php echo $comp->id; ?>">
+                                      <button type="submit" name="atualizar" value="atualizar" class="btn btn-success btn-lg btn-block"><i class="fa fa-check"></i> Atualizar </button>
                                       <br>
                                       <button type="reset" name="limpar" value="limpar" class="btn btn-outline btn-danger btn-lg btn-block"><i class="fa fa-magic"></i> Limpar </button>
 

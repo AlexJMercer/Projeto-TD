@@ -99,7 +99,7 @@ class Select
      }
     }
 
-    public function diaSelect($dia ="")
+    public function diaSelect($dia="")
     {
       $sql = "SELECT * from dia Order by id_dia";
       $result = pg_query($sql);
@@ -129,7 +129,7 @@ class Select
       }
     }
 
-    public function alimentoSelect($alimento ="")
+    public function alimentoSelect($alimento="")
     {
       $sql = "SELECT * from alimentos Order by id";
       $result = pg_query($sql);
@@ -159,7 +159,7 @@ class Select
       }
     }
 
-    public function cursoSelect($curso ="")
+    public function cursoSelect($curso="")
     {
         $sql = "SELECT * from cursos Order by id_curso";
         $result = pg_query($sql);
@@ -178,7 +178,7 @@ class Select
             $this->id = $a['id_curso'];
             $this->curso = $a['nome'];
 
-            if ($curso==$this->curso)
+            if ($curso==$this->id)
             {
               print "<option selected value='{$this->id}'>{$this->curso}</option>";
             }

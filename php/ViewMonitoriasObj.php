@@ -87,7 +87,7 @@ include_once "../class/Carrega.class.php";
 
 $curso = $_POST["curso"];
 
-  if (isset($_POST['pesquisar']))
+  if (isset($_POST['pesquisar']) || isset($_POST['retornar']))
   {
 
     $listar = new Monitorias();

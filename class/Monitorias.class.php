@@ -73,7 +73,7 @@ include_once 'Carrega.class.php';
    public function Atualizar()
    {
        $return = false;
-       //$sql = "UPDATE monitorias set   WHERE id_monit='$this->id'";
+       $sql = "UPDATE monitorias SET semestre_m='$this->semestre', sala_m='$this->sala', info_m='$this->info' WHERE id_monit=$this->id";
        $return = pg_query($sql);
 
        return $return;

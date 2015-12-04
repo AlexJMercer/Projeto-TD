@@ -5,24 +5,24 @@ include_once "../class/Carrega.class.php";
     if (isset($_POST['enviar']))
     {
       $object = new Disciplinas();
-      $object->disciplinas = $_POST['disciplinas'];
+      $object->disciplina = $_POST['disciplina'];
       $object->curso = $_POST['curso'];
 
-      $object->inserir();
+      $object->Inserir();
 
-      header("Location:ViewDisciplinasObj.php");
+      header("Location:ViewDisciplinaObj.php");
     }
 
     else if (isset($_POST['atualizar']))
     {
       $object = new Disciplinas();
       $object->id = $_POST['id'];
-      $object->disciplinas = $_POST['disciplinas'];
+      $object->disciplina = $_POST['disciplina'];
       $object->curso = $_POST['curso'];
-      
-      $object->atualizar();
 
-      header("Location:ViewDisciplinasObj.php");
+      $object->Atualizar();
+
+      header("Location:ViewDisciplinaObj.php");
     }
 
     else if (isset($_POST['excluir']))
@@ -30,10 +30,10 @@ include_once "../class/Carrega.class.php";
       $object = new Disciplinas();
       $object->id = $_POST['id'];
 
-      $object->excluir();
+      $object->Excluir();
 
 
-      header("Location:ViewDisciplinasObj.php");
+      header("Location:ViewDisciplinaObj.php");
     }
 
 

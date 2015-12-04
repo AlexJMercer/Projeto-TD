@@ -42,7 +42,7 @@
     public function Listar()
     {
 
-      $sql = "SELECT * FROM disciplinas as d, cursos as c WHERE d.curso=c.id";
+      $sql = "SELECT * FROM disciplinas as d, cursos as c WHERE d.curso=c.id_curso";
       $result = pg_query($sql);
       $return = null;
 
@@ -71,11 +71,7 @@
     {
 
       $return = false;
-      $sql = "UPDATE disciplinas
-                set disciplina='$this->disciplina',
-                    curso='$this->curso',
-
-                where id_disc=$this->id";
+      $sql = "UPDATE disciplinas SET disciplina='$this->disciplina', curso='$this->curso' WHERE id_disc=$this->id";
 
       $return = pg_query($sql);
 
@@ -84,7 +80,7 @@
 
     public function Editar($id = "")
     {
-      $sql = "SELECT * FROM disciplinas as d, cursos as c WHERE d.curso=c.id AND d.id_disc=$id";
+      $sql = "SELECT * FROM disciplinas as d, cursos as c WHERE d.curso=c.id_curso AND d.id_disc=$id";
       $result = pg_query($sql);
       $return = null;
 
