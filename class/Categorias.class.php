@@ -35,7 +35,16 @@
         $sql ="INSERT INTO categorias (categoria) VALUES ('$this->categoria')";
         $return = pg_query($sql);
 
-        return $return;
+        if($return)
+        {
+          $show = "<script> alert('Cadastro feito com sucesso.');</script>";
+        }
+        else
+        {
+          $show = "<script> alert('Deu ruim.');</script>";
+        }
+
+        return $show;
       }
 
       function listar()
