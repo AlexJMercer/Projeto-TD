@@ -1,3 +1,20 @@
+<?php
+
+include_once "../../class/Carrega.class.php";
+
+if (isset($_POST['enviar']))
+{
+    $object = new Cardapios();
+    $object->dia = $_POST['dia'];
+    $object->data = $_POST['data'];
+    $object->alimento = $_POST['alimento'];
+    /*var_dump($object);*/
+    $object->inserir();
+
+    header("Location:CardapioObj.php");
+}
+
+?>
 <!DOCTYPE html>
 <html>
   <head>
@@ -37,21 +54,17 @@
   </head>
   <body class="hold-transition skin-green sidebar-mini">
     <div class="wrapper">
-      <?php include 'topotime.html';
+      <?php include '../topotime.html';
 
-            include 'menutime.html';
+            include '../menutime.html';
 
       ?>
-
-
       <div class="content-wrapper">
         <!-- Content Header (Page header) -->
         <section class="content-header">
           <h1>
             Cardápios
-
           </h1>
-
         </section>
 
         <!-- Main content -->
@@ -67,26 +80,19 @@
                   <h3 class="box-title">Cadastro de cardápios</h3>
                 </div><!-- /.box-header -->
                 <!-- form start -->
-                <form class="form-horizontal">
+                <form class="form-horizontal" name="cadcardapio" id="form" method="post" action="<?php $SELF_PHP;?>">
                   <div class="box-body">
-
                       <div class="form-group">
                         <label for="dia" class="col-sm-2 control-label" >Dia</label>
                         <div class="col-sm-10">
                           <select class="form-control select2" id="dia" name="dia" style="width: 100%;">
-                            <option></option>
-                            <option>Alabama</option>
-                            <option>Alaska</option>
-                            <option>California</option>
-                            <option>Delaware</option>
-                            <option>Tennessee</option>
-                            <option>Texas</option>
-                            <option>Washington</option>
+                            <option value=""></option>
+                            <?php $diaSelect = new Dia();
+                                  $diaSelect->diaSelect();
+                            ?>
                           </select>
                         </div>
-
                       </div>
-
                       <div class="form-group">
                         <label class="col-sm-2 control-label" for="reservation">Data</label>
                         <div class="col-sm-10">
@@ -94,32 +100,26 @@
                             <div class="input-group-addon">
                               <i class="fa fa-calendar"></i>
                             </div>
-                          <input type="text" class="form-control" id="reservation">
+                          <input type="text" class="form-control" name="data" id="reservation">
                         </div>
                         </div>
                       </div>
-
                       <div class="form-group">
-                          <label for="alimento" class="col-sm-2 control-label">Alimentos</label>
+                          <label for="alimentos" class="col-sm-2 control-label">Alimentos</label>
                           <div class="col-sm-10">
-                            <select class="form-control select2" id="alimento" name="alimentos" multiple="multiple" style="width: 100%;">
-                              <option>Alabama</option>
-                              <option>Alaska</option>
-                              <option>California</option>
-                              <option>Delaware</option>
-                              <option>Tennessee</option>
-                              <option>Texas</option>
-                              <option>Washington</option>
+                            <select class="form-control select2" id="alimentos" name="alimento[]" multiple="multiple" style="width: 100%;">
+                              <option value=""></option>
+                              <?php $alimentoSelect = new Select();
+                                    $alimentoSelect->alimentoSelect();
+                              ?>
                             </select>
                           </div>
-
                         </div>
-
                   </div><!-- /.box-body -->
                   <div class="box-footer">
-                    <button type="submit" class="btn btn-success btn-flat btn-block">Sign in</button>
+                    <button type="submit" name="enviar" value="enviar" class="btn btn-success btn-flat btn-block">Enviar</button>
                     <br>
-                    <button type="submit" class="btn btn-default btn-flat btn-block btn-sm ">Cancel</button>
+                    <button type="reset" class="btn btn-default btn-flat btn-block btn-sm ">Limpar</button>
 
                   </div><!-- /.box-footer -->
                 </form>
