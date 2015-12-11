@@ -134,33 +134,22 @@
          }
          else
          {
-
-
             while ($a = pg_fetch_array($result))
             {
-             $this->id = $a['id'];
-             $this->alimento = $a['alimento'];
-             $count=count($a);
+              $this->id = $a['id'];
+              $this->alimento = $a['alimento'];
+              //$count=count($a);
 
-             foreach ($alimento as $key)
-            {
-
-               if ($key==$this->id)
-               {
-                 print "<option selected value='{$this->id}'>{$this->alimento}</option>";
-               }
+              foreach ($alimento as $key)
+              {
+                if ($key==$this->id)
+                {
+                  print "<option selected value='{$this->id}'>{$this->alimento}</option>";
+                }
+              }
             }
-
-
-
-               }
-
-
           }
-
         }
-
-
 
 }
 ?>
