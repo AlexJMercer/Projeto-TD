@@ -77,9 +77,11 @@
                         </div>
                         <!-- /.panel-heading -->
                         <div class="panel-body">
-                          <br>
-                            <span title="The tooltip" data-toggle="tooltip" data-placement="bottom"><button class="btn btn-primary btn-lg btn-block" data-toggle="modal" data-target="#myModal">Selecionar curso</button></span>
-                          <br>
+                        <br>
+                           <span title="The tooltip" data-toggle="tooltip" data-placement="bottom">
+                              <button class="btn btn-primary btn-lg btn-block" data-toggle="modal" data-target="#myModal"><i class="fa fa-search"></i>Selecionar curso</button>
+                           </span>
+                        <br>
                           <!-- Modal -->
                           <div class="modal fade" id="myModal" tabindex="0" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                              <div class="modal-dialog">
@@ -101,7 +103,7 @@
                                        </div>
                                      </div>
                                      <div class="modal-footer">
-                                        <button type="submit" name="pesquisar" value="pesquisar" class="btn btn-primary btn-lg btn-block">Pesquisar monitorias</button>
+                                        <button type="submit" name="pesquisar" value="pesquisar" class="btn btn-primary btn-lg btn-block"><i class="fa fa-search"></i>Pesquisar monitorias</button>
 
                                      </div>
                                     </form>

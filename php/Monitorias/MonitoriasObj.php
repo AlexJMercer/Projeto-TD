@@ -1,9 +1,26 @@
+<?php
+
+include_once "../../class/Carrega.class.php";
+
+if (isset($_POST['enviar']))
+{
+    $object = new Cardapios();
+    $object->dia = $_POST['dia'];
+    $object->data = $_POST['data'];
+    $object->alimento = $_POST['alimento'];
+    /*var_dump($object);*/
+    $object->inserir();
+
+    header("Location:CardapioObj.php");
+}
+
+?>
 <!DOCTYPE html>
 <html>
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>AdminLTE 2 | Data Tables</title>
+    <title>AdminLTE 2 | General Form Elements</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <!-- Bootstrap 3.3.5 -->
@@ -12,13 +29,29 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
     <!-- Ionicons -->
     <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
-    <!-- DataTables -->
-    <link rel="stylesheet" href="../../plugins/datatables/dataTables.bootstrap.css">
+    <!-- daterange picker -->
+    <link rel="stylesheet" href="../../plugins/daterangepicker/daterangepicker-bs3.css">
+    <!-- iCheck for checkboxes and radio inputs -->
+    <link rel="stylesheet" href="../../plugins/iCheck/all.css">
+    <!-- Bootstrap Color Picker -->
+    <link rel="stylesheet" href="../../plugins/colorpicker/bootstrap-colorpicker.min.css">
+    <!-- Bootstrap time Picker -->
+    <link rel="stylesheet" href="../../plugins/timepicker/bootstrap-timepicker.min.css">
+    <!-- Select2 -->
+    <link rel="stylesheet" href="../../plugins/select2/select2.min.css">
     <!-- Theme style -->
     <link rel="stylesheet" href="../../dist/css/AdminLTE.min.css">
     <!-- AdminLTE Skins. Choose a skin from the css/skins
          folder instead of downloading all of them to reduce the load. -->
     <link rel="stylesheet" href="../../dist/css/skins/_all-skins.min.css">
+
+    <style type="text/css">
+    .carregando
+    {
+      color:#666;
+      display:none;
+    }
+    </style>
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -27,122 +60,91 @@
         <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
   </head>
-  <body class="hold-transition skin-blue sidebar-mini">
+  <body class="hold-transition skin-green sidebar-mini">
     <div class="wrapper">
-
       <?php include '../topotime.html';
 
             include '../menutime.html';
 
       ?>
-      <!-- Content Wrapper. Contains page content -->
       <div class="content-wrapper">
         <!-- Content Header (Page header) -->
         <section class="content-header">
-          <h1>
-            Cárdapios
-          </h1>
+          <h1>Monitorias</h1>
         </section>
 
         <!-- Main content -->
         <section class="content">
           <div class="row">
-            <div class="col-xs-12">
-              <div class="box">
-                <div class="box-header">
-                  <h3 class="box-title">Listagem de cárdapios</h3>
+            <div class="col-lg-12">
+              <!-- Horizontal Form -->
+              <div class="box box-success">
+                <div class="box-header with-border">
+                  <h3 class="box-title">Cadastro de monitorias</h3>
                 </div><!-- /.box-header -->
-                <div class="box-body">
-                  <table id="" class="table table-bordered table-hover">
-                    <thead>
-                      <tr>
-                        <th style="text-align:center">Dia</th>
-                        <th style="text-align:center">Data</th>
-                        <th style="text-align:center">Opções</th>
-                      </tr>
-                    </thead>
-<?php
+                <!-- form start -->
+                <form class="form-horizontal" name="cadmonitorias" id="form" method="post" action="CrudMonitorias.php">
+                  <div class="box-body">
+                     <div class="form-group">
+                        <label for="curso" class="col-sm-2 control-label">Curso:</label>
+                        <div class="col-sm-10">
+                          <select class="form-control select2" name="curso" id="curso" style="width: 100%;">
+                            <option value=""></option>
+                            <?php $cursoSelect = new Select();
+                                  $cursoSelect->cursoSelect();
+                            ?>
+                          </select>
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label class="col-sm-2 control-label" for="disciplina">Disciplina:</label>
+                        <span class="carregando">Aguarde, carregando...</span>
+                        <div class="col-sm-10">
+                           <select class="form-control select2" name="disciplina" id="disciplina" required>
+                              <option value=""></option>
+                           </select>
+                        </div>
+                        </div>
+                      <div class="form-group">
+                           <label for="semestre" class="col-sm-2 control-label">Semestre:</label>
+                           <div class="col-sm-10">
+                            <select class="form-control select2" name="semestre" id="semestre" style="width: 100%;">
+                              <option value=""></option>
+                              <?php $semestreSelect = new Select();
+                                    $semestreSelect->semestreSelect();
+                              ?>
+                            </select>
+                          </div>
+                        </div>
+                        <div class="form-group">
+                           <label for="sala" class="col-sm-2 control-label">Sala:</label>
+                           <div class="col-sm-10">
+                              <select class="form-control select2" name="sala" id="sala" style="width: 100%;">
+                                 <option value=""></option>
+                                 <?php $localSelect = new Select();
+                                       $localSelect->localSelect();
+                                 ?>
+                             </select>
+                           </div>
+                         </div>
+                        <div class="form-group">
+                           <label for="info" class="col-sm-2 control-label">Informações adicionais:</label>
+                           <div class="col-sm-10">
+                              <textarea class="form-control" name="info" rows="4" placeholder="Digite aqui..."></textarea>
+                           </div>
+                        </div>
+                  </div><!-- /.box-body -->
+                  <div class="box-footer">
+                    <button type="submit" name="enviar" value="enviar" class="btn btn-success btn-flat btn-block">Enviar</button>
+                    <br>
+                    <button type="reset" class="btn btn-default btn-flat btn-block btn-sm ">Limpar</button>
 
-include_once "../../class/Carrega.class.php";
-
-  $listar = new Cardapios();
-  $list = $listar->listar();
-
-  /*print_r($list);*/
-  if ($list != null)
-  {
-    foreach ($list as $line)
-    {
-?>
-                    <form name="view" class="" action="EditCardapioObj.php" method="post">
-                    <tbody>
-                      <tr>
-                        <td><?php echo $line->dia; ?></td>
-                        <td><?php echo date('d/m/Y',strtotime($line->data)); ?></td>
-                        <td style="text-align:center">
-                            <input type='hidden' name='id' value='<?php echo $line->id; ?>'>
-
-                            <button type="submit" name="exibir" value="exibir" formaction="ExibCardapioObj.php" class="btn btn-info btn-flat disabled"><i class="fa fa-expand"></i> Exibir </button>
-
-                            <button type="submit" name="editar" value="editar" class="btn btn-warning btn-flat"><i class="fa fa-edit"></i> Editar </button>
-
-                            <button type="submit" name="excluir" value="excluir" formaction="CrudCardapio.php" class='btn btn-danger btn-flat'><i class="fa fa-times"></i> Excluir </button></td>
-                      </tr>
-                    </tbody>
-                  </form>
-                    <?php
-                            }
-                          }
-                          else
-                          {
-                            echo "<h2> Nada cadastrado!!</h2>";
-                          }
-                    ?>
-
-                  </table>
-                </div><!-- /.box-body -->
+                  </div><!-- /.box-footer -->
+                </form>
               </div><!-- /.box -->
-
-              <!-- Tabela com datatables completo>
-              <div class="box">
-                <div class="box-header">
-                  <h3 class="box-title">Data Table With Full Features</h3>
-                </div>
-                <div class="box-body">
-                  <table id="example1" class="table table-bordered table-striped">
-                    <thead>
-                      <tr>
-                        <th>Rendering engine</th>
-                        <th>Browser</th>
-                        <th>Platform(s)</th>
-                        <th>Engine version</th>
-                        <th>CSS grade</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <td>Xablau</td>
-                        <td>goiaba</td>
-                        <td>Mercer</td>
-                        <td>Oi</td>
-                        <td>Feijoada</td>
-                      </tr>
-                    </tbody>
-                    <tfoot>
-                      <tr>
-                        <th>Rendering engine</th>
-                        <th>Browser</th>
-                        <th>Platform(s)</th>
-                        <th>Engine version</th>
-                        <th>CSS grade</th>
-                      </tr>
-                    </tfoot>
-                  </table>
-                </div><
-              </div>
-              <Tabela com datatables completo-->
-            </div><!-- /.col -->
-          </div><!-- /.row -->
+              <!-- general form elements disabled -->
+            </div><!--/.col (right) -->
+          </div>   <!-- /.row -->
         </section><!-- /.content -->
       </div><!-- /.content-wrapper -->
       <footer class="main-footer">
@@ -323,31 +325,63 @@ include_once "../../class/Carrega.class.php";
     <script src="../../plugins/jQuery/jQuery-2.1.4.min.js"></script>
     <!-- Bootstrap 3.3.5 -->
     <script src="../../bootstrap/js/bootstrap.min.js"></script>
-    <!-- DataTables -->
-    <script src="../../plugins/datatables/jquery.dataTables.min.js"></script>
-    <script src="../../plugins/datatables/dataTables.bootstrap.min.js"></script>
-    <!-- SlimScroll -->
-    <script src="../../plugins/slimScroll/jquery.slimscroll.min.js"></script>
     <!-- FastClick -->
     <script src="../../plugins/fastclick/fastclick.min.js"></script>
     <!-- AdminLTE App -->
     <script src="../../dist/js/app.min.js"></script>
     <!-- AdminLTE for demo purposes -->
     <script src="../../dist/js/demo.js"></script>
-    <!-- page script -->
-    <script>
-      $(function () {
-        $("#example1").DataTable();
-        $('#example2').DataTable({
-          responsive:true,
-          "paging": true,
-          "lengthChange": false,
-          "searching": false,
-          "ordering": true,
-          "info": true,
-          "autoWidth": true
-        });
+    <!-- Select2 -->
+    <script src="../../plugins/select2/select2.full.min.js"></script>
+    <!-- bootstrap time picker -->
+    <script src="../../plugins/timepicker/bootstrap-timepicker.min.js"></script>
+
+    <!-- date-range-picker -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.2/moment.min.js"></script>
+    <script src="../../plugins/daterangepicker/daterangepicker.js"></script>
+
+    <script type="text/javascript">
+    $(function(){
+      $(".select2").select2();
+
+      $('#reservation').daterangepicker({
+        singleDatePicker: true,
+        format: 'DD/MM/YYYY',
+        "locale": {
+        "format": "DD/MM/YYYY",
+        "separator": " - ",
+        "applyLabel": "Apply",
+        "cancelLabel": "Cancel",
+        "fromLabel": "From",
+        "toLabel": "To",
+        "customRangeLabel": "Custom",
+        "daysOfWeek": [
+            "Dom",
+            "Seg",
+            "Ter",
+            "Qua",
+            "Qui",
+            "Sex",
+            "Sab"
+        ],
+        "monthNames": [
+            "Janeiro",
+            "Feveireiro",
+            "Março",
+            "Abril",
+            "Maio",
+            "Junho",
+            "Julho",
+            "Agosto",
+            "Setembro",
+            "Outubro",
+            "Novembro",
+            "Dezembro"
+        ],
+        "firstDay": 1
+    },
       });
+    });
     </script>
   </body>
 </html>

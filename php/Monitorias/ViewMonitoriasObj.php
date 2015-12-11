@@ -40,7 +40,7 @@
         <!-- Content Header (Page header) -->
         <section class="content-header">
           <h1>
-            Cárdapios
+            Listagem de cárdapios
           </h1>
         </section>
 
@@ -50,15 +50,15 @@
             <div class="col-xs-12">
               <div class="box">
                 <div class="box-header">
-                  <h3 class="box-title">Listagem de cárdapios</h3>
+                  <h3 class="box-title"></h3>
                 </div><!-- /.box-header -->
                 <div class="box-body">
                   <table id="" class="table table-bordered table-hover">
                     <thead>
                       <tr>
-                        <th style="text-align:center">Dia</th>
-                        <th style="text-align:center">Data</th>
-                        <th style="text-align:center">Opções</th>
+                        <th>Dia</th>
+                        <th>Data</th>
+                        <th>Opções</th>
                       </tr>
                     </thead>
 <?php
@@ -79,7 +79,7 @@ include_once "../../class/Carrega.class.php";
                       <tr>
                         <td><?php echo $line->dia; ?></td>
                         <td><?php echo date('d/m/Y',strtotime($line->data)); ?></td>
-                        <td style="text-align:center">
+                        <td class>
                             <input type='hidden' name='id' value='<?php echo $line->id; ?>'>
 
                             <button type="submit" name="exibir" value="exibir" formaction="ExibCardapioObj.php" class="btn btn-info btn-flat disabled"><i class="fa fa-expand"></i> Exibir </button>
@@ -98,7 +98,7 @@ include_once "../../class/Carrega.class.php";
                             echo "<h2> Nada cadastrado!!</h2>";
                           }
                     ?>
-
+                    
                   </table>
                 </div><!-- /.box-body -->
               </div><!-- /.box -->
