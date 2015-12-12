@@ -2,18 +2,6 @@
 
 include_once "../../class/Carrega.class.php";
 
-if (isset($_POST['enviar']))
-{
-    $object = new Cardapios();
-    $object->dia = $_POST['dia'];
-    $object->data = $_POST['data'];
-    $object->alimento = $_POST['alimento'];
-    /*var_dump($object);*/
-    $object->inserir();
-
-    header("Location:CardapioObj.php");
-}
-
 ?>
 <!DOCTYPE html>
 <html>

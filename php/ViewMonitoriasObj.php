@@ -104,7 +104,7 @@ $curso = $_POST["curso"];
                                 <td class='center'>
                                   <input type='hidden' name='id' value='<?php echo $line->id; ?>'>
                                   <input type="hidden" name="curso" value="<?php echo $curso;?>">
-                                  <button type="submit" name="exibir" value="exibir" formaction="ExibMonitoriaObj.php" class="btn btn-outline btn-info"><i class="fa fa-edit" data-toggle="modal" data-target="#myModal"></i> Exibir </button>
+                                  <button type="submit" name="exibir" value="exibir" formaction="ExibMonitoriaObj.php" class="btn btn-outline btn-info"><i class="fa fa-edit"></i> Exibir </button>
 
                                   <button type="submit" name="editar" value="editar" class="btn btn-outline btn-warning"><i class="fa fa-edit"></i> Editar </button>
 

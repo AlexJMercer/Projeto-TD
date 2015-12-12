@@ -53,7 +53,7 @@
                   <h3 class="box-title">Listagem de cárdapios</h3>
                 </div><!-- /.box-header -->
                 <div class="box-body">
-                  <table id="" class="table table-bordered table-hover">
+                  <table class="table table-bordered table-hover">
                     <thead>
                       <tr>
                         <th style="text-align:center">Dia</th>

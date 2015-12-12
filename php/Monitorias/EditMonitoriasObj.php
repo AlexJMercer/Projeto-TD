@@ -50,55 +50,98 @@ include_once "../../class/Carrega.class.php";
       <div class="content-wrapper">
         <!-- Content Header (Page header) -->
         <section class="content-header">
-          <h1>Monitorias</h1>
+          <h1>
+            Cardápios
+          </h1>
         </section>
 
         <!-- Main content -->
         <section class="content">
           <div class="row">
+            <!-- left column -->
+
+            <!-- right column -->
             <div class="col-lg-12">
               <!-- Horizontal Form -->
-              <div class="box box-info">
+              <div class="box box-success">
                 <div class="box-header with-border">
-                  <h3 class="box-title">Filtrar monitorias</h3>
+                  <h3 class="box-title">Cadastro de cardápios</h3>
                 </div><!-- /.box-header -->
-                <div class="box-body">
+                <!-- form start -->
+<?php
 
-                <span title="Escolha um curso para filtrar as monitorias" data-toggle="tooltip" data-placement="bottom"><button class="btn btn-info btn-lg btn-flat btn-block" data-toggle="modal" data-target="#myModal"><i class="fa fa-external-link"></i>   Selecionar curso  </button></span>
+  $id = $_POST["id"];
 
+  if (isset($_POST["editar"]))
+  {
+    $edit = new Monitorias();
+    $comp = $edit->Editar($id);
 
-                <div class="modal fade" id="myModal" tabindex="0" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                 <div class="modal-dialog">
-                   <div class="modal-content">
-                     <div class="modal-header">
-                       <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                       <h4 class="modal-title">Listagem de monitorias</h4>
-                     </div>
-                     <div class="modal-body">
-                        <div class="form-group">
-                          <form class="" action="ViewMonitoriasObj.php" method="post">
-                           <label for="curso">Curso:</label>
-                           <select class="form-control" name="curso" id="curso">
-                             <option value="">Selecione um curso para continuar</option>
-                              <?php $cursoSelect = new Select();
-                                    $cursoSelect->cursoSelect();
+    if ($edit != null)
+    {
+?>
+                <form class="form-horizontal" name="cadcardapio" id="form" method="post" action="<?php $SELF_PHP;?>">
+                  <div class="box-body">
+                      <div class="form-group">
+                        <label class="col-sm-2 control-label" >Curso:</label>
+                        <div class="col-sm-10">
+                          <p class="form-control-static"><?php echo $comp->curso; ?></p>
+                          </select>
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label class="col-sm-2 control-label">Disciplina:</label>
+                        <div class="col-sm-10">
+                          <p class="form-control-static"> <?php echo $comp->disciplina; ?></p>
+                        </div>
+                      </div>
+                      <div class="form-group">
+                          <label for="semestre" class="col-sm-2 control-label">Semestre:</label>
+                          <div class="col-sm-10">
+                            <select class="form-control select2" id="semestre" name="semestre" style="width: 100%;">
+                              <option value=""></option>
+                              <?php $semestreSelect = new Select();
+                                    $semestreSelect->semestreSelect($comp->semestre);
                               ?>
-                           </select>
-                       </div>
-                     </div>
-                     <div class="modal-footer">
-                       <button type="submit" name='pesquisar' value='pesquisar' class="btn btn-info btn-flat btn-lg btn-block"><i class="fa fa-search"></i>  Pesquisar </button>
-                     </div>
-                   </div><!-- /.modal-content -->
-                 </div><!-- /.modal-dialog -->
-               </div><!-- /.modal -->
-               </div>
+                            </select>
+                          </div>
+                        </div>
+                        <div class="form-group">
+                           <label for="sala" class="col-sm-2 control-label">Sala:</label>
+                           <div class="col-sm-10">
+                              <select class="form-control select2" name="sala" id="sala" style="width: 100%;">
+                                 <option value=""></option>
+                                 <?php $localSelect = new Select();
+                                       $localSelect->localSelect($comp->sala);
+                                 ?>
+                             </select>
+                           </div>
+                         </div>
+                         <div class="form-group">
+                            <label for="info" class="col-sm-2 control-label">Informações adicionais:</label>
+                            <div class="col-sm-10">
+                               <textarea class="form-control" name="info" rows="4" placeholder="Digite aqui..."><?php echo $comp->info; ?></textarea>
+                            </div>
+                         </div>
+                  </div><!-- /.box-body -->
+                  <div class="box-footer">
+                    <input type="hidden" name="id" value="<?php echo $comp->id; ?>"/>
+                    <button type="submit" name="atualizar" value="atualizar" class="btn btn-success btn-flat btn-block">Atualizar</button>
+                    <br>
+                    <button type="reset" class="btn btn-default btn-flat btn-block btn-sm ">Limpar</button>
+
+                  </div><!-- /.box-footer -->
+                </form>
               </div><!-- /.box -->
               <!-- general form elements disabled -->
-            </div>
+            </div><!--/.col (right) -->
           </div>   <!-- /.row -->
         </section><!-- /.content -->
       </div><!-- /.content-wrapper -->
+      <?php
+            }
+          }
+      ?>
       <footer class="main-footer">
         <div class="pull-right hidden-xs">
           <b>Version</b> 2.3.0
@@ -293,8 +336,7 @@ include_once "../../class/Carrega.class.php";
     <script src="../../plugins/daterangepicker/daterangepicker.js"></script>
 
     <script type="text/javascript">
-    $(function()
-    {
+    $(function(){
       $(".select2").select2();
 
       $('#reservation').daterangepicker({
@@ -334,11 +376,6 @@ include_once "../../class/Carrega.class.php";
         "firstDay": 1
     },
       });
-    });
-
-    $(window).load(function()
-    {
-        $('#myModal').modal('show');
     });
     </script>
   </body>

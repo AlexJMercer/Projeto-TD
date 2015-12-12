@@ -60,39 +60,52 @@ include_once "../../class/Carrega.class.php";
               <!-- Horizontal Form -->
               <div class="box box-info">
                 <div class="box-header with-border">
-                  <h3 class="box-title">Filtrar monitorias</h3>
+                  <h3 class="box-title">Monitorias</h3>
                 </div><!-- /.box-header -->
+<?php
+
+  $id = $_POST["id"];
+  $curso = $_POST['curso'];
+
+  if (isset($_POST["exibir"]))
+  {
+    $exib = new Monitorias();
+    $comp = $exib->ShowMonitoria($id);
+
+    if ($exib != null)
+    {
+?>
                 <div class="box-body">
+                  <div class="form-group">
+                    <dl class="dl-horizontal">
+                      <dt>Curso:</dt>
+                      <dd><?php echo $comp->curso; ?></dd>
+                      <dt>Disciplina:</dt>
+                      <dd><?php echo $comp->disciplina; ?></dd>
+                      <dt>Semestre:</dt>
+                      <dd><?php echo $comp->semestre; ?></dd>
+                      <dt>Local:</dt>
+                      <dd><?php echo $comp->sala; ?></dd>
+                      <dt>Informações:</dt>
+                      <dd><?php echo $comp->info; ?></dd>
+                    </dl>
+                    <form action="EditMonitoriasObj.php" method="post">
 
-                <span title="Escolha um curso para filtrar as monitorias" data-toggle="tooltip" data-placement="bottom"><button class="btn btn-info btn-lg btn-flat btn-block" data-toggle="modal" data-target="#myModal"><i class="fa fa-external-link"></i>   Selecionar curso  </button></span>
-
-
-                <div class="modal fade" id="myModal" tabindex="0" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                 <div class="modal-dialog">
-                   <div class="modal-content">
-                     <div class="modal-header">
-                       <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                       <h4 class="modal-title">Listagem de monitorias</h4>
-                     </div>
-                     <div class="modal-body">
-                        <div class="form-group">
-                          <form class="" action="ViewMonitoriasObj.php" method="post">
-                           <label for="curso">Curso:</label>
-                           <select class="form-control" name="curso" id="curso">
-                             <option value="">Selecione um curso para continuar</option>
-                              <?php $cursoSelect = new Select();
-                                    $cursoSelect->cursoSelect();
-                              ?>
-                           </select>
-                       </div>
-                     </div>
-                     <div class="modal-footer">
-                       <button type="submit" name='pesquisar' value='pesquisar' class="btn btn-info btn-flat btn-lg btn-block"><i class="fa fa-search"></i>  Pesquisar </button>
-                     </div>
-                   </div><!-- /.modal-content -->
-                 </div><!-- /.modal-dialog -->
-               </div><!-- /.modal -->
-               </div>
+                      <input type="hidden" name="id" value="<?php echo $id; ?>"/>
+                      <input type="hidden" name="curso" value="<?php echo $curso; ?>">
+                      <div class="col-sm-6">
+                        <button type="submit" name="retornar" value="retornar" class="btn bg-maroon btn-flat btn-block margin" formaction="ViewMonitoriasObj.php"><i class="fa fa-edit"></i> Retornar para lista </button>
+                      </div>
+                      <div class="col-sm-6">
+                        <button type="submit" name="editar" value="editar" class="btn btn-warning btn-flat btn-block margin"><i class="fa fa-edit"></i> Editar </button>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+<?php
+    }
+  }
+?>
               </div><!-- /.box -->
               <!-- general form elements disabled -->
             </div>
