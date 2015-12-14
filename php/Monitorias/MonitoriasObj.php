@@ -50,9 +50,9 @@ include_once "../../class/Carrega.class.php";
   </head>
   <body class="hold-transition skin-green sidebar-mini">
     <div class="wrapper">
-      <?php include '../topotime.html';
+      <?php include '../inc/topotime.html';
 
-            include '../menutime.html';
+            include '../inc/menutime.html';
 
       ?>
       <div class="content-wrapper">
@@ -71,12 +71,12 @@ include_once "../../class/Carrega.class.php";
                   <h3 class="box-title">Cadastro de monitorias</h3>
                 </div><!-- /.box-header -->
                 <!-- form start -->
-                <form class="form-horizontal" name="cadmonitorias" id="form" method="post" action="CrudMonitorias.php">
+                <form role="form" class="form-horizontal" name="cadmonitorias" id="form" method="post" action="CrudMonitorias.php">
                   <div class="box-body">
                      <div class="form-group">
-                        <label for="curso" class="col-sm-2 control-label">Curso:</label>
+                        <label for="curso" class="control-label col-sm-2">Curso:</label>
                         <div class="col-sm-10">
-                          <select class="form-control select2" name="curso" id="curso" style="width: 100%;">
+                          <select class="form-control select2" id="curso" name="curso" style="width: 100%;">
                             <option value=""></option>
                             <?php $cursoSelect = new Select();
                                   $cursoSelect->cursoSelect();
@@ -89,7 +89,7 @@ include_once "../../class/Carrega.class.php";
                         <span class="carregando">Aguarde, carregando...</span>
                         <div class="col-sm-10">
                            <select class="form-control select2" name="disciplina" id="disciplina" required>
-                              <option value="">Selecione um curso para selecionar uma disciplina</option>
+                              <option value=""></option>
                            </select>
                         </div>
                         </div>
@@ -161,45 +161,29 @@ include_once "../../class/Carrega.class.php";
     <script src="../../plugins/daterangepicker/daterangepicker.js"></script>
 
     <script type="text/javascript">
-    $(function(){
+    $(function()
+    {
       $(".select2").select2();
 
-      $('#reservation').daterangepicker({
-        singleDatePicker: true,
-        format: 'DD/MM/YYYY',
-        "locale": {
-        "format": "DD/MM/YYYY",
-        "separator": " - ",
-        "applyLabel": "Apply",
-        "cancelLabel": "Cancel",
-        "fromLabel": "From",
-        "toLabel": "To",
-        "customRangeLabel": "Custom",
-        "daysOfWeek": [
-            "Dom",
-            "Seg",
-            "Ter",
-            "Qua",
-            "Qui",
-            "Sex",
-            "Sab"
-        ],
-        "monthNames": [
-            "Janeiro",
-            "Feveireiro",
-            "Março",
-            "Abril",
-            "Maio",
-            "Junho",
-            "Julho",
-            "Agosto",
-            "Setembro",
-            "Outubro",
-            "Novembro",
-            "Dezembro"
-        ],
-        "firstDay": 1
-    },
+      $('#curso').change(function()
+      {
+        if( $(this).val() )
+        {
+          $('#disciplina').hide();
+          $('.carregando').show();
+          $.getJSON('disciplina.ajax.php',{curso: $(this).val(), ajax: 'true'}, function(j)
+          {
+            var options = '<option value=""></option>';
+            for (var i = 0; i < j.length; i++)
+            {
+              options += '<option value="' + j[i].id_disc + '">' + j[i].disciplina + '</option>';
+            }
+            $('#disciplina').html(options).show();
+            $('.carregando').hide();
+          });
+        } else {
+          $('#disciplina').html('<option value="">Nada encontrado !!</option>');
+        }
       });
     });
     </script>
