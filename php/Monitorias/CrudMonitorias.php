@@ -1,6 +1,6 @@
 <?php
 
-include_once "../class/Carrega.class.php";
+include_once "../../class/Carrega.class.php";
 
   if (isset($_POST['enviar']))
   {

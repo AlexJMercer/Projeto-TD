@@ -35,7 +35,6 @@ include_once 'Carrega.class.php';
       $this->$key = $value;
    }
 
-
    public function Inserir()
    {
       $sql="INSERT INTO monitorias (curso_m, disciplina_m, semestre_m, sala_m, info_m)
@@ -54,7 +53,6 @@ include_once 'Carrega.class.php';
      {
         $object = new Monitorias();
         $object->id = $reg["id_monit"];
-        $object->curso = $reg["nome"];
         $object->disciplina = $reg["disciplina"];
 
         $return[] = $object;

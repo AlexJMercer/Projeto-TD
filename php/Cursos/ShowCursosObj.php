@@ -33,14 +33,6 @@ include_once "../../class/Carrega.class.php";
          folder instead of downloading all of them to reduce the load. -->
     <link rel="stylesheet" href="../../dist/css/skins/_all-skins.min.css">
 
-    <style type="text/css">
-    .carregando
-    {
-      color:#666;
-      display:none;
-    }
-    </style>
-
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -58,7 +50,7 @@ include_once "../../class/Carrega.class.php";
       <div class="content-wrapper">
         <!-- Content Header (Page header) -->
         <section class="content-header">
-          <h1>Monitorias</h1>
+          <h1>Cursos</h1>
         </section>
 
         <!-- Main content -->
@@ -66,72 +58,51 @@ include_once "../../class/Carrega.class.php";
           <div class="row">
             <div class="col-lg-12">
               <!-- Horizontal Form -->
-              <div class="box box-success">
+              <div class="box box-info">
                 <div class="box-header with-border">
-                  <h3 class="box-title">Cadastro de monitorias</h3>
+                  <h3 class="box-title">Cursos</h3>
                 </div><!-- /.box-header -->
-                <!-- form start -->
-                <form class="form-horizontal" name="cadmonitorias" id="form" method="post" action="CrudMonitorias.php">
-                  <div class="box-body">
-                     <div class="form-group">
-                        <label for="curso" class="col-sm-2 control-label">Curso:</label>
-                        <div class="col-sm-10">
-                          <select class="form-control select2" name="curso" id="curso" style="width: 100%;">
-                            <option value=""></option>
-                            <?php $cursoSelect = new Select();
-                                  $cursoSelect->cursoSelect();
-                            ?>
-                          </select>
-                        </div>
-                      </div>
-                      <div class="form-group">
-                        <label class="col-sm-2 control-label" for="disciplina">Disciplina:</label>
-                        <span class="carregando">Aguarde, carregando...</span>
-                        <div class="col-sm-10">
-                           <select class="form-control select2" name="disciplina" id="disciplina" required>
-                              <option value="">Selecione um curso para selecionar uma disciplina</option>
-                           </select>
-                        </div>
-                        </div>
-                      <div class="form-group">
-                           <label for="semestre" class="col-sm-2 control-label">Semestre:</label>
-                           <div class="col-sm-10">
-                            <select class="form-control select2" name="semestre" id="semestre" style="width: 100%;">
-                              <option value=""></option>
-                              <?php $semestreSelect = new Select();
-                                    $semestreSelect->semestreSelect();
-                              ?>
-                            </select>
-                          </div>
-                        </div>
-                        <div class="form-group">
-                           <label for="sala" class="col-sm-2 control-label">Sala:</label>
-                           <div class="col-sm-10">
-                              <select class="form-control select2" name="sala" id="sala" style="width: 100%;">
-                                 <option value=""></option>
-                                 <?php $localSelect = new Select();
-                                       $localSelect->localSelect();
-                                 ?>
-                             </select>
-                           </div>
-                         </div>
-                        <div class="form-group">
-                           <label for="info" class="col-sm-2 control-label">Informações adicionais:</label>
-                           <div class="col-sm-10">
-                              <textarea class="form-control" name="info" rows="6" placeholder="Digite aqui..."></textarea>
-                           </div>
-                        </div>
-                  </div><!-- /.box-body -->
-                  <div class="box-footer">
-                    <button type="submit" name="enviar" value="enviar" class="btn btn-success btn-flat btn-block">Enviar</button>
-                    <br>
-                    <button type="reset" class="btn btn-default btn-flat btn-block btn-sm ">Limpar</button>
+<?php
 
-                  </div><!-- /.box-footer -->
-                </form>
+  $id = $_POST["id"];
+
+
+  if (isset($_POST["exibir"]))
+  {
+    $exib = new Cursos();
+    $comp = $exib->Editar($id);
+
+    if ($exib != null)
+    {
+?>
+                <div class="box-body">
+                  <div class="form-group">
+                    <dl class="dl-horizontal">
+                      <dt>Nome do curso:</dt>
+                      <dd><?php echo $comp->nome; ?></dd><br>
+                      <dt>Descrição:</dt>
+                      <dd><textarea name="name" rows="20" class="form-control" disabled><?php echo $comp->texto; ?></textarea></dd>
+                    </dl>
+                    <form action="EditCursoObj.php" method="post">
+
+                      <input type="hidden" name="id" value="<?php echo $id; ?>"/>
+
+                      <div class="col-sm-6">
+                        <button type="submit" name="retornar" value="retornar" class="btn bg-maroon btn-flat btn-block margin" formaction="ViewCursosObj.php"><i class="fa fa-edit"></i> Retornar para lista </button>
+                      </div>
+                      <div class="col-sm-6">
+                        <button type="submit" name="editar" value="editar" class="btn btn-warning btn-flat btn-block margin"><i class="fa fa-edit"></i> Editar </button>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+<?php
+    }
+  }
+?>
               </div><!-- /.box -->
               <!-- general form elements disabled -->
-            </div><!--/.col (right) -->
+            </div>
           </div>   <!-- /.row -->
         </section><!-- /.content -->
       </div><!-- /.content-wrapper -->
@@ -161,7 +132,8 @@ include_once "../../class/Carrega.class.php";
     <script src="../../plugins/daterangepicker/daterangepicker.js"></script>
 
     <script type="text/javascript">
-    $(function(){
+    $(function()
+    {
       $(".select2").select2();
 
       $('#reservation').daterangepicker({
@@ -201,6 +173,11 @@ include_once "../../class/Carrega.class.php";
         "firstDay": 1
     },
       });
+    });
+
+    $(window).load(function()
+    {
+        $('#myModal').modal('show');
     });
     </script>
   </body>
