@@ -33,9 +33,9 @@
   <body class="hold-transition skin-blue sidebar-mini">
     <div class="wrapper">
 
-      <?php include '../topotime.html';
+      <?php include '../inc/topotime.html';
 
-            include '../menutime.html';
+            include '../inc/menutime.html';
 
       ?>
       <!-- Content Wrapper. Contains page content -->
@@ -107,9 +107,10 @@ include_once "../../class/Carrega.class.php";
       </div><!-- /.content-wrapper -->
 
       <?php
-        include '../footer.html';
-        include '../control-sidebar.html';
+        include '../inc/footer.html';
+        include '../inc/control-sidebar.html';
       ?>
+
 
 
     </div><!-- ./wrapper -->

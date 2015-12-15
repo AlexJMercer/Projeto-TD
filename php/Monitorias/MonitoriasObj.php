@@ -136,8 +136,8 @@ include_once "../../class/Carrega.class.php";
         </section><!-- /.content -->
       </div><!-- /.content-wrapper -->
       <?php
-        include '../footer.html';
-        include '../control-sidebar.html';
+        include '../inc/footer.html';
+        include '../inc/control-sidebar.html';
       ?>
     </div><!-- ./wrapper -->
 

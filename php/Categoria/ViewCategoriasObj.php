@@ -33,10 +33,9 @@
   <body class="hold-transition skin-blue sidebar-mini">
     <div class="wrapper">
 
-      <?php include '../topotime.html';
-
-            include '../menutime.html';
-
+      <?php
+        include '../inc/footer.html';
+        include '../inc/control-sidebar.html';
       ?>
       <!-- Content Wrapper. Contains page content -->
       <div class="content-wrapper">

@@ -32,9 +32,9 @@ include_once "../../class/Carrega.class.php";
   </head>
   <body class="hold-transition skin-green sidebar-mini">
     <div class="wrapper">
-      <?php include '../topotime.html';
+      <?php include '../inc/topotime.html';
 
-            include '../menutime.html';
+            include '../inc/menutime.html';
 
       ?>
       <div class="content-wrapper">
@@ -94,9 +94,10 @@ include_once "../../class/Carrega.class.php";
         </section><!-- /.content -->
       </div><!-- /.content-wrapper -->
       <?php
-        include '../footer.html';
-        include '../control-sidebar.html';
+        include '../inc/footer.html';
+        include '../inc/control-sidebar.html';
       ?>
+
     </div><!-- ./wrapper -->
 
     <!-- jQuery 2.1.4 -->
