@@ -13,6 +13,9 @@ class Select
     public $dia;
     public $alimento;
     public $curso;
+    public $categoria;
+    //public $;
+    //public $;
     //public $;
     //public $;
     //public $;
@@ -190,5 +193,35 @@ class Select
         }
     }
 
+    public function categoriaSelect($categoria='')
+    {
+      $sql = "SELECT * from categorias Order by id";
+      $result = pg_query($sql);
+
+      $ln=pg_num_rows($result);
+
+      if ($ln==0)
+      {
+        echo "<option value=''>Nada Encontrado!!</option>";
+      }
+      else
+      {
+
+        while ($a = pg_fetch_array($result))
+        {
+          $this->id = $a['id'];
+          $this->categoria = $a['categoria'];
+
+          if ($categoria==$this->id)
+          {
+            print "<option selected value='{$this->id}'>{$this->categoria}</option>";
+          }
+          else
+          {
+            print "<option value='{$this->id}'>{$this->categoria}</option>";
+          }
+        }
+      }
+    }
 }
 ?>

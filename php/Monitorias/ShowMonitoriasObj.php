@@ -87,7 +87,7 @@ include_once "../../class/Carrega.class.php";
                       <dt>Local:</dt>
                       <dd><?php echo $comp->sala; ?></dd>
                       <dt>Informações:</dt>
-                      <dd><?php echo $comp->info; ?></dd>
+                      <dd> <textarea class="form-control"  rows="8" cols="40" disabled><?php echo $comp->info; ?></textarea></dd>
                     </dl>
                     <form action="EditMonitoriasObj.php" method="post">
 
@@ -128,63 +128,7 @@ include_once "../../class/Carrega.class.php";
     <script src="../../dist/js/app.min.js"></script>
     <!-- AdminLTE for demo purposes -->
     <script src="../../dist/js/demo.js"></script>
-    <!-- Select2 -->
-    <script src="../../plugins/select2/select2.full.min.js"></script>
-    <!-- bootstrap time picker -->
-    <script src="../../plugins/timepicker/bootstrap-timepicker.min.js"></script>
 
-    <!-- date-range-picker -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.2/moment.min.js"></script>
-    <script src="../../plugins/daterangepicker/daterangepicker.js"></script>
-
-    <script type="text/javascript">
-    $(function()
-    {
-      $(".select2").select2();
-
-      $('#reservation').daterangepicker({
-        singleDatePicker: true,
-        format: 'DD/MM/YYYY',
-        "locale": {
-        "format": "DD/MM/YYYY",
-        "separator": " - ",
-        "applyLabel": "Apply",
-        "cancelLabel": "Cancel",
-        "fromLabel": "From",
-        "toLabel": "To",
-        "customRangeLabel": "Custom",
-        "daysOfWeek": [
-            "Dom",
-            "Seg",
-            "Ter",
-            "Qua",
-            "Qui",
-            "Sex",
-            "Sab"
-        ],
-        "monthNames": [
-            "Janeiro",
-            "Feveireiro",
-            "Março",
-            "Abril",
-            "Maio",
-            "Junho",
-            "Julho",
-            "Agosto",
-            "Setembro",
-            "Outubro",
-            "Novembro",
-            "Dezembro"
-        ],
-        "firstDay": 1
-    },
-      });
-    });
-
-    $(window).load(function()
-    {
-        $('#myModal').modal('show');
-    });
     </script>
   </body>
 </html>

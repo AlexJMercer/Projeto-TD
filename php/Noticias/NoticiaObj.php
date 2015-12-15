@@ -17,6 +17,15 @@ include_once "../../class/Carrega.class.php";
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
     <!-- Ionicons -->
     <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <!-- daterange picker-->
+    <link rel="stylesheet" href="../../plugins/daterangepicker/daterangepicker-bs3.css">
+    <!-- Bootstrap time Picker -->
+    <link rel="stylesheet" href="../../plugins/timepicker/bootstrap-timepicker.min.css">
+    <!-- Select2 -->
+    <link rel="stylesheet" href="../../plugins/select2/select2.min.css">
+
+
+    <!--link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.css" /-->
     <!-- Theme style -->
     <link rel="stylesheet" href="../../dist/css/AdminLTE.min.css">
     <!-- AdminLTE Skins. Choose a skin from the css/skins
@@ -40,9 +49,10 @@ include_once "../../class/Carrega.class.php";
       <div class="content-wrapper">
         <!-- Content Header (Page header) -->
         <section class="content-header">
-          <h1>
-            Noticias
-          </h1>
+            <h1>
+              Noticias
+              <button type="button" class="btn btn-flat pull-right" name="name" value="teste">ADD NEWS</button>
+            </h1>
         </section>
 
         <!-- Main content -->
@@ -57,20 +67,14 @@ include_once "../../class/Carrega.class.php";
                 <!-- form start -->
                 <form class="form-horizontal" id="form" method="post" action="CrudLocal.php">
                   <div class="box-body">
-                     <div class="form-group">
+                      <div class="form-group">
                         <label class="col-sm-2 control-label"> Autor: </label>
                         <div class="col-sm-10">
                            <p class="form-control" disabled>
                               Mercer
                            </p>
                         </div>
-                     </div>
-                     <!--div class="form-group">
-                        <label class="col-sm-2 control-label">Autor:</label>
-                        <div class="col-sm-10">
-                           <input type="text" name="teste" value="Mercer" class="form-control" disabled>
-                        </div>
-                     </div-->
+                      </div>
                       <div class="form-group">
                         <label for="titulo" class="col-sm-2 control-label">Título:</label>
                         <div class="col-sm-10">
@@ -80,12 +84,41 @@ include_once "../../class/Carrega.class.php";
                       <div class="form-group">
                         <label for="tempo" class="col-sm-2 control-label">Data e hora:</label>
                         <div class="col-sm-10">
-                          <input type="text" class="form-control" name="tempo" id="tempo" placeholder="Digite a data e hora aqui" required>
+                          <input type="text" class="form-control pull-right" name="tempo" id="tempo" placeholder="Digite a data e hora aqui" required>
                         </div>
+                      </div>
+                      <div class="form-group">
+                        <label for="status" class="col-sm-2 control-label">Status:</label>
+                        <div class="col-sm-10">
+                          <select class="form-control select2" name="status" id="status" >
+                            <option value=""></option>
+                          </select>
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label for="categoria" class="col-sm-2 control-label">Categorias da noticia:</label>
+                        <div class="col-sm-10">
+                          <select class="form-control " id="categoria" name="categorias[]" multiple="multiple" placeholder="Selecione a(s) categoria(s)" required>
+                            <option value=""></option>
+                            <?php
+                              $catSelect = new Select();
+                              $catSelect->categoriaSelect();
+                            ?>
+                          </select>
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label for="noticia" class="col-sm-2 control-label">Noticia:</label>
+                        <div class="col-sm-10">
+                          <textarea class="form-control"  name="noticia" id="noticia" rows="8" cols="40"></textarea>
+                        </div>
+                      </div>
+                      <div class="">
+                        <label for="">Imagem:</label>
                       </div>
                   </div><!-- /.box-body -->
                   <div class="box-footer">
-                    <button type="submit" name="enviar" value="enviar" class="btn btn-success btn-flat btn-block"><i class="fa fa-check"></i> Enviar </button>
+                    <button type="submit" name="enviar" value="enviar" class="btn btn-lg btn-success btn-flat btn-block"><i class="fa fa-check"></i> Enviar </button>
                     <br>
                     <button type="reset" class="btn btn-default btn-flat btn-block btn-sm"><i class="fa fa-magic"></i> Limpar </button>
                   </div><!-- /.box-footer -->
@@ -106,12 +139,74 @@ include_once "../../class/Carrega.class.php";
     <script src="../../plugins/jQuery/jQuery-2.1.4.min.js"></script>
     <!-- Bootstrap 3.3.5 -->
     <script src="../../bootstrap/js/bootstrap.min.js"></script>
+    <!-- Select2 -->
+    <script src="../../plugins/select2/select2.full.min.js"></script>
+    <!-- bootstrap time picker -->
+    <script src="../../plugins/timepicker/bootstrap-timepicker.min.js"></script>
+    <script type="text/javascript" src="//cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+    <!-- Include Date Range Picker -->
+    <script type="text/javascript" src="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.js"></script>
+    <!-- date-range-picker >
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.2/moment.min.js"></script>
+    <script src="../../plugins/daterangepicker/daterangepicker.js"></script-->
     <!-- FastClick -->
     <script src="../../plugins/fastclick/fastclick.min.js"></script>
     <!-- AdminLTE App -->
     <script src="../../dist/js/app.min.js"></script>
     <!-- AdminLTE for demo purposes -->
     <script src="../../dist/js/demo.js"></script>
+    <!-- CK Editor -->
+    <script src="https://cdn.ckeditor.com/4.4.3/standard/ckeditor.js"></script>
 
+    <script type="text/javascript">
+    $(function(){
+      $("#status").select2({
+        placeholder:"Selecione o status"
+      });
+
+      $("#categoria").select2({
+        placeholder:"Selecione a(s) categoria(s)"
+      });
+
+      $('#tempo').daterangepicker({
+        timePicker24Hour: true,
+        timePicker:true,
+        singleDatePicker: true,
+        format: 'DD/MM/YYYY HH:mm',
+        "locale": {
+        "format": "DD/MM/YYYY HH:mm",
+        "separator": " - ",
+        "applyLabel": "OK",
+        "cancelLabel": "Cancelar",
+        "daysOfWeek": [
+            "Dom",
+            "Seg",
+            "Ter",
+            "Qua",
+            "Qui",
+            "Sex",
+            "Sab"
+        ],
+        "monthNames": [
+            "Janeiro",
+            "Feveireiro",
+            "Março",
+            "Abril",
+            "Maio",
+            "Junho",
+            "Julho",
+            "Agosto",
+            "Setembro",
+            "Outubro",
+            "Novembro",
+            "Dezembro"
+        ],
+        "firstDay": 1
+    },
+      });
+
+      CKEDITOR.replace('noticia');
+    });
+    </script>
   </body>
 </html>

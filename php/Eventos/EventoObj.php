@@ -2,18 +2,6 @@
 
 include_once "../../class/Carrega.class.php";
 
-if (isset($_POST['enviar']))
-{
-    $object = new Cardapios();
-    $object->dia = $_POST['dia'];
-    $object->data = $_POST['data'];
-    $object->alimento = $_POST['alimento'];
-    /*var_dump($object);*/
-    $object->inserir();
-
-    header("Location:CardapioObj.php");
-}
-
 ?>
 <!DOCTYPE html>
 <html>
@@ -29,16 +17,15 @@ if (isset($_POST['enviar']))
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
     <!-- Ionicons -->
     <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
-    <!-- daterange picker -->
+    <!-- daterange picker-->
     <link rel="stylesheet" href="../../plugins/daterangepicker/daterangepicker-bs3.css">
-    <!-- iCheck for checkboxes and radio inputs -->
-    <link rel="stylesheet" href="../../plugins/iCheck/all.css">
-    <!-- Bootstrap Color Picker -->
-    <link rel="stylesheet" href="../../plugins/colorpicker/bootstrap-colorpicker.min.css">
     <!-- Bootstrap time Picker -->
     <link rel="stylesheet" href="../../plugins/timepicker/bootstrap-timepicker.min.css">
     <!-- Select2 -->
     <link rel="stylesheet" href="../../plugins/select2/select2.min.css">
+
+
+    <!--link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.css" /-->
     <!-- Theme style -->
     <link rel="stylesheet" href="../../dist/css/AdminLTE.min.css">
     <!-- AdminLTE Skins. Choose a skin from the css/skins
@@ -63,64 +50,74 @@ if (isset($_POST['enviar']))
         <!-- Content Header (Page header) -->
         <section class="content-header">
           <h1>
-            Cardápios
+            Noticias
           </h1>
         </section>
 
         <!-- Main content -->
         <section class="content">
           <div class="row">
-            <!-- left column -->
-
-            <!-- right column -->
             <div class="col-lg-12">
               <!-- Horizontal Form -->
               <div class="box box-success">
                 <div class="box-header with-border">
-                  <h3 class="box-title">Cadastro de cardápios</h3>
+                  <h3 class="box-title">Noticias</h3>
                 </div><!-- /.box-header -->
                 <!-- form start -->
-                <form class="form-horizontal" name="cadcardapio" id="form" method="post" action="<?php $SELF_PHP;?>">
+                <form class="form-horizontal" id="form" method="post" action="CrudLocal.php">
                   <div class="box-body">
                       <div class="form-group">
-                        <label for="dia" class="col-sm-2 control-label" >Dia</label>
+                        <label class="col-sm-2 control-label"> Autor: </label>
                         <div class="col-sm-10">
-                          <select class="form-control select2" id="dia" name="dia" style="width: 100%;">
-                            <option value=""></option>
-                            <?php $diaSelect = new Dia();
-                                  $diaSelect->diaSelect();
-                            ?>
+                           <p class="form-control" disabled>
+                              Mercer
+                           </p>
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label for="titulo" class="col-sm-2 control-label">Título:</label>
+                        <div class="col-sm-10">
+                          <input type="text" class="form-control" name="titulo" id="titulo" placeholder="Digite o título aqui" autofocus required>
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label for="tempo" class="col-sm-2 control-label">Data e hora:</label>
+                        <div class="col-sm-10">
+                          <input type="text" class="form-control pull-right" name="tempo" id="tempo" placeholder="Digite a data e hora aqui" required>
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label for="status" class="col-sm-2 control-label">Status:</label>
+                        <div class="col-sm-10">
+                          <select class="form-control select2" name="status" id="status" >
+                            <option value="option">option</option>
                           </select>
                         </div>
                       </div>
                       <div class="form-group">
-                        <label class="col-sm-2 control-label" for="reservation">Data</label>
+                        <label for="categoria" class="col-sm-2 control-label">Categorias da noticia:</label>
                         <div class="col-sm-10">
-                          <div class="input-group">
-                            <div class="input-group-addon">
-                              <i class="fa fa-calendar"></i>
-                            </div>
-                          <input type="text" class="form-control" name="data" id="reservation">
-                        </div>
+                          <select class="form-control select2" id="categoria" name="categorias[]" multiple="multiple" required>
+                            <option value="option">option</option>
+                          </select>
                         </div>
                       </div>
                       <div class="form-group">
-                          <label for="alimentos" class="col-sm-2 control-label">Alimentos</label>
-                          <div class="col-sm-10">
-                            <select class="form-control select2" id="alimentos" name="alimento[]" multiple="multiple" style="width: 100%;">
-                              <option value=""></option>
-                              <?php $alimentoSelect = new Select();
-                                    $alimentoSelect->alimentoSelect();
-                              ?>
-                            </select>
-                          </div>
+                        <label for="noticia" class="col-sm-2 control-label">Noticia:</label>
+                        <div class="col-sm-10">
+
+
+                        <textarea class="form-control"  name="noticia" id="noticia" rows="8" cols="40"></textarea>
                         </div>
+                      </div>
+                      <div class="">
+                        <label for="">Imagem:</label>
+                      </div>
                   </div><!-- /.box-body -->
                   <div class="box-footer">
-                    <button type="submit" name="enviar" value="enviar" class="btn btn-success btn-flat btn-block">Enviar</button>
+                    <button type="submit" name="enviar" value="enviar" class="btn btn-lg btn-success btn-flat btn-block"><i class="fa fa-check"></i> Enviar </button>
                     <br>
-                    <button type="reset" class="btn btn-default btn-flat btn-block btn-sm ">Limpar</button>
-
+                    <button type="reset" class="btn btn-default btn-flat btn-block btn-sm"><i class="fa fa-magic"></i> Limpar </button>
                   </div><!-- /.box-footer -->
                 </form>
               </div><!-- /.box -->
@@ -133,40 +130,50 @@ if (isset($_POST['enviar']))
         include '../inc/footer.html';
         include '../inc/control-sidebar.html';
       ?>
-    </div><!-- ./wrapper -->
 
+    </div><!-- ./wrapper -->
     <!-- jQuery 2.1.4 -->
     <script src="../../plugins/jQuery/jQuery-2.1.4.min.js"></script>
     <!-- Bootstrap 3.3.5 -->
     <script src="../../bootstrap/js/bootstrap.min.js"></script>
+    <!-- Select2 -->
+    <script src="../../plugins/select2/select2.full.min.js"></script>
+    <!-- bootstrap time picker -->
+    <script src="../../plugins/timepicker/bootstrap-timepicker.min.js"></script>
+    <script type="text/javascript" src="//cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+
+
+    <!-- Include Date Range Picker -->
+    <script type="text/javascript" src="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.js"></script>
+
+    <!-- date-range-picker >
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.2/moment.min.js"></script>
+    <script src="../../plugins/daterangepicker/daterangepicker.js"></script-->
     <!-- FastClick -->
     <script src="../../plugins/fastclick/fastclick.min.js"></script>
     <!-- AdminLTE App -->
     <script src="../../dist/js/app.min.js"></script>
     <!-- AdminLTE for demo purposes -->
     <script src="../../dist/js/demo.js"></script>
-    <!-- Select2 -->
-    <script src="../../plugins/select2/select2.full.min.js"></script>
-    <!-- bootstrap time picker -->
-    <script src="../../plugins/timepicker/bootstrap-timepicker.min.js"></script>
+    <!-- CK Editor -->
+    <script src="https://cdn.ckeditor.com/4.4.3/standard/ckeditor.js"></script>
 
-    <!-- date-range-picker -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.2/moment.min.js"></script>
-    <script src="../../plugins/daterangepicker/daterangepicker.js"></script>
+
 
     <script type="text/javascript">
     $(function(){
       $(".select2").select2();
 
-      $('#reservation').daterangepicker({
-
+      $('#tempo').daterangepicker({
+        timePicker:true,
+        timePicker24Hour: true,
         singleDatePicker: true,
-        format: 'DD/MM/YYYY',
+        format: 'DD/MM/YYYY HH:mm',
         "locale": {
-        "format": "DD/MM/YYYY",
+        "format": "DD/MM/YYYY HH:mm",
         "separator": " - ",
-        "applyLabel": "Apply",
-        "cancelLabel": "Cancel",
+        "applyLabel": "OK",
+        "cancelLabel": "Cancelar",
         "fromLabel": "From",
         "toLabel": "To",
         "customRangeLabel": "Custom",
@@ -196,6 +203,8 @@ if (isset($_POST['enviar']))
         "firstDay": 1
     },
       });
+
+      CKEDITOR.replace('noticia');
     });
     </script>
   </body>
