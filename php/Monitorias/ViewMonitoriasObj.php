@@ -33,13 +33,12 @@
         <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
   </head>
-  <body class="hold-transition skin-blue sidebar-mini">
+  <body class="hold-transition skin-green sidebar-mini">
     <div class="wrapper">
-
-      <?php include '../inc/topotime.html';
+      <?php
+            include '../inc/topotime.html';
 
             include '../inc/menutime.html';
-
       ?>
       <!-- Content Wrapper. Contains page content -->
       <div class="content-wrapper">

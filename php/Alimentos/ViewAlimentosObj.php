@@ -30,7 +30,7 @@
         <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
   </head>
-  <body class="hold-transition skin-blue sidebar-mini">
+  <body class="hold-transition skin-green sidebar-mini">
     <div class="wrapper">
 
       <?php include '../inc/topotime.html';
@@ -140,8 +140,8 @@ include_once "../../class/Carrega.class.php";
           responsive:{details: false},
           "ordering": false,
           "oLanguage": { "sSearch": "",
-                         "sInfo": "Um total de _TOTAL_ monitorias (_START_ de _END_)",
-                         "sLengthMenu": "Listar _MENU_ monitorias"},
+                         "sInfo": "Um total de _TOTAL_ alimentos (_START_ de _END_)",
+                         "sLengthMenu": "Listar _MENU_ alimentos"},
         });
         $('.dataTables_filter input').attr("placeholder", "Pesquise aqui");
       });
