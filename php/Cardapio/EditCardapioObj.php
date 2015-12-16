@@ -2,21 +2,6 @@
 
 include_once "../../class/Carrega.class.php";
 
-
- if (isset($_POST['atualizar']))
- {
-     $object = new Cardapios();
-     $object->id = $_POST['id'];
-     $object->dia = $_POST['dia'];
-     $object->data = $_POST['data'];
-     $object->alimento = $_POST['alimento'];
-
-     //print_r($object);
-     $object->atualizar();
-
-     header("Location:ViewCardapioObj.php");
- }
-
 ?>
 <!DOCTYPE html>
 <html>
@@ -90,17 +75,17 @@ include_once "../../class/Carrega.class.php";
   if (isset($_POST["editar"]))
   {
     $edit = new Cardapios();
-    $comp = $edit->editar($id);
+    $comp = $edit->Editar($id);
 
-    print_r($comp->alimento);
+    //print_r($comp->alimento);
 
     if ($edit != null)
     {
 ?>
-                <form class="form-horizontal" name="cadcardapio" id="form" method="post" action="<?php $SELF_PHP;?>">
+                <form class="form-horizontal" name="cadcardapio" id="form" method="post" action="CrudCardapios.php">
                   <div class="box-body">
                       <div class="form-group">
-                        <label for="dia" class="col-sm-2 control-label" >Dia</label>
+                        <label for="dia" class="col-sm-2 control-label" >Dia:</label>
                         <div class="col-sm-10">
                           <select class="form-control select2" id="dia" name="dia" style="width: 100%;">
                             <option value=""></option>
@@ -111,7 +96,7 @@ include_once "../../class/Carrega.class.php";
                         </div>
                       </div>
                       <div class="form-group">
-                        <label class="col-sm-2 control-label" for="reservation">Data</label>
+                        <label class="col-sm-2 control-label" for="reservation">Data:</label>
                         <div class="col-sm-10">
                           <div class="input-group">
                             <div class="input-group-addon">
@@ -122,9 +107,9 @@ include_once "../../class/Carrega.class.php";
                         </div>
                       </div>
                       <div class="form-group">
-                          <label for="alimentos" class="col-sm-2 control-label">Alimentos</label>
+                        <label for="alimentosSEL" class="col-sm-2 control-label">Alimentos selecionados:</label>
                           <div class="col-sm-10">
-                            <select class="form-control select2" id="alimentos" name="alimento[]" multiple="multiple" style="width: 100%;">
+                            <select class="form-control select2" id="alimentosSEL" name="alimento[]" multiple="multiple" style="width: 100%;">
                               <option value=""></option>
                               <?php $alimentoSelect = new Alimentos();
                                     $alimentoSelect->alimentoMulti($comp->alimento);
@@ -132,7 +117,18 @@ include_once "../../class/Carrega.class.php";
                               ?>
                             </select>
                           </div>
-                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label for="alimentos" class="col-sm-2 control-label">Alimentos:</label>
+                          <div class="col-sm-10">
+                            <select class="form-control select2" id="alimentos" name="alimento[]" multiple="multiple" style="width: 100%;">
+                              <option value=""></option>
+                              <?php $alimentoSelect = new Select();
+                                    $alimentoSelect->alimentoSelect();
+                              ?>
+                            </select>
+                          </div>
+                      </div>
                   </div><!-- /.box-body -->
                   <div class="box-footer">
                     <input type="hidden" name="id" value="<?php echo $comp->id; ?>"/>
@@ -180,7 +176,9 @@ include_once "../../class/Carrega.class.php";
 
     <script type="text/javascript">
     $(function(){
-      $(".select2").select2();
+      $("#dia").select2();
+      $("#alimentosSEL").select2();
+      $("#alimentos").select2();
 
       $('#reservation').daterangepicker({
         singleDatePicker: true,

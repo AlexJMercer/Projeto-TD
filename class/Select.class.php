@@ -6,7 +6,6 @@
  */
 class Select
 {
-
     public $id;
     public $semestre;
     public $sala;
@@ -14,7 +13,7 @@ class Select
     public $alimento;
     public $curso;
     public $categoria;
-    //public $;
+    public $status;
     //public $;
     //public $;
     //public $;
@@ -219,6 +218,36 @@ class Select
           else
           {
             print "<option value='{$this->id}'>{$this->categoria}</option>";
+          }
+        }
+      }
+    }
+
+    public function statusSelect($status="")
+    {
+      $sql = "SELECT * from status Order by id_sta";
+      $result = pg_query($sql);
+
+      $ln=pg_num_rows($result);
+
+      if ($ln==0)
+      {
+        echo "<option value=''>Nada Encontrado!!</option>";
+      }
+      else
+      {
+        while ($a = pg_fetch_array($result))
+        {
+          $this->id = $a['id_sta'];
+          $this->status = $a['status'];
+
+          if ($status==$this->id)
+          {
+            print "<option selected value='{$this->id}'>{$this->status}</option>";
+          }
+          else
+          {
+            print "<option value='{$this->id}'>{$this->status}</option>";
           }
         }
       }

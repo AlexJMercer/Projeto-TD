@@ -70,9 +70,8 @@ include_once "../../class/Carrega.class.php";
                       <div class="form-group">
                         <label class="col-sm-2 control-label"> Autor: </label>
                         <div class="col-sm-10">
-                           <p class="form-control" disabled>
-                              Mercer
-                           </p>
+                           <input type="text" value="Mercer" class="form-control" disabled>
+                           <input type="hidden" name="autor" value="1">
                         </div>
                       </div>
                       <div class="form-group">
@@ -82,16 +81,14 @@ include_once "../../class/Carrega.class.php";
                         </div>
                       </div>
                       <div class="form-group">
-                        <label for="tempo" class="col-sm-2 control-label">Data e hora:</label>
-                        <div class="col-sm-10">
-                          <input type="text" class="form-control pull-right" name="tempo" id="tempo" placeholder="Digite a data e hora aqui" required>
-                        </div>
-                      </div>
-                      <div class="form-group">
                         <label for="status" class="col-sm-2 control-label">Status:</label>
                         <div class="col-sm-10">
-                          <select class="form-control select2" name="status" id="status" >
+                          <select class="form-control select2" name="status" id="status" required>
                             <option value=""></option>
+                            <?php
+                                $staSelect = new Select();
+                                $staSelect->statusSelect();
+                            ?>
                           </select>
                         </div>
                       </div>
@@ -113,8 +110,11 @@ include_once "../../class/Carrega.class.php";
                           <textarea class="form-control"  name="noticia" id="noticia" rows="8" cols="40"></textarea>
                         </div>
                       </div>
-                      <div class="">
-                        <label for="">Imagem:</label>
+                      <div class="form-group">
+                        <label for="imagens" class="col-sm-2 control-label">Adicionar imagens:</label>
+                        <div class="col-sm-10">
+
+                        </div>
                       </div>
                   </div><!-- /.box-body -->
                   <div class="box-footer">

@@ -80,12 +80,12 @@ if (isset($_POST['enviar']))
                   <h3 class="box-title">Cadastro de cardápios</h3>
                 </div><!-- /.box-header -->
                 <!-- form start -->
-                <form class="form-horizontal" name="cadcardapio" id="form" method="post" action="<?php $SELF_PHP;?>">
+                <form class="form-horizontal" name="cadcardapio" id="form" method="post" action="CrudCardapios.php">
                   <div class="box-body">
                       <div class="form-group">
-                        <label for="dia" class="col-sm-2 control-label" >Dia</label>
+                        <label for="day" class="col-sm-2 control-label">Dia:</label>
                         <div class="col-sm-10">
-                          <select class="form-control select2" id="dia" name="dia" style="width: 100%;">
+                          <select class="form-control" id="day" name="dia" style="width: 100%;" required>
                             <option value=""></option>
                             <?php $diaSelect = new Dia();
                                   $diaSelect->diaSelect();
@@ -94,20 +94,15 @@ if (isset($_POST['enviar']))
                         </div>
                       </div>
                       <div class="form-group">
-                        <label class="col-sm-2 control-label" for="reservation">Data</label>
+                        <label class="col-sm-2 control-label" for="date">Data:</label>
                         <div class="col-sm-10">
-                          <div class="input-group">
-                            <div class="input-group-addon">
-                              <i class="fa fa-calendar"></i>
-                            </div>
-                          <input type="text" class="form-control" name="data" id="reservation">
-                        </div>
+                          <input type="text" class="form-control" name="data" id="date" required>
                         </div>
                       </div>
                       <div class="form-group">
-                          <label for="alimentos" class="col-sm-2 control-label">Alimentos</label>
+                          <label for="alimentos" class="col-sm-2 control-label">Alimentos:</label>
                           <div class="col-sm-10">
-                            <select class="form-control select2" id="alimentos" name="alimento[]" multiple="multiple" style="width: 100%;">
+                            <select class="form-control select2" id="alimentos" name="alimento[]" multiple="multiple" style="width: 100%;" required>
                               <option value=""></option>
                               <?php $alimentoSelect = new Select();
                                     $alimentoSelect->alimentoSelect();
@@ -158,7 +153,7 @@ if (isset($_POST['enviar']))
     $(function(){
       $(".select2").select2();
 
-      $('#reservation').daterangepicker({
+      $('#date').daterangepicker({
 
         singleDatePicker: true,
         format: 'DD/MM/YYYY',

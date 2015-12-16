@@ -61,7 +61,7 @@
 include_once "../../class/Carrega.class.php";
 
   $listar = new Cardapios();
-  $list = $listar->listar();
+  $list = $listar->Listar();
 
   /*print_r($list);*/
   if ($list != null)

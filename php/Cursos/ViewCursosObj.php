@@ -86,7 +86,7 @@ include_once "../../class/Carrega.class.php";
                         <td>
                           <input type='hidden' name='id' value='<?php echo $line->id; ?>'>
 
-                          <button type="submit" name="exibir" value="exibir" formaction="ShowCursosObj.php" class="btn btn-flat btn-info"><i class="fa fa-edit"></i> Exibir </button>
+                          <button type="submit" name="exibir" value="exibir" formaction="ShowCursosObj.php" class="btn btn-flat btn-info"><i class="fa fa-expand"></i> Exibir </button>
 
                           <button type="submit" name="editar" value="editar" class="btn btn-flat btn-warning"><i class="fa fa-edit"></i> Editar </button>
 

@@ -37,7 +37,7 @@ include_once "Carrega.class.php";
          return $retorno;
       }
 
-      public function inserir()
+      public function Inserir()
       {
 
         $this->transacao("BEGIN");
@@ -48,7 +48,7 @@ include_once "Carrega.class.php";
           if($return)
           {
 
-            $count = count($this->alimento);
+            //$count = count($this->alimento);
 
             $sql_id_card= "SELECT CURRVAL('cardapios_id_seq')";
             $last = pg_query($sql_id_card);
@@ -76,7 +76,7 @@ include_once "Carrega.class.php";
           $this->transacao("ROLLBACK");
       }
 
-      public function listar()
+      public function Listar()
       {
          $sql = "SELECT * FROM cardapios c, dia d WHERE d.id_dia=c.dia ORDER BY d.id_dia";
          $result = pg_query($sql);
@@ -94,37 +94,14 @@ include_once "Carrega.class.php";
         return $retorno;
       }
 
-      public function excluir()
+      public function Excluir()
       {
          $sql = "DELETE from cardapios where id_card=$this->id";
          $retorno = pg_query($sql);
          return $retorno;
       }
 
-      public function atualizar()
-      {
-          $this->transacao("BEGIN");
-
-          $retorno = false;
-          $sql = "UPDATE cardapios, alimentos_cardapios
-                  set dia='$this->dia',
-                      data='$this->data'
-                  where id_card=$this->id";
-          $retorno = pg_query($sql);
-
-          $return = false;
-          $sql2 = "UPDATE alimentos_cardapios
-                   set id_ali='$this->alimento'
-                   where id_cad=$this->id";
-
-          $return = pg_query($sql2);
-
-          $this->transacao("COMMIT");
-
-        $this->transacao("ROLLBACK");
-      }
-
-      public function editar($id = "")
+      public function Editar($id = "")
       {
          $sql = "SELECT * FROM cardapios c JOIN dia d ON d.id_dia=c.dia
                                            JOIN alimentos_cardapios ac ON ac.id_cad=c.id_card
