@@ -89,7 +89,7 @@ include_once "../../class/Carrega.class.php";
                         <td>
                           <input type='hidden' name='id' value='<?php echo $line->id; ?>'>
                           <input type="hidden" name="curso" value="<?php echo $curso;?>">
-                          <button type="submit" name="exibir" value="exibir" formaction="ShowMonitoriasObj.php" class="btn btn-flat btn-info"><i class="fa fa-expand"> Exibir </button>
+                          <button type="submit" name="exibir" value="exibir" formaction="ShowMonitoriasObj.php" class="btn btn-flat btn-info"><i class="fa fa-expand"></i> Exibir </button>
 
                           <button type="submit" name="editar" value="editar" class="btn btn-flat btn-warning"><i class="fa fa-edit"></i> Editar </button>
 
@@ -97,8 +97,6 @@ include_once "../../class/Carrega.class.php";
                         </td>
                       </tr>
                       </form>
-
-
                     <?php
                             }
                           }
@@ -140,13 +138,13 @@ include_once "../../class/Carrega.class.php";
     <script src="../../dist/js/app.min.js"></script>
     <!-- AdminLTE for demo purposes -->
     <script src="../../dist/js/demo.js"></script>
-    <!-- page script -->
-    <script src="https://cdn.datatables.net/responsive/2.0.0/js/responsive.bootstrap.min.js"></script>
+    <!-- page script >
+    <script src="https://cdn.datatables.net/responsive/2.0.0/js/responsive.bootstrap.min.js"></script-->
     <script>
       $(function ()
       {
         $("#dataT").DataTable({
-          responsive:{details: false},
+          
           "ordering": false,
           "oLanguage": { "sSearch": "",
                          "sInfo": "Um total de _TOTAL_ monitorias (_START_ de _END_)",

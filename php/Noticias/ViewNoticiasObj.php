@@ -43,7 +43,7 @@
         <!-- Content Header (Page header) -->
         <section class="content-header">
           <h1>
-          Locais
+          Noticias
           </h1>
         </section>
 
@@ -53,13 +53,14 @@
             <div class="col-xs-12">
               <div class="box">
                 <div class="box-header">
-                  <h3 class="box-title">Listagem de locais</h3>
+                  <h3 class="box-title">Listagem de noticias</h3>
                 </div><!-- /.box-header -->
                 <div class="box-body">
                   <table id="dataT" class="table table-bordered table-hover">
                     <thead>
                       <tr>
-                        <th>Locais</th>
+                        <th>Data</th>
+                        <th>Noticia</th>
                         <th>Opções</th>
                       </tr>
                     </thead>
@@ -68,7 +69,7 @@
 
 include_once "../../class/Carrega.class.php";
 
-  $listar = new Local();
+  $listar = new Noticias();
   $list = $listar->listar();
 
   if ($list != null)
@@ -77,8 +78,9 @@ include_once "../../class/Carrega.class.php";
     {
 ?>
                       <tr class="odd gradeX">
-                        <form name="view" action="EditLocalObj.php" method="post">
-                        <td><?php echo $line->sala; ?></td>
+                        <form name="view" action="EditNoticiaObj.php" method="post">
+                        <td><?php echo $line->data ?></td>
+                        <td><?php echo $line->titulo; ?></td>
                         <td>
                           <input type='hidden' name='id' value='<?php echo $line->id; ?>'>
 
@@ -105,14 +107,10 @@ include_once "../../class/Carrega.class.php";
           </div><!-- /.row -->
         </section><!-- /.content -->
       </div><!-- /.content-wrapper -->
-
       <?php
         include '../inc/footer.html';
         include '../inc/control-sidebar.html';
       ?>
-
-
-
     </div><!-- ./wrapper -->
 
     <!-- jQuery 2.1.4 -->
@@ -140,8 +138,8 @@ include_once "../../class/Carrega.class.php";
 
           "ordering": false,
           "oLanguage": { "sSearch": "",
-                         "sInfo": "Um total de _TOTAL_ locais (_START_ de _END_)",
-                         "sLengthMenu": "Listar _MENU_ locais"},
+                         "sInfo": "Um total de _TOTAL_ noticias (_START_ de _END_)",
+                         "sLengthMenu": "Listar _MENU_ noticias"},
         });
         $('.dataTables_filter input').attr("placeholder", "Pesquise aqui");
       });

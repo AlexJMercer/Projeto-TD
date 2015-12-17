@@ -64,14 +64,12 @@ include_once "../../class/Carrega.class.php";
                   <h3 class="box-title">Noticias</h3>
                 </div><!-- /.box-header -->
                 <!-- form start -->
-                <form class="form-horizontal" id="form" method="post" action="CrudLocal.php">
+                <form class="form-horizontal" id="form" method="post" action="CrudEventos.php">
                   <div class="box-body">
                       <div class="form-group">
-                        <label class="col-sm-2 control-label"> Autor: </label>
+                        <label class="col-sm-2 control-label" for="evento"> Evento: </label>
                         <div class="col-sm-10">
-                           <p class="form-control" disabled>
-                              Mercer
-                           </p>
+                           <input type="text" class="form-control" id="evento" name="evento" required>
                         </div>
                       </div>
                       <div class="form-group">
@@ -81,37 +79,16 @@ include_once "../../class/Carrega.class.php";
                         </div>
                       </div>
                       <div class="form-group">
-                        <label for="tempo" class="col-sm-2 control-label">Data e hora:</label>
+                        <label for="tempo" class="col-sm-2 control-label">Data e hora do evento:</label>
                         <div class="col-sm-10">
-                          <input type="text" class="form-control pull-right" name="tempo" id="tempo" placeholder="Digite a data e hora aqui" required>
-                        </div>
-                      </div>
-                      <div class="form-group">
-                        <label for="status" class="col-sm-2 control-label">Status:</label>
-                        <div class="col-sm-10">
-                          <select class="form-control select2" name="status" id="status" >
-                            <option value="option">option</option>
-                          </select>
-                        </div>
-                      </div>
-                      <div class="form-group">
-                        <label for="categoria" class="col-sm-2 control-label">Categorias da noticia:</label>
-                        <div class="col-sm-10">
-                          <select class="form-control select2" id="categoria" name="categorias[]" multiple="multiple" required>
-                            <option value="option">option</option>
-                          </select>
+                          <input type="text" class="form-control pull-right" name="tempo" id="tempo" placeholder="Digite aqui a data e hora aqui" required>
                         </div>
                       </div>
                       <div class="form-group">
                         <label for="noticia" class="col-sm-2 control-label">Noticia:</label>
                         <div class="col-sm-10">
-
-
                         <textarea class="form-control"  name="noticia" id="noticia" rows="8" cols="40"></textarea>
                         </div>
-                      </div>
-                      <div class="">
-                        <label for="">Imagem:</label>
                       </div>
                   </div><!-- /.box-body -->
                   <div class="box-footer">
@@ -167,7 +144,6 @@ include_once "../../class/Carrega.class.php";
       $('#tempo').daterangepicker({
         timePicker:true,
         timePicker24Hour: true,
-        singleDatePicker: true,
         format: 'DD/MM/YYYY HH:mm',
         "locale": {
         "format": "DD/MM/YYYY HH:mm",

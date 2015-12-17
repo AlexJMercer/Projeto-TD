@@ -4,9 +4,7 @@
 create table dia(
 	id_dia serial not null,
 	dia varchar(100) not null,
-	primary key(id)
-
-	ON UPDATE CASCADE ON DELETE CASCADE
+	primary key(id_dia)
 );
 
 INSERT INTO dia (dia) VALUES ('Segunda-Feira');
@@ -18,9 +16,8 @@ INSERT INTO dia (dia) VALUES ('Sexta-Feira');
 create table categorias(
 	id_cat serial not null,
 	categoria varchar(150) not null,
-	primary key(id)
+	primary key(id_cat)
 
- ON UPDATE CASCADE ON DELETE CASCADE
 );
 
 create table local(
@@ -34,7 +31,6 @@ create table status(
 	status text not null,
 	primary key(id_sta)
 
-	ON UPDATE CASCADE ON DELETE CASCADE
 );
 
 INSERT INTO status (status) VALUES ('Sob Avaliação!');
@@ -150,12 +146,14 @@ INSERT INTO usuarios (username, email, senha, type) VALUES ('admin','admin','adm
 create table noticias(
 	id_not serial not null,
 	titulo varchar(200) not null,
+	resumo varchar(350) not null,
 	texto text not null,
 	data timestamp default(now()) not null,
 	autor integer not null,
 	status integer not null,
 	primary key(id_not),
 	foreign key(autor) references usuarios,
+	ON UPDATE CASCADE ON DELETE CASCADE
 	foreign key(status) references status
 
 	ON UPDATE CASCADE ON DELETE CASCADE
@@ -164,13 +162,13 @@ create table noticias(
 create table categorias_noticias(
 	cat_id integer not null,
 	not_id integer not null,
-	foreign key(cat_id) references categorias,
-
-	ON UPDATE CASCADE ON DELETE CASCADE
+	foreign key(cat_id) references categorias
+	ON UPDATE CASCADE ON DELETE CASCADE,
 
 	foreign key(not_id) references noticias
 
 	ON UPDATE CASCADE ON DELETE CASCADE
+);
 
 
 create table imagens_noticias(

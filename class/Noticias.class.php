@@ -7,12 +7,13 @@ include_once 'Carrega.class.php';
  */
 class Noticias
 {
-   private $cod;
-   private $title;
-   private $text;
-   private $cat;
+   private $id;
+   private $titulo;
+   private $resumo;
+   private $noticia;
+   private $categorias;
+   private $status;
    private $data;
-   private $type;
    private $image;
    private $bd;
 
@@ -36,27 +37,70 @@ class Noticias
          $this->$key = $value;
       }
 
-      public function inserir()
+      public function transacao($valor)
       {
-         $sql="";
+         $sql = $valor;
+         $retorno = pg_query($sql);
+         return $retorno;
+      }
+
+      public function Inserir()
+      {
+         $this->transacao("BEGIN");
+
+         $sql = "INSERT INTO noticias (autor, titulo, resumo, status, texto) VALUES ('$this->autor', '$this->titulo', '$this->resumo', '$this->status', '$this->noticia')";
          $return = pg_query($sql);
-         return $return;
+
+           if($return)
+           {
+
+             //$count = count($this->alimento);
+
+             $sql_id_not= "SELECT CURRVAL('noticias_id_not_seq')";
+             $last = pg_query($sql_id_not);
+             $idnot = pg_fetch_array($last);
+
+             $this->id = $idnot[0];
+
+             foreach ($this->categorias as $value)
+             {
+
+               $sql2 = "INSERT INTO categorias_noticias (not_id, cat_id) VALUES ('$this->id', '$value')";
+               $return2 = pg_query($sql2);
+
+             }
+
+             /*foreach ($this->image as $value)
+             {
+               $sql3 = "INSERT INTO imagens_noticias (noticia, imagem) VALUES ('$this->id', '$value')";
+               $return3 = pg_query($sql3);
+
+            }*/
+
+             if ($return2)
+             {
+              $this->transacao("COMMIT");
+             }
+             else
+             {
+               $this->transacao("ROLLBACK");
+             }
+           }
+           $this->transacao("ROLLBACK");
       }
 
       public function listar()
       {
-         $sql="SELECT * FROM noticias Order by news_dateon";
+         $sql="SELECT * FROM noticias Order by id_not";
          $result = pg_query($sql);
          $return = null;
 
          while ($reg = pg_fetch_assoc($result))
          {
             $obj = new Noticias();
-            $obj->cod = $reg["news_id"];
-            $obj->title = $reg["news_title"];
-            $obj->text = $reg["news_text"];
-            $obj->data = $reg["news_dateon"];
-            $obj->type = $reg["typeuser"];
+            $obj->id = $reg["id_not"];
+            $obj->titulo = $reg["titulo"];
+            $obj->data = $reg["data"];
 
             $return[] = $obj;
          }

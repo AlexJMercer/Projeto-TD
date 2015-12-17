@@ -8,7 +8,7 @@ include_once "../../class/Carrega.class.php";
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>AdminLTE 2 | General Form Elements</title>
+    <title>AdminLTE 2</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <!-- Bootstrap 3.3.5 -->
@@ -23,9 +23,10 @@ include_once "../../class/Carrega.class.php";
     <link rel="stylesheet" href="../../plugins/timepicker/bootstrap-timepicker.min.css">
     <!-- Select2 -->
     <link rel="stylesheet" href="../../plugins/select2/select2.min.css">
-
-
-    <!--link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.css" /-->
+    <!-- Dropzone-->
+    <link rel="stylesheet" href="../../plugins/dropzone/dist/dropzone.min.css">
+    <!-- Dropzone-->
+    <script type="text/javascript" src="../../plugins/dropzone/dist/min/dropzone.min.js"></script>
     <!-- Theme style -->
     <link rel="stylesheet" href="../../dist/css/AdminLTE.min.css">
     <!-- AdminLTE Skins. Choose a skin from the css/skins
@@ -65,19 +66,25 @@ include_once "../../class/Carrega.class.php";
                   <h3 class="box-title">Noticias</h3>
                 </div><!-- /.box-header -->
                 <!-- form start -->
-                <form class="form-horizontal" id="form" method="post" action="CrudLocal.php">
+                <form class="form-horizontal" id="form" method="post" action="CrudNoticias.php">
                   <div class="box-body">
                       <div class="form-group">
                         <label class="col-sm-2 control-label"> Autor: </label>
                         <div class="col-sm-10">
                            <input type="text" value="Mercer" class="form-control" disabled>
-                           <input type="hidden" name="autor" value="1">
+                           <input type="hidden" name="autor" value="2">
                         </div>
                       </div>
                       <div class="form-group">
                         <label for="titulo" class="col-sm-2 control-label">Título:</label>
                         <div class="col-sm-10">
                           <input type="text" class="form-control" name="titulo" id="titulo" placeholder="Digite o título aqui" autofocus required>
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label for="resumo" class="col-sm-2 control-label">Resumo:</label>
+                        <div class="col-sm-10">
+                          <input type="text" class="form-control" name="resumo" id="resumo" placeholder="Digite o resumo aqui" required>
                         </div>
                       </div>
                       <div class="form-group">
@@ -95,7 +102,7 @@ include_once "../../class/Carrega.class.php";
                       <div class="form-group">
                         <label for="categoria" class="col-sm-2 control-label">Categorias da noticia:</label>
                         <div class="col-sm-10">
-                          <select class="form-control " id="categoria" name="categorias[]" multiple="multiple" placeholder="Selecione a(s) categoria(s)" required>
+                          <select class="form-control select2" id="categoria" name="categorias[]" multiple="multiple" placeholder="Selecione a(s) categoria(s)" required>
                             <option value=""></option>
                             <?php
                               $catSelect = new Select();
@@ -110,12 +117,14 @@ include_once "../../class/Carrega.class.php";
                           <textarea class="form-control"  name="noticia" id="noticia" rows="8" cols="40"></textarea>
                         </div>
                       </div>
-                      <div class="form-group">
+                      <!--div class="form-group">
                         <label for="imagens" class="col-sm-2 control-label">Adicionar imagens:</label>
                         <div class="col-sm-10">
 
+                              <input type="file" name="file" class="dropzone" multiple/>
+
                         </div>
-                      </div>
+                     </div-->
                   </div><!-- /.box-body -->
                   <div class="box-footer">
                     <button type="submit" name="enviar" value="enviar" class="btn btn-lg btn-success btn-flat btn-block"><i class="fa fa-check"></i> Enviar </button>
@@ -133,7 +142,6 @@ include_once "../../class/Carrega.class.php";
         include '../inc/footer.html';
         include '../inc/control-sidebar.html';
       ?>
-
     </div><!-- ./wrapper -->
     <!-- jQuery 2.1.4 -->
     <script src="../../plugins/jQuery/jQuery-2.1.4.min.js"></script>
@@ -157,6 +165,8 @@ include_once "../../class/Carrega.class.php";
     <script src="../../dist/js/demo.js"></script>
     <!-- CK Editor -->
     <script src="https://cdn.ckeditor.com/4.4.3/standard/ckeditor.js"></script>
+    <!-- Dropzone-->
+    <script type="text/javascript" src="../../plugins/dropzone/dist/min/dropzone.min.js"></script>
 
     <script type="text/javascript">
     $(function(){
