@@ -18,5 +18,15 @@ include_once "../../class/Carrega.class.php";
       header("Location:NoticiaObj.php");
    }
 
+   if (isset($_POST['excluir']))
+   {
+      $object = new Noticias();
+      $object->id = $_POST['id'];
+
+      //print_r($object);
+      $object->Excluir();
+
+      header("Location:ViewNoticiasObj.php");
+   }
 
 ?>

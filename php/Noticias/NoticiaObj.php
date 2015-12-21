@@ -84,7 +84,8 @@ include_once "../../class/Carrega.class.php";
                       <div class="form-group">
                         <label for="resumo" class="col-sm-2 control-label">Resumo:</label>
                         <div class="col-sm-10">
-                          <input type="text" class="form-control" name="resumo" id="resumo" placeholder="Digite o resumo aqui" required>
+                          <textarea class="form-control"  name="resumo" id="resumo" rows="2" cols="40" required></textarea>
+
                         </div>
                       </div>
                       <div class="form-group">
@@ -114,7 +115,7 @@ include_once "../../class/Carrega.class.php";
                       <div class="form-group">
                         <label for="noticia" class="col-sm-2 control-label">Noticia:</label>
                         <div class="col-sm-10">
-                          <textarea class="form-control"  name="noticia" id="noticia" rows="8" cols="40"></textarea>
+                          <textarea class="form-control"  name="noticia" id="noticia" rows="16" cols="40" required></textarea>
                         </div>
                       </div>
                       <!--div class="form-group">
@@ -163,8 +164,6 @@ include_once "../../class/Carrega.class.php";
     <script src="../../dist/js/app.min.js"></script>
     <!-- AdminLTE for demo purposes -->
     <script src="../../dist/js/demo.js"></script>
-    <!-- CK Editor -->
-    <script src="https://cdn.ckeditor.com/4.4.3/standard/ckeditor.js"></script>
     <!-- Dropzone-->
     <script type="text/javascript" src="../../plugins/dropzone/dist/min/dropzone.min.js"></script>
 
@@ -215,7 +214,6 @@ include_once "../../class/Carrega.class.php";
     },
       });
 
-      CKEDITOR.replace('noticia');
     });
     </script>
   </body>

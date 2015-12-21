@@ -152,8 +152,8 @@ create table noticias(
 	autor integer not null,
 	status integer not null,
 	primary key(id_not),
-	foreign key(autor) references usuarios,
-	ON UPDATE CASCADE ON DELETE CASCADE
+	foreign key(autor) references usuarios
+	ON UPDATE CASCADE ON DELETE CASCADE,
 	foreign key(status) references status
 
 	ON UPDATE CASCADE ON DELETE CASCADE
@@ -172,10 +172,10 @@ create table categorias_noticias(
 
 
 create table imagens_noticias(
-	id_in serial not null,
+	id_im serial not null,
 	imagem text not null,
 	noticia integer not null,
-	primary key(imagem_id),
+	primary key(id_im),
 	foreign key(noticia) references noticias
 
 	ON UPDATE CASCADE ON DELETE CASCADE

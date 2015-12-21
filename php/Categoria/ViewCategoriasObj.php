@@ -33,9 +33,10 @@
   <body class="hold-transition skin-green sidebar-mini">
     <div class="wrapper">
 
-      <?php
-        include '../inc/footer.html';
-        include '../inc/control-sidebar.html';
+      <?php include '../inc/topotime.html';
+
+            include '../inc/menutime.html';
+
       ?>
       <!-- Content Wrapper. Contains page content -->
       <div class="content-wrapper">
@@ -43,6 +44,7 @@
         <section class="content-header">
           <h1>
           Categorias
+          <a class="btn btn-info btn-flat pull-right" href="CategoriaObj.php"><i class="fa fa-plus"></i>  ADD Categorias </a>
           </h1>
         </section>
 
@@ -106,10 +108,9 @@ include_once "../../class/Carrega.class.php";
       </div><!-- /.content-wrapper -->
 
       <?php
-        include '../footer.html';
-        include '../control-sidebar.html';
+        include '../inc/footer.html';
+        include '../inc/control-sidebar.html';
       ?>
-
 
     </div><!-- ./wrapper -->
 
