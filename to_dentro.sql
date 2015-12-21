@@ -90,7 +90,7 @@ create table eventos(
 
 create table estagios(
 	id_est serial not null,
-	title varchar(200) not null,
+	titulo varchar(200) not null,
 	texto text not null,
 	categoria integer not null,
 	datas date default(now()) not null,
