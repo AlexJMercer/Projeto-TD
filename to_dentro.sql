@@ -54,7 +54,7 @@ INSERT INTO usertype (type) VALUES ('Autor');
 create table assistencias(
 
 	id_assist serial not null,
-	assist varchar(80) not null,
+	assist varchar(150) not null,
 	texto text not null,
 	primary key(id_assist)
 );
@@ -62,7 +62,7 @@ create table assistencias(
 create table semestre(
 	id_sem serial not null,
 	semestre text not null,
-	Primary key(id)
+	Primary key(id_sem)
 
 );
 
