@@ -34,7 +34,7 @@ include_once 'Carrega.class.php';
 
     public function Inserir()
     {
-      $sql="INSERT INTO assistencias (assist, texto) VALUES ('$this->assist', '$this->texto')";
+      $sql    = "INSERT INTO assistencias (assist, texto) VALUES ('$this->assist', '$this->texto')";
       $return = pg_query($sql);
 
       if ($return)
@@ -49,17 +49,17 @@ include_once 'Carrega.class.php';
 
     public function Listar()
     {
-      $sql="SELECT * FROM assistencias ORDER BY id_assist";
+      $sql    = "SELECT * FROM assistencias ORDER BY id_assist";
       $result = pg_query($sql);
 
-      while ($reg = pg_fetch_assoc($result)) 
+      while ($reg    = pg_fetch_assoc($result))
       {
-        $obj = new Assistencias();
-        $obj->id = $reg['id_assist'];
+        $obj         = new Assistencias();
+        $obj->id     = $reg['id_assist'];
         $obj->assist = $reg['assist'];
-        $obj->texto = $reg['texto'];
+        $obj->texto  = $reg['texto'];
 
-        $retorno[] = $obj;
+        $retorno[]   = $obj;
       }
 
       return $retorno;
@@ -67,40 +67,34 @@ include_once 'Carrega.class.php';
 
     public function Atualizar()
     {
-        $sql = "UPDATE assistencias
-                  set assist='$this->assist',
-                      texto='$this->texto'
-                  where id_assist=$this->id";
-
+        $sql     = "UPDATE assistencias set assist ='$this->assist', texto ='$this->texto' where id_assist =$this->id";
         $retorno = pg_query($sql);
         return $retorno;
     }
 
     public function Excluir()
     {
-        $sql = "DELETE from assistencias where id_assist=$this->id";
+        $sql     = "DELETE from assistencias where id_assist =$this->id";
         $retorno = pg_query($sql);
         return $retorno;
     }
 
-    public function Editar($assist='')
+    public function Editar($id='')
     {
-      $sql="SELECT * FROM assistencias WHERE assistencias.id_assist=$assist";
+      $sql    = "SELECT * FROM assistencias WHERE assistencias.id_assist=$id";
       $result = pg_query($sql);
 
-      while ($reg = pg_fetch_assoc($result)) 
+      while ($reg = pg_fetch_assoc($result))
       {
-        $obj = new Assistencias();
-        $obj->id = $reg['id_assist'];
+        $obj         = new Assistencias();
+        $obj->id     = $reg['id_assist'];
         $obj->assist = $reg['assist'];
-        $obj->texto = $reg['texto'];
+        $obj->texto  = $reg['texto'];
 
-        $retorno = $obj;
+        $retorno     = $obj;
       }
-
       return $retorno;
     }
 
   }
-
 ?>

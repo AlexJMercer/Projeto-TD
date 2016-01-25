@@ -4,10 +4,10 @@ include_once "../../class/Carrega.class.php";
 
   if (isset($_POST['enviar']))
   {
-      $object = new Cursos();
-      $object->nome = $_POST['nome'];
+      $object        = new Cursos();
+      $object->nome  = $_POST['nome'];
       $object->texto = $_POST['texto'];
-      $object->logo = $_POST['logo'];
+      $object->logo  = $_POST['logo'];
 
       $object->Inserir();
 
@@ -16,11 +16,11 @@ include_once "../../class/Carrega.class.php";
 
   elseif (isset($_POST['atualizar']))
   {
-      $object = new Cursos();
-      $object->id = $_POST['id'];
-      $object->nome = $_POST['nome'];
+      $object        = new Cursos();
+      $object->id    = $_POST['id'];
+      $object->nome  = $_POST['nome'];
       $object->texto = $_POST['texto'];
-      $object->logo = $_POST['logo'];
+      $object->logo  = $_POST['logo'];
 
       $object->Atualizar();
 
@@ -29,7 +29,7 @@ include_once "../../class/Carrega.class.php";
 
   elseif (isset($_POST['excluir']))
   {
-      $object = new Cursos();
+      $object     = new Cursos();
       $object->id = $_POST['id'];
 
       $object->Excluir();

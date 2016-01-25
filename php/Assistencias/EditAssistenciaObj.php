@@ -58,13 +58,13 @@ include_once "../../class/Carrega.class.php";
                   <h3 class="box-title">Edição de assistência estudantil</h3>
                 </div><!-- /.box-header -->
                 <!-- form start -->
-                 <?php
+                <?php
 
                   $id = $_POST["id"];
 
                   if (isset($_POST["editar"]))
                   {
-                    $edit = new Assistencia();
+                    $edit = new Assistencias();
                     $comp = $edit->editar($id);
 
                       if ($edit != null)
@@ -89,7 +89,7 @@ include_once "../../class/Carrega.class.php";
                     <input type="hidden" name="id" value="<?php echo $comp->id; ?>"/>
                     <button type="submit" name="atualizar" value="atualizar" class="btn btn-success btn-flat btn-block"><i class="fa fa-check"></i> Atualizar </button>
                     <br>
-                    <button type="button" name="cancelar" value="cancelar" onclick="location.href='ViewCategoriasObj.php'" class="btn btn-default btn-flat btn-block btn-sm"><i class="fa fa-magic"></i> Cancelar </button>
+                    <button type="button" name="cancelar" value="cancelar" onclick="location.href='ViewAssistenciasObj.php'" class="btn btn-default btn-flat btn-block btn-sm"><i class="fa fa-magic"></i> Cancelar </button>
                   </div><!-- /.box-footer -->
                 </form>
                 <?php

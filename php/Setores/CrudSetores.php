@@ -4,35 +4,35 @@ include_once "../../class/Carrega.class.php";
 
   if (isset($_POST['enviar']))
   {
-    $object         = new Assistencias();
-    $object->assist = $_POST['assist'];
+    $object         = new Setores();
+    $object->setor = $_POST['setor'];
     $object->texto  = $_POST['texto'];
 
     $object->Inserir();
 
-    header("Location:ViewAssistenciasObj.php");
+    header("Location:ViewSetoresObj.php");
   }
 
   else if (isset($_POST['excluir']))
   {
-      $object     = new Assistencias();
+      $object     = new Setores();
       $object->id = $_POST['id'];
 
-      $object->excluir();
+      $object->Excluir();
 
-      header("Location:ViewAssistenciasObj.php");
+      header("Location:ViewSetoresObj.php");
   }
 
   else if (isset($_POST['atualizar']))
   {
-    $object         = new Assistencias();
+    $object         = new Setores();
     $object->id     = $_POST['id'];
-    $object->assist = $_POST['assist'];
+    $object->setor = $_POST['setor'];
     $object->texto  = $_POST['texto'];
 
     $object->Atualizar();
 
-    header("Location:ViewAssistenciasObj.php");
+    header("Location:ViewSetoresObj.php");
   }
 
  ?>

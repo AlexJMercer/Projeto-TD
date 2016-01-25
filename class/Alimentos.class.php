@@ -31,7 +31,7 @@
 
       public function inserir()
       {
-        $sql ="INSERT INTO alimentos (alimento) VALUES ('$this->alimento')";
+        $sql    = "INSERT INTO alimentos (alimento) VALUES ('$this->alimento')";
         $return = pg_query($sql);
 
         return $return;
@@ -39,48 +39,46 @@
 
       function listar()
       {
-         $sql = "SELECT * from alimentos Order by id";
-         $result = pg_query($sql);
+         $sql              = "SELECT * from alimentos Order by id";
+         $result           = pg_query($sql);
 
-         while ($reg = pg_fetch_assoc($result))
+         while ($reg       = pg_fetch_assoc($result))
          {
-            $obj = new Alimentos();
-            $obj->id = $reg["id"];
+            $obj           = new Alimentos();
+            $obj->id       = $reg["id"];
             $obj->alimento = $reg["alimento"];
 
-            $return[] = $obj;
+            $return[]      = $obj;
          }
          return $return;
       }
 
       public function excluir()
       {
-         $sql = "DELETE from alimentos where id=$this->id";
+         $sql    = "DELETE from alimentos where id =$this->id";
          $return = pg_query($sql);
          return $return;
       }
 
       public function atualizar()
       {
-         $return = false;
-         $sql = "UPDATE alimentos
-                  set alimento='$this->alimento'
-                  where id=$this->id";
 
+         $sql    = "UPDATE alimentos set alimento ='$this->alimento' where id =$this->id";
          $return = pg_query($sql);
+
          return $return;
       }
 
       public function editar($id = "")
       {
-        $sql = "SELECT * FROM alimentos WHERE alimentos.id=$id";
+        $sql    = "SELECT * FROM alimentos WHERE alimentos.id =$id";
         $result = pg_query($sql);
         $return = NULL;
 
         while ($reg = pg_fetch_assoc($result))
         {
-           $obj = new Alimentos();
-           $obj->id = $reg["id"];
+           $obj           = new Alimentos();
+           $obj->id       = $reg["id"];
            $obj->alimento = $reg["alimento"];
 
            $return = $obj;

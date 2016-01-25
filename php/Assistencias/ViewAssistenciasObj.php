@@ -30,7 +30,7 @@
         <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
   </head>
-  <body class="hold-transition skin-green sidebar-mini">
+  <body class="hold-transition skin-green-light sidebar-mini">
     <div class="wrapper">
 
       <?php include '../inc/topotime.html';
@@ -94,9 +94,14 @@ include_once "../../class/Carrega.class.php";
                           }
                           else
                           {
-                            echo "<h2> Nada cadastrado!!</h2>";
+                    ?>
+                            <tr class="odd gradeX">
+                              <td>
+                                <?php  echo "<h2> Nada cadastrado!!</h2>"; ?>
+                              </td>
+                            </tr>
+                    <?php
                           }
-
                     ?>
                     </tbody>
                   </table>
@@ -139,8 +144,8 @@ include_once "../../class/Carrega.class.php";
           responsive:{details: false},
           "ordering": false,
           "oLanguage": { "sSearch": "",
-                         "sInfo": "Um total de _TOTAL_ categorias (_START_ de _END_)",
-                         "sLengthMenu": "Listar _MENU_ categorias"},
+                         "sInfo": "Um total de _TOTAL_ assistências (_START_ de _END_)",
+                         "sLengthMenu": "Listar _MENU_ assistências"},
         });
         $('.dataTables_filter input').attr("placeholder", "Pesquise aqui");
       });
