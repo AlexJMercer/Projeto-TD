@@ -42,7 +42,7 @@ include_once "Carrega.class.php";
 
         $this->transacao("BEGIN");
 
-        $sql = "INSERT INTO cardapios (dia, data) VALUES ('$this->dia', '$this->data')";
+        $sql    = "INSERT INTO cardapios (dia, data) VALUES ('$this->dia', '$this->data')";
         $return = pg_query($sql);
 
           if($return)
@@ -50,16 +50,16 @@ include_once "Carrega.class.php";
 
             //$count = count($this->alimento);
 
-            $sql_id_card= "SELECT CURRVAL('cardapios_id_seq')";
-            $last = pg_query($sql_id_card);
-            $idcard = pg_fetch_array($last);
+            $sql_id_card = "SELECT CURRVAL('cardapios_id_seq')";
+            $last        = pg_query($sql_id_card);
+            $idcard      = pg_fetch_array($last);
 
-            $this->id = $idcard[0];
+            $this->id    = $idcard[0];
 
             foreach ($this->alimento as $value)
             {
 
-              $sql2 = "INSERT INTO alimentos_cardapios (id_cad, id_ali) VALUES ('$this->id', '$value')";
+              $sql2    = "INSERT INTO alimentos_cardapios (id_cad, id_ali) VALUES ('$this->id', '$value')";
               $return2 = pg_query($sql2);
 
             }
@@ -78,15 +78,15 @@ include_once "Carrega.class.php";
 
       public function Listar()
       {
-         $sql = "SELECT * FROM cardapios c, dia d WHERE d.id_dia=c.dia ORDER BY d.id_dia";
-         $result = pg_query($sql);
+         $sql     = "SELECT * FROM cardapios c, dia d WHERE d.id_dia =c.dia ORDER BY d.id_dia";
+         $result  = pg_query($sql);
          $retorno = null;
 
          while ($reg = pg_fetch_assoc($result))
          {
-            $obj = new Cardapios();
-            $obj->id = $reg["id_card"];
-            $obj->dia = $reg["dia"];
+            $obj       = new Cardapios();
+            $obj->id   = $reg["id_card"];
+            $obj->dia  = $reg["dia"];
             $obj->data = $reg["data"];
 
             $retorno[] = $obj;
@@ -96,38 +96,34 @@ include_once "Carrega.class.php";
 
       public function Excluir()
       {
-         $sql = "DELETE from cardapios where id_card=$this->id";
+         $sql     = "DELETE from cardapios where id_card =$this->id";
          $retorno = pg_query($sql);
          return $retorno;
       }
 
       public function Editar($id = "")
       {
-         $sql = "SELECT * FROM cardapios c JOIN dia d ON d.id_dia=c.dia
-                                           JOIN alimentos_cardapios ac ON ac.id_cad=c.id_card
-                                           WHERE ac.id_cad=$id";
-         $sql2 = "SELECT a.id FROM alimentos a, alimentos_cardapios ac WHERE
-                                       ac.id_cad = $id AND a.id = ac.id_ali";
+        $sql     = "SELECT * FROM cardapios c JOIN dia d ON d.id_dia=c.dia JOIN alimentos_cardapios ac ON ac.id_cad =c.id_card WHERE ac.id_cad =$id";
+        $sql2    = "SELECT a.id FROM alimentos a, alimentos_cardapios ac WHERE ac.id_cad = $id AND a.id = ac.id_ali";
 
-        $result = pg_query($sql);
+        $result  = pg_query($sql);
         $result2 = pg_query($sql2);
         $retorno = NULL;
 
         while ($reg = pg_fetch_assoc($result))
         {
-           $obj = new Cardapios();
-           $obj->id = $reg["id_card"];
-           $obj->dia = $reg["id_dia"];
+           $obj       = new Cardapios();
+           $obj->id   = $reg["id_card"];
+           $obj->dia  = $reg["id_dia"];
            $obj->data = $reg["data"];
 
            foreach (pg_fetch_assoc($result2) as $value)
            {
               $temp[] = $value;
-
            }
-          $obj->alimento = $temp;
+           $obj->alimento = $temp;
 
-           $retorno = $obj;
+           $retorno       = $obj;
         }
         return $retorno;
       }
@@ -136,19 +132,19 @@ include_once "Carrega.class.php";
       public function exibir($id = "")
       {
         //Não adaptado as alterações recentes
-        $sql = "SELECT * FROM cardapios, dia WHERE cardapios.dia=dia.id AND cardapios.id=$id ";
-        $result = pg_query($sql);
+        $sql     = "SELECT * FROM cardapios, dia WHERE cardapios.dia =dia.id AND cardapios.id =$id ";
+        $result  = pg_query($sql);
         $retorno = NULL;
 
         while ($reg = pg_fetch_assoc($result))
         {
-           $obj = new Cardapios();
-           $obj->id = $reg["id"];
-           $obj->dia = $reg["dia"];
-           $obj->data = $reg["data"];
+           $obj           = new Cardapios();
+           $obj->id       = $reg["id"];
+           $obj->dia      = $reg["dia"];
+           $obj->data     = $reg["data"];
            $obj->alimento = $reg["card_text"];
 
-           $retorno = $obj;
+           $retorno       = $obj;
         }
         return $retorno;
       }

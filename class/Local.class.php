@@ -31,68 +31,62 @@ class Local
 
     public function Inserir()
     {
-      $sql = "INSERT INTO local (sala) VALUES ('$this->sala')";
+      $sql    = "INSERT INTO local (sala) VALUES ('$this->sala')";
       $return = pg_query($sql);
       return $return;
     }
 
     public function Listar()
     {
-      $sql = "SELECT * FROM local";
+      $sql    = "SELECT * FROM local";
       $result = pg_query($sql);
-      $return = null;
 
       while ($reg = pg_fetch_assoc($result))
       {
-        $obj = new Local();
-        $obj->id = $reg["id"];
+        $obj       = new Local();
+        $obj->id   = $reg["id"];
         $obj->sala = $reg["sala"];
 
         $return[] = $obj;
       }
-
       return $return;
     }
 
     public function Editar($id = "")
     {
-      $sql = "SELECT * FROM local AS l WHERE l.id=$id";
+      $sql    = "SELECT * FROM local AS l WHERE l.id =$id";
       $result = pg_query($sql);
-      $return = null;
 
       while ($reg = pg_fetch_assoc($result))
       {
-        $obj = new Local();
-        $obj->id = $reg["id"];
+        $obj       = new Local();
+        $obj->id   = $reg["id"];
         $obj->sala = $reg["sala"];
 
         $return = $obj;
       }
-
       return $return;
     }
 
     public function Excluir()
     {
-      $sql = "DELETE FROM local WHERE id=$this->id";
+      $sql    = "DELETE FROM local WHERE id =$this->id";
       $return = pg_query($sql);
       return $return;
     }
 
     public function Atualizar()
     {
-        $return = false;
-        $sql = "UPDATE local set sala = '$this->sala' WHERE id = '$this->id'";
+        $sql    = "UPDATE local set sala = '$this->sala' WHERE id = '$this->id'";
         $return = pg_query($sql);
-
         return $return;
     }
 
     public function salaSelect($id ="")
     {
-       $sql = "SELECT * from local Order by id";
+       $sql    = "SELECT * from local Order by id";
        $result = pg_query($sql);
-       $ln=pg_num_rows($result);
+       $ln     =pg_num_rows($result);
 
       if ($ln==0)
       {

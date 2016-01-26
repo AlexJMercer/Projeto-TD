@@ -33,81 +33,69 @@
 
     public function Inserir()
     {
-      $sql = "INSERT INTO disciplinas (disciplina, curso)
-              VALUES ('$this->disciplina', '$this->curso')";
+      $sql    = "INSERT INTO disciplinas (disciplina, curso) VALUES ('$this->disciplina', '$this->curso')";
       $return = pg_query($sql);
       return $return;
     }
 
     public function ListarEspecify($curso="")
     {
-
-      $sql = "SELECT * FROM disciplinas as d, cursos as c WHERE d.curso=c.id_curso AND d.curso=$curso";
+      $sql    = "SELECT * FROM disciplinas as d, cursos as c WHERE d.curso =c.id_curso AND d.curso =$curso";
       $result = pg_query($sql);
-      $return = null;
 
       while ($reg = pg_fetch_assoc($result))
       {
-         $object = new Disciplinas();
-         $object->id = $reg["id_disc"];
+         $object             = new Disciplinas();
+         $object->id         = $reg["id_disc"];
          $object->disciplina = $reg["disciplina"];
 
          $return[] = $object;
       }
-
       return $return;
-
     }
 
     public function Excluir()
     {
-      $sql = "DELETE from disciplinas where id_disc=$this->id";
+      $sql    = "DELETE from disciplinas where id_disc =$this->id";
       $return = pg_query($sql);
       return $return;
     }
 
     public function Atualizar()
     {
-
-      $return = false;
-      $sql = "UPDATE disciplinas SET disciplina='$this->disciplina', curso='$this->curso' WHERE id_disc=$this->id";
-
+      $sql    = "UPDATE disciplinas SET disciplina ='$this->disciplina', curso ='$this->curso' WHERE id_disc =$this->id";
       $return = pg_query($sql);
-
       return $return;
     }
 
     public function Editar($id = "")
     {
-      $sql = "SELECT * FROM disciplinas as d, cursos as c WHERE d.curso=c.id_curso AND d.id_disc=$id";
+      $sql    = "SELECT * FROM disciplinas as d, cursos as c WHERE d.curso =c.id_curso AND d.id_disc =$id";
       $result = pg_query($sql);
-      $return = null;
 
       while ($reg = pg_fetch_assoc($result))
       {
-         $object = new Disciplinas();
-         $object->id = $reg["id_disc"];
+         $object             = new Disciplinas();
+         $object->id         = $reg["id_disc"];
          $object->disciplina = $reg["disciplina"];
-         $object->curso = $reg["curso"];
+         $object->curso      = $reg["curso"];
 
          $return = $object;
       }
-
       return $return;
     }
 
     public function ShowDisciplina($id='')
     {
-      $sql="SELECT * FROM disciplinas as d, cursos as c WHERE d.curso=c.id_curso AND d.id_disc=$id";
+      $sql    = "SELECT * FROM disciplinas as d, cursos as c WHERE d.curso =c.id_curso AND d.id_disc =$id";
       $result = pg_query($sql);
-      $return = null;
 
       while ($reg = pg_fetch_assoc($result))
       {
-        $object = new Disciplinas();
-        $object->id = $reg["id_disc"];
+        $object             = new Disciplinas();
+        $object->id         = $reg["id_disc"];
         $object->disciplina = $reg["disciplina"];
-        $object->curso = $reg["nome"];
+        $object->curso      = $reg["nome"];
 
         $return = $object;
       }

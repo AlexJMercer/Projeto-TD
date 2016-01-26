@@ -43,10 +43,9 @@ class Select
 
     public function semestreSelect($semestre="")
     {
-      $sql = "SELECT * from semestre Order by id_sem";
+      $sql    = "SELECT * from semestre Order by id_sem";
       $result = pg_query($sql);
-
-      $ln=pg_num_rows($result);
+      $ln     = pg_num_rows($result);
 
       if ($ln==0)
       {
@@ -56,7 +55,7 @@ class Select
       {
         while ($a = pg_fetch_array($result))
         {
-         $this->id = $a['id_sem'];
+         $this->id       = $a['id_sem'];
          $this->semestre = $a['semestre'];
 
          if ($semestre==$this->id)
@@ -73,20 +72,19 @@ class Select
 
     public function localSelect($sala="")
     {
-      $sql = "SELECT * from local Order by id";
+      $sql    = "SELECT * from local Order by id";
       $result = pg_query($sql);
+      $ln     = pg_num_rows($result);
 
-      $ln=pg_num_rows($result);
-
-     if ($ln==0)
-     {
+      if ($ln==0)
+      {
         echo "<option value=''>Nada Encontrado!!</option>";
-     }
-     else
-     {
-       while ($a = pg_fetch_array($result))
-       {
-         $this->id = $a['id'];
+      }
+      else
+      {
+        while ($a = pg_fetch_array($result))
+        {
+         $this->id   = $a['id'];
          $this->sala = $a['sala'];
 
          if ($sala==$this->id)
@@ -103,10 +101,9 @@ class Select
 
     public function diaSelect($dia="")
     {
-      $sql = "SELECT * from dia Order by id_dia";
+      $sql    = "SELECT * from dia Order by id_dia";
       $result = pg_query($sql);
-
-      $ln=pg_num_rows($result);
+      $ln     = pg_num_rows($result);
 
       if ($ln==0)
       {
@@ -116,7 +113,7 @@ class Select
       {
         while ($a = pg_fetch_array($result))
         {
-          $this->id = $a['id_dia'];
+          $this->id  = $a['id_dia'];
           $this->dia = $a['dia'];
 
           if ($dia==$this->id)
@@ -133,10 +130,9 @@ class Select
 
     public function alimentoSelect($alimento="")
     {
-      $sql = "SELECT * from alimentos Order by id";
+      $sql    = "SELECT * from alimentos Order by id";
       $result = pg_query($sql);
-
-      $ln=pg_num_rows($result);
+      $ln     = pg_num_rows($result);
 
       if ($ln==0)
       {
@@ -146,7 +142,7 @@ class Select
       {
         while ($a = pg_fetch_array($result))
         {
-          $this->id = $a['id'];
+          $this->id       = $a['id'];
           $this->alimento = $a['alimento'];
 
             if ($alimento==$this->id)
@@ -163,10 +159,9 @@ class Select
 
     public function cursoSelect($curso="")
     {
-        $sql = "SELECT * from cursos Order by id_curso";
+        $sql    = "SELECT * from cursos Order by id_curso";
         $result = pg_query($sql);
-
-        $ln=pg_num_rows($result);
+        $ln     = pg_num_rows($result);
 
         if ($ln==0)
         {
@@ -177,7 +172,7 @@ class Select
 
           while ($a = pg_fetch_array($result))
           {
-            $this->id = $a['id_curso'];
+            $this->id    = $a['id_curso'];
             $this->curso = $a['nome'];
 
             if ($curso==$this->id)
@@ -194,10 +189,9 @@ class Select
 
     public function categoriaSelect($categoria='')
     {
-      $sql = "SELECT * from categorias Order by id";
+      $sql    = "SELECT * from categorias Order by id";
       $result = pg_query($sql);
-
-      $ln=pg_num_rows($result);
+      $ln     = pg_num_rows($result);
 
       if ($ln==0)
       {
@@ -208,7 +202,7 @@ class Select
 
         while ($a = pg_fetch_array($result))
         {
-          $this->id = $a['id'];
+          $this->id        = $a['id'];
           $this->categoria = $a['categoria'];
 
           if ($categoria==$this->id)
@@ -225,10 +219,9 @@ class Select
 
     public function statusSelect($status="")
     {
-      $sql = "SELECT * from status Order by id_sta";
+      $sql    = "SELECT * from status Order by id_sta";
       $result = pg_query($sql);
-
-      $ln=pg_num_rows($result);
+      $ln     = pg_num_rows($result);
 
       if ($ln==0)
       {
@@ -238,7 +231,7 @@ class Select
       {
         while ($a = pg_fetch_array($result))
         {
-          $this->id = $a['id_sta'];
+          $this->id     = $a['id_sta'];
           $this->status = $a['status'];
 
           if ($status==$this->id)

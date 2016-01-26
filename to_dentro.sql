@@ -229,3 +229,10 @@ create table monitorias(
 	ON UPDATE CASCADE ON DELETE CASCADE
 
 );
+
+create table setores(
+	id_set serial not null,
+	setor varchar(75) not null,
+	texto text not null,
+	primary key(id_set) 
+)

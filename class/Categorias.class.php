@@ -32,7 +32,7 @@
 
       public function inserir()
       {
-        $sql ="INSERT INTO categorias (categoria) VALUES ('$this->categoria')";
+        $sql    ="INSERT INTO categorias (categoria) VALUES ('$this->categoria')";
         $return = pg_query($sql);
 
         if($return)
@@ -49,48 +49,44 @@
 
       function listar()
       {
-         $sql = "SELECT * from categorias Order by id";
+         $sql    = "SELECT * from categorias Order by id";
          $result = pg_query($sql);
 
          while ($reg = pg_fetch_assoc($result))
          {
-            $obj = new Categorias();
-            $obj->id = $reg["id"];
+            $obj            = new Categorias();
+            $obj->id        = $reg["id"];
             $obj->categoria = $reg["categoria"];
 
-            $return[] = $obj;
+            $return[]       = $obj;
          }
          return $return;
       }
 
       public function excluir()
       {
-         $sql = "DELETE from categorias where id=$this->id";
+         $sql    = "DELETE from categorias where id =$this->id";
          $return = pg_query($sql);
          return $return;
       }
 
       public function atualizar()
       {
-         $return = false;
-         $sql = "UPDATE categorias
-                  set categoria='$this->categoria'
-                  where id=$this->id";
-
+         $sql    = "UPDATE categorias set categoria ='$this->categoria' where id =$this->id";
          $return = pg_query($sql);
          return $return;
       }
 
       public function editar($id = "")
       {
-        $sql = "SELECT * FROM categorias WHERE categorias.id=$id ";
+        $sql    = "SELECT * FROM categorias WHERE categorias.id =$id ";
         $result = pg_query($sql);
         $return = NULL;
 
         while ($reg = pg_fetch_assoc($result))
         {
-           $obj = new Categorias();
-           $obj->id = $reg["id"];
+           $obj            = new Categorias();
+           $obj->id        = $reg["id"];
            $obj->categoria = $reg["categoria"];
 
            $return = $obj;
@@ -100,10 +96,10 @@
 
       public function categoriaSelect($categoria ="")
       {
-         $sql = "SELECT * from categoria Order by id";
+         $sql    = "SELECT * from categoria Order by id";
          $result = pg_query($sql);
 
-         $ln=pg_num_rows($result);
+         $ln     =pg_num_rows($result);
 
         if ($ln==0)
         {
@@ -113,7 +109,7 @@
         {
           while ($a = pg_fetch_array($result))
           {
-            $this->id = $a['id'];
+            $this->id        = $a['id'];
             $this->categoria = $a['categoria'];
 
             if ($categoria==$this->id)
