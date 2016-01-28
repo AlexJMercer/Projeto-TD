@@ -50,10 +50,9 @@ include_once "../../class/Carrega.class.php";
         <!-- Content Header (Page header) -->
         <section class="content-header">
           <h1>
-            Noticias
+            Eventos
           </h1>
         </section>
-
         <!-- Main content -->
         <section class="content">
           <div class="row">
@@ -61,7 +60,7 @@ include_once "../../class/Carrega.class.php";
               <!-- Horizontal Form -->
               <div class="box box-success">
                 <div class="box-header with-border">
-                  <h3 class="box-title">Noticias</h3>
+                  <h3 class="box-title">Eventos</h3>
                 </div><!-- /.box-header -->
                 <!-- form start -->
                 <form class="form-horizontal" id="form" method="post" action="CrudEventos.php">
@@ -69,25 +68,31 @@ include_once "../../class/Carrega.class.php";
                       <div class="form-group">
                         <label class="col-sm-2 control-label" for="evento"> Evento: </label>
                         <div class="col-sm-10">
-                           <input type="text" class="form-control" id="evento" name="evento" required>
+                           <input type="text" class="form-control" id="evento" name="evento" placeholder="Nome do Evento" required>
                         </div>
                       </div>
                       <div class="form-group">
-                        <label for="titulo" class="col-sm-2 control-label">Título:</label>
+                        <label for="dataInicio" class="col-sm-2 control-label"> Data de inicio do evento: </label>
                         <div class="col-sm-10">
-                          <input type="text" class="form-control" name="titulo" id="titulo" placeholder="Digite o título aqui" autofocus required>
+                          <input type="text" class="form-control" name="dataInicio" id="dataInicio" data-inputmask="'alias': 'dd/mm/yyyy'" data-mask>
                         </div>
                       </div>
                       <div class="form-group">
-                        <label for="tempo" class="col-sm-2 control-label">Data e hora do evento:</label>
+                        <label for="dataFinal" class="col-sm-2 control-label"> Data do final do evento: </label>
                         <div class="col-sm-10">
-                          <input type="text" class="form-control pull-right" name="tempo" id="tempo" placeholder="Digite aqui a data e hora aqui" required>
+                          <input type="text" class="form-control" name="dataFinal" id="dataFinal" data-inputmask="'alias': 'dd/mm/yyyy'" data-mask>
                         </div>
                       </div>
                       <div class="form-group">
-                        <label for="noticia" class="col-sm-2 control-label">Noticia:</label>
+                        <label for="texto" class="col-sm-2 control-label"> Descrição: </label>
                         <div class="col-sm-10">
-                        <textarea class="form-control"  name="noticia" id="noticia" rows="8" cols="40"></textarea>
+                          <textarea class="form-control" name="texto" id="texto" rows="8" cols="40"></textarea>
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label for="imagem" class="col-sm-2 control-label"> Adicionar imagem: </label>
+                        <div class="col-sm-10">
+                            <input class="btn btn-default" type="file" id="imagem" name="imagem" />
                         </div>
                       </div>
                   </div><!-- /.box-body -->
@@ -115,72 +120,26 @@ include_once "../../class/Carrega.class.php";
     <script src="../../bootstrap/js/bootstrap.min.js"></script>
     <!-- Select2 -->
     <script src="../../plugins/select2/select2.full.min.js"></script>
-    <!-- bootstrap time picker -->
-    <script src="../../plugins/timepicker/bootstrap-timepicker.min.js"></script>
-    <script type="text/javascript" src="//cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
-
-
-    <!-- Include Date Range Picker -->
-    <script type="text/javascript" src="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.js"></script>
-
-    <!-- date-range-picker >
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.2/moment.min.js"></script>
-    <script src="../../plugins/daterangepicker/daterangepicker.js"></script-->
+    <!-- InputMask -->
+    <script src="../../plugins/input-mask/jquery.inputmask.js"></script>
+    <script src="../../plugins/input-mask/jquery.inputmask.date.extensions.js"></script>
+    <script src="../../plugins/input-mask/jquery.inputmask.extensions.js"></script>
     <!-- FastClick -->
     <script src="../../plugins/fastclick/fastclick.min.js"></script>
     <!-- AdminLTE App -->
     <script src="../../dist/js/app.min.js"></script>
     <!-- AdminLTE for demo purposes -->
     <script src="../../dist/js/demo.js"></script>
-    <!-- CK Editor -->
-    <script src="https://cdn.ckeditor.com/4.4.3/standard/ckeditor.js"></script>
 
 
 
     <script type="text/javascript">
     $(function(){
-      $(".select2").select2();
+      $("#datemask").inputmask("dd/mm/yyyy", {"placeholder": "dd/mm/yyyy"});
 
-      $('#tempo').daterangepicker({
-        timePicker:true,
-        timePicker24Hour: true,
-        format: 'DD/MM/YYYY HH:mm',
-        "locale": {
-        "format": "DD/MM/YYYY HH:mm",
-        "separator": " - ",
-        "applyLabel": "OK",
-        "cancelLabel": "Cancelar",
-        "fromLabel": "From",
-        "toLabel": "To",
-        "customRangeLabel": "Custom",
-        "daysOfWeek": [
-            "Dom",
-            "Seg",
-            "Ter",
-            "Qua",
-            "Qui",
-            "Sex",
-            "Sab"
-        ],
-        "monthNames": [
-            "Janeiro",
-            "Feveireiro",
-            "Março",
-            "Abril",
-            "Maio",
-            "Junho",
-            "Julho",
-            "Agosto",
-            "Setembro",
-            "Outubro",
-            "Novembro",
-            "Dezembro"
-        ],
-        "firstDay": 1
-    },
-      });
+      //Money Euro
+      $("[data-mask]").inputmask();
 
-      CKEDITOR.replace('noticia');
     });
     </script>
   </body>

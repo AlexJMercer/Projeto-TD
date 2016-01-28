@@ -8,10 +8,11 @@ include_once 'Carrega.class.php';
   class Eventos
   {
     private $id;
-    private $nome;
+    private $evento;
     private $texto;
-    private $categorias;
-    private $data;
+    private $dataInicio;
+    private $dataFinal;
+    private $imagem;
     private $bd;
 
     function __construct()
@@ -36,25 +37,22 @@ include_once 'Carrega.class.php';
 
     public function Inserir()
     {
-      $sql = "";
+      $sql    = "INSERT INTO eventos (evento, datainicio, datafim, texto) VALUES ('$this->evento', '$this->dataInicio', '$this->dataFinal', '$this->texto')";
       $return = pg_query($sql);
       return $return;
     }
 
     public function Listar()
     {
-      $sql = "";
+      $sql    = "SELECT id_event, evento FROM eventos ORDER BY id_event";
       $result = pg_query($sql);
       $return = null;
 
       while ($reg=pg_fetch_assoc($result))
       {
-        $object = new Disciplinas();
-        $object->id = $reg[""];
-        $object->nome = $reg[""];
-        $object->texto = $reg[""];
-        $object->categoria = $reg[""];
-        $object->data = $reg[""];
+        $object         = new Eventos();
+        $object->id     = $reg["id_event"];
+        $object->evento = $reg["evento"];
 
         $return[] = $object;
       }
@@ -74,29 +72,29 @@ include_once 'Carrega.class.php';
       return $return;
     }
 
-    public function Excluir($id='')
+    public function Excluir()
     {
-      $sql = "DELETE from  where ";
+      $sql    = "DELETE from eventos where id_event = $this->id ";
       $return = pg_query($sql);
       return $return;
     }
 
-    public function Editar($value='')
+    public function Editar($id='')
     {
-      $sql = "";
+      $sql    = "SELECT * FROM eventos WHERE id_event = $id";
       $result = pg_query($sql);
       $return = null;
 
       while ($reg=pg_fetch_assoc($result))
       {
-        $object = new Disciplinas();
-        $object->id = $reg[""];
-        $object->nome = $reg[""];
-        $object->texto = $reg[""];
-        $object->categoria = $reg[""];
-        $object->data = $reg[""];
+        $object             = new Eventos();
+        $object->id         = $reg["id_event"];
+        $object->evento     = $reg['evento'];
+        $object->dataInicio = $reg['dataInicio'];
+        $object->dataFinal  = $reg['dataFinal'];
+        $object->texto      = $reg['texto'];
 
-        $return[] = $object;
+        $return = $object;
       }
       return $return;
     }

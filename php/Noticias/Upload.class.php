@@ -7,6 +7,8 @@
 * http://blog.vilourenco.com.br
 */
 
+
+
 class Upload {
 
 	// Constante respons�vel por guardar a pasta de onde os arquivos estar�o.
@@ -25,7 +27,7 @@ class Upload {
 			mkdir(self::_FOLDER_DIR);
 		}
 		$this->_file = $curFile;
-		$this->bd    = new BD();
+		$this->bd = new BD();
 	}
 
 	//Met�do para:
@@ -35,56 +37,24 @@ class Upload {
 	//Verifica se o arquivo foi realizado o upload
 	//Move o arquivo para o diret�rio escolhido, inserido na concatena��o realizada.
 	//Retorna true em casos de upload com sucesso e false com erro.
-	function noticiaUpload()
-	{
-		if(isset($this->_file))
-		{
+	function makeUpload(){
+		if(isset($this->_file)){
 			$randomName = rand(00,9999);
-			$fileName   = self::_FOLDER_DIR . "_" . $randomName . "_" . $this->_file["name"];
-			if(is_uploaded_file($this->_file["tmp_name"]))
-			{
-				if(move_uploaded_file($this->_file["tmp_name"], $fileName))
-				{
+			$fileName = self::_FOLDER_DIR . "_" . $randomName . "_" . $this->_file["name"];
+			if(is_uploaded_file($this->_file["tmp_name"])){
+				if(move_uploaded_file($this->_file["tmp_name"], $fileName)){
+
 					$sql_id_not = "SELECT CURRVAL('noticias_id_not_seq')";
 					$last       = pg_query($sql_id_not);
 					$idnot      = pg_fetch_array($last);
-					$this->id   = $idnot[0];
-					//print_r($idnot[0]);
-					$sqlImg    = "INSERT INTO imagens_noticias (imagem, noticia) VALUES ('$fileName', '$this->id')";
-          $returnImg = pg_query($sqlImg);
 
+					$this->id = $idnot[0];
+					print_r($idnot[0]);
+									$sqlImg    = "INSERT INTO imagens_noticias (imagem, noticia) VALUES ('$fileName', '$this->id')";
+                  $returnImg = pg_query($sqlImg);
+					
 					return true;
-				}
-				else
-				{
-					return false;
-				}
-			}
-		}
-	}
-
-	function eventoUpload()
-	{
-		if(isset($this->_file))
-		{
-			$randomName = rand(00,9999);
-			$fileName   = self::_FOLDER_DIR . "_" . $randomName . "_" . $this->_file["name"];
-			if(is_uploaded_file($this->_file["tmp_name"]))
-			{
-				if(move_uploaded_file($this->_file["tmp_name"], $fileName))
-				{
-					$sql_id_event = "SELECT CURRVAL('eventos_id_not_seq')";
-					$last         = pg_query($sql_id_event);
-					$ideve        = pg_fetch_array($last);
-					$this->id     = $ideve[0];
-					//print_r($ideve[0]);
-					$sqlImg    = "UPDATE eventos set imagem = '$fileName' WHERE id_event = $this->id";
-        	$returnImg = pg_query($sqlImg);
-
-					return true;
-				}
-				else
-				{
+				}else{
 					echo "Erro, problemas no envio.";
 					return false;
 				}

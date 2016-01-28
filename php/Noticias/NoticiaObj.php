@@ -120,12 +120,12 @@ include_once "../../class/Carrega.class.php";
                           <br>
                         </div>
                       </div>
-                      <!--div class="form-group">
+                      <div class="form-group">
                         <label for="imagem" class="col-sm-2 control-label">Adicionar imagem:</label>
                         <div class="col-sm-10">
                               <input class="btn btn-default" type="file" id="imagem" name="imagem" />
                         </div>
-                     </div-->
+                      </div>
                   </div><!-- /.box-body -->
                   <div class="box-footer">
                     <button type="submit" name="enviar" value="enviar" class="btn btn-lg btn-success btn-flat btn-block"><i class="fa fa-check"></i> Enviar </button>

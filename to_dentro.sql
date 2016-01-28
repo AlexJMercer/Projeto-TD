@@ -81,9 +81,11 @@ INSERT INTO semestre (semestre) VALUES ('12º Semestre');
 
 create table eventos(
 	id_event serial not null,
-	nome varchar(300) not null,
+	evento varchar(300) not null,
+	dataInicio varchar(20),
+	dataFim varchar(20),
 	texto text not null,
-	datas text not null,
+	imagem text,
 	primary key(id_event)
 
 );
@@ -234,5 +236,5 @@ create table setores(
 	id_set serial not null,
 	setor varchar(75) not null,
 	texto text not null,
-	primary key(id_set) 
+	primary key(id_set)
 )
