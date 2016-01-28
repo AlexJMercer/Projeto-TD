@@ -11,11 +11,12 @@ include_once "../../class/Carrega.class.php";
       $object->status     = $_POST['status'];
       $object->categorias = $_POST['categorias'];
       $object->noticia    = $_POST['noticia'];
+      //$object->image      = $_FILES['imagem'];
 
       //print_r($object);
       $object->Inserir();
 
-      header("Location:NoticiaObj.php");
+
    }
 
    if (isset($_POST['excluir']))

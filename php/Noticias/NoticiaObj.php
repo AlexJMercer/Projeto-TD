@@ -23,15 +23,18 @@ include_once "../../class/Carrega.class.php";
     <link rel="stylesheet" href="../../plugins/timepicker/bootstrap-timepicker.min.css">
     <!-- Select2 -->
     <link rel="stylesheet" href="../../plugins/select2/select2.min.css">
-    <!-- Dropzone-->
-    <link rel="stylesheet" href="../../plugins/dropzone/dist/dropzone.min.css">
-    <!-- Dropzone-->
-    <script type="text/javascript" src="../../plugins/dropzone/dist/min/dropzone.min.js"></script>
     <!-- Theme style -->
     <link rel="stylesheet" href="../../dist/css/AdminLTE.min.css">
     <!-- AdminLTE Skins. Choose a skin from the css/skins
          folder instead of downloading all of them to reduce the load. -->
     <link rel="stylesheet" href="../../dist/css/skins/_all-skins.min.css">
+
+    <!--style type="text/css">
+      input[type=file]
+      {
+        border: none;
+      }
+    </style-->
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -52,7 +55,6 @@ include_once "../../class/Carrega.class.php";
         <section class="content-header">
             <h1>
               Noticias
-              <button type="button" class="btn btn-flat pull-right" name="name" value="teste">ADD NEWS</button>
             </h1>
         </section>
 
@@ -66,7 +68,7 @@ include_once "../../class/Carrega.class.php";
                   <h3 class="box-title">Noticias</h3>
                 </div><!-- /.box-header -->
                 <!-- form start -->
-                <form class="form-horizontal" id="form" method="post" action="CrudNoticias.php">
+                <form class="form-horizontal" id="form" method="post" action="CrudNoticias.php" enctype="multipart/form-data">
                   <div class="box-body">
                       <div class="form-group">
                         <label class="col-sm-2 control-label"> Autor: </label>
@@ -84,8 +86,7 @@ include_once "../../class/Carrega.class.php";
                       <div class="form-group">
                         <label for="resumo" class="col-sm-2 control-label">Resumo:</label>
                         <div class="col-sm-10">
-                          <textarea class="form-control"  name="resumo" id="resumo" rows="2" cols="40" required></textarea>
-
+                          <textarea class="form-control"  name="resumo" id="resumo" rows="2" cols="40"  required></textarea>
                         </div>
                       </div>
                       <div class="form-group">
@@ -116,14 +117,13 @@ include_once "../../class/Carrega.class.php";
                         <label for="noticia" class="col-sm-2 control-label">Noticia:</label>
                         <div class="col-sm-10">
                           <textarea class="form-control"  name="noticia" id="noticia" rows="16" cols="40" required></textarea>
+                          <br>
                         </div>
                       </div>
                       <!--div class="form-group">
-                        <label for="imagens" class="col-sm-2 control-label">Adicionar imagens:</label>
+                        <label for="imagem" class="col-sm-2 control-label">Adicionar imagem:</label>
                         <div class="col-sm-10">
-
-                              <input type="file" name="file" class="dropzone" multiple/>
-
+                              <input class="btn btn-default" type="file" id="imagem" name="imagem" />
                         </div>
                      </div-->
                   </div><!-- /.box-body -->
