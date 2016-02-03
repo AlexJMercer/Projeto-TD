@@ -82,11 +82,12 @@ INSERT INTO semestre (semestre) VALUES ('12º Semestre');
 create table eventos(
 	id_event serial not null,
 	evento varchar(300) not null,
-	dataInicio varchar(20),
-	dataFim varchar(20),
+	event_cat integer not null,
 	texto text not null,
 	imagem text,
-	primary key(id_event)
+	primary key(id_event),
+	foreign key(event_cat) references categorias
+	ON UPDATE CASCADE ON DELETE CASCADE
 
 );
 
@@ -185,9 +186,9 @@ create table imagens_noticias(
 
 create table programacao(
 	id_prog serial not null,
-	evento integer not null,
-	texto text not null,
-	data date not null,
+	evento_id integer not null,
+	dataInicio date default(null),
+	dataFim date default(null),
 	primary key(id_prog),
 	foreign key(evento) references eventos
 

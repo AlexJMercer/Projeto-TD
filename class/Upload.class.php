@@ -73,7 +73,7 @@ class Upload {
 			{
 				if(move_uploaded_file($this->_file["tmp_name"], $fileName))
 				{
-					$sql_id_event = "SELECT CURRVAL('eventos_id_not_seq')";
+					$sql_id_event = "SELECT CURRVAL('eventos_id_event_seq')";
 					$last         = pg_query($sql_id_event);
 					$ideve        = pg_fetch_array($last);
 					$this->id     = $ideve[0];

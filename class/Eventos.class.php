@@ -9,9 +9,10 @@ include_once 'Carrega.class.php';
   {
     private $id;
     private $evento;
+    private $categoria;
     private $texto;
-    private $dataInicio;
-    private $dataFinal;
+    //private $dataInicio;
+    //private $dataFinal;
     private $imagem;
     private $bd;
 
@@ -37,9 +38,10 @@ include_once 'Carrega.class.php';
 
     public function Inserir()
     {
-      $sql    = "INSERT INTO eventos (evento, datainicio, datafim, texto) VALUES ('$this->evento', '$this->dataInicio', '$this->dataFinal', '$this->texto')";
+      $sql    = "INSERT INTO eventos (evento, event_cat, texto) VALUES ('$this->evento', '$this->categoria', '$this->texto')";
       $return = pg_query($sql);
       return $return;
+
     }
 
     public function Listar()
@@ -87,12 +89,12 @@ include_once 'Carrega.class.php';
 
       while ($reg=pg_fetch_assoc($result))
       {
-        $object             = new Eventos();
-        $object->id         = $reg["id_event"];
-        $object->evento     = $reg['evento'];
-        $object->dataInicio = $reg['dataInicio'];
-        $object->dataFinal  = $reg['dataFinal'];
-        $object->texto      = $reg['texto'];
+        $object            = new Eventos();
+        $object->id        = $reg["id_event"];
+        $object->evento    = $reg['evento'];
+        $object->categoria = $reg['event_cat'];
+        $object->texto     = $reg['texto'];
+        $object->imagem    = $reg['imagem'];
 
         $return = $object;
       }

@@ -24,6 +24,8 @@ include_once "../../class/Carrega.class.php";
     <!-- AdminLTE Skins. Choose a skin from the css/skins
          folder instead of downloading all of them to reduce the load. -->
     <link rel="stylesheet" href="../../dist/css/skins/_all-skins.min.css">
+    <!--FileInput-->
+    <link rel="stylesheet" href="../../plugins/fileinput/css/fileinput.min.css">
 
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -47,7 +49,6 @@ include_once "../../class/Carrega.class.php";
             Cursos
           </h1>
         </section>
-
         <!-- Main content -->
         <section class="content">
           <div class="row">
@@ -58,7 +59,7 @@ include_once "../../class/Carrega.class.php";
                   <h3 class="box-title">Cadastro de curso</h3>
                 </div><!-- /.box-header -->
                 <!-- form start -->
-                <form class="form-horizontal" id="form" method="post" action="CrudCursos.php">
+                <form class="form-horizontal" id="form" method="post" action="CrudCursos.php" enctype="multipart/form-data">
                   <div class="box-body">
                       <div class="form-group">
                         <label for="curso" class="col-sm-2 control-label">Nome do curso:</label>
@@ -73,8 +74,10 @@ include_once "../../class/Carrega.class.php";
                          </div>
                       </div>
                       <div class="form-group">
-                        <label for="">Logo:</label>
-                        <input class="form-control" type="text" name="logo" value="nulo">
+                        <label for="logo" class="col-sm-2 control-label">Logo:</label>
+                        <div class="col-sm-10">
+                          <input id="logo" name="logo" class="file" type="file" multiple data-min-file-count="1">
+                        </div>
                       </div>
                   </div><!-- /.box-body -->
                   <div class="box-footer">
@@ -102,16 +105,27 @@ include_once "../../class/Carrega.class.php";
     <script src="../../plugins/fastclick/fastclick.min.js"></script>
     <!-- AdminLTE App -->
     <script src="../../dist/js/app.min.js"></script>
-    <!-- Select2 -->
-    <script src="../../plugins/select2/select2.full.min.js"></script>
+    <!--FileInput-->
+    <script src="../../plugins/fileinput/js/fileinput.min.js" type="text/javascript"></script>
+    <script src="../../plugins/fileinput/js/fileinput_locale_pt-BR.js" type="text/javascript"></script>
     <!-- AdminLTE for demo purposes -->
     <script src="../../dist/js/demo.js"></script>
 
-
     <script type="text/javascript">
-    $(function(){
-      $(".select2").select2();
-    });
+
+      $('.file').fileinput({
+          overwriteInitial: true,
+          browseClass: "btn btn-info btn-flat btn-block",
+          showCaption: false,
+          showRemove: false,
+          showUpload: false,
+          language: 'pt-BR',
+          uploadUrl: '#',
+          allowedFileExtensions : ['jpg', 'png','gif']
+
+      });
+
+
     </script>
 
   </body>

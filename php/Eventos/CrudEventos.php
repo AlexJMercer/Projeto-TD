@@ -8,15 +8,16 @@ include_once "../../class/Carrega.class.php";
    {
       $object             = new Eventos();
       $object->evento     = $_POST['evento'];
-      $object->dataInicio = $_POST['dataInicio'];
-      $object->dataFinal  = $_POST['dataFinal'];
+      $object->categoria  = $_POST['categoria'];
       $object->texto      = $_POST['texto'];
-      //print_r($object);
+
       $object->Inserir();
 
       $myUpload = new Upload($_FILES["imagem"]);
 
       $Up = $myUpload->eventoUpload();
+      /*print_r($object);
+      print_r($Up);*/
       header("Location:ViewEventosObj.php");
    }
 

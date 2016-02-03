@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>AdminLTE 2 | Data Tables</title>
+    <title>AdminLTE 2</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <!-- Bootstrap 3.3.5 -->
@@ -19,10 +19,7 @@
     <!-- AdminLTE Skins. Choose a skin from the css/skins
          folder instead of downloading all of them to reduce the load. -->
     <link rel="stylesheet" href="../../dist/css/skins/_all-skins.min.css">
-
     <link rel="stylesheet" href="../../bootstrap/css/center.css">
-
-
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -36,7 +33,6 @@
       <?php include '../inc/topotime.html';
 
             include '../inc/menutime.html';
-
       ?>
       <!-- Content Wrapper. Contains page content -->
       <div class="content-wrapper">
@@ -81,7 +77,7 @@ include_once "../../class/Carrega.class.php";
                            <td>
                               <input type='hidden' name='id' value='<?php echo $line->id; ?>'>
 
-                              <button type="submit" name="exibir" value="exibir" class="btn btn-flat btn-info"><i class="fa fa-edit"></i> Exibir </button>
+                              <button type="submit" name="exibir" value="exibir" class="btn btn-flat btn-info" disabled><i class="fa fa-edit"></i> Exibir </button>
 
                               <button type="submit" name="editar" value="editar" class="btn btn-flat btn-warning"><i class="fa fa-edit"></i> Editar </button>
 
@@ -107,16 +103,11 @@ include_once "../../class/Carrega.class.php";
           </div><!-- /.row -->
         </section><!-- /.content -->
       </div><!-- /.content-wrapper -->
-
       <?php
         include '../inc/footer.html';
         include '../inc/control-sidebar.html';
       ?>
-
-
-
     </div><!-- ./wrapper -->
-
     <!-- jQuery 2.1.4 -->
     <script src="../../plugins/jQuery/jQuery-2.1.4.min.js"></script>
     <!-- Bootstrap 3.3.5 -->
@@ -142,8 +133,8 @@ include_once "../../class/Carrega.class.php";
 
           "ordering": false,
           "oLanguage": { "sSearch": "",
-                         "sInfo": "Um total de _TOTAL_ locais (_START_ de _END_)",
-                         "sLengthMenu": "Listar _MENU_ locais"},
+                         "sInfo": "Um total de _TOTAL_ eventos (_START_ de _END_)",
+                         "sLengthMenu": "Listar _MENU_ eventos"},
         });
         $('.dataTables_filter input').attr("placeholder", "Pesquise aqui");
       });

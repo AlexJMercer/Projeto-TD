@@ -23,6 +23,8 @@ include_once "../../class/Carrega.class.php";
     <link rel="stylesheet" href="../../plugins/timepicker/bootstrap-timepicker.min.css">
     <!-- Select2 -->
     <link rel="stylesheet" href="../../plugins/select2/select2.min.css">
+    <!--FileInput-->
+    <link rel="stylesheet" href="../../plugins/fileinput/css/fileinput.min.css">
 
 
     <!--link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.css" /-->
@@ -63,7 +65,7 @@ include_once "../../class/Carrega.class.php";
                   <h3 class="box-title">Eventos</h3>
                 </div><!-- /.box-header -->
                 <!-- form start -->
-                <form class="form-horizontal" id="form" method="post" action="CrudEventos.php">
+                <form class="form-horizontal" id="form" method="post" action="CrudEventos.php" enctype="multipart/form-data">
                   <div class="box-body">
                       <div class="form-group">
                         <label class="col-sm-2 control-label" for="evento"> Evento: </label>
@@ -72,15 +74,15 @@ include_once "../../class/Carrega.class.php";
                         </div>
                       </div>
                       <div class="form-group">
-                        <label for="dataInicio" class="col-sm-2 control-label"> Data de inicio do evento: </label>
+                        <label for="categoria" class="col-sm-2 control-label">Categorias do evento:</label>
                         <div class="col-sm-10">
-                          <input type="text" class="form-control" name="dataInicio" id="dataInicio" data-inputmask="'alias': 'dd/mm/yyyy'" data-mask>
-                        </div>
-                      </div>
-                      <div class="form-group">
-                        <label for="dataFinal" class="col-sm-2 control-label"> Data do final do evento: </label>
-                        <div class="col-sm-10">
-                          <input type="text" class="form-control" name="dataFinal" id="dataFinal" data-inputmask="'alias': 'dd/mm/yyyy'" data-mask>
+                          <select class="form-control select2" id="categoria" name="categoria" placeholder="Selecione a(s) categoria(s)" required>
+                            <option value=""></option>
+                            <?php
+                              $catSelect = new Select();
+                              $catSelect->categoriaSelect();
+                            ?>
+                          </select>
                         </div>
                       </div>
                       <div class="form-group">
@@ -92,7 +94,7 @@ include_once "../../class/Carrega.class.php";
                       <div class="form-group">
                         <label for="imagem" class="col-sm-2 control-label"> Adicionar imagem: </label>
                         <div class="col-sm-10">
-                            <input class="btn btn-default" type="file" id="imagem" name="imagem" />
+                            <input class="file" type="file" id="imagem" name="imagem" data-show-upload="false" data-min-file-count="1"/>
                         </div>
                       </div>
                   </div><!-- /.box-body -->
@@ -120,26 +122,29 @@ include_once "../../class/Carrega.class.php";
     <script src="../../bootstrap/js/bootstrap.min.js"></script>
     <!-- Select2 -->
     <script src="../../plugins/select2/select2.full.min.js"></script>
-    <!-- InputMask -->
-    <script src="../../plugins/input-mask/jquery.inputmask.js"></script>
-    <script src="../../plugins/input-mask/jquery.inputmask.date.extensions.js"></script>
-    <script src="../../plugins/input-mask/jquery.inputmask.extensions.js"></script>
     <!-- FastClick -->
     <script src="../../plugins/fastclick/fastclick.min.js"></script>
+    <!--FileInput-->
+    <script src="../../plugins/fileinput/js/fileinput.min.js" type="text/javascript"></script>
+    <script src="../../plugins/fileinput/js/fileinput_locale_pt-BR.js" type="text/javascript"></script>
     <!-- AdminLTE App -->
     <script src="../../dist/js/app.min.js"></script>
     <!-- AdminLTE for demo purposes -->
     <script src="../../dist/js/demo.js"></script>
 
-
-
     <script type="text/javascript">
     $(function(){
-      $("#datemask").inputmask("dd/mm/yyyy", {"placeholder": "dd/mm/yyyy"});
+      $(".select2").select2();
+    });
 
-      //Money Euro
-      $("[data-mask]").inputmask();
-
+    $('.file').fileinput({
+        browseClass: "btn btn-info btn-flat btn-block",
+        showCaption: false,
+        showRemove: false,
+        showUpload: false,
+        language: 'pt-BR',
+        overwriteInitial: true,
+        allowedFileExtensions : ['jpg', 'png','gif']
     });
     </script>
   </body>

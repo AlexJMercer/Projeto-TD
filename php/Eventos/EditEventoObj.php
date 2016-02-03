@@ -23,7 +23,8 @@ include_once "../../class/Carrega.class.php";
     <link rel="stylesheet" href="../../plugins/timepicker/bootstrap-timepicker.min.css">
     <!-- Select2 -->
     <link rel="stylesheet" href="../../plugins/select2/select2.min.css">
-
+    <!--FileInput-->
+    <link rel="stylesheet" href="../../plugins/fileinput/css/fileinput.min.css">
 
     <!--link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.css" /-->
     <!-- Theme style -->
@@ -31,7 +32,6 @@ include_once "../../class/Carrega.class.php";
     <!-- AdminLTE Skins. Choose a skin from the css/skins
          folder instead of downloading all of them to reduce the load. -->
     <link rel="stylesheet" href="../../dist/css/skins/_all-skins.min.css">
-
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -44,7 +44,6 @@ include_once "../../class/Carrega.class.php";
       <?php include '../inc/topotime.html';
 
             include '../inc/menutime.html';
-
       ?>
       <div class="content-wrapper">
         <!-- Content Header (Page header) -->
@@ -75,7 +74,7 @@ include_once "../../class/Carrega.class.php";
                       {
                 ?>
                 <!-- form start -->
-                <form class="form-horizontal" id="form" method="post" action="CrudEventos.php">
+                <form class="form-horizontal" id="form" method="post" action="CrudEventos.php" enctype="multipart/form-data">
                   <div class="box-body">
                       <div class="form-group">
                         <label class="col-sm-2 control-label" for="evento"> Evento: </label>
@@ -84,37 +83,39 @@ include_once "../../class/Carrega.class.php";
                         </div>
                       </div>
                       <div class="form-group">
-                        <label for="dataInicio" class="col-sm-2 control-label"> Data de inicio do evento: </label>
+                        <label for="categoria" class="col-sm-2 control-label">Categorias do evento:</label>
                         <div class="col-sm-10">
-                          <input type="text" class="form-control" name="dataInicio" id="dataInicio" data-inputmask="'alias': 'dd/mm/yyyy'" data-mask>
-                        </div>
-                      </div>
-                      <div class="form-group">
-                        <label for="dataFinal" class="col-sm-2 control-label"> Data do final do evento: </label>
-                        <div class="col-sm-10">
-                          <input type="text" class="form-control" name="dataFinal" id="dataFinal" data-inputmask="'alias': 'dd/mm/yyyy'" data-mask>
+                          <select class="form-control select2" id="categoria" name="categoria" placeholder="Selecione a(s) categoria(s)" required>
+                            <option value=""></option>
+                            <?php
+                              $catSelect = new Select();
+                              $catSelect->categoriaSelect($comp->categoria);
+                            ?>
+                          </select>
                         </div>
                       </div>
                       <div class="form-group">
                         <label for="texto" class="col-sm-2 control-label"> Descrição: </label>
                         <div class="col-sm-10">
-                          <textarea class="form-control" name="texto" id="texto" rows="8" cols="40"></textarea>
+                          <textarea class="form-control" name="texto" id="texto" rows="8" cols="40"><?php echo $comp->texto; ?></textarea>
                         </div>
                       </div>
                       <div class="form-group">
                         <label for="imagem" class="col-sm-2 control-label"> Adicionar imagem: </label>
                         <div class="col-sm-10">
-                            <input class="btn btn-default" type="file" id="imagem" name="imagem" />
+                            <input class="file" type="file" id="imagem" name="imagem" data-show-upload="false" data-min-file-count="1" value="<?php echo $comp->imagem; ?>"/>
                         </div>
                       </div>
                   </div><!-- /.box-body -->
                   <div class="box-footer">
-                    <button type="submit" name="enviar" value="enviar" class="btn btn-lg btn-success btn-flat btn-block"><i class="fa fa-check"></i> Enviar </button>
+                    <input type="hidden" name="id" value="<?php echo $comp->id; ?>"/>
+                    <button type="submit" name="atualizar" value="atualizar" class="btn btn-success btn-flat btn-block"><i class="fa fa-check"></i> Atualizar </button>
                     <br>
-                    <button type="reset" class="btn btn-default btn-flat btn-block btn-sm"><i class="fa fa-magic"></i> Limpar </button>
+                    <button type="button" name="cancelar" value="cancelar" onclick="location.href='ViewEventosObj.php'" class="btn btn-default btn-flat btn-block btn-sm"><i class="fa fa-magic"></i> Cancelar </button>
                   </div><!-- /.box-footer -->
                 </form>
               </div><!-- /.box -->
+
               <!-- general form elements disabled -->
             </div><!--/.col (right) -->
           </div>   <!-- /.row -->
@@ -132,10 +133,9 @@ include_once "../../class/Carrega.class.php";
     <script src="../../bootstrap/js/bootstrap.min.js"></script>
     <!-- Select2 -->
     <script src="../../plugins/select2/select2.full.min.js"></script>
-    <!-- InputMask -->
-    <script src="../../plugins/input-mask/jquery.inputmask.js"></script>
-    <script src="../../plugins/input-mask/jquery.inputmask.date.extensions.js"></script>
-    <script src="../../plugins/input-mask/jquery.inputmask.extensions.js"></script>
+    <!--FileInput-->
+    <script src="../../plugins/fileinput/js/fileinput.min.js" type="text/javascript"></script>
+    <script src="../../plugins/fileinput/js/fileinput_locale_pt-BR.js" type="text/javascript"></script>
     <!-- FastClick -->
     <script src="../../plugins/fastclick/fastclick.min.js"></script>
     <!-- AdminLTE App -->
@@ -147,12 +147,27 @@ include_once "../../class/Carrega.class.php";
 
     <script type="text/javascript">
     $(function(){
-      $("#datemask").inputmask("dd/mm/yyyy", {"placeholder": "dd/mm/yyyy"});
+      $(".select2").select2();
+    });
 
-      //Money Euro
-      $("[data-mask]").inputmask();
+    $('.file').fileinput({
+        var file = "<?php echo $comp->imagem; ?>";
+        initialPreview: [
+          '<img src="$.(file)" class="file-preview-image">'
+        ],
+        browseClass: "btn btn-info btn-flat btn-block",
+        showCaption: false,
+        showRemove: false,
+        showUpload: false,
+        language: 'pt-BR',
+        overwriteInitial: true,
+        allowedFileExtensions : ['jpg', 'png','gif']
 
     });
     </script>
   </body>
 </html>
+<?php
+    }
+  }
+?>
