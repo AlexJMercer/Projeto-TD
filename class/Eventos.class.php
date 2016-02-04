@@ -64,13 +64,8 @@ include_once 'Carrega.class.php';
     public function Atualizar()
     {
       $return = false;
-      $sql = "UPDATE
-                set ,
-
-                where ";
-
+      $sql    = "UPDATE eventos set evento = '$this->evento', event_cat = '$this->categoria', texto = '$this->texto' where id_event = $this->id";
       $return = pg_query($sql);
-
       return $return;
     }
 

@@ -72,7 +72,7 @@ include_once "../../class/Carrega.class.php";
                       <div class="form-group">
                         <label for="local" class="col-sm-2 control-label">Local:</label>
                         <div class="col-sm-10">
-                          <input type="text" class="form-control" name="sala" id='local' value="<?php echo $comp->sala; ?>" placeholder="Digite a sala aqui" autofocus required>
+                          <input type="text" class="form-control" name="sala" id='local' $ placeholder="Digite a sala aqui" autofocus required>
                         </div>
                       </div>
                   </div><!-- /.box-body -->

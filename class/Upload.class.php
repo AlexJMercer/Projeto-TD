@@ -66,7 +66,7 @@ class Upload {
 	function eventoUpload()
 	{
 		if(isset($this->_file))
-		{
+		{	
 			$randomName = rand(00,9999);
 			$fileName   = self::_FOLDER_DIR . "_" . $randomName . "_" . $this->_file["name"];
 			if(is_uploaded_file($this->_file["tmp_name"]))
@@ -79,7 +79,7 @@ class Upload {
 					$this->id     = $ideve[0];
 					//print_r($ideve[0]);
 					$sqlImg    = "UPDATE eventos set imagem = '$fileName' WHERE id_event = $this->id";
-        	$returnImg = pg_query($sqlImg);
+					$returnImg = pg_query($sqlImg);
 
 					return true;
 				}

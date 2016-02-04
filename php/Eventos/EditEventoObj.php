@@ -103,7 +103,7 @@ include_once "../../class/Carrega.class.php";
                       <div class="form-group">
                         <label for="imagem" class="col-sm-2 control-label"> Adicionar imagem: </label>
                         <div class="col-sm-10">
-                            <input class="file" type="file" id="imagem" name="imagem" data-show-upload="false" data-min-file-count="1" value="<?php echo $comp->imagem; ?>"/>
+                            <input class="file" type="file" id="imagem" name="imagem" data-show-upload="false" data-min-file-count="0"/>
                         </div>
                       </div>
                   </div><!-- /.box-body -->
@@ -151,9 +151,9 @@ include_once "../../class/Carrega.class.php";
     });
 
     $('.file').fileinput({
-        var file = "<?php echo $comp->imagem; ?>";
+        //var file = "<?php echo $comp->imagem; ?>";
         initialPreview: [
-          '<img src="$.(file)" class="file-preview-image">'
+          '<img src="<?php echo $comp->imagem; ?>" class="file-preview-image">'
         ],
         browseClass: "btn btn-info btn-flat btn-block",
         showCaption: false,

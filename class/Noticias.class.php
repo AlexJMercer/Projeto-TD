@@ -108,6 +108,24 @@ class Noticias
          return $return;
       }
 
+      public function Editar($id='')
+      {
+         $sql    = "SELECT * FROM noticias as n, categorias_noticias as cn, categorias as c, status as s, imagens_noticias as ino
+                     WHERE n.id_not = cn.not_id AND n.id_not = ino.noticia AND c.id = cn.cat_id AND n.status = s.id_sta WHERE n.id_not = $id";
+         $sql2 = "";
+         $result = pg_query($sql);
+
+         while ($reg = pg_fetch_assoc($result))
+         {
+            $object = new Noticias();
+            $object->id = $reg['id_not'];
+            $object->autor = $reg['autor'];
+            $object->titulo = $reg['titulo'];
+            $object->resumo = $reg['resumo'];
+            $object->status = $reg['status'];
+         }
+      }
+
 
 }
 ?>

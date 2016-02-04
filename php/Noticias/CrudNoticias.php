@@ -22,7 +22,7 @@ include_once "../../class/Carrega.class.php";
       header("Location:ViewNoticiasObj.php");
    }
 
-   if (isset($_POST['excluir']))
+   elseif (isset($_POST['excluir']))
    {
       $object     = new Noticias();
       $object->id = $_POST['id'];
@@ -31,6 +31,12 @@ include_once "../../class/Carrega.class.php";
       $object->Excluir();
 
       header("Location:ViewNoticiasObj.php");
+   }
+
+   elseif (isset($_POST['atualizar']))
+   {
+      $object     = new Noticias();
+      $object->id = $_POST['id'];
    }
 
 ?>
