@@ -11,10 +11,10 @@ class Noticias
    private $titulo;
    private $resumo;
    private $noticia;
-   private $categorias;
+   private $categoria;
    private $status;
    private $data;
-   private $image;
+   private $imagem;
    private $bd;
 
       function __construct()
@@ -59,7 +59,7 @@ class Noticias
 
              $this->id = $idnot[0];
 
-             foreach ($this->categorias as $value)
+             foreach ($this->categoria as $value)
              {
                $sql2    = "INSERT INTO categorias_noticias (not_id, cat_id) VALUES ('$this->id', '$value')";
                $return2 = pg_query($sql2);
@@ -101,31 +101,73 @@ class Noticias
          return $return;
       }
 
-      public function atualizar()
+      public function Atualizar()
       {
-         $sql    = "UPDATE noticias set news_title ='$this->title', news_dateon ='$this->data', news_text ='$this->texto', catnews_id ='$this->cat' where news_id =$this->id";
-         $return = pg_query($sql);
-         return $return;
+        $this->transacao("BEGIN");
+
+        $sql    = "UPDATE noticias set autor = '$this->autor', titulo = '$this->titulo', resumo = '$this->resumo', status = '$this->status', texto = '$this->noticia' WHERE id_not = $this->id";
+        $return = pg_query($sql);
+
+          if($return)
+          {
+            $sql2    = "DELETE FROM categorias_noticias WHERE not_id = $this->id";
+            $return2 = pg_query($sql2);
+
+            if ($return2)
+            {
+              foreach ($this->categoria as $value)
+              {
+                $sql3    = "INSERT INTO categorias_noticias (not_id, cat_id) VALUES ('$this->id', '$value')";
+                $return3 = pg_query($sql3);
+              }
+              if ($return3)
+              {
+               $this->transacao("COMMIT");
+              }
+              else
+              {
+                $this->transacao("ROLLBACK");
+              }
+            }
+          }
+          else
+          {
+            $this->transacao("ROLLBACK");
+          }
+          $this->transacao("ROLLBACK");
       }
 
       public function Editar($id='')
       {
-         $sql    = "SELECT * FROM noticias as n, categorias_noticias as cn, categorias as c, status as s, imagens_noticias as ino
-                     WHERE n.id_not = cn.not_id AND n.id_not = ino.noticia AND c.id = cn.cat_id AND n.status = s.id_sta WHERE n.id_not = $id";
-         $sql2 = "";
-         $result = pg_query($sql);
+         $sql    = "SELECT * FROM noticias n, status s, imagens_noticias ino, usuarios u, categorias_noticias cn
+                     WHERE n.id_not = ino.noticia AND n.status = s.id_sta AND n.autor = u.id_user AND cn.not_id = n.id_not AND n.id_not = $id";
+         $sql2   = "SELECT c.id FROM categorias c, categorias_noticias cn WHERE cn.not_id = $id AND c.id = cn.cat_id";
+
+         $result  = pg_query($sql);
+         $result2 = pg_query($sql2);
+         $retorno = NULL;
 
          while ($reg = pg_fetch_assoc($result))
          {
-            $object = new Noticias();
-            $object->id = $reg['id_not'];
-            $object->autor = $reg['autor'];
+            $object         = new Noticias();
+            $object->id     = $reg['id_not'];
+            $object->autor  = $reg['id_user'];
             $object->titulo = $reg['titulo'];
             $object->resumo = $reg['resumo'];
-            $object->status = $reg['status'];
-         }
-      }
+            $object->status = $reg['id_sta'];
+            $object->texto  = $reg['texto'];
+            $object->imagem = $reg['imagem'];
 
+            foreach (pg_fetch_assoc($result2) as $value)
+            {
+              $temp[] = $value;
+            }
+            $object->categoria = $temp;
+
+            $retorno = $object;
+         }
+         return $retorno;
+      }
 
 }
 ?>

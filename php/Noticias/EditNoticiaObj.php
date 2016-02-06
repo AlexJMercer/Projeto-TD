@@ -50,7 +50,6 @@ include_once "../../class/Carrega.class.php";
       <?php include '../inc/topotime.html';
 
             include '../inc/menutime.html';
-
       ?>
       <div class="content-wrapper">
         <!-- Content Header (Page header) -->
@@ -59,7 +58,6 @@ include_once "../../class/Carrega.class.php";
               Noticias
             </h1>
         </section>
-
         <!-- Main content -->
         <section class="content">
           <div class="row">
@@ -69,6 +67,18 @@ include_once "../../class/Carrega.class.php";
                 <div class="box-header with-border">
                   <h3 class="box-title">Noticias</h3>
                 </div><!-- /.box-header -->
+                <?php
+
+                  $id = $_POST["id"];
+
+                  if (isset($_POST["editar"]))
+                  {
+                    $edit = new Noticias();
+                    $comp = $edit->editar($id);
+
+                      if ($edit != null)
+                      {
+                ?>
                 <!-- form start -->
                 <form class="form-horizontal" id="form" method="post" action="CrudNoticias.php" enctype="multipart/form-data">
                   <div class="box-body">
@@ -76,19 +86,19 @@ include_once "../../class/Carrega.class.php";
                         <label class="col-sm-2 control-label"> Autor: </label>
                         <div class="col-sm-10">
                            <input type="text" value="Mercer" class="form-control" disabled>
-                           <input type="hidden" name="autor" value="2">
+                           <input type="hidden" name="autor" value="<?php echo $comp->autor; ?>">
                         </div>
                       </div>
                       <div class="form-group">
                         <label for="titulo" class="col-sm-2 control-label">Título:</label>
                         <div class="col-sm-10">
-                          <input type="text" class="form-control" name="titulo" id="titulo" placeholder="Digite o título aqui" autofocus required>
+                          <input type="text" class="form-control" name="titulo" id="titulo" placeholder="Digite o título aqui" value="<?php echo $comp->titulo; ?>" required>
                         </div>
                       </div>
                       <div class="form-group">
                         <label for="resumo" class="col-sm-2 control-label">Resumo:</label>
                         <div class="col-sm-10">
-                          <textarea class="form-control"  name="resumo" id="resumo" rows="2" cols="40"  required></textarea>
+                          <textarea class="form-control"  name="resumo" id="resumo" rows="2" cols="40" required><?php echo $comp->resumo; ?></textarea>
                         </div>
                       </div>
                       <div class="form-group">
@@ -98,7 +108,7 @@ include_once "../../class/Carrega.class.php";
                             <option value=""></option>
                             <?php
                                 $staSelect = new Select();
-                                $staSelect->statusSelect();
+                                $staSelect->statusSelect($comp->status);
                             ?>
                           </select>
                         </div>
@@ -109,6 +119,19 @@ include_once "../../class/Carrega.class.php";
                           <select class="form-control select2" id="categoria" name="categoria[]" multiple="multiple" placeholder="Selecione a(s) categoria(s)" required>
                             <option value=""></option>
                             <?php
+
+                              $catSelected   = new Select();
+                              $catSelected->categoriaMultiSelected($comp->categoria);
+                            ?>
+                          </select>
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label for="scategoria" class="col-sm-2 control-label">Categorias:</label>
+                        <div class="col-sm-10">
+                          <select class="form-control select2" id="scategoria" name="categoria[]" multiple="multiple" placeholder="Selecione a(s) categoria(s)">
+                            <option value=""></option>
+                            <?php
                               $catSelect = new Select();
                               $catSelect->categoriaSelect();
                             ?>
@@ -116,9 +139,15 @@ include_once "../../class/Carrega.class.php";
                         </div>
                       </div>
                       <div class="form-group">
+                        <label for="scategoria" class="col-sm-2 control-label">Categorias:</label>
+                        <div class="col-sm-10">
+                          <button type="button" name="cancelar" value="cancelar" class="btn btn-default btn-flat btn-block btn-sm"><i class="fa fa-times"></i> Teste </button>
+                        </div>
+                      </div>
+                      <div class="form-group">
                         <label for="noticia" class="col-sm-2 control-label">Noticia:</label>
                         <div class="col-sm-10">
-                          <textarea class="form-control"  name="noticia" id="noticia" rows="16" cols="40" required></textarea>
+                          <textarea class="form-control"  name="noticia" id="noticia" rows="16" cols="40" required><?php echo $comp->texto; ?></textarea>
                           <br>
                         </div>
                       </div>
@@ -130,9 +159,10 @@ include_once "../../class/Carrega.class.php";
                       </div>
                   </div><!-- /.box-body -->
                   <div class="box-footer">
-                    <button type="submit" name="enviar" value="enviar" class="btn btn-lg btn-success btn-flat btn-block"><i class="fa fa-check"></i> Enviar </button>
+                    <input type="hidden" name="id" value="<?php echo $comp->id; ?>"/>
+                    <button type="submit" name="atualizar" value="atualizar" class="btn btn-success btn-flat btn-block"><i class="fa fa-check"></i> Atualizar </button>
                     <br>
-                    <button type="reset" class="btn btn-default btn-flat btn-block btn-sm"><i class="fa fa-magic"></i> Limpar </button>
+                    <button type="button" name="cancelar" value="cancelar" onclick="location.href='ViewNoticiasObj.php'" class="btn btn-default btn-flat btn-block btn-sm"><i class="fa fa-times"></i> Cancelar </button>
                   </div><!-- /.box-footer -->
                 </form>
               </div><!-- /.box -->
@@ -155,6 +185,9 @@ include_once "../../class/Carrega.class.php";
     <!--FileInput-->
     <script src="../../plugins/fileinput/js/fileinput.min.js" type="text/javascript"></script>
     <script src="../../plugins/fileinput/js/fileinput_locale_pt-BR.js" type="text/javascript"></script>
+    <!-- date-range-picker >
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.2/moment.min.js"></script>
+    <script src="../../plugins/daterangepicker/daterangepicker.js"></script-->
     <!-- FastClick -->
     <script src="../../plugins/fastclick/fastclick.min.js"></script>
     <!-- AdminLTE App -->
@@ -168,12 +201,18 @@ include_once "../../class/Carrega.class.php";
         placeholder:"Selecione o status"
       });
 
-
       $("#categoria").select2({
+        placeholder:"Selecione a(s) categoria(s)"
+      });
+
+      $("#scategoria").select2({
         placeholder:"Selecione a(s) categoria(s)"
       });
 });
       $('.file').fileinput({
+          initialPreview: [
+            '<img src="<?php echo $comp->imagem; ?>" class="file-preview-image">'
+          ],
           browseClass: "btn btn-info btn-flat btn-block",
           showCaption: false,
           showRemove: false,
@@ -181,9 +220,12 @@ include_once "../../class/Carrega.class.php";
           language: 'pt-BR',
           overwriteInitial: true,
           allowedFileExtensions : ['jpg', 'png','gif']
+
       });
-
-
     </script>
   </body>
 </html>
+<?php
+    }
+  }
+?>

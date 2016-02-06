@@ -94,7 +94,7 @@ include_once "../../class/Carrega.class.php";
                       <div class="form-group">
                         <label for="imagem" class="col-sm-2 control-label"> Adicionar imagem: </label>
                         <div class="col-sm-10">
-                            <input class="file" type="file" id="imagem" name="imagem" data-show-upload="false" data-min-file-count="1"/>
+                            <input class="file" type="file" id="imagem" name="imagem" data-show-upload="false" data-min-file-count="0"/>
                         </div>
                       </div>
                   </div><!-- /.box-body -->

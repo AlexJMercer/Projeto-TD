@@ -245,5 +245,94 @@ class Select
         }
       }
     }
+
+    public function alimentoMulti($alimento ="")
+    {
+       $sql = "SELECT * from alimentos";
+       $result = pg_query($sql);
+
+       $ln=pg_num_rows($result);
+
+       if ($ln==0)
+       {
+          echo "<option value=''>Nada Encontrado!!</option>";
+       }
+       else
+       {
+          while ($a = pg_fetch_array($result))
+          {
+            $this->id = $a['id'];
+            $this->alimento = $a['alimento'];
+            //$count=count($a);
+
+            foreach ($alimento as $key)
+            {
+              if ($key==$this->id)
+              {
+                print "<option selected value='{$this->id}'>{$this->alimento}</option>";
+              }
+            }
+          }
+        }
+      }
+
+      public function categoriaMultiSelected($categoria ="")
+      {
+         $sql    = "SELECT * from categorias";
+         $result = pg_query($sql);
+
+         $ln = pg_num_rows($result);
+
+         if ($ln==0)
+         {
+            echo "<option value=''>Nada Encontrado!!</option>";
+         }
+         else
+         {
+            while ($a = pg_fetch_assoc($result))
+            {
+              $this->id        = $a['id'];
+              $this->categoria = $a['categoria'];
+              //$count=count($a);
+
+              foreach ($categoria as $key)
+              {
+                if ($key==$this->id)
+                {
+                  print "<option selected value='{$this->id}'>{$this->categoria}</option>";
+                }
+              }
+            }
+          }
+      }
+
+      public function categoriaUnselected($categoria ="")
+      {
+         $sql    = "SELECT * from categorias";
+         $result = pg_query($sql);
+
+         $ln = pg_num_rows($result);
+
+         if ($ln==0)
+         {
+            echo "<option value=''>Nada Encontrado!!</option>";
+         }
+         else
+         {
+            while ($a = pg_fetch_assoc($result))
+            {
+              $this->id        = $a['id'];
+              $this->categoria = $a['categoria'];
+
+              foreach ($categoria as $key)
+              {
+                if ($this->id!=$key)
+                {
+                  print "<option value='{$this->id}'>{$this->categoria}</option>";
+                }
+              }
+            }
+          }
+      }
 }
 ?>

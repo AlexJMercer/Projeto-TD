@@ -42,7 +42,7 @@ include_once "../../class/Carrega.class.php";
       $object->Atualizar();
 
       $myUpload = new Upload($_FILES['imagem']);
-      $Up       = $myUpload->eventoUpload();
+      $Up       = $myUpload->eventoUploadUpdate($_POST['id']);
 
       header("Location:ViewEventosObj.php");
    }

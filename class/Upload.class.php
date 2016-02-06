@@ -66,7 +66,7 @@ class Upload {
 	function eventoUpload()
 	{
 		if(isset($this->_file))
-		{	
+		{
 			$randomName = rand(00,9999);
 			$fileName   = self::_FOLDER_DIR . "_" . $randomName . "_" . $this->_file["name"];
 			if(is_uploaded_file($this->_file["tmp_name"]))
@@ -91,5 +91,58 @@ class Upload {
 			}
 		}
 	}
+
+	function noticiaUploadUpdate($id = "")
+	{
+		if(isset($this->_file))
+		{
+			$randomName = rand(00,9999);
+			$fileName   = self::_FOLDER_DIR . "_" . $randomName . "_" . $this->_file["name"];
+			if(is_uploaded_file($this->_file["tmp_name"]))
+			{
+				if(move_uploaded_file($this->_file["tmp_name"], $fileName))
+				{
+					$this->id = $id;
+					//print_r($this->id);
+					$sqlImg    = "UPDATE imagens_noticias SET imagem = '$fileName' WHERE noticia = $this->id";
+          $returnImg = pg_query($sqlImg);
+					//print_r($sqlImg);
+					//print_r($returnImg);
+					return true;
+				}
+				else
+				{
+					return false;
+				}
+			}
+		}
+	}
+
+	function eventoUploadUpdate($id="")
+	{
+		if(isset($this->_file))
+		{
+			$randomName = rand(00,9999);
+			$fileName   = self::_FOLDER_DIR . "_" . $randomName . "_" . $this->_file["name"];
+			if(is_uploaded_file($this->_file["tmp_name"]))
+			{
+				if(move_uploaded_file($this->_file["tmp_name"], $fileName))
+				{
+					$this->id = $id;
+					//print_r($ideve[0]);
+					$sqlImg    = "UPDATE eventos set imagem = '$fileName' WHERE id_event = $this->id";
+					$returnImg = pg_query($sqlImg);
+
+					return true;
+				}
+				else
+				{
+					echo "Erro, problemas no envio.";
+					return false;
+				}
+			}
+		}
+	}
+
 }
 ?>

@@ -81,7 +81,7 @@ include_once "../../class/Carrega.class.php";
                       <dt>Nome do curso:</dt>
                       <dd><?php echo $comp->nome; ?></dd><br>
                       <dt>Descrição:</dt>
-                      <dd><textarea name="name" rows="20" class="form-control" disabled><?php echo $comp->texto; ?></textarea></dd>
+                      <dd><textarea style="//border:none; //background-color:#ffffff;" rows="25" class="form-control" disabled><?php echo $comp->texto; ?></textarea></dd>
                     </dl>
                     <form action="EditCursoObj.php" method="post">
 

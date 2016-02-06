@@ -45,7 +45,6 @@ include_once "../../class/Carrega.class.php";
       <?php include '../inc/topotime.html';
 
             include '../inc/menutime.html';
-
       ?>
       <div class="content-wrapper">
         <!-- Content Header (Page header) -->
@@ -54,13 +53,9 @@ include_once "../../class/Carrega.class.php";
             Cardápios
           </h1>
         </section>
-
         <!-- Main content -->
         <section class="content">
           <div class="row">
-            <!-- left column -->
-
-            <!-- right column -->
             <div class="col-lg-12">
               <!-- Horizontal Form -->
               <div class="box box-success">

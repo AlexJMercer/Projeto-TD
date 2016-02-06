@@ -47,9 +47,6 @@ include_once "Carrega.class.php";
 
           if($return)
           {
-
-            //$count = count($this->alimento);
-
             $sql_id_card = "SELECT CURRVAL('cardapios_id_seq')";
             $last        = pg_query($sql_id_card);
             $idcard      = pg_fetch_array($last);
@@ -58,12 +55,9 @@ include_once "Carrega.class.php";
 
             foreach ($this->alimento as $value)
             {
-
               $sql2    = "INSERT INTO alimentos_cardapios (id_cad, id_ali) VALUES ('$this->id', '$value')";
               $return2 = pg_query($sql2);
-
             }
-
             if ($return2)
             {
              $this->transacao("COMMIT");

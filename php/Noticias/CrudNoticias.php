@@ -6,13 +6,13 @@ include_once "../../class/Carrega.class.php";
 
    if (isset($_POST['enviar']))
    {
-      $object             = new Noticias();
-      $object->autor      = $_POST['autor'];
-      $object->titulo     = $_POST['titulo'];
-      $object->resumo     = $_POST['resumo'];
-      $object->status     = $_POST['status'];
-      $object->categorias = $_POST['categorias'];
-      $object->noticia    = $_POST['noticia'];
+      $object            = new Noticias();
+      $object->autor     = $_POST['autor'];
+      $object->titulo    = $_POST['titulo'];
+      $object->resumo    = $_POST['resumo'];
+      $object->status    = $_POST['status'];
+      $object->categoria = $_POST['categoria'];
+      $object->noticia   = $_POST['noticia'];
       //print_r($object);
       $object->Inserir();
 
@@ -35,8 +35,21 @@ include_once "../../class/Carrega.class.php";
 
    elseif (isset($_POST['atualizar']))
    {
-      $object     = new Noticias();
-      $object->id = $_POST['id'];
+      $object            = new Noticias();
+      $object->id        = $_POST['id'];
+      $object->autor     = $_POST['autor'];
+      $object->titulo    = $_POST['titulo'];
+      $object->resumo    = $_POST['resumo'];
+      $object->status    = $_POST['status'];
+      $object->categoria = $_POST['categoria'];
+      $object->noticia   = $_POST['noticia'];
+
+      $object->Atualizar();
+
+      $myUpload = new Upload($_FILES["imagem"]);
+
+      $Up = $myUpload->noticiaUploadUpdate($_POST['id']);
+      header("Location:ViewNoticiasObj.php");
    }
 
 ?>
