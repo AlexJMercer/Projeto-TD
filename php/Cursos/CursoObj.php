@@ -64,19 +64,19 @@ include_once "../../class/Carrega.class.php";
                       <div class="form-group">
                         <label for="curso" class="col-sm-2 control-label">Nome do curso:</label>
                         <div class="col-sm-10">
-                          <input type="text" class="form-control" name="curso" id="curso" placeholder="Digite o nome aqui" required>
+                          <input type="text" class="form-control" name="nome" id="curso" placeholder="Digite o nome aqui" required>
                         </div>
                       </div>
                       <div class="form-group">
                          <label for="desc" class="col-sm-2 control-label">Descrição:</label>
                          <div class="col-sm-10">
-                            <textarea class="form-control" name="texto" id="desc" rows="8" placeholder="Digite aqui..."></textarea>
+                            <textarea class="form-control" name="texto" id="desc" rows="14" placeholder="Digite aqui..."></textarea>
                          </div>
                       </div>
                       <div class="form-group">
                         <label for="logo" class="col-sm-2 control-label">Logo:</label>
                         <div class="col-sm-10">
-                          <input id="logo" name="logo" class="file" type="file" multiple data-min-file-count="1">
+                          <input id="logo" name="logo" class="file" type="file" multiple data-min-file-count="0">
                         </div>
                       </div>
                   </div><!-- /.box-body -->
@@ -120,7 +120,6 @@ include_once "../../class/Carrega.class.php";
           showRemove: false,
           showUpload: false,
           language: 'pt-BR',
-          uploadUrl: '#',
           allowedFileExtensions : ['jpg', 'png','gif']
 
       });

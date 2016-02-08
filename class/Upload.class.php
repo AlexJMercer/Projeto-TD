@@ -92,6 +92,61 @@ class Upload {
 		}
 	}
 
+	function cursoUpload()
+	{
+		if(isset($this->_file))
+		{
+			$randomName = rand(00,9999);
+			$fileName   = self::_FOLDER_DIR . "_" . $randomName . "_" . $this->_file["name"];
+			if(is_uploaded_file($this->_file["tmp_name"]))
+			{
+				if(move_uploaded_file($this->_file["tmp_name"], $fileName))
+				{
+					$sql_id_curso = "SELECT CURRVAL('cursos_id_curso_seq')";
+					$last         = pg_query($sql_id_curso);
+					$idcur        = pg_fetch_array($last);
+					$this->id     = $idcur[0];
+					//print_r($ideve[0]);
+					$sqlImg    = "UPDATE cursos set logo = '$fileName' WHERE id_curso = $this->id";
+					$returnImg = pg_query($sqlImg);
+
+					return true;
+				}
+				else
+				{
+					echo "Erro, problemas no envio.";
+					return false;
+				}
+			}
+		}
+	}
+
+	function cursoUploadUpdate($id = "")
+	{
+		if(isset($this->_file))
+		{
+			$randomName = rand(00,9999);
+			$fileName   = self::_FOLDER_DIR . "_" . $randomName . "_" . $this->_file["name"];
+			if(is_uploaded_file($this->_file["tmp_name"]))
+			{
+				if(move_uploaded_file($this->_file["tmp_name"], $fileName))
+				{
+					$this->id = $id;
+					//print_r($ideve[0]);
+					$sqlImg    = "UPDATE cursos set logo = '$fileName' WHERE id_curso = $this->id";
+					$returnImg = pg_query($sqlImg);
+
+					return true;
+				}
+				else
+				{
+					echo "Erro, problemas no envio.";
+					return false;
+				}
+			}
+		}
+	}
+
 	function noticiaUploadUpdate($id = "")
 	{
 		if(isset($this->_file))
@@ -129,7 +184,7 @@ class Upload {
 				if(move_uploaded_file($this->_file["tmp_name"], $fileName))
 				{
 					$this->id = $id;
-					//print_r($ideve[0]);
+					
 					$sqlImg    = "UPDATE eventos set imagem = '$fileName' WHERE id_event = $this->id";
 					$returnImg = pg_query($sqlImg);
 

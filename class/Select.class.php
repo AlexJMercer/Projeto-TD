@@ -276,7 +276,7 @@ class Select
         }
       }
 
-      public function categoriaMultiSelected($categoria ="")
+    public function categoriaMultiSelected($categoria ="")
       {
          $sql    = "SELECT * from categorias";
          $result = pg_query($sql);
@@ -306,33 +306,39 @@ class Select
           }
       }
 
-      public function categoriaUnselected($categoria ="")
+    public function categoriaUnselected($categoria ="")
       {
          $sql    = "SELECT * from categorias";
          $result = pg_query($sql);
 
-         $ln = pg_num_rows($result);
-
-         if ($ln==0)
-         {
-            echo "<option value=''>Nada Encontrado!!</option>";
-         }
-         else
-         {
             while ($a = pg_fetch_assoc($result))
             {
-              $this->id        = $a['id'];
-              $this->categoria = $a['categoria'];
+              $object = new Select();
+              $object->id        = $a['id'];
+              $object->categoria = $a['categoria'];
+
+
 
               foreach ($categoria as $key)
               {
-                if ($this->id!=$key)
+                $array[0] = array_unique($object);
+                print_r($result);
+                //Object
+                echo "object";
+                print_r($object);
+                //$a
+                echo "a";
+                print_r($a);
+                //array
+                echo "array";
+                print_r($array);
+                if ($object->id!=$key)
                 {
-                  print "<option value='{$this->id}'>{$this->categoria}</option>";
+                  print "<option value='{$object->id}'>{$object->categoria}</option>";
                 }
               }
             }
-          }
+
       }
 }
 ?>

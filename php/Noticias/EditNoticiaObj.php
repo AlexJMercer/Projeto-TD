@@ -85,7 +85,7 @@ include_once "../../class/Carrega.class.php";
                       <div class="form-group">
                         <label class="col-sm-2 control-label"> Autor: </label>
                         <div class="col-sm-10">
-                           <input type="text" value="Mercer" class="form-control" disabled>
+                           <input type="text" value="Mercer" class="form-control" style="display: none" disabled>
                            <input type="hidden" name="autor" value="<?php echo $comp->autor; ?>">
                         </div>
                       </div>
@@ -119,29 +119,40 @@ include_once "../../class/Carrega.class.php";
                           <select class="form-control select2" id="categoria" name="categoria[]" multiple="multiple" placeholder="Selecione a(s) categoria(s)" required>
                             <option value=""></option>
                             <?php
-
-                              $catSelected   = new Select();
+                              $catSelected = new Select();
                               $catSelected->categoriaMultiSelected($comp->categoria);
+                              $cat = new Select();
+                              $cat->categoriaUnselected($comp->categoria);
                             ?>
                           </select>
                         </div>
                       </div>
-                      <div class="form-group">
+                      <!--div class="form-group">
                         <label for="scategoria" class="col-sm-2 control-label">Categorias:</label>
                         <div class="col-sm-10">
                           <select class="form-control select2" id="scategoria" name="categoria[]" multiple="multiple" placeholder="Selecione a(s) categoria(s)">
+                            <option value=""></option>
+                            <?php
+                              //$catSelect = new Select();
+                              //$catSelect->categoriaSelect();
+                            ?>
+                          </select>
+                        </div>
+                      </div-->
+                      <div class="form-group">
+                        <label for="scategoria" class="col-sm-2 control-label">Categorias:</label>
+                        <div class="col-sm-10">
+                          <button type="button" name="button" id="addcat" class="btn btn-info btn-flat btn-block"><i class="fa fa-plus"></i> Adicionar categorias</button>
+                          <div id="testing" style="display: none">
+                            <br>
+                          <select class="form-control select2" id="scategoria" name="categoria[]" multiple="multiple" style="width: 100%" placeholder="Selecione a(s) categoria(s)">
                             <option value=""></option>
                             <?php
                               $catSelect = new Select();
                               $catSelect->categoriaSelect();
                             ?>
                           </select>
-                        </div>
-                      </div>
-                      <div class="form-group">
-                        <label for="scategoria" class="col-sm-2 control-label">Categorias:</label>
-                        <div class="col-sm-10">
-                          <button type="button" name="cancelar" value="cancelar" class="btn btn-default btn-flat btn-block btn-sm"><i class="fa fa-times"></i> Teste </button>
+                          </div>
                         </div>
                       </div>
                       <div class="form-group">
@@ -196,7 +207,20 @@ include_once "../../class/Carrega.class.php";
     <script src="../../dist/js/demo.js"></script>
 
     <script type="text/javascript">
+      $(document).ready(function()
+      {
+        $("#addcat").click(ShowCategoria);
+      });
+
+      function ShowCategoria()
+      {
+        $("#testing").toggle();
+      }
+    </script>
+
+    <script type="text/javascript">
     $(function(){
+
       $("#status").select2({
         placeholder:"Selecione o status"
       });
@@ -205,9 +229,7 @@ include_once "../../class/Carrega.class.php";
         placeholder:"Selecione a(s) categoria(s)"
       });
 
-      $("#scategoria").select2({
-        placeholder:"Selecione a(s) categoria(s)"
-      });
+      $("#scategoria").select2();
 });
       $('.file').fileinput({
           initialPreview: [
@@ -220,7 +242,6 @@ include_once "../../class/Carrega.class.php";
           language: 'pt-BR',
           overwriteInitial: true,
           allowedFileExtensions : ['jpg', 'png','gif']
-
       });
     </script>
   </body>

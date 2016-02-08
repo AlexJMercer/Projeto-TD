@@ -19,6 +19,8 @@ include_once "../../class/Carrega.class.php";
     <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
     <!-- Select2 -->
     <link rel="stylesheet" href="../../plugins/select2/select2.min.css">
+    <!--FileInput-->
+    <link rel="stylesheet" href="../../plugins/fileinput/css/fileinput.min.css">
     <!-- Theme style -->
     <link rel="stylesheet" href="../../dist/css/AdminLTE.min.css">
     <!-- AdminLTE Skins. Choose a skin from the css/skins
@@ -70,12 +72,12 @@ include_once "../../class/Carrega.class.php";
     if ($edit != null)
     {
 ?>
-                <form class="form-horizontal" id="form" method="post" action="CrudCursos.php">
+                <form class="form-horizontal" id="form" method="post" action="CrudCursos.php" enctype="multipart/form-data">
                   <div class="box-body">
                       <div class="form-group">
                         <label for="curso" class="col-sm-2 control-label">Nome do curso:</label>
                         <div class="col-sm-10">
-                          <input type="text" value="<?php echo $comp->nome; ?>" class="form-control" name="curso" id="curso" placeholder="Digite o nome aqui" required>
+                          <input type="text" value="<?php echo $comp->nome; ?>" class="form-control" name="nome" id="curso" placeholder="Digite o nome aqui" required>
                         </div>
                       </div>
                       <div class="form-group">
@@ -85,8 +87,10 @@ include_once "../../class/Carrega.class.php";
                          </div>
                       </div>
                       <div class="form-group">
-                        <label for="">Logo:</label>
-                        <input class="form-control" type="text" name="logo" value="nulo">
+                        <label for="logo" class="col-sm-2 control-label">Logo:</label>
+                        <div class="col-sm-10">
+                          <input id="logo" name="logo" class="file" type="file" data-min-file-count="0">
+                        </div>
                       </div>
                   </div><!-- /.box-body -->
                   <div class="box-footer">
@@ -96,10 +100,7 @@ include_once "../../class/Carrega.class.php";
                     <button type="button" name="cancelar" value="cancelar" onclick="location.href='ViewCursosObj.php'" class="btn btn-default btn-flat btn-block btn-sm"><i class="fa fa-magic"></i> Cancelar </button>
                   </div><!-- /.box-footer -->
                 </form>
-                <?php
-                      }
-                    }
-                ?>
+
               </div><!-- /.box -->
               <!-- general form elements disabled -->
             </div><!--/.col (right) -->
@@ -117,6 +118,9 @@ include_once "../../class/Carrega.class.php";
     <script src="../../bootstrap/js/bootstrap.min.js"></script>
     <!-- FastClick -->
     <script src="../../plugins/fastclick/fastclick.min.js"></script>
+    <!--FileInput-->
+    <script src="../../plugins/fileinput/js/fileinput.min.js" type="text/javascript"></script>
+    <script src="../../plugins/fileinput/js/fileinput_locale_pt-BR.js" type="text/javascript"></script>
     <!-- AdminLTE App -->
     <script src="../../dist/js/app.min.js"></script>
     <!-- Select2 -->
@@ -126,10 +130,24 @@ include_once "../../class/Carrega.class.php";
 
 
     <script type="text/javascript">
-    $(function(){
-      $(".select2").select2();
+    $('.file').fileinput({
+      initialPreview: [
+        '<img src="<?php echo $comp->logo; ?>" class="file-preview-image">'
+      ],
+        overwriteInitial: true,
+        browseClass: "btn btn-info btn-flat btn-block",
+        showCaption: false,
+        showRemove: false,
+        showUpload: false,
+        language: 'pt-BR',
+        allowedFileExtensions : ['jpg', 'png','gif']
+
     });
     </script>
 
   </body>
 </html>
+<?php
+      }
+    }
+?>
