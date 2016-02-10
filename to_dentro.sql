@@ -149,9 +149,10 @@ INSERT INTO usuarios (username, email, senha, type) VALUES ('admin','admin','adm
 create table noticias(
 	id_not serial not null,
 	titulo varchar(200) not null,
-	resumo varchar(350) not null,
+	resumo varchar(350),
 	texto text not null,
-	data timestamp default(now()) not null,
+	data date default(now()) not null,
+	hora time default(now()) not null,
 	autor integer not null,
 	status integer not null,
 	primary key(id_not),

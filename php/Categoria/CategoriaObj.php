@@ -22,6 +22,17 @@ include_once "../../class/Carrega.class.php";
     <!-- AdminLTE Skins. Choose a skin from the css/skins
          folder instead of downloading all of them to reduce the load. -->
     <link rel="stylesheet" href="../../dist/css/skins/_all-skins.min.css">
+    <!-- jQuery 2.1.4 -->
+    <script src="../../plugins/jQuery/jQuery-2.1.4.min.js"></script>
+    <!--Ajax-->
+    <!--script src="script.js"></script-->
+
+    <style type='text/css'>
+      .alerta{
+        display: none;
+        z-index: 1001;
+      }
+    </style>
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -35,11 +46,20 @@ include_once "../../class/Carrega.class.php";
       <?php include '../inc/topotime.html';
 
             include '../inc/menutime.html';
-
       ?>
       <div class="content-wrapper">
         <!-- Content Header (Page header) -->
+        <span class="alert ">
+          <div class="col-md-4 pull-right">
+            <div class="alert alert-success alert-dismissable">
+              <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+              <h4>	<i class="icon fa fa-check"></i> Alert!</h4>
+              Success alert preview. This alert is dismissable.
+            </div>
+          </div>
+        </span>
         <section class="content-header">
+
           <h1>
             Categorias
           </h1>
@@ -58,7 +78,7 @@ include_once "../../class/Carrega.class.php";
                   <h3 class="box-title">Cadastro de categorias</h3>
                 </div><!-- /.box-header -->
                 <!-- form start -->
-                <form class="form-horizontal" id="form" method="post" action="CrudCategoria.php">
+                <form class="form-horizontal" id="form" method="post" action="CadCategoria.php">
                   <div class="box-body">
                       <div class="form-group">
                         <label for="dia" class="col-sm-2 control-label">Categoria:</label>
@@ -74,6 +94,7 @@ include_once "../../class/Carrega.class.php";
 
                   </div><!-- /.box-footer -->
                 </form>
+
               </div><!-- /.box -->
               <!-- general form elements disabled -->
             </div><!--/.col (right) -->
@@ -86,8 +107,6 @@ include_once "../../class/Carrega.class.php";
       ?>
     </div><!-- ./wrapper -->
 
-    <!-- jQuery 2.1.4 -->
-    <script src="../../plugins/jQuery/jQuery-2.1.4.min.js"></script>
     <!-- Bootstrap 3.3.5 -->
     <script src="../../bootstrap/js/bootstrap.min.js"></script>
     <!-- FastClick -->

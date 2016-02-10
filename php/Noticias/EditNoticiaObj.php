@@ -85,8 +85,18 @@ include_once "../../class/Carrega.class.php";
                       <div class="form-group">
                         <label class="col-sm-2 control-label"> Autor: </label>
                         <div class="col-sm-10">
-                           <input type="text" value="Mercer" class="form-control" style="display: none" disabled>
+                           <input type="text" value="Mercer" class="form-control" disabled>
                            <input type="hidden" name="autor" value="<?php echo $comp->autor; ?>">
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label for="data" class="col-sm-2 control-label">Data:</label>
+                        <div class="col-sm-5">
+                          <input type="text" name="data" value="<?php echo date('d/m/Y',strtotime($comp->data)); ?>" class="form-control" data-inputmask="'alias': 'dd/mm/yyyy'" data-mask>
+                        </div>
+                        <label for="hora" class="col-sm-1 control-label">Hora:</label>
+                        <div class="col-sm-4 bootstrap-timepicker pull-right">
+                          <input type="text" name="hora" value='<?php echo $comp->hora; ?>' class="form-control timepicker pull-right">
                         </div>
                       </div>
                       <div class="form-group">
@@ -116,13 +126,13 @@ include_once "../../class/Carrega.class.php";
                       <div class="form-group">
                         <label for="categoria" class="col-sm-2 control-label">Categorias da noticia:</label>
                         <div class="col-sm-10">
-                          <select class="form-control select2" id="categoria" name="categoria[]" multiple="multiple" placeholder="Selecione a(s) categoria(s)" required>
+                          <select class="form-control select2" id="categoria" name="categoria[]" multiple="multiple" placeholder="Selecione a(s) categoria(s)">
                             <option value=""></option>
                             <?php
                               $catSelected = new Select();
                               $catSelected->categoriaMultiSelected($comp->categoria);
-                              $cat = new Select();
-                              $cat->categoriaUnselected($comp->categoria);
+                              //$cat = new Select();
+                              //$cat->categoriaUnselected($comp->categoria);
                             ?>
                           </select>
                         </div>
@@ -196,9 +206,12 @@ include_once "../../class/Carrega.class.php";
     <!--FileInput-->
     <script src="../../plugins/fileinput/js/fileinput.min.js" type="text/javascript"></script>
     <script src="../../plugins/fileinput/js/fileinput_locale_pt-BR.js" type="text/javascript"></script>
-    <!-- date-range-picker >
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.2/moment.min.js"></script>
-    <script src="../../plugins/daterangepicker/daterangepicker.js"></script-->
+    <!-- InputMask -->
+    <script src="../../plugins/input-mask/jquery.inputmask.js"></script>
+    <script src="../../plugins/input-mask/jquery.inputmask.date.extensions.js"></script>
+    <script src="../../plugins/input-mask/jquery.inputmask.extensions.js"></script>
+    <!-- bootstrap time picker -->
+    <script src="../../plugins/timepicker/bootstrap-timepicker.min.js"></script>
     <!-- FastClick -->
     <script src="../../plugins/fastclick/fastclick.min.js"></script>
     <!-- AdminLTE App -->
@@ -230,6 +243,16 @@ include_once "../../class/Carrega.class.php";
       });
 
       $("#scategoria").select2();
+
+      $("#datemask").inputmask("dd/mm/yyyy", {"placeholder": "dd/mm/yyyy"});
+      //Money Euro
+      $("[data-mask]").inputmask();
+
+      //Timepicker
+      $(".timepicker").timepicker({
+        showInputs: false,
+        showMeridian: false
+      });
 });
       $('.file').fileinput({
           initialPreview: [

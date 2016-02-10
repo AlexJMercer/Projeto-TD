@@ -86,8 +86,8 @@ include_once "../../class/Carrega.class.php";
                       </div>
                       <div class="form-group">
                         <label class="col-sm-2 control-label" for="disciplina">Disciplina:</label>
-                        <span class="carregando">Aguarde, carregando...</span>
                         <div class="col-sm-10">
+                          <span class="carregando">Aguarde, carregando...</span>
                            <select class="form-control select2" name="disciplina" id="disciplina" required>
                               <option value=""></option>
                            </select>

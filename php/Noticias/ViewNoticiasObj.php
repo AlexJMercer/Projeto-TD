@@ -79,7 +79,7 @@ include_once "../../class/Carrega.class.php";
 ?>
                       <tr class="odd gradeX">
                         <form name="view" action="EditNoticiaObj.php" method="post">
-                        <td><?php echo $line->data ?></td>
+                        <td><?php echo date('d/m/Y',strtotime($line->data)); ?></td>
                         <td><?php echo $line->titulo; ?></td>
                         <td>
                           <input type='hidden' name='id' value='<?php echo $line->id; ?>'>

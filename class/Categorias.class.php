@@ -32,19 +32,17 @@
 
       public function inserir()
       {
-        $sql    ="INSERT INTO categorias (categoria) VALUES ('$this->categoria')";
+        $sql    = "INSERT INTO categorias (categoria) VALUES ('$this->categoria')";
         $return = pg_query($sql);
 
         if($return)
         {
-          $show = "<script> alert('Cadastro feito com sucesso.');</script>";
+          return true;
         }
         else
         {
-          $show = "<script> alert('Deu ruim.');</script>";
+          return false;
         }
-
-        return $show;
       }
 
       function listar()

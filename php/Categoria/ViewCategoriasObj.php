@@ -21,6 +21,12 @@
     <link rel="stylesheet" href="../../dist/css/skins/_all-skins.min.css">
 
     <link rel="stylesheet" href="../../bootstrap/css/center.css">
+    <style type='text/css'>
+      .alerta{
+        /*display: none;*/
+        z-index: 1001;
+      }
+    </style>
 
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -31,6 +37,8 @@
     <![endif]-->
   </head>
   <body class="hold-transition skin-green sidebar-mini">
+
+
     <div class="wrapper">
 
       <?php include '../inc/topotime.html';
@@ -38,6 +46,7 @@
             include '../inc/menutime.html';
 
       ?>
+
       <!-- Content Wrapper. Contains page content -->
       <div class="content-wrapper">
         <!-- Content Header (Page header) -->
@@ -100,12 +109,24 @@ include_once "../../class/Carrega.class.php";
                     ?>
                     </tbody>
                   </table>
+
                 </div><!-- /.box-body -->
+                <span class="alerta">
+                  <div class="col-md-4 pull-right">
+                    <div class="alert alert-success alert-dismissable">
+                      <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                      <h4>	<i class="icon fa fa-check"></i> Alert!</h4>
+                      Success alert preview. This alert is dismissable.
+                    </div>
+                  </div>
+                </span>
               </div><!-- /.box -->
             </div><!-- /.col -->
+
           </div><!-- /.row -->
         </section><!-- /.content -->
       </div><!-- /.content-wrapper -->
+
 
       <?php
         include '../inc/footer.html';

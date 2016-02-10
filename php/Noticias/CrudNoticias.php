@@ -8,6 +8,8 @@ include_once "../../class/Carrega.class.php";
    {
       $object            = new Noticias();
       $object->autor     = $_POST['autor'];
+      $object->data      = $_POST['data'];
+      $object->hora      = $_POST['hora'];
       $object->titulo    = $_POST['titulo'];
       $object->resumo    = $_POST['resumo'];
       $object->status    = $_POST['status'];
@@ -38,6 +40,8 @@ include_once "../../class/Carrega.class.php";
       $object            = new Noticias();
       $object->id        = $_POST['id'];
       $object->autor     = $_POST['autor'];
+      $object->data      = $_POST['data'];
+      $object->hora      = $_POST['hora'];
       $object->titulo    = $_POST['titulo'];
       $object->resumo    = $_POST['resumo'];
       $object->status    = $_POST['status'];

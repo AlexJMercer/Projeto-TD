@@ -10,7 +10,7 @@ if (isset($_POST['excluir']))
 
     $object->excluir();
 
-    //echo "<meta http-equiv='refresh' content='0;url=ViewCardapioObj.php'";
+    echo "<meta http-equiv='refresh' content='0;url=ViewCardapioObj.php'";
     header("Location:ViewCardapioObj.php");
 }
 ?>

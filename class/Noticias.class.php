@@ -14,6 +14,7 @@ class Noticias
    private $categoria;
    private $status;
    private $data;
+   private $hora;
    private $imagem;
    private $bd;
 
@@ -48,7 +49,8 @@ class Noticias
       {
          $this->transacao("BEGIN");
 
-         $sql    = "INSERT INTO noticias (autor, titulo, resumo, status, texto) VALUES ('$this->autor', '$this->titulo', '$this->resumo', '$this->status', '$this->noticia')";
+         $sql    = "INSERT INTO noticias (autor, data, hora, titulo, resumo, status, texto)
+                    VALUES ('$this->autor', '$this->data', '$this->hora', '$this->titulo', '$this->resumo', '$this->status', '$this->noticia')";
          $return = pg_query($sql);
 
            if($return)
@@ -105,7 +107,7 @@ class Noticias
       {
         $this->transacao("BEGIN");
 
-        $sql    = "UPDATE noticias set autor = '$this->autor', titulo = '$this->titulo', resumo = '$this->resumo', status = '$this->status', texto = '$this->noticia' WHERE id_not = $this->id";
+        $sql    = "UPDATE noticias set autor = '$this->autor', data = '$this->data', hora = '$this->hora', titulo = '$this->titulo', resumo = '$this->resumo', status = '$this->status', texto = '$this->noticia' WHERE id_not = $this->id";
         $return = pg_query($sql);
 
           if($return)
@@ -152,6 +154,8 @@ class Noticias
             $object         = new Noticias();
             $object->id     = $reg['id_not'];
             $object->autor  = $reg['id_user'];
+            $object->data   = $reg['data'];
+            $object->hora   = $reg['hora'];
             $object->titulo = $reg['titulo'];
             $object->resumo = $reg['resumo'];
             $object->status = $reg['id_sta'];
