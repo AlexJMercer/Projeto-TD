@@ -31,7 +31,7 @@ class Logar
 
   public function Logar($login='', $senha='')
   {
-    $sql    = "SELECT * FROM usuarios WHERE usuarios.login ='$login' AND usuarios.senha ='$senha'";
+    $sql    = "SELECT login, senha, usertype FROM usuarios WHERE usuarios.login ='$login' AND usuarios.senha ='$senha'";
     $result = pg_query($sql);
     $usr    = pg_num_rows($result);
   }
