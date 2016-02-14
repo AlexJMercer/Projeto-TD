@@ -1,3 +1,16 @@
+<?php
+
+include_once "../class/Carrega.class.php";
+
+if (isset($_POST['logar']) && !empty($_POST['login']) && !empty($_POST['senha']))
+{
+  $object = new Logar();
+
+
+  $object->logon($_POST['login'], $_POST['senha']);
+}
+
+?>
 <!DOCTYPE html>
 <html>
   <head>
@@ -31,13 +44,13 @@
       </div><!-- /.login-logo -->
       <div class="login-box-body">
         <p class="login-box-msg">Logue para iniciar sua sessão</p>
-        <form action="../../index2.html" method="post">
+        <form action="<?php $SELF_PHP;?>" method="post">
           <div class="form-group has-feedback">
-            <input type="email" class="form-control" placeholder="Email ou Nome de usuário">
+            <input type="email" class="form-control" name='login' placeholder="Email ou Nome de usuário">
             <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
           </div>
           <div class="form-group has-feedback">
-            <input type="password" class="form-control" placeholder="Password">
+            <input type="password" class="form-control" name='senha' placeholder="Password">
             <span class="glyphicon glyphicon-lock form-control-feedback"></span>
           </div>
           <div class="row">
@@ -49,7 +62,7 @@
               </div>
             </div><!-- /.col -->
             <div class="col-xs-4">
-              <button type="submit" class="btn btn-primary btn-block btn-flat">Logar</button>
+              <button type="submit" name="logar" class="btn btn-primary btn-block btn-flat">Logar</button>
             </div><!-- /.col -->
           </div>
         </form>

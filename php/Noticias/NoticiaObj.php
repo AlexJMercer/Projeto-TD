@@ -33,13 +33,6 @@ include_once "../../class/Carrega.class.php";
          folder instead of downloading all of them to reduce the load. -->
     <link rel="stylesheet" href="../../dist/css/skins/_all-skins.min.css">
 
-    <!--style type="text/css">
-      input[type=file]
-      {
-        border: none;
-      }
-    </style-->
-
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -52,16 +45,12 @@ include_once "../../class/Carrega.class.php";
       <?php include '../inc/topotime.html';
 
             include '../inc/menutime.html';
-
       ?>
       <div class="content-wrapper">
         <!-- Content Header (Page header) -->
         <section class="content-header">
-            <h1>
-              Noticias
-            </h1>
+            <h1>Notícias</h1>
         </section>
-
         <!-- Main content -->
         <section class="content">
           <div class="row">
@@ -69,7 +58,7 @@ include_once "../../class/Carrega.class.php";
               <!-- Horizontal Form -->
               <div class="box box-success">
                 <div class="box-header with-border">
-                  <h3 class="box-title">Noticias</h3>
+                  <h3 class="box-title">Cadastro de notícias</h3>
                 </div><!-- /.box-header -->
                 <!-- form start -->
                 <form class="form-horizontal" id="form" method="post" action="CrudNoticias.php" enctype="multipart/form-data">

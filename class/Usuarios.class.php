@@ -5,12 +5,12 @@
     */
    class Usuarios
    {
-      private $cod;
+      private $id;
       private $nome;
       private $email;
       private $senha;
       private $bd;
-      private $type;
+      private $tipo;
       //private $inSession = true;
 
       public function __construct()
@@ -35,8 +35,7 @@
 
       public function inserir()
       {
-         $sql = "INSERT INTO usuarios (nome, email, senha, usertype, login)
-                 VALUES ('$this->nome', '$this->email', '$this->senha', '$this->type', '$this->login')";
+         $sql = "INSERT INTO usuarios (nome, email, senha, usertype) VALUES ('$this->nome', '$this->email', '$this->senha', '$this->tipo')";
          $return = pg_query($sql);
          return $return;
       }
@@ -126,7 +125,7 @@
       public function logar($login="", $senha="")
       {
          //$senha = $this->codificaSenha($senha);
-         $sql = "SELECT * FROM usuarios WHERE usuarios.login='$login' AND usuarios.senha='$senha' AND usuarios.usertype='$type'";
+         $sql = "SELECT * FROM usuarios WHERE usuarios.email='$login' AND usuarios.senha='$senha' AND usuarios.usertype='$type'";
          $result = pg_query($sql);
          $cont=pg_num_rows($result);
          //$return= NULL;

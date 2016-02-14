@@ -56,7 +56,7 @@ include_once "../../class/Carrega.class.php";
                   <h3 class="box-title">Cadastro de usuários</h3>
                 </div><!-- /.box-header -->
                 <!-- form start -->
-                <form class="form-horizontal" id="form" method="post" action="Crud.php">
+                <form class="form-horizontal" id="form" method="post" action="CrudUsers.php">
                   <div class="box-body">
                       <div class="form-group">
                         <label for="nome" class="col-sm-2 control-label">Nome:</label>
@@ -82,12 +82,6 @@ include_once "../../class/Carrega.class.php";
                         </div>
                       </div>
                       <div class="form-group">
-                        <label for="login" class="col-sm-2 control-label">Nome de usuário:</label>
-                        <div class="col-sm-10">
-                          <input type="text" class="form-control" name="login" id="login" required>
-                        </div>
-                      </div>
-                      <div class="form-group">
                         <label for="senha" class="col-sm-2 control-label">Senha:</label>
                         <div class="col-sm-10">
                           <input type="password" class="form-control" name="senha" id="senha" required>
@@ -96,7 +90,7 @@ include_once "../../class/Carrega.class.php";
                       <div class="form-group">
                         <label for="csenha" class="col-sm-2 control-label">Confirmar senha:</label>
                         <div class="col-sm-10">
-                          <input type="password" class="form-control" name="csenha" id="csenha" required>
+                          <input type="password" class="form-control" name="csenha" id="csenha" oninput="validaSenha(this)" required>
                         </div>
                       </div>
                   </div><!-- /.box-body -->
@@ -140,6 +134,20 @@ include_once "../../class/Carrega.class.php";
 
     });
     </script>
+
+    <script type="text/javascript">
+    function validaSenha (input)
+    {
+	     if (input.value != document.getElementById('senha').value)
+       {
+         input.setCustomValidity('Repita a senha corretamente');
+       }
+       else
+       {
+         input.setCustomValidity('');
+       }
+    }
+</script>
 
   </body>
 </html>
