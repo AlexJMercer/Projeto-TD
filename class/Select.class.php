@@ -14,6 +14,7 @@ class Select
     public $curso;
     public $categoria;
     public $status;
+    public $evento;
     //public $;
     //public $;
     //public $;
@@ -277,7 +278,7 @@ class Select
       }
 
     public function categoriaMultiSelected($categoria ="")
-      {
+   {
          $sql    = "SELECT * from categorias";
          $result = pg_query($sql);
 
@@ -306,8 +307,8 @@ class Select
           }
       }
 
-    public function categoriaUnselected($categoria ="")
-      {
+   public function categoriaUnselected($categoria ="")
+   {
          $sql    = "SELECT * from categorias";
          $result = pg_query($sql);
 
@@ -340,5 +341,35 @@ class Select
             }
 
       }
+
+   public function eventoSelect($evento='')
+   {
+      $sql    = "SELECT * from eventos Order by id_event";
+      $result = pg_query($sql);
+      $ln     = pg_num_rows($result);
+
+      if ($ln==0)
+      {
+         echo "<option value=''> Nada encontrado!! </option>";
+      }
+      else
+      {
+         while ($a  = pg_fetch_array($result))
+         {
+            $this->id     = $a['id_event'];
+            $this->evento = $a['evento'];
+
+
+            if ($evento==$this->id)
+            {
+               print "<option selected value='{$this->id}'>{$this->evento}</option>";
+            }
+            else
+            {
+               print "<option value='{$this->id}'>{$this->evento}</option>";
+            }
+         }
+      }
+   }
 }
 ?>

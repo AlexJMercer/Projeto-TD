@@ -94,7 +94,7 @@ include_once "../../class/Carrega.class.php";
                       <div class="form-group">
                         <label for="titulo" class="col-sm-2 control-label">Título:</label>
                         <div class="col-sm-10">
-                          <input type="text" class="form-control" name="titulo" id="titulo" placeholder="Digite o título aqui" autofocus required>
+                          <input type="text" class="form-control" name="titulo" id="titulo" placeholder="Digite o título aqui" required>
                         </div>
                       </div>
                       <div class="form-group">

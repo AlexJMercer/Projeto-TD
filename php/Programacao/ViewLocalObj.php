@@ -43,7 +43,7 @@
         <!-- Content Header (Page header) -->
         <section class="content-header">
           <h1>
-          Noticias
+          Locais
           </h1>
         </section>
 
@@ -53,14 +53,13 @@
             <div class="col-xs-12">
               <div class="box">
                 <div class="box-header">
-                  <h3 class="box-title">Listagem de noticias</h3>
+                  <h3 class="box-title">Listagem de locais</h3>
                 </div><!-- /.box-header -->
                 <div class="box-body">
                   <table id="dataT" class="table table-bordered table-hover">
                     <thead>
                       <tr>
-                        <th>Data</th>
-                        <th>Noticia</th>
+                        <th>Locais</th>
                         <th>Opções</th>
                       </tr>
                     </thead>
@@ -69,7 +68,7 @@
 
 include_once "../../class/Carrega.class.php";
 
-  $listar = new Noticias();
+  $listar = new Local();
   $list = $listar->listar();
 
   if ($list != null)
@@ -77,28 +76,25 @@ include_once "../../class/Carrega.class.php";
     foreach ($list as $line)
     {
 ?>
-                  <tr class="odd gradeX">
-                     <form name="view" action="EditNoticiaObj.php" method="post">
-                        <td><?php echo date('d/m/Y',strtotime($line->data)); ?></td>
-                        <td><?php echo $line->titulo; ?></td>
+                      <tr class="odd gradeX">
+                        <form name="view" action="EditLocalObj.php" method="post">
+                        <td><?php echo $line->sala; ?></td>
                         <td>
                           <input type='hidden' name='id' value='<?php echo $line->id; ?>'>
-                          <button type="submit" name="editar" value="editar" class="btn btn-flat btn-warning"><i class="fa fa-edit"></i> Editar </button>
-                          <button type="submit" name="excluir" value="excluir" formaction="CrudNoticias.php" class='btn btn-flat btn-danger'><i class="fa fa-times"></i> Excluir </button>
-                        </td>
-                     </form>
-                  </tr>
 
+                          <button type="submit" name="editar" value="editar" class="btn btn-flat btn-warning"><i class="fa fa-edit"></i> Editar </button>
+
+                          <button type="submit" name="excluir" value="excluir" formaction="CrudLocal.php" class='btn btn-flat btn-danger'><i class="fa fa-times"></i> Excluir </button>
+                        </td>
+                      </tr>
+                      </form>
                     <?php
                             }
                           }
                           else
                           {
-                            ?>
-                            <tr class="odd gradeX">
-                               <td><h2>Nada encontrado!!</h2></td>
-                            </tr>
-                  <?php}
+                            echo "<h2> Nada cadastrado!!</h2>";
+                          }
 
                     ?>
                     </tbody>
@@ -109,10 +105,14 @@ include_once "../../class/Carrega.class.php";
           </div><!-- /.row -->
         </section><!-- /.content -->
       </div><!-- /.content-wrapper -->
+
       <?php
         include '../inc/footer.html';
         include '../inc/control-sidebar.html';
       ?>
+
+
+
     </div><!-- ./wrapper -->
 
     <!-- jQuery 2.1.4 -->
@@ -140,8 +140,8 @@ include_once "../../class/Carrega.class.php";
 
           "ordering": false,
           "oLanguage": { "sSearch": "",
-                         "sInfo": "Um total de _TOTAL_ noticias (_START_ de _END_)",
-                         "sLengthMenu": "Listar _MENU_ noticias"},
+                         "sInfo": "Um total de _TOTAL_ locais (_START_ de _END_)",
+                         "sLengthMenu": "Listar _MENU_ locais"},
         });
         $('.dataTables_filter input').attr("placeholder", "Pesquise aqui");
       });
