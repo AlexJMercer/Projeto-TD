@@ -45,7 +45,6 @@ class Logar
         $_SESSION['senha'] = $reg['senha'];
         $_SESSION['tipo']  = $reg['usertype'];
 
-
       }
       //header('location:/Categoria/CategoriaObj.php');
       //print_r($_SESSION);

@@ -46,7 +46,6 @@ include_once "../../class/Carrega.class.php";
             Programação
           </h1>
         </section>
-
         <!-- Main content -->
         <section class="content">
           <div class="row">
@@ -56,7 +55,6 @@ include_once "../../class/Carrega.class.php";
                <div class="box-header with-border">
                   <h3 class="box-title">Cadastro de datas</h3>
                </div><!-- /.box-header -->
-
                <div class="box-body">
                 <!-- form start -->
                   <form class="form-horizontal" id="form" method="post" action="CrudProgramacao.php">
@@ -101,7 +99,6 @@ include_once "../../class/Carrega.class.php";
         include '../inc/footer.html';
         include '../inc/control-sidebar.html';
       ?>
-
     </div><!-- ./wrapper -->
     <!-- jQuery 2.1.4 -->
     <script src="../../plugins/jQuery/jQuery-2.1.4.min.js"></script>
