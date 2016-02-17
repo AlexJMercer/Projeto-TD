@@ -34,17 +34,15 @@ include_once "../../class/Carrega.class.php";
   </head>
   <body class="hold-transition skin-green sidebar-mini">
     <div class="wrapper">
-      <?php include '../inc/topotime.html';
+      <?php
+            include '../inc/topotime.html';
 
             include '../inc/menutime.html';
-
       ?>
       <div class="content-wrapper">
         <!-- Content Header (Page header) -->
         <section class="content-header">
-          <h1>
-            Programação
-          </h1>
+          <h1>Programação</h1>
         </section>
         <!-- Main content -->
         <section class="content">
@@ -59,13 +57,13 @@ include_once "../../class/Carrega.class.php";
                 <!-- form start -->
                   <form class="form-horizontal" id="form" method="post" action="CrudProgramacao.php">
                      <div class="form-group">
-                        <label for="evento" class="col-sm-2 control-label">Evento:</label>
+                        <label for="evento" class=" col-sm-2 control-label"> <i class="fa fa-check-circle"></i> Evento:</label>
                         <div class="col-sm-10">
                           <select class="form-control select2" name="evento" required>
                               <option value=""></option>
                               <?php
                                     $eventoSelect = new Select();
-                                    $eventoSelect->eventoSel();
+                                    $eventoSelect->eventoSelect();
                               ?>
                           </select>
                         </div>
@@ -73,14 +71,20 @@ include_once "../../class/Carrega.class.php";
                      <div class="form-group">
                         <label for="dataInicio" class="col-sm-2 control-label">Data de inicio de evento:</label>
                         <div class="col-sm-10">
-                          <input type="text" name="dataInicio" id="dataInicio" required>
+                          <input type="text" class="form-control" name="dataInicio" id="dataInicio" required data-inputmask="'alias': 'dd/mm/yyyy'" data-mask>
                         </div>
                      </div>
                      <div class="form-group">
                         <label for="dataFim" class="col-sm-2 control-label">Data de fim de evento:</label>
                         <div class="col-sm-10">
-                          <input type="text" name="dataFim" id="dataFim" required>
+                          <input type="text" class="form-control" name="dataFim" id="dataFim" required data-inputmask="'alias': 'dd/mm/yyyy'" data-mask>
                         </div>
+                     </div>
+                     <div class="form-group">
+                       <label class="col-sm-2 control-label">Legenda:</label>
+                       <div class="col-sm-10">
+                         <p class="help-block"><i class="fa fa-check-circle"></i> Campo obrigatório</p>
+                       </div>
                      </div>
                   </div><!-- /.box-body -->
                   <div class="box-footer">
@@ -116,6 +120,21 @@ include_once "../../class/Carrega.class.php";
     <script src="../../dist/js/app.min.js"></script>
     <!-- AdminLTE for demo purposes -->
     <script src="../../dist/js/demo.js"></script>
+
+    <script type="text/javascript">
+      $(function()
+      {
+        //select2
+        $(".select2").select2({
+          placeholder:"Selecione o evento"
+        });
+
+        //InputMask
+        $("#datemask").inputmask("dd/mm/yyyy", {"placeholder": "dd/mm/yyyy"});
+        //Money Euro
+        $("[data-mask]").inputmask();
+      });
+    </script>
 
   </body>
 </html>

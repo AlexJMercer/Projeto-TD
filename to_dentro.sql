@@ -188,10 +188,10 @@ create table imagens_noticias(
 create table programacao(
 	id_prog serial not null,
 	evento_id integer not null,
-	dataInicio date default(null),
-	dataFim date default(null),
+	dataInicio date not null,
+	dataFim date not null,
 	primary key(id_prog),
-	foreign key(evento) references eventos
+	foreign key(evento_id) references eventos
 
 	ON UPDATE CASCADE ON DELETE CASCADE
 );

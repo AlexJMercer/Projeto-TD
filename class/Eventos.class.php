@@ -46,7 +46,7 @@ include_once 'Carrega.class.php';
 
     public function Listar()
     {
-      $sql    = "SELECT id_event, evento FROM eventos ORDER BY id_event";
+      $sql    = "SELECT id_event, evento FROM eventos ORDER BY id_event DESC";
       $result = pg_query($sql);
       $return = null;
 

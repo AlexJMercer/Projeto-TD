@@ -32,7 +32,6 @@
   </head>
   <body class="hold-transition skin-green  sidebar-mini">
     <div class="wrapper">
-
       <?php include '../inc/topotime.html';
 
             include '../inc/menutime.html';
@@ -43,23 +42,23 @@
         <!-- Content Header (Page header) -->
         <section class="content-header">
           <h1>
-          Locais
+          Programação
           </h1>
         </section>
-
         <!-- Main content -->
         <section class="content">
           <div class="row">
             <div class="col-xs-12">
               <div class="box">
-                <div class="box-header">
-                  <h3 class="box-title">Listagem de locais</h3>
+                <div class="box-header box-info">
+                  <h3 class="box-title">Listagem de eventos</h3>
                 </div><!-- /.box-header -->
                 <div class="box-body">
                   <table id="dataT" class="table table-bordered table-hover">
                     <thead>
                       <tr>
-                        <th>Locais</th>
+                        <th>Evento</th>
+                        <th>Data de inicio</th>
                         <th>Opções</th>
                       </tr>
                     </thead>
@@ -68,8 +67,8 @@
 
 include_once "../../class/Carrega.class.php";
 
-  $listar = new Local();
-  $list = $listar->listar();
+  $listar = new Programacao();
+  $list   = $listar->listar();
 
   if ($list != null)
   {
@@ -78,13 +77,14 @@ include_once "../../class/Carrega.class.php";
 ?>
                       <tr class="odd gradeX">
                         <form name="view" action="EditLocalObj.php" method="post">
-                        <td><?php echo $line->sala; ?></td>
+                        <td><?php echo $line->evento; ?></td>
+                        <td><?php echo date('d/m/Y',strtotime($line->dataInicio)); ?></td>
                         <td>
                           <input type='hidden' name='id' value='<?php echo $line->id; ?>'>
 
                           <button type="submit" name="editar" value="editar" class="btn btn-flat btn-warning"><i class="fa fa-edit"></i> Editar </button>
 
-                          <button type="submit" name="excluir" value="excluir" formaction="CrudLocal.php" class='btn btn-flat btn-danger'><i class="fa fa-times"></i> Excluir </button>
+                          <button type="submit" name="excluir" value="excluir" formaction="CrudProgramacao.php" class='btn btn-flat btn-danger'><i class="fa fa-times"></i> Excluir </button>
                         </td>
                       </tr>
                       </form>
@@ -95,7 +95,6 @@ include_once "../../class/Carrega.class.php";
                           {
                             echo "<h2> Nada cadastrado!!</h2>";
                           }
-
                     ?>
                     </tbody>
                   </table>
@@ -110,9 +109,6 @@ include_once "../../class/Carrega.class.php";
         include '../inc/footer.html';
         include '../inc/control-sidebar.html';
       ?>
-
-
-
     </div><!-- ./wrapper -->
 
     <!-- jQuery 2.1.4 -->

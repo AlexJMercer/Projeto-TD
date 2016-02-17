@@ -8,9 +8,9 @@ include_once 'Carrega.class.php';
   class Programacao
   {
     private $id;
-    private $nome;
-    private $texto;
-
+    private $evento;
+    private $dataInicio;
+    private $dataFim;
     private $bd;
 
     function __construct()
@@ -35,24 +35,23 @@ include_once 'Carrega.class.php';
 
     public function Inserir()
     {
-      $sql = "";
+      $sql    = "INSERT INTO programacao (evento_id, datainicio, datafim) VALUES ('$this->evento', '$this->dataInicio', '$this->dataFim')";
       $return = pg_query($sql);
       return $return;
     }
 
     public function Listar()
     {
-      $sql = "";
+      $sql    = "SELECT p.id_prog, p.evento_id, p.datainicio, e.id_event, e.evento FROM programacao p, eventos e WHERE p.evento_id=e.id_event";
       $result = pg_query($sql);
       $return = null;
 
       while ($reg=pg_fetch_assoc($result))
       {
-        $object = new Disciplinas();
-        $object->id = $reg[""];
-        $object->nome = $reg[""];
-        $object->texto = $reg[""];
-
+        $object             = new Programacao();
+        $object->id         = $reg["id_prog"];
+        $object->evento     = $reg["evento"];
+        $object->dataInicio = $reg["datainicio"];
 
         $return[] = $object;
       }
@@ -74,7 +73,7 @@ include_once 'Carrega.class.php';
 
     public function Excluir($id='')
     {
-      $sql = "DELETE from  where ";
+      $sql = "DELETE from programacao where id_prog = $id";
       $return = pg_query($sql);
       return $return;
     }
@@ -91,7 +90,7 @@ include_once 'Carrega.class.php';
         $object->id = $reg[""];
         $object->nome = $reg[""];
         $object->texto = $reg[""];
-        
+
 
         $return[] = $object;
       }
