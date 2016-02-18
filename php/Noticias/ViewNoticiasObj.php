@@ -2,13 +2,13 @@
 
 include_once "../../class/Carrega.class.php";
 
-session_start();
+/*session_start();
 
 if(empty($_SESSION['email']) && empty($_SESSION['senha']) && empty($_SESSION['tipo']) && empty($_SESSION['nome']))
 {
    header('Location:../login.php');
    exit;
-}
+}*/
 ?>
 <!DOCTYPE html>
 <html>
@@ -55,7 +55,8 @@ if(empty($_SESSION['email']) && empty($_SESSION['senha']) && empty($_SESSION['ti
         <!-- Content Header (Page header) -->
         <section class="content-header">
           <h1>
-          Noticias
+          Notícias
+          <a class="btn btn-info btn-flat pull-right" href="NoticiaObj.php"><i class="fa fa-plus"></i>  ADD Notícias </a>
           </h1>
         </section>
 
@@ -65,14 +66,14 @@ if(empty($_SESSION['email']) && empty($_SESSION['senha']) && empty($_SESSION['ti
             <div class="col-xs-12">
               <div class="box">
                 <div class="box-header">
-                  <h3 class="box-title">Listagem de noticias</h3>
+                  <h3 class="box-title">Listagem de notícias</h3>
                 </div><!-- /.box-header -->
                 <div class="box-body">
                   <table id="dataT" class="table table-bordered table-hover">
                     <thead>
                       <tr>
                         <th>Data</th>
-                        <th>Noticia</th>
+                        <th>Notícia</th>
                         <th>Opções</th>
                       </tr>
                     </thead>
@@ -150,8 +151,8 @@ if(empty($_SESSION['email']) && empty($_SESSION['senha']) && empty($_SESSION['ti
 
           "ordering": false,
           "oLanguage": { "sSearch": "",
-                         "sInfo": "Um total de _TOTAL_ noticias (_START_ de _END_)",
-                         "sLengthMenu": "Listar _MENU_ noticias"},
+                         "sInfo": "Um total de _TOTAL_ notícias (_START_ de _END_)",
+                         "sLengthMenu": "Listar _MENU_ notícias"},
         });
         $('.dataTables_filter input').attr("placeholder", "Pesquise aqui");
       });

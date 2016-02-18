@@ -2,13 +2,13 @@
 
 include_once "../../class/Carrega.class.php";
 
-session_start();
+/*session_start();
 
 if(empty($_SESSION['email']) && empty($_SESSION['senha']) && empty($_SESSION['tipo']) && empty($_SESSION['nome']))
 {
    header('Location:../login.php');
    exit;
-}
+}*/
 
 
 ?>
@@ -161,9 +161,6 @@ if(empty($_SESSION['email']) && empty($_SESSION['senha']) && empty($_SESSION['ti
                       <div class="form-group">
                         <label for="scategoria" class="col-sm-2 control-label">Categorias:</label>
                         <div class="col-sm-10">
-                          <button type="button" name="button" id="addcat" class="btn btn-info btn-flat btn-block"><i class="fa fa-plus"></i> Adicionar categorias</button>
-                          <div id="testing" style="display: none">
-                            <br>
                           <select class="form-control select2" id="scategoria" name="categoria[]" multiple="multiple" style="width: 100%" placeholder="Selecione a(s) categoria(s)">
                             <option value=""></option>
                             <?php
@@ -171,7 +168,6 @@ if(empty($_SESSION['email']) && empty($_SESSION['senha']) && empty($_SESSION['ti
                               $catSelect->categoriaSelect();
                             ?>
                           </select>
-                          </div>
                         </div>
                       </div>
                       <div class="form-group">
@@ -228,18 +224,7 @@ if(empty($_SESSION['email']) && empty($_SESSION['senha']) && empty($_SESSION['ti
     <!-- AdminLTE for demo purposes -->
     <script src="../../dist/js/demo.js"></script>
 
-    <script type="text/javascript">
-      $(document).ready(function()
-      {
-        $("#addcat").click(ShowCategoria);
-      });
-
-      function ShowCategoria()
-      {
-        $("#testing").toggle();
-      }
-    </script>
-
+  
     <script type="text/javascript">
     $(function(){
 

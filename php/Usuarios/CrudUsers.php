@@ -13,6 +13,8 @@ if (isset($_POST['enviar']))
 
     $object->inserir();
 
+    header("Location:UserObj.php");
+
 }
 
 ?>
