@@ -7,9 +7,17 @@ include_once "../../class/Carrega.class.php";
       $object            = new Categorias();
       $object->categoria = $_POST['categoria'];
 
-      //$object->inserir();
+      $object->inserir();
 
-      if ($object->inserir())
+      /*if ($object->inserir()==true)
+      {
+         echo "Cadastrado com sucesso!!";
+      }
+      elseif ($object->inserir()==false) {
+         echo "deu ruim";
+      }*/
+
+      /*if ($object->inserir())
       {
         echo "<meta http-equiv='refresh' content='0;url=CategoriaObj.php'";
         echo "<script type='text/javascript'>
@@ -21,9 +29,9 @@ include_once "../../class/Carrega.class.php";
       }
       else {
         echo "não";
-      }
+     }*/
 
-      //header("Location:ViewCategoriasObj.php");
+      header("Location:ViewCategoriasObj.php");
   }
 
   else if (isset($_POST['excluir']))

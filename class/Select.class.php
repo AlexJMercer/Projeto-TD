@@ -279,6 +279,8 @@ class Select
 
     public function categoriaMultiSelected($categoria ="")
    {
+
+         print_r($categoria);
          $sql    = "SELECT * from categorias";
          $result = pg_query($sql);
 
@@ -294,53 +296,49 @@ class Select
             {
               $this->id        = $a['id'];
               $this->categoria = $a['categoria'];
-              //$count=count($a);
 
-              foreach ($categoria as $key)
-              {
-                if ($key==$this->id)
-                {
+
+              if(in_array($this->id, $categoria))
+               {
                   print "<option selected value='{$this->id}'>{$this->categoria}</option>";
                 }
-              }
+                else {
+                  print "<option value='{$this->id}'>{$this->categoria}</option>";
+                }
+
             }
           }
       }
 
    public function categoriaUnselected($categoria ="")
    {
-         $sql    = "SELECT * from categorias";
-         $result = pg_query($sql);
+      $sql    = "SELECT * from categorias";
+      $result = pg_query($sql);
 
-            while ($a = pg_fetch_assoc($result))
-            {
-              $object = new Select();
-              $object->id        = $a['id'];
-              $object->categoria = $a['categoria'];
+      $ln = pg_num_rows($result);
 
-
-
-              foreach ($categoria as $key)
-              {
-                $array[0] = array_unique($object);
-                print_r($result);
-                //Object
-                echo "object";
-                print_r($object);
-                //$a
-                echo "a";
-                print_r($a);
-                //array
-                echo "array";
-                print_r($array);
-                if ($object->id!=$key)
-                {
-                  print "<option value='{$object->id}'>{$object->categoria}</option>";
-                }
-              }
-            }
-
+      if ($ln==0)
+      {
+         echo "<option value=''>Nada Encontrado!!</option>";
       }
+      else
+      {
+         while ($a = pg_fetch_assoc($result))
+         {
+           $this->id        = $a['id'];
+           $this->categoria = $a['categoria'];
+           //$count=count($a);
+
+          // foreach ($categoria as $key)
+           //{
+            // if ($this->id!=$key)
+            // {
+               print "<option value='{$this->id}'>{$this->categoria}</option>";
+             //}
+           //}
+         }
+      }
+   }
 
    public function eventoSelect($evento='')
    {

@@ -145,19 +145,7 @@ if(empty($_SESSION['email']) && empty($_SESSION['senha']) && empty($_SESSION['ti
                             ?>
                           </select>
                         </div>
-                      </div>
-                      <!--div class="form-group">
-                        <label for="scategoria" class="col-sm-2 control-label">Categorias:</label>
-                        <div class="col-sm-10">
-                          <select class="form-control select2" id="scategoria" name="categoria[]" multiple="multiple" placeholder="Selecione a(s) categoria(s)">
-                            <option value=""></option>
-                            <?php
-                              //$catSelect = new Select();
-                              //$catSelect->categoriaSelect();
-                            ?>
-                          </select>
-                        </div>
-                      </div-->
+                     </div>
                       <div class="form-group">
                         <label for="scategoria" class="col-sm-2 control-label">Categorias:</label>
                         <div class="col-sm-10">
@@ -165,7 +153,7 @@ if(empty($_SESSION['email']) && empty($_SESSION['senha']) && empty($_SESSION['ti
                             <option value=""></option>
                             <?php
                               $catSelect = new Select();
-                              $catSelect->categoriaSelect();
+                              $catSelect->categoriaUnselected($comp->categoria);
                             ?>
                           </select>
                         </div>
@@ -224,7 +212,7 @@ if(empty($_SESSION['email']) && empty($_SESSION['senha']) && empty($_SESSION['ti
     <!-- AdminLTE for demo purposes -->
     <script src="../../dist/js/demo.js"></script>
 
-  
+
     <script type="text/javascript">
     $(function(){
 
