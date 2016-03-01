@@ -280,7 +280,7 @@ class Select
     public function categoriaMultiSelected($categoria ="")
    {
 
-         print_r($categoria);
+         //print_r($categoria);
          $sql    = "SELECT * from categorias";
          $result = pg_query($sql);
 

@@ -1,6 +1,8 @@
 <?php
 
 include_once "../../class/Carrega.class.php";
+date_default_timezone_set('America/Sao_Paulo');
+
 
 /*session_start();
 
@@ -85,11 +87,11 @@ if(empty($_SESSION['email']) && empty($_SESSION['senha']) && empty($_SESSION['ti
                       <div class="form-group">
                         <label for="data" class="col-sm-2 control-label">Data:</label>
                         <div class="col-sm-5">
-                          <input type="text" name="data" class="form-control" data-inputmask="'alias': 'dd/mm/yyyy'" data-mask>
+                          <input type="text" name="data" class="form-control" value="<?php echo date('d/m/Y'); ?>" data-inputmask="'alias': 'dd/mm/yyyy'" data-mask>
                         </div>
                         <label for="hora" class="col-sm-1 control-label">Hora:</label>
                         <div class="col-sm-4 bootstrap-timepicker pull-right">
-                          <input type="text" name="hora" class="form-control timepicker pull-right">
+                          <input type="text" name="hora" value="<?php echo date('H:i');?>" class="form-control" disabled>
                         </div>
                       </div>
                       <div class="form-group">
@@ -99,7 +101,7 @@ if(empty($_SESSION['email']) && empty($_SESSION['senha']) && empty($_SESSION['ti
                         </div>
                       </div>
                       <div class="form-group">
-                        <label for="resumo" class="col-sm-2 control-label">Resumo:</label>
+                        <label for="resumo" class="col-sm-2 control-label">Linha de apoio:</label>
                         <div class="col-sm-10">
                           <textarea class="form-control"  name="resumo" id="resumo" rows="2" cols="40"  required></textarea>
                         </div>
@@ -176,6 +178,8 @@ if(empty($_SESSION['email']) && empty($_SESSION['senha']) && empty($_SESSION['ti
     <script src="../../plugins/timepicker/bootstrap-timepicker.min.js"></script>
     <!-- FastClick -->
     <script src="../../plugins/fastclick/fastclick.min.js"></script>
+    <!-- CK Editor -->
+    <script src="https://cdn.ckeditor.com/4.4.3/standard/ckeditor.js"></script>
     <!-- AdminLTE App -->
     <script src="../../dist/js/app.min.js"></script>
     <!-- AdminLTE for demo purposes -->
@@ -200,6 +204,8 @@ if(empty($_SESSION['email']) && empty($_SESSION['senha']) && empty($_SESSION['ti
         showInputs: false,
         showMeridian: false
       });
+
+      CKEDITOR.replace('noticia');
 });
       $('.file').fileinput({
           browseClass: "btn btn-info btn-flat btn-block",
