@@ -1,14 +1,16 @@
 <?php
 
+
+echo "<meta charset='UTF-8'>";
 include_once "../class/Carrega.class.php";
 
 $object = new Connection();
 echo "<pre>";
-$object->getAllNoticias();
+$object->getAllAssistencias();
 echo "</pre>";
 echo "<br>";
 $obj = new Connection();
 echo "<pre>";
-$obj->getNoticiaById(1);
+$obj->getObjNoticiaById(12);
 echo "</pre>"
 ?>

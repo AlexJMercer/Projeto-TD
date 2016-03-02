@@ -1,6 +1,7 @@
 <?php
 
 include_once "../../class/Carrega.class.php";
+date_default_timezone_set('America/Sao_Paulo');
 
 /*session_start();
 
@@ -84,7 +85,8 @@ if(empty($_SESSION['email']) && empty($_SESSION['senha']) && empty($_SESSION['ti
                   {
                     $edit = new Noticias();
                     $comp = $edit->editar($id);
-
+                    //print_r($comp);
+                    //var_dump($comp);
                       if ($edit != null)
                       {
                 ?>
@@ -101,11 +103,11 @@ if(empty($_SESSION['email']) && empty($_SESSION['senha']) && empty($_SESSION['ti
                       <div class="form-group">
                         <label for="data" class="col-sm-2 control-label">Data:</label>
                         <div class="col-sm-5">
-                          <input type="text" name="data" value="<?php echo date('d/m/Y',strtotime($comp->data)); ?>" class="form-control" data-inputmask="'alias': 'dd/mm/yyyy'" data-mask>
+                          <input type="text" name="data" value="<?php echo date('d/m/Y'); ?>" class="form-control" data-inputmask="'alias': 'dd/mm/yyyy'" data-mask>
                         </div>
                         <label for="hora" class="col-sm-1 control-label">Hora:</label>
-                        <div class="col-sm-4 bootstrap-timepicker pull-right">
-                          <input type="text" name="hora" value='<?php echo $comp->hora; ?>' class="form-control timepicker pull-right">
+                        <div class="col-sm-4 pull-right">
+                          <input type="text" name="hora" value="<?php echo date('H:i');?>" class="form-control pull-right">
                         </div>
                       </div>
                       <div class="form-group">
@@ -140,20 +142,6 @@ if(empty($_SESSION['email']) && empty($_SESSION['senha']) && empty($_SESSION['ti
                             <?php
                               $catSelected = new Select();
                               $catSelected->categoriaMultiSelected($comp->categoria);
-                              //$cat = new Select();
-                              //$cat->categoriaUnselected($comp->categoria);
-                            ?>
-                          </select>
-                        </div>
-                     </div>
-                      <div class="form-group">
-                        <label for="scategoria" class="col-sm-2 control-label">Categorias:</label>
-                        <div class="col-sm-10">
-                          <select class="form-control select2" id="scategoria" name="categoria[]" multiple="multiple" style="width: 100%" placeholder="Selecione a(s) categoria(s)">
-                            <option value=""></option>
-                            <?php
-                              $catSelect = new Select();
-                              $catSelect->categoriaUnselected($comp->categoria);
                             ?>
                           </select>
                         </div>
@@ -187,7 +175,7 @@ if(empty($_SESSION['email']) && empty($_SESSION['senha']) && empty($_SESSION['ti
       </div><!-- /.content-wrapper -->
       <?php
         include '../inc/footer.html';
-        include '../inc/control-sidebar.html';
+        //include '../inc/control-sidebar.html';
       ?>
     </div><!-- ./wrapper -->
     <!-- jQuery 2.1.4 -->
@@ -207,6 +195,8 @@ if(empty($_SESSION['email']) && empty($_SESSION['senha']) && empty($_SESSION['ti
     <script src="../../plugins/timepicker/bootstrap-timepicker.min.js"></script>
     <!-- FastClick -->
     <script src="../../plugins/fastclick/fastclick.min.js"></script>
+    <!-- CK Editor -->
+    <script src="https://cdn.ckeditor.com/4.4.3/standard/ckeditor.js"></script>
     <!-- AdminLTE App -->
     <script src="../../dist/js/app.min.js"></script>
     <!-- AdminLTE for demo purposes -->
@@ -214,6 +204,7 @@ if(empty($_SESSION['email']) && empty($_SESSION['senha']) && empty($_SESSION['ti
 
 
     <script type="text/javascript">
+
     $(function(){
 
       $("#status").select2({
@@ -235,19 +226,38 @@ if(empty($_SESSION['email']) && empty($_SESSION['senha']) && empty($_SESSION['ti
         showInputs: false,
         showMeridian: false
       });
+
+      CKEDITOR.replace('noticia');
 });
-      $('.file').fileinput({
-          initialPreview: [
-            '<img src="<?php echo $comp->imagem; ?>" class="file-preview-image">'
-          ],
-          browseClass: "btn btn-info btn-flat btn-block",
-          showCaption: false,
-          showRemove: false,
-          showUpload: false,
-          language: 'pt-BR',
-          overwriteInitial: true,
-          allowedFileExtensions : ['jpg', 'png','gif']
-      });
+
+    </script>
+
+    <?php
+        if ($comp->imagem != null)
+        {
+          $show = $comp->imagem;
+        }
+        else
+        {
+          $show = "../../dist/img/nadaCadastrado.png";
+        }
+    ?>
+
+    <script type="text/javascript">
+
+            $('.file').fileinput({
+              initialPreview: [
+                '<img src="<?php echo $show; ?>" class="file-preview-image">'
+              ],
+                browseClass: "btn btn-info btn-flat btn-block",
+                showCaption: false,
+                showRemove: false,
+                showUpload: false,
+                language: 'pt-BR',
+                overwriteInitial: true,
+                allowedFileExtensions : ['jpg', 'png','gif']
+            });
+
     </script>
   </body>
 </html>

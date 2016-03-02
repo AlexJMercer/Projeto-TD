@@ -81,7 +81,7 @@ class Noticias
 
       public function listar()
       {
-         $sql    = "SELECT * FROM noticias Order by id_not";
+         $sql    = "SELECT id_not, titulo, data FROM noticias Order by id_not desc";
          $result = pg_query($sql);
 
          while ($reg = pg_fetch_assoc($result))
@@ -154,8 +154,6 @@ class Noticias
             $object         = new Noticias();
             $object->id     = $reg['id_not'];
             $object->autor  = $reg['id_user'];
-            $object->data   = $reg['data'];
-            $object->hora   = $reg['hora'];
             $object->titulo = $reg['titulo'];
             $object->resumo = $reg['resumo'];
             $object->status = $reg['id_sta'];
@@ -170,8 +168,53 @@ class Noticias
 
             $retorno = $object;
          }
+
          return $retorno;
       }
 
+      public function noImageUp()
+      {
+        $noImage  = "../../dist/img/todentro_logo.png";
+        $sqlNot   = "SELECT CURRVAL('noticias_id_not_seq')";
+        $last     = pg_query($sqlNot);
+        $idnot    = pg_fetch_array($last);
+        $this->id = $idnot[0];
+        $sql      = "INSERT INTO imagens_noticias (imagem, noticia) VALUES ('$noImage', '$this->id')";
+        $return   = pg_query($sql);
+        return $return;
+      }
+
+      public function showNoticia($id="")
+      {
+        $sql    = "SELECT * FROM noticias n, status s, imagens_noticias ino, usuarios u, categorias_noticias cn
+                    WHERE n.id_not = ino.noticia AND n.status = s.id_sta AND n.autor = u.id_user AND cn.not_id = n.id_not AND n.id_not = $id";
+        $sql2   = "SELECT c.categoria FROM categorias c, categorias_noticias cn WHERE cn.not_id = $id AND c.id = cn.cat_id";
+
+        $result  = pg_query($sql);
+        $result2 = pg_query($sql2);
+        $retorno = NULL;
+
+        while ($reg = pg_fetch_assoc($result))
+        {
+           $object         = new Noticias();
+           $object->id     = $reg['id_not'];
+           $object->autor  = $reg['nome'];
+           $object->titulo = $reg['titulo'];
+           $object->resumo = $reg['resumo'];
+           $object->status = $reg['status'];
+           $object->texto  = $reg['texto'];
+           $object->imagem = $reg['imagem'];
+
+           foreach (pg_fetch_assoc($result2) as $value)
+           {
+             $temp[] = $value;
+           }
+           $object->categoria = $temp;
+
+           $retorno = $object;
+        }
+
+        return $retorno;
+      }
 }
 ?>

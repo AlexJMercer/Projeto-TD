@@ -91,7 +91,7 @@ if(empty($_SESSION['email']) && empty($_SESSION['senha']) && empty($_SESSION['ti
                         </div>
                         <label for="hora" class="col-sm-1 control-label">Hora:</label>
                         <div class="col-sm-4 bootstrap-timepicker pull-right">
-                          <input type="text" name="hora" value="<?php echo date('H:i');?>" class="form-control" disabled>
+                          <input type="text" name="hora" value="<?php echo date('H:i');?>" class="form-control">
                         </div>
                       </div>
                       <div class="form-group">

@@ -128,11 +128,22 @@ include_once "../../class/Carrega.class.php";
     <!-- AdminLTE for demo purposes -->
     <script src="../../dist/js/demo.js"></script>
 
+    <?php
+        if ($comp->imagem != null)
+        {
+          $show = $comp->imagem;
+        }
+        else
+        {
+          $show = "../../dist/img/nadaCadastrado.png";
+        }
+    ?>
+
 
     <script type="text/javascript">
     $('.file').fileinput({
       initialPreview: [
-        '<img src="<?php echo $comp->logo; ?>" class="file-preview-image">'
+        '<img src="<?php echo $show; ?>" class="file-preview-image">'
       ],
         overwriteInitial: true,
         browseClass: "btn btn-info btn-flat btn-block",

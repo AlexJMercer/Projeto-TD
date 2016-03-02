@@ -82,6 +82,8 @@ if(empty($_SESSION['email']) && empty($_SESSION['senha']) && empty($_SESSION['ti
 
   $listar = new Noticias();
   $list   = $listar->listar();
+  //print_r($list);
+
 
   if ($list != null)
   {
@@ -94,12 +96,12 @@ if(empty($_SESSION['email']) && empty($_SESSION['senha']) && empty($_SESSION['ti
                         <td><?php echo $line->titulo; ?></td>
                         <td>
                           <input type='hidden' name='id' value='<?php echo $line->id; ?>'>
+                          <button type="submit" name="exibir" value="exibir" formaction="ShowNoticiaObj.php" class="btn btn-flat btn-info"><i class="fa fa-expand"></i> Exibir </button>
                           <button type="submit" name="editar" value="editar" class="btn btn-flat btn-warning"><i class="fa fa-edit"></i> Editar </button>
                           <button type="submit" name="excluir" value="excluir" formaction="CrudNoticias.php" class='btn btn-flat btn-danger'><i class="fa fa-times"></i> Excluir </button>
                         </td>
                      </form>
                   </tr>
-
                     <?php
                             }
                           }
