@@ -96,12 +96,7 @@ include_once "../../class/Carrega.class.php";
                       <div class="form-group">
                         <label class="col-sm-2 control-label" for="reservation">Data:</label>
                         <div class="col-sm-10">
-                          <div class="input-group">
-                            <div class="input-group-addon">
-                              <i class="fa fa-calendar"></i>
-                            </div>
                           <input type="text" class="form-control" name="data" id="reservation" value="<?php echo date('d/m/Y',strtotime($comp->data)); ?>">
-                        </div>
                         </div>
                       </div>
                       <div class="form-group">
@@ -109,20 +104,8 @@ include_once "../../class/Carrega.class.php";
                           <div class="col-sm-10">
                             <select class="form-control select2" id="alimentosSEL" name="alimento[]" multiple="multiple" style="width: 100%;">
                               <option value=""></option>
-                              <?php $alimentoSelect = new Alimentos();
-                                    $alimentoSelect->alimentoMulti($comp->alimento);
-                                     //$alimentoSelect->alimentoSel($comp->alimento);
-                              ?>
-                            </select>
-                          </div>
-                      </div>
-                      <div class="form-group">
-                        <label for="alimentos" class="col-sm-2 control-label">Alimentos:</label>
-                          <div class="col-sm-10">
-                            <select class="form-control select2" id="alimentos" name="alimento[]" multiple="multiple" style="width: 100%;">
-                              <option value=""></option>
                               <?php $alimentoSelect = new Select();
-                                    $alimentoSelect->alimentoSelect();
+                                    $alimentoSelect->alimentoMulti($comp->alimento);
                               ?>
                             </select>
                           </div>

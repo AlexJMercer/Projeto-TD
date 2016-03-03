@@ -12,6 +12,7 @@ include_once 'Carrega.class.php';
     private $data;
     private $titulo;
     private $texto;
+    private $curso;
     private $bd;
 
     function __construct()
@@ -34,6 +35,125 @@ include_once 'Carrega.class.php';
        $this->$key = $value;
     }
 
+    function getAllCursos()
+    {
+      $sql       = "SELECT * FROM cursos Order by nome";
+      $res       = pg_query($sql);
+      $resultado = array();
+
+      while ($row = pg_fetch_assoc($res))
+      {
+         $object        = new Connection();
+         $object->id    = $row['id_curso'];
+         $object->curso = $row['nome'];
+         array_push($resultado, array("Id"=>$object->id, "Nome do Curso"=>$object->curso));
+      }
+
+      echo json_encode(array("result"=>$resultado), JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);
+    }
+
+    function getCardapios()
+    {
+      $sql="";
+      $res= pg_query($sql);
+      $resultado = array();
+    }
+
+    function getAllEventos()
+    {
+      $sql = "SELECT * FROM eventos";
+      $res       = pg_query($sql);
+      $resultado = array();
+
+      while ($row = pg_fetch_assoc($res))
+      {
+         $object         = new Connection();
+         $object->id     = $row['id_event'];
+         $object->evento = $row['evento'];
+         array_push($resultado, array("Id"=>$object->id, "evento"=>$object->evento));
+      }
+
+      echo json_encode(array("result"=>$resultado), JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);
+    }
+
+    function getEventosById($id='')
+    {
+       # cod
+    }
+
+    function getAllSetores()
+    {
+      $sql = "SELECT * FROM setores";
+      $res       = pg_query($sql);
+      $resultado = array();
+
+      while ($row = pg_fetch_assoc($res))
+      {
+         $object        = new Connection();
+         $object->id    = $row['id_set'];
+         $object->setor = $row['setor'];
+         $object->texto = $row['texto'];
+         array_push($resultado, array("Id"=>$object->id, "setor"=>$object->setor,"texto"=>$object->texto));
+      }
+
+      echo json_encode(array("result"=>$resultado), JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);
+
+    }
+
+    function getAllMonitoriasByCurso()
+    {
+       # code...
+    }
+
+    function getMonitoriaById($id='')
+    {
+       # code...
+    }
+
+    function getAllCategorias()
+    {
+      $sql = "SELECT * FROM categorias";
+      $res       = pg_query($sql);
+      $resultado = array();
+
+      while ($row = pg_fetch_assoc($res))
+      {
+          $object            = new Connection();
+          $object->id        = $row['id'];
+          $object->categoria = $row['categoria'];
+          array_push($resultado, array("Id"=>$object->id, "categoria"=>$object->categoria));
+      }
+
+      echo json_encode(array("result"=>$resultado), JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);
+
+    }
+
+    function getProcessoSeletivo()
+    {
+       # code...
+    }
+
+
+
+    function getAllObjNoticias()
+    {
+      $sql = "SELECT * FROM noticias";
+      $res = pg_query($sql);
+      $resultado = array();
+
+      while($row = pg_fetch_array($res))
+      {
+         $object          = new Connection();
+         $object->id      = $row['id_not'];
+         $object->noticia = utf8_encode($row['titulo']);
+         $object->data    = date('d/m/Y', strtotime($row['data']));
+         array_push($resultado, array("id"=>$object->id, "Texto"=>$object->noticia, "Data"=>$object->data));
+      }
+
+       echo json_encode(array("result"=>$resultado), JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
+
+    }
+
     function getAllNoticias()
     {
       $sql = "SELECT * FROM noticias";
@@ -42,6 +162,7 @@ include_once 'Carrega.class.php';
 
       while($row = pg_fetch_array($res))
       {
+
         $date = date('d/m/Y', strtotime($row['data']));
         array_push($resultado,
         array('id'=>$row['id_not'],'Descricao'=>$row['resumo'],'Data'=>$date));

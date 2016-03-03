@@ -89,6 +89,8 @@ include_once "../../class/Carrega.class.php";
                       <dd><?php echo $comp->texto; ?></dd>
                       <dt>Autor:</dt>
                       <dd><?php echo $comp->autor; ?></dd>
+                      <dt>Categorias:</dt>
+                      <dd><?php echo $comp->categoria; ?></dd>
                     </dl>
                     <form action="EditNoticiaObj.php" method="post">
 
