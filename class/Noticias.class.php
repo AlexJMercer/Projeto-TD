@@ -188,7 +188,7 @@ class Noticias
       {
         $sql    = "SELECT * FROM noticias n, status s, imagens_noticias ino, usuarios u, categorias_noticias cn
                     WHERE n.id_not = ino.noticia AND n.status = s.id_sta AND n.autor = u.id_user AND cn.not_id = n.id_not AND n.id_not = $id";
-        $sql2   = "SELECT c.categoria FROM categorias c, categorias_noticias cn WHERE cn.not_id = $id AND c.id = cn.cat_id";
+        $sql2   = "SELECT c.id FROM categorias c, categorias_noticias cn WHERE cn.not_id = $id AND c.id = cn.cat_id";
 
         $result  = pg_query($sql);
         $result2 = pg_query($sql2);

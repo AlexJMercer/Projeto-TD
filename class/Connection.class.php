@@ -48,7 +48,6 @@ include_once 'Carrega.class.php';
          $object->curso = $row['nome'];
          array_push($resultado, array("Id"=>$object->id, "Nome do Curso"=>$object->curso));
       }
-
       echo json_encode(array("result"=>$resultado), JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);
     }
 
@@ -135,7 +134,7 @@ include_once 'Carrega.class.php';
 
 
 
-    function getAllObjNoticias()
+    function getAllNoticias()
     {
       $sql = "SELECT * FROM noticias";
       $res = pg_query($sql);
@@ -149,44 +148,7 @@ include_once 'Carrega.class.php';
          $object->data    = date('d/m/Y', strtotime($row['data']));
          array_push($resultado, array("id"=>$object->id, "Texto"=>$object->noticia, "Data"=>$object->data));
       }
-
        echo json_encode(array("result"=>$resultado), JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
-
-    }
-
-    function getAllNoticias()
-    {
-      $sql = "SELECT * FROM noticias";
-      $res = pg_query($sql);
-      $resultado = array();
-
-      while($row = pg_fetch_array($res))
-      {
-
-        $date = date('d/m/Y', strtotime($row['data']));
-        array_push($resultado,
-        array('id'=>$row['id_not'],'Descricao'=>$row['resumo'],'Data'=>$date));
-      }
-
-       echo json_encode(array("result"=>$resultado), JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
-
-    }
-
-    function getNoticiaById($id='')
-    {
-      $sql = "SELECT * FROM noticias Where id_not = $id";
-      $res = pg_query($sql);
-      $resultado = array();
-
-      while($row = pg_fetch_array($res))
-      {
-        $date = date('d/m/Y', strtotime($row['data']));
-        array_push($resultado,
-        array('Descricao'=>$row['texto'],'Data'=>$date));
-      }
-
-       echo json_encode(array("result"=>$resultado), JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);
-
     }
 
     function getObjNoticiaById($id='')

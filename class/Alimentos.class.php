@@ -86,68 +86,31 @@
         return $return;
       }
 
-      public function alimentoSelect($alimento ="")
+      public function labelAlimentos($alimento = "")
       {
-         $sql = "SELECT * from alimentos as a where a.id= ";
-         $result = pg_query($sql);
+        $sql    = "SELECT * from alimentos";
+        $result = pg_query($sql);
 
-         $ln=pg_num_rows($result);
+        $ln = pg_num_rows($result);
 
-         if ($ln==0)
-         {
-            echo "<option value=''>Nada Encontrado!!</option>";
-         }
-         else
-         {
-           while ($a = pg_fetch_array($result))
+        if ($ln==0)
+        {
+           echo "<small class='label bg-red'>ERRO</small>";
+        }
+        else
+        {
+           while ($a = pg_fetch_assoc($result))
            {
-            $this->id = $a['id'];
-            $this->alimento = $a['alimento'];
+             $this->id       = $a['id'];
+             $this->alimento = $a['alimento'];
 
-            foreach ($alimento as $key)
+
+            if(in_array($this->id, $alimento))
             {
-
-               if ($key==$this->id)
-               {
-                 print "<option selected value='{$this->id}'>{$this->alimento}</option>";
-               }
-
+              print "<small class='label btn-info'>{$this->alimento}</small>  ";
             }
-            echo "<option value='{$this->id}'>{$this->alimento}</option>";
-          }
+           }
         }
       }
-
-
-      public function alimentoMulti($alimento ="")
-      {
-         $sql = "SELECT * from alimentos";
-         $result = pg_query($sql);
-
-         $ln=pg_num_rows($result);
-
-         if ($ln==0)
-         {
-            echo "<option value=''>Nada Encontrado!!</option>";
-         }
-         else
-         {
-            while ($a = pg_fetch_array($result))
-            {
-              $this->id = $a['id'];
-              $this->alimento = $a['alimento'];
-              //$count=count($a);
-
-              foreach ($alimento as $key)
-              {
-                if ($key==$this->id)
-                {
-                  print "<option selected value='{$this->id}'>{$this->alimento}</option>";
-                }
-              }
-            }
-          }
-        }
-
 }
 ?>

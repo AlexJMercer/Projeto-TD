@@ -298,7 +298,6 @@ class Select
               $this->id        = $a['id'];
               $this->categoria = $a['categoria'];
 
-
               if(in_array($this->id, $categoria))
               {
                  print "<option selected value='{$this->id}'>{$this->categoria}</option>";
@@ -358,7 +357,6 @@ class Select
             $this->id     = $a['id_event'];
             $this->evento = $a['evento'];
 
-
             if ($evento==$this->id)
             {
                print "<option selected value='{$this->id}'>{$this->evento}</option>";
@@ -370,40 +368,6 @@ class Select
          }
       }
    }
-
-   public function categoriaLabel($categoria ="")
-   {
-
-        //print_r($categoria);
-        $sql    = "SELECT * from categorias";
-        $result = pg_query($sql);
-
-        $ln = pg_num_rows($result);
-
-        if ($ln==0)
-        {
-           echo "<option value=''>Nada Encontrado!!</option>";
-        }
-        else
-        {
-           while ($a = pg_fetch_assoc($result))
-           {
-             $this->id        = $a['id'];
-             $this->categoria = $a['categoria'];
-
-
-            if(in_array($this->id, $categoria))
-            {
-                 print "<option selected value='{$this->id}'>{$this->categoria}</option>";
-            }
-               else {
-                 print "";
-               }
-
-           }
-         }
-     }
-
 
 }
 ?>

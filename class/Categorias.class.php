@@ -37,12 +37,10 @@
 
         if($return)
         {
-
           return true;
         }
         else
         {
-           
           return false;
         }
       }
@@ -94,34 +92,32 @@
         return $return;
       }
 
-      public function categoriaSelect($categoria ="")
+      public function labelCategorias($categoria = "")
       {
-         $sql    = "SELECT * from categoria Order by id";
-         $result = pg_query($sql);
+        $sql    = "SELECT * from categorias";
+        $result = pg_query($sql);
 
-         $ln     =pg_num_rows($result);
+        $ln = pg_num_rows($result);
 
         if ($ln==0)
         {
-           echo "<option value=''>Nada Encontrado!!</option>";
+           echo "<small class='label bg-red'>ERRO</small>";
         }
         else
         {
-          while ($a = pg_fetch_array($result))
-          {
-            $this->id        = $a['id'];
-            $this->categoria = $a['categoria'];
+           while ($a = pg_fetch_assoc($result))
+           {
+             $this->id        = $a['id'];
+             $this->categoria = $a['categoria'];
 
-            if ($categoria==$this->id)
+
+            if(in_array($this->id, $categoria))
             {
-              print "<option selected value='{$this->id}'>{$this->categoria}</option>";
+              print "<small class='label bg-blue'>{$this->categoria}</small>  ";
             }
-            else
-            {
-              print "<option value='{$this->id}'>{$this->categoria}</option>";
-            }
-          }
-        }
+           }
+         }
       }
-   }
+
+}
 ?>

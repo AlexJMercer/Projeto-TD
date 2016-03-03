@@ -50,7 +50,7 @@ include_once "../../class/Carrega.class.php";
       <div class="content-wrapper">
         <!-- Content Header (Page header) -->
         <section class="content-header">
-          <h1>Notícias</h1>
+          <h1>Cardápios</h1>
         </section>
 
         <!-- Main content -->
@@ -60,7 +60,7 @@ include_once "../../class/Carrega.class.php";
               <!-- Horizontal Form -->
               <div class="box box-info">
                 <div class="box-header with-border">
-                  <h3 class="box-title">Notícias</h3>
+                  <h3 class="box-title">Cardápio</h3>
                 </div><!-- /.box-header -->
 <?php
 
@@ -68,8 +68,8 @@ include_once "../../class/Carrega.class.php";
 
   if (isset($_POST["exibir"]))
   {
-    $exib = new Noticias();
-    $comp = $exib->showNoticia($id);
+    $exib = new Cardapios();
+    $comp = $exib->showCardapio($id);
 
     if ($exib != null)
     {
@@ -77,30 +77,22 @@ include_once "../../class/Carrega.class.php";
                 <div class="box-body">
                   <div class="form-group">
                     <dl class="dl-horizontal">
-                      <dt>Titulo:</dt>
-                      <dd><?php echo $comp->titulo; ?></dd>
-                      <dt>Linha de apoio:</dt>
-                      <dd><?php echo $comp->resumo; ?></dd>
-                      <dt>Status:</dt>
-                      <dd><?php echo $comp->status; ?></dd>
-                      <dt>Imagem:</dt>
-                      <dd><img src="<?php echo $comp->imagem; ?>" alt="Imagem" width="50%" height="50%"/></dd>
-                      <dt>Notícia:</dt>
-                      <dd><?php echo $comp->texto; ?></dd>
-                      <dt>Autor:</dt>
-                      <dd><?php echo $comp->autor; ?></dd>
-                      <dt>Categorias:</dt>
+                      <dt>Dia:</dt>
+                      <dd><?php echo $comp->dia; ?></dd>
+                      <dt>Data:</dt>
+                      <dd><?php echo date('d/m/Y', strtotime($comp->data)); ?></dd>
+                      <dt>Alimentos:</dt>
                       <dd><?php
-                                $label = new Categorias();
-                                $label->labelCategorias($comp->categoria);
+                                $label = new Alimentos();
+                                $label->labelAlimentos($comp->alimento);
                           ?></dd>
                     </dl>
-                    <form action="EditNoticiaObj.php" method="post">
+                    <form action="EditCardapioObj.php" method="post">
 
                       <input type="hidden" name="id" value="<?php echo $id; ?>"/>
 
                       <div class="col-sm-6">
-                        <button type="submit" name="retornar" value="retornar" class="btn bg-maroon btn-flat btn-block margin" formaction="ViewNoticiasObj.php"><i class="fa fa-edit"></i> Retornar para lista </button>
+                        <button type="submit" name="retornar" value="retornar" class="btn bg-maroon btn-flat btn-block margin" formaction="ViewCardapiosObj.php"><i class="fa fa-edit"></i> Retornar para lista </button>
                       </div>
                       <div class="col-sm-6">
                         <button type="submit" name="editar" value="editar" class="btn btn-warning btn-flat btn-block margin"><i class="fa fa-edit"></i> Editar </button>
