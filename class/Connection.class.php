@@ -13,6 +13,13 @@ include_once 'Carrega.class.php';
     private $titulo;
     private $texto;
     private $curso;
+    private $disciplina;
+    private $categoria;
+    private $semestre;
+    private $local;
+    private $info;
+    private $sala;
+    private $setor;
     private $bd;
 
     function __construct()
@@ -77,8 +84,51 @@ include_once 'Carrega.class.php';
 
     function getEventosById($id='')
     {
-       # cod
+      $sql    = "SELECT * FROM eventos e, categorias c WHERE c.id=e.event_cat AND e.id_event = $id";
+      $res = pg_query($sql);
+      $resultado = array();
+
+      while ($row=pg_fetch_assoc($res))
+      {
+        $object            = new Connection();
+        $object->id        = $reg["id_event"];
+        $object->evento    = $reg['evento'];
+        $object->categoria = $reg['categoria'];
+        $object->texto     = $reg['texto'];
+        $object->imagem    = $reg['imagem'];
+        array_push($resultado, array("id"=>$object->id, "evento"=>$object->evento, "categoria"=>$object->categoria, "texto"=>$object->texto, "imagem"=>$object->imagem));
+      }
+      echo json_encode(array("result"=>$resultado), JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);
     }
+
+    function getAllCardapios()
+    {
+      $sql     = "SELECT * FROM cardapios c JOIN dia d ON d.id_dia=c.dia JOIN alimentos_cardapios ac ON ac.id_cad =c.id_card";
+      $sql2    = "SELECT a.alimento FROM alimentos a, alimentos_cardapios ac WHERE a.id = ac.id_ali";
+      $res  = pg_query($sql);
+      $res2 = pg_query($sql2);
+      $resultado = array();
+
+      while ($row = pg_fetch_assoc($res))
+      {
+         $obj       = new Cardapios();
+         $obj->id   = $row["id_card"];
+         $obj->dia  = $row["dia"];
+         $obj->data = date('d/m/Y', strtotime($row["data"]));
+
+         foreach (pg_fetch_assoc($res2) as $value)
+         {
+           $temp[] = $value;
+         }
+         $obj->alimento = $temp;
+
+         //print_r($obj);
+
+         array_push($resultado, array("id"=>$obj->id, "dia"=>$obj->dia, "data"=>$obj->data, "alimentos"=>$obj->alimento));
+      }
+      echo json_encode(array("result"=>$resultado), JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);
+    }
+
 
     function getAllSetores()
     {
@@ -99,14 +149,58 @@ include_once 'Carrega.class.php';
 
     }
 
-    function getAllMonitoriasByCurso()
+    function getAllMonitorias()
     {
-       # code...
+      $sql = "SELECT * FROM monitorias m, disciplinas d, cursos c WHERE m.curso_m=c.id_curso AND m.disciplina_m=d.id_disc";
+      $res = pg_query($sql);
+      $resultado = array();
+
+      while ($row = pg_fetch_assoc($res))
+      {
+        $object = new Connection();
+        $object->id = $row['id_monit'];
+        $object->curso = $row['nome'];
+        $object->disciplina = $row['disciplina'];
+        array_push($resultado, array("id"=>$object->id, "curso"=>$object->curso, "disciplina"=>$object->disciplina));
+      }
+      echo json_encode(array("result"=>$resultado), JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);
+  }
+
+
+    function getAllMonitoriasByCurso($curso = '')
+    {
+       $sql = "SELECT * FROM monitorias m, disciplinas d, cursos c WHERE m.curso_m=c.id_curso AND m.disciplina_m=d.id_disc AND m.curso_m=$curso";
+       $res = pg_query($sql);
+       $resultado = array();
+
+       while ($row = pg_fetch_assoc($res))
+       {
+         $object = new Connection();
+         $object->id = $row['id_monit'];
+         $object->disciplina = $row['disciplina'];
+         array_push($resultado, array("id"=>$object->id, "disciplina"=>$object->disciplina));
+       }
+       echo json_encode(array("result"=>$resultado), JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);
     }
 
     function getMonitoriaById($id='')
     {
-       # code...
+      $sql    ="SELECT * FROM monitorias as m, disciplinas as d, cursos as c, local as l, semestre as s WHERE m.curso_m =c.id_curso AND m.disciplina_m =d.id_disc AND s.id_sem =m.semestre_m AND l.id =m.sala_m AND m.id_monit =$id";
+      $res = pg_query($sql);
+      $resultado = array();
+
+      while ($row = pg_fetch_assoc($res))
+      {
+         $object             = new Monitorias();
+         $object->id         = $reg["id_monit"];
+         $object->curso      = $reg['nome'];
+         $object->disciplina = $reg['disciplina'];
+         $object->semestre   = $reg['semestre'];
+         $object->sala       = $reg['sala'];
+         $object->info       = $reg['info_m'];
+         array_push($resultado, array("id"=>$object->id, "curso"=>$object->curso, "disciplina"=>$object->disciplina, "semestre"=>$object->semestre, "sala"=>$object->sala, "info"=>$objetc->info));
+      }
+      echo json_encode(array("result"=>$resultado), JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);
     }
 
     function getAllCategorias()
@@ -131,7 +225,6 @@ include_once 'Carrega.class.php';
     {
        # code...
     }
-
 
 
     function getAllNoticias()
