@@ -83,6 +83,8 @@ create table eventos(
 	id_event serial not null,
 	evento varchar(300) not null,
 	event_cat integer not null,
+	dataInicio date not null,
+	dataFim date not null,
 	texto text not null,
 	imagem text,
 	primary key(id_event),
@@ -105,9 +107,9 @@ create table estagios(
 
 create table cardapios(
 	id_card serial not null,
-	dia integer not null,
+	dia integer unique not null,
 	data date not null,
-	primary key(id),
+	primary key(id_id),
 	foreign key(dia) references dia
 
 	ON UPDATE CASCADE ON DELETE CASCADE

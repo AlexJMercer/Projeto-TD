@@ -61,6 +61,10 @@ include_once "../../class/Carrega.class.php";
               <div class="box box-info">
                 <div class="box-header with-border">
                   <h3 class="box-title">Notícias</h3>
+                  <!-- tools box -->
+                  <div class="pull-right box-tools">
+                    <button class="btn btn-info btn-sm" data-widget="collapse" data-toggle="tooltip" title="Collapse"><i class="fa fa-minus"></i></button>
+                  </div><!-- /. tools -->
                 </div><!-- /.box-header -->
 <?php
 
@@ -76,25 +80,24 @@ include_once "../../class/Carrega.class.php";
 ?>
                 <div class="box-body">
                   <div class="form-group">
-                    <dl class="dl-horizontal">
-                      <dt>Titulo:</dt>
-                      <dd><?php echo $comp->titulo; ?></dd>
-                      <dt>Linha de apoio:</dt>
-                      <dd><?php echo $comp->resumo; ?></dd>
-                      <dt>Status:</dt>
-                      <dd><?php echo $comp->status; ?></dd>
-                      <dt>Imagem:</dt>
-                      <dd><img src="<?php echo $comp->imagem; ?>" alt="Imagem" width="50%" height="50%"/></dd>
-                      <dt>Notícia:</dt>
-                      <dd><?php echo $comp->texto; ?></dd>
-                      <dt>Autor:</dt>
-                      <dd><?php echo $comp->autor; ?></dd>
-                      <dt>Categorias:</dt>
-                      <dd><?php
-                                $label = new Categorias();
-                                $label->labelCategorias($comp->categoria);
-                          ?></dd>
-                    </dl>
+                    <div class="col-sm-7">
+                      <?php echo $comp->texto; ?>
+                      <br>
+                      <dl>
+                        <dt>Escrito por:</dt>
+                        <dd><?php echo $comp->autor; ?></dd>
+                        <dt>Categorias:</dt>
+                        <dd><?php
+                                  $label = new Categorias();
+                                  $label->labelCategorias($comp->categoria);
+                        ?></dd>
+                      </dl>
+                    </div>
+                    <div class="col-sm-5" style="align: center;">
+                      <br>
+                      <img class="img-responsive-pad " src="<?php echo $comp->imagem; ?>" alt="Imagem" width="100%" height="100%" />
+                    </div>
+
                     <form action="EditNoticiaObj.php" method="post">
 
                       <input type="hidden" name="id" value="<?php echo $id; ?>"/>
@@ -108,11 +111,31 @@ include_once "../../class/Carrega.class.php";
                     </form>
                   </div>
                 </div>
+              </div><!-- /.box -->
+              <div class="box box-info collapsed-box">
+                <div class="box-header with-border">
+                  <h3 class="box-title">Informações cadastradas</h3>
+                  <div class="box-tools pull-right">
+                    <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-plus"></i></button>
+                  </div><!-- /.box-tools -->
+                </div><!-- /.box-header -->
+                <div class="box-body">
+                  <dl class="dl-horizontal">
+                    <dt>Titulo:</dt>
+                    <dd><?php echo $comp->titulo; ?></dd>
+                    <dt>Linha de apoio:</dt>
+                    <dd><?php echo $comp->resumo; ?></dd>
+                    <dt>Status:</dt>
+                    <dd><?php echo $comp->status; ?></dd>
+                  </dl>
+                </div><!-- /.box-body -->
+              </div><!-- /.box -->
+
 <?php
     }
   }
 ?>
-              </div><!-- /.box -->
+
               <!-- general form elements disabled -->
             </div>
           </div>   <!-- /.row -->
