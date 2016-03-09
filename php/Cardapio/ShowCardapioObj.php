@@ -71,6 +71,8 @@ include_once "../../class/Carrega.class.php";
     $exib = new Cardapios();
     $comp = $exib->showCardapio($id);
 
+    print_r($comp);
+
     if ($exib != null)
     {
 ?>

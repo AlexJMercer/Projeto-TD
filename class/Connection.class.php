@@ -101,10 +101,10 @@ include_once 'Carrega.class.php';
       echo json_encode(array("result"=>$resultado), JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);
     }
 
-    function getAllCardapios()
+    function getAllCardapios($id='')
     {
-      $sql     = "SELECT * FROM cardapios c JOIN dia d ON d.id_dia=c.dia JOIN alimentos_cardapios ac ON ac.id_cad =c.id_card";
-      $sql2    = "SELECT a.alimento FROM alimentos a, alimentos_cardapios ac WHERE a.id = ac.id_ali";
+      $sql     = "SELECT * FROM cardapios c JOIN dia d ON d.id_dia=c.dia JOIN alimentos_cardapios ac ON ac.id_cad =c.id_card WHERE ac.id_cad =$id  ORDER BY id_dia ";
+      $sql2    = "SELECT a.id FROM alimentos a, alimentos_cardapios ac WHERE ac.id_cad = $id AND a.id = ac.id_ali";
       $res  = pg_query($sql);
       $res2 = pg_query($sql2);
       $resultado = array();
@@ -122,11 +122,11 @@ include_once 'Carrega.class.php';
          }
          $obj->alimento = $temp;
 
-         //print_r($obj);
+         print_r($obj);
 
-         array_push($resultado, array("id"=>$obj->id, "dia"=>$obj->dia, "data"=>$obj->data, "alimentos"=>$obj->alimento));
+         //array_push($resultado, array("id"=>$obj->id, "dia"=>$obj->dia, "data"=>$obj->data, "alimentos"=>$obj->alimento));
       }
-      echo json_encode(array("result"=>$resultado), JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);
+    //  echo json_encode(array("result"=>$resultado), JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);
     }
 
 
@@ -246,19 +246,34 @@ include_once 'Carrega.class.php';
 
     function getObjNoticiaById($id='')
     {
-      $sql       = "SELECT * FROM noticias Where id_not = $id";
-      $res       = pg_query($sql);
+      $sql    = "SELECT * FROM noticias n, imagens_noticias ino, usuarios u, categorias_noticias cn
+                  WHERE n.id_not = ino.noticia AND n.autor = u.id_user AND cn.not_id = n.id_not AND n.id_not = $id";
+      $sql2   = "SELECT c.categoria FROM categorias c, categorias_noticias cn WHERE cn.not_id = $id AND c.id = cn.cat_id";
+
+      $res  = pg_query($sql);
+      $res2 = pg_query($sql2);
       $resultado = array();
 
       while($row = pg_fetch_assoc($res))
       {
-        $object          = new Connection();
-        $object->noticia = utf8_encode($row['texto']);
-        $object->data    = date('d/m/Y', strtotime($row['data']));
-        array_push($resultado, array("Texto"=>$object->noticia, "Data"=>$object->data));
+        $object         = new Connection();
+        $object->autor  = $row['nome'];
+        $object->texto  = htmlspecialchars($row['texto']);
+        $object->imagem = $row['imagem'];
+        $object->data   = $row['data'];
+        $object->hora   = $row['hora'];
+
+        foreach (pg_fetch_assoc($res2) as $value)
+        {
+          $temp[] = $value;
+        }
+        $object->categoria = $temp;
+
+        print_r($object);
+        //array_push($resultado, array("Texto"=>$object->texto, "Data"=>$object->data, "Imagem"=>$object->imagem, "Hora"=>$object->hora, "Autor"=>$object->autor, "Categorias"=>$object->categoria));
       }
 
-      echo json_encode(array("result"=>$resultado), JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT );
+      //echo json_encode(array("result"=>$resultado), JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT );
 
     }
 

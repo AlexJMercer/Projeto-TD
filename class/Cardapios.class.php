@@ -143,11 +143,12 @@ include_once "Carrega.class.php";
           {
              $temp[] = $value;
           }
-          $obj->alimento = $temp;
+          $obj->alimento[] = $temp;
 
           $retorno = $obj;
+          print_r($obj);
        }
-       return $retorno;
+       //return $retorno;
       }
    }
 ?>
