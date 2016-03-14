@@ -9,7 +9,7 @@ Ass.
 Julian Cunha 
 
 
-# Start Bootstrap - SB Admin 2
+#  Bootstrap
 
-Utilizando AdminLTE
+Utilizando AdminLTE.
 [Bootstrap](http://getbootstrap.com/)
