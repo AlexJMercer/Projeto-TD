@@ -17,16 +17,11 @@ include_once "../../class/Carrega.class.php";
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
     <!-- Ionicons -->
     <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
-    <!-- Select2 -->
-    <link rel="stylesheet" href="../../plugins/select2/select2.min.css">
-    <!--FileInput-->
-    <link rel="stylesheet" href="../../plugins/fileinput/css/fileinput.min.css">
     <!-- Theme style -->
     <link rel="stylesheet" href="../../dist/css/AdminLTE.min.css">
     <!-- AdminLTE Skins. Choose a skin from the css/skins
          folder instead of downloading all of them to reduce the load. -->
     <link rel="stylesheet" href="../../dist/css/skins/_all-skins.min.css">
-
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -46,7 +41,7 @@ include_once "../../class/Carrega.class.php";
         <!-- Content Header (Page header) -->
         <section class="content-header">
           <h1>
-            Cursos
+            Institutos
           </h1>
         </section>
 
@@ -57,50 +52,27 @@ include_once "../../class/Carrega.class.php";
               <!-- Horizontal Form -->
               <div class="box box-success">
                 <div class="box-header with-border">
-                  <h3 class="box-title">Cadastro de curso</h3>
+                  <h3 class="box-title">Edição de institutos</h3>
                 </div><!-- /.box-header -->
                 <!-- form start -->
-<?php
+                <?php
 
-  $id = $_POST["id"];
+                  $id = $_POST["id"];
 
-  if (isset($_POST["editar"]))
-  {
-    $edit = new Cursos();
-    $comp = $edit->Editar($id);
+                  if (isset($_POST["editar"]))
+                  {
+                    $edit = new Instituto();
+                    $comp = $edit->editar($id);
 
-    if ($edit != null)
-    {
-?>
-                <form class="form-horizontal" id="form" method="post" action="CrudCursos.php" enctype="multipart/form-data">
+                      if ($edit != null)
+                      {
+                ?>
+                <form class="form-horizontal" id="form" method="post" action="CrudInstituto.php">
                   <div class="box-body">
                       <div class="form-group">
-                        <label for="curso" class="col-sm-2 control-label">Nome do curso:</label>
+                        <label for="nome" class="col-sm-2 control-label">Nome do instituto:</label>
                         <div class="col-sm-10">
-                          <input type="text" value="<?php echo $comp->nome; ?>" class="form-control" name="nome" id="curso" placeholder="Digite o nome aqui" required>
-                        </div>
-                      </div>
-                      <div class="form-group">
-                         <label for="inst" class="col-sm-2 control-label">Instituto:</label>
-                         <div class="col-sm-10">
-                            <select class="form-control" name="instituto" id='inst' required>
-                              <option value=""></option>
-                              <?php
-                                  $instituto = new Select();
-                                  $instituto->institutoSelect($comp->instituto);
-                              ?>
-                            </select>
-                         </div>
-                      <div class="form-group">
-                         <label for="desc" class="col-sm-2 control-label">Descrição:</label>
-                         <div class="col-sm-10">
-                            <textarea class="form-control"  name="texto" id="desc" rows="8" placeholder="Digite aqui..."><?php echo $comp->texto; ?></textarea>
-                         </div>
-                      </div>
-                      <div class="form-group">
-                        <label for="logo" class="col-sm-2 control-label">Logo:</label>
-                        <div class="col-sm-10">
-                          <input id="logo" name="logo" class="file" type="file" data-min-file-count="0">
+                          <input type="text" class="form-control" name="instituto" id="nome" value="<?php echo $comp->instituto; ?>" placeholder="Digite aqui" autofocus required>
                         </div>
                       </div>
                   </div><!-- /.box-body -->
@@ -108,10 +80,13 @@ include_once "../../class/Carrega.class.php";
                     <input type="hidden" name="id" value="<?php echo $comp->id; ?>"/>
                     <button type="submit" name="atualizar" value="atualizar" class="btn btn-success btn-flat btn-block"><i class="fa fa-check"></i> Atualizar </button>
                     <br>
-                    <button type="button" name="cancelar" value="cancelar" onclick="location.href='ViewCursosObj.php'" class="btn btn-default btn-flat btn-block btn-sm"><i class="fa fa-magic"></i> Cancelar </button>
+                    <button type="button" name="cancelar" value="cancelar" onclick="location.href='ViewInstitutosObj.php'" class="btn btn-default btn-flat btn-block btn-sm"><i class="fa fa-magic"></i> Cancelar </button>
                   </div><!-- /.box-footer -->
                 </form>
-
+                <?php
+                      }
+                    }
+                ?>
               </div><!-- /.box -->
               <!-- general form elements disabled -->
             </div><!--/.col (right) -->
@@ -129,47 +104,10 @@ include_once "../../class/Carrega.class.php";
     <script src="../../bootstrap/js/bootstrap.min.js"></script>
     <!-- FastClick -->
     <script src="../../plugins/fastclick/fastclick.min.js"></script>
-    <!--FileInput-->
-    <script src="../../plugins/fileinput/js/fileinput.min.js" type="text/javascript"></script>
-    <script src="../../plugins/fileinput/js/fileinput_locale_pt-BR.js" type="text/javascript"></script>
     <!-- AdminLTE App -->
     <script src="../../dist/js/app.min.js"></script>
-    <!-- Select2 -->
-    <script src="../../plugins/select2/select2.full.min.js"></script>
     <!-- AdminLTE for demo purposes -->
     <script src="../../dist/js/demo.js"></script>
 
-    <?php
-        if ($comp->imagem != null)
-        {
-          $show = $comp->imagem;
-        }
-        else
-        {
-          $show = "../../dist/img/nadaCadastrado.png";
-        }
-    ?>
-
-
-    <script type="text/javascript">
-    $('.file').fileinput({
-      initialPreview: [
-        '<img src="<?php echo $show; ?>" class="file-preview-image">'
-      ],
-        overwriteInitial: true,
-        browseClass: "btn btn-info btn-flat btn-block",
-        showCaption: false,
-        showRemove: false,
-        showUpload: false,
-        language: 'pt-BR',
-        allowedFileExtensions : ['jpg', 'png','gif']
-
-    });
-    </script>
-
   </body>
 </html>
-<?php
-      }
-    }
-?>

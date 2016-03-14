@@ -1,6 +1,3 @@
-﻿create database ToDentro;
-
-
 create table dia(
 	id_dia serial not null,
 	dia varchar(100) not null,
@@ -23,7 +20,7 @@ create table categorias(
 create table local(
 	id_lo serial not null,
 	sala varchar(150) not null,
-	Primary key(id)
+	Primary key(id_lo)
 );
 
 create table status(
@@ -38,18 +35,6 @@ INSERT INTO status (status) VALUES ('Rejeitado!');
 INSERT INTO status (status) VALUES ('Editado!');
 INSERT INTO status (status) VALUES ('Publicado!');
 INSERT INTO status (status) VALUES ('Publicado e editado!');
-
-create table usertype(
-id_us serial not null,
-type text not null,
-Primary key(id)
-
-ON UPDATE CASCADE ON DELETE CASCADE
-);
-
-INSERT INTO usertype (type) VALUES ('Administrador');
-INSERT INTO usertype (type) VALUES ('Editor');
-INSERT INTO usertype (type) VALUES ('Autor');
 
 create table assistencias(
 
@@ -84,7 +69,7 @@ create table eventos(
 	evento varchar(300) not null,
 	event_cat integer not null,
 	dataInicio date not null,
-	dataFim date not null,
+	dataFim date default(null),
 	texto text not null,
 	imagem text,
 	primary key(id_event),
@@ -96,20 +81,25 @@ create table eventos(
 create table estagios(
 	id_est serial not null,
 	titulo varchar(200) not null,
-	texto text not null,
-	categoria integer not null,
-	datas date default(now()) not null,
-	primary key(id_est),
-	foreign key(categoria) references categorias
+	salario numeric(10,2) not null,
+	condicoes text not null,
+	atividades text not null,
+	exigencias text not null,
+	info_est text,
+	primary key(id_est)
+);
 
-	ON UPDATE CASCADE ON DELETE CASCADE
+create table instituto(
+	id_inst serial not null,
+	instituto text not null,
+	primary key(id_inst)
 );
 
 create table cardapios(
 	id_card serial not null,
-	dia integer unique not null,
+	dia integer not null unique,
 	data date not null,
-	primary key(id_id),
+	primary key(id_card),
 	foreign key(dia) references dia
 
 	ON UPDATE CASCADE ON DELETE CASCADE
@@ -118,45 +108,42 @@ create table cardapios(
 create table alimentos(
 	id_ali serial not null,
 	alimento varchar(150) not null,
-	primary key(id)
+	primary key(id_ali)
 
 );
 
 create table alimentos_cardapios(
-	id_cad integer not null,
-	id_ali integer not null,
-	foreign key(id_card) references cardapios,
+	card_id integer not null,
+	ali_id integer not null,
+	foreign key(card_id) references cardapios
 
-	ON UPDATE CASCADE ON DELETE CASCADE
+	ON UPDATE CASCADE ON DELETE CASCADE,
 
-	foreign key(id_ali) references alimentos
+	foreign key(ali_id) references alimentos
 
 	ON UPDATE CASCADE ON DELETE CASCADE
 );
 
 create table usuarios(
 	id_user serial not null,
-	username varchar(200) not null,
+	nome varchar(200) not null,
 	email varchar(200) not null,
-	senha varchar(200) not null,
-	type integer default(3) not null,
-	primary key(id),
-	foreign key(type) references usertype
-
-	ON UPDATE CASCADE ON DELETE CASCADE
+	senha varchar(500) not null,
+	primary key(id_user)
 );
 
-INSERT INTO usuarios (username, email, senha, type) VALUES ('admin','admin','admin','1');
+INSERT INTO usuarios (nome, email, senha) VALUES ('Administrador','admin','admin');
 
 create table noticias(
 	id_not serial not null,
 	titulo varchar(200) not null,
-	resumo varchar(350),
+	linha_apoio varchar(350),
 	texto text not null,
 	data date default(now()) not null,
 	hora time default(now()) not null,
 	autor integer not null,
 	status integer not null,
+	url text,
 	primary key(id_not),
 	foreign key(autor) references usuarios
 	ON UPDATE CASCADE ON DELETE CASCADE,
@@ -190,8 +177,6 @@ create table imagens_noticias(
 create table programacao(
 	id_prog serial not null,
 	evento_id integer not null,
-	dataInicio date not null,
-	dataFim date not null,
 	primary key(id_prog),
 	foreign key(evento_id) references eventos
 
@@ -201,18 +186,33 @@ create table programacao(
 create table cursos(
 	id_curso serial not null,
 	nome text not null,
-	texto text not null,
+	inst_id integer,
+	texto text,
 	logo text,
-	primary key(id)
+	primary key(id_curso),
+	foreign key(inst_id) references instituto
 
+	ON UPDATE CASCADE ON DELETE CASCADE
 );
 
 create table disciplinas(
 	id_disc serial not null,
 	disciplina text not null,
 	curso integer not null,
-	primary key(id),
+	primary key(id_disc),
 	foreign key(curso) references cursos
+
+	ON UPDATE CASCADE ON DELETE CASCADE
+);
+
+create table estagio_cursos(
+	est_id integer not null,
+	curso_id integer not null,
+	foreign key(est_id) references estagios
+
+	ON UPDATE CASCADE ON DELETE CASCADE,
+
+	foreign key(curso_id) references cursos
 
 	ON UPDATE CASCADE ON DELETE CASCADE
 );
@@ -241,4 +241,4 @@ create table setores(
 	setor varchar(75) not null,
 	texto text not null,
 	primary key(id_set)
-)
+);

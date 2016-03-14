@@ -103,8 +103,8 @@ include_once 'Carrega.class.php';
 
     function getAllCardapios($id='')
     {
-      $sql     = "SELECT * FROM cardapios c JOIN dia d ON d.id_dia=c.dia JOIN alimentos_cardapios ac ON ac.id_cad =c.id_card WHERE ac.id_cad =$id  ORDER BY id_dia ";
-      $sql2    = "SELECT a.id FROM alimentos a, alimentos_cardapios ac WHERE ac.id_cad = $id AND a.id = ac.id_ali";
+      $sql     = "SELECT * FROM cardapios c JOIN dia d ON d.id_dia=c.dia JOIN alimentos_cardapios ac ON ac.card_id =c.id_card WHERE c.dia=$id";
+      $sql2    = "SELECT a.id_ali FROM alimentos a, alimentos_cardapios ac WHERE a.id_ali = ac.ali_id";
       $res  = pg_query($sql);
       $res2 = pg_query($sql2);
       $resultado = array();
@@ -126,7 +126,7 @@ include_once 'Carrega.class.php';
 
          //array_push($resultado, array("id"=>$obj->id, "dia"=>$obj->dia, "data"=>$obj->data, "alimentos"=>$obj->alimento));
       }
-    //  echo json_encode(array("result"=>$resultado), JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);
+     //echo json_encode(array("result"=>$resultado), JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);
     }
 
 
@@ -235,33 +235,36 @@ include_once 'Carrega.class.php';
 
       while($row = pg_fetch_array($res))
       {
-         $object          = new Connection();
-         $object->id      = $row['id_not'];
-         $object->noticia = utf8_encode($row['titulo']);
-         $object->data    = date('d/m/Y', strtotime($row['data']));
-         array_push($resultado, array("id"=>$object->id, "Texto"=>$object->noticia, "Data"=>$object->data));
+         $object              = new Noticias();
+         $object->id          = $row['id_not'];
+         $object->titulo      = $row['titulo'];
+         $object->linha_apoio = $row['linha_apoio'];
+         $object->data        = date('d/m/Y', strtotime($row['data']));
+         array_push($resultado, array("id"=>$object->id, "Texto"=>$object->titulo, "linha_apoio"=>$object->linha_apoio, "Data"=>$object->data));
       }
        echo json_encode(array("result"=>$resultado), JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
     }
 
-    function getObjNoticiaById($id='')
+    function getObjNoticiaById($id)
     {
       $sql    = "SELECT * FROM noticias n, imagens_noticias ino, usuarios u, categorias_noticias cn
                   WHERE n.id_not = ino.noticia AND n.autor = u.id_user AND cn.not_id = n.id_not AND n.id_not = $id";
-      $sql2   = "SELECT c.categoria FROM categorias c, categorias_noticias cn WHERE cn.not_id = $id AND c.id = cn.cat_id";
+      $sql2   = "SELECT c.id_cat FROM categorias c, categorias_noticias cn WHERE cn.not_id = $id AND c.id_cat = cn.cat_id";
 
       $res  = pg_query($sql);
       $res2 = pg_query($sql2);
-      $resultado = array();
+      //$resultado = array();
+      $retorno = null;
 
       while($row = pg_fetch_assoc($res))
       {
-        $object         = new Connection();
+        $object         = new Noticias();
         $object->autor  = $row['nome'];
-        $object->texto  = htmlspecialchars($row['texto']);
+        $object->texto  = $row['texto'];
         $object->imagem = $row['imagem'];
         $object->data   = $row['data'];
         $object->hora   = $row['hora'];
+        $object->url    = $row['url'];
 
         foreach (pg_fetch_assoc($res2) as $value)
         {
@@ -269,12 +272,34 @@ include_once 'Carrega.class.php';
         }
         $object->categoria = $temp;
 
-        print_r($object);
-        //array_push($resultado, array("Texto"=>$object->texto, "Data"=>$object->data, "Imagem"=>$object->imagem, "Hora"=>$object->hora, "Autor"=>$object->autor, "Categorias"=>$object->categoria));
+        $retorno = $object;
+
+        //print_r($object);
+        //array_push($resultado, array("Texto"=>$object->texto, "Data"=>$object->data, "Imagem"=>$object->imagem, "Hora"=>$object->hora, "Autor"=>$object->autor, "Categorias"=>$object->categoria, "url"=>$object->url));
       }
-
+      return $retorno;
       //echo json_encode(array("result"=>$resultado), JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT );
+    }
 
+    function ShowNoticiaById($id)
+    {
+      $noticia   = new Connection();
+      $show      = $noticia->getObjNoticiaById($id);
+      $resultado = array();
+      if ($show != null)
+      {
+        $texto     = $show->texto;
+        $autor     = $show->autor;
+        $categoria = $show->categoria;
+        $imagem    = $show->imagem;
+        $data      = date('d/m/Y', strtotime($show->data));
+        $hora      = date('H:i', strtotime($show->hora));
+        $url       = $show->url;
+
+        array_push($resultado, array("Imagem"=>$imagem, "hora"=>$hora, "data"=>$data, "Autor"=>$autor, "Categorias"=>$categoria, "url"=>$url, "Texto"=>$texto));
+
+        echo json_encode(array("result"=>$resultado), JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT );
+      }
     }
 
     function getAllEstagios($id='')

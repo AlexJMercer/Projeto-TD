@@ -9,13 +9,14 @@ class Noticias
 {
    private $id;
    private $titulo;
-   private $resumo;
+   private $linha_apoio;
    private $noticia;
    private $categoria;
    private $status;
    private $data;
    private $hora;
    private $imagem;
+   private $url;
    private $bd;
 
       function __construct()
@@ -49,8 +50,8 @@ class Noticias
       {
          $this->transacao("BEGIN");
 
-         $sql    = "INSERT INTO noticias (autor, data, hora, titulo, resumo, status, texto)
-                    VALUES ('$this->autor', '$this->data', '$this->hora', '$this->titulo', '$this->resumo', '$this->status', '$this->noticia')";
+         $sql    = "INSERT INTO noticias (autor, data, hora, titulo, linha_apoio, status, texto, url)
+                    VALUES ('$this->autor', '$this->data', '$this->hora', '$this->titulo', '$this->linha_apoio', '$this->status', '$this->noticia', '$this->url')";
          $return = pg_query($sql);
 
            if($return)
@@ -107,7 +108,15 @@ class Noticias
       {
         $this->transacao("BEGIN");
 
-        $sql    = "UPDATE noticias set autor = '$this->autor', data = '$this->data', hora = '$this->hora', titulo = '$this->titulo', resumo = '$this->resumo', status = '$this->status', texto = '$this->noticia' WHERE id_not = $this->id";
+        $sql         = "UPDATE noticias set autor = '$this->autor',
+                                      data        = '$this->data',
+                                      hora        = '$this->hora',
+                                      titulo      = '$this->titulo',
+                                      linha_apoio = '$this->linha_apoio',
+                                      status      = '$this->status',
+                                      texto       = '$this->noticia',
+                                      url         = '$this->url'
+                                WHERE id_not      = $this->id";
         $return = pg_query($sql);
 
           if($return)
@@ -151,14 +160,15 @@ class Noticias
 
          while ($reg = pg_fetch_assoc($result))
          {
-            $object         = new Noticias();
-            $object->id     = $reg['id_not'];
-            $object->autor  = $reg['id_user'];
-            $object->titulo = $reg['titulo'];
-            $object->resumo = $reg['resumo'];
-            $object->status = $reg['id_sta'];
-            $object->texto  = $reg['texto'];
-            $object->imagem = $reg['imagem'];
+            $object              = new Noticias();
+            $object->id          = $reg['id_not'];
+            $object->autor       = $reg['id_user'];
+            $object->titulo      = $reg['titulo'];
+            $object->linha_apoio = $reg['linha_apoio'];
+            $object->status      = $reg['id_sta'];
+            $object->texto       = $reg['texto'];
+            $object->url         = $reg['url'];
+            $object->imagem      = $reg['imagem'];
 
             foreach (pg_fetch_assoc($result2) as $value)
             {
@@ -186,24 +196,24 @@ class Noticias
 
       public function showNoticia($id="")
       {
-        $sql    = "SELECT * FROM noticias n, status s, imagens_noticias ino, usuarios u, categorias_noticias cn
+        $sql     = "SELECT * FROM noticias n, status s, imagens_noticias ino, usuarios u, categorias_noticias cn
                     WHERE n.id_not = ino.noticia AND n.status = s.id_sta AND n.autor = u.id_user AND cn.not_id = n.id_not AND n.id_not = $id";
-        $sql2   = "SELECT c.id FROM categorias c, categorias_noticias cn WHERE cn.not_id = $id AND c.id = cn.cat_id";
-
+        $sql2    = "SELECT c.categoria FROM categorias c, categorias_noticias cn WHERE cn.not_id = $id AND c.id_cat = cn.cat_id";
         $result  = pg_query($sql);
         $result2 = pg_query($sql2);
         $retorno = NULL;
 
         while ($reg = pg_fetch_assoc($result))
         {
-           $object         = new Noticias();
-           $object->id     = $reg['id_not'];
-           $object->autor  = $reg['nome'];
-           $object->titulo = $reg['titulo'];
-           $object->resumo = $reg['resumo'];
-           $object->status = $reg['status'];
-           $object->texto  = $reg['texto'];
-           $object->imagem = $reg['imagem'];
+           $object              = new Noticias();
+           $object->id          = $reg['id_not'];
+           $object->autor       = $reg['nome'];
+           $object->titulo      = $reg['titulo'];
+           $object->linha_apoio = $reg['linha_apoio'];
+           $object->status      = $reg['status'];
+           $object->texto       = $reg['texto'];
+           $object->url         = $reg['url'];
+           $object->imagem      = $reg['imagem'];
 
            foreach (pg_fetch_assoc($result2) as $value)
            {
@@ -213,7 +223,6 @@ class Noticias
 
            $retorno = $object;
         }
-
         return $retorno;
       }
 }

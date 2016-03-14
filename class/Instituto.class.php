@@ -3,10 +3,10 @@ include_once 'Carrega.class.php';
 /**
  *
  */
-class Local
+class Instituto
 {
   private $id;
-  private $sala;
+  private $instituto;
   private $bd;
 
     public function __construct()
@@ -31,21 +31,21 @@ class Local
 
     public function Inserir()
     {
-      $sql    = "INSERT INTO local (sala) VALUES ('$this->sala')";
+      $sql    = "INSERT INTO instituto (instituto) VALUES ('$this->instituto')";
       $return = pg_query($sql);
       return $return;
     }
 
     public function Listar()
     {
-      $sql    = "SELECT * FROM local";
+      $sql    = "SELECT * FROM instituto";
       $result = pg_query($sql);
 
       while ($reg = pg_fetch_assoc($result))
       {
-        $obj       = new Local();
-        $obj->id   = $reg["id_lo"];
-        $obj->sala = $reg["sala"];
+        $obj       = new instituto();
+        $obj->id   = $reg["id_inst"];
+        $obj->instituto = $reg["instituto"];
 
         $return[] = $obj;
       }
@@ -54,14 +54,14 @@ class Local
 
     public function Editar($id = "")
     {
-      $sql    = "SELECT * FROM local AS l WHERE l.id_lo =$id";
+      $sql    = "SELECT * FROM instituto AS i WHERE i.id_inst =$id";
       $result = pg_query($sql);
 
       while ($reg = pg_fetch_assoc($result))
       {
-        $obj       = new Local();
-        $obj->id   = $reg["id_lo"];
-        $obj->sala = $reg["sala"];
+        $obj       = new instituto();
+        $obj->id   = $reg["id_inst"];
+        $obj->instituto = $reg["instituto"];
 
         $return = $obj;
       }
@@ -70,21 +70,21 @@ class Local
 
     public function Excluir()
     {
-      $sql    = "DELETE FROM local WHERE id_lo =$this->id";
+      $sql    = "DELETE FROM instituto WHERE id_inst =$this->id";
       $return = pg_query($sql);
       return $return;
     }
 
     public function Atualizar()
     {
-        $sql    = "UPDATE local set sala = '$this->sala' WHERE id_lo = '$this->id'";
+        $sql    = "UPDATE instituto set instituto = '$this->instituto' WHERE id_inst = '$this->id'";
         $return = pg_query($sql);
         return $return;
     }
 
-    public function salaSelect($id ="")
+    public function institutoSelect($id ="")
     {
-       $sql    = "SELECT * from local Order by id_lo";
+       $sql    = "SELECT * from instituto Order by id_inst";
        $result = pg_query($sql);
        $ln     =pg_num_rows($result);
 
@@ -98,16 +98,16 @@ class Local
         while ($a = pg_fetch_array($result))
         {
 
-          $this->id = $a['id_lo'];
-          $this->sala = $a['sala'];
+          $this->id        = $a['id_inst'];
+          $this->instituto = $a['instituto'];
 
           if ($id==$this->id)
           {
-            print "<option selected value='{$this->id}'>{$this->sala}</option>";
+            print "<option selected value='{$this->id}'>{$this->instituto}</option>";
           }
           else
           {
-            print "<option value='{$this->id}'>{$this->sala}</option>";
+            print "<option value='{$this->id}'>{$this->instituto}</option>";
           }
         }
       }

@@ -15,7 +15,7 @@ class Select
     public $categoria;
     public $status;
     public $evento;
-    //public $;
+    public $instituto;
     //public $;
     //public $;
     //public $;
@@ -131,7 +131,7 @@ class Select
 
     public function alimentoSelect($alimento="")
     {
-      $sql    = "SELECT * from alimentos Order by id";
+      $sql    = "SELECT * from alimentos Order by id_ali";
       $result = pg_query($sql);
       $ln     = pg_num_rows($result);
 
@@ -143,7 +143,7 @@ class Select
       {
         while ($a = pg_fetch_array($result))
         {
-          $this->id       = $a['id'];
+          $this->id       = $a['id_ali'];
           $this->alimento = $a['alimento'];
 
             if ($alimento==$this->id)
@@ -190,7 +190,7 @@ class Select
 
     public function categoriaSelect($categoria='')
     {
-      $sql    = "SELECT * from categorias Order by id";
+      $sql    = "SELECT * from categorias Order by id_cat";
       $result = pg_query($sql);
       $ln     = pg_num_rows($result);
 
@@ -203,7 +203,7 @@ class Select
 
         while ($a = pg_fetch_array($result))
         {
-          $this->id        = $a['id'];
+          $this->id        = $a['id_cat'];
           $this->categoria = $a['categoria'];
 
           if ($categoria==$this->id)
@@ -262,7 +262,7 @@ class Select
        {
           while ($a = pg_fetch_array($result))
           {
-            $this->id       = $a['id'];
+            $this->id       = $a['id_ali'];
             $this->alimento = $a['alimento'];
             //$count=count($a);
 
@@ -368,6 +368,38 @@ class Select
          }
       }
    }
+
+   public function institutoSelect($id ="")
+   {
+      $sql    = "SELECT * from instituto Order by id_inst";
+      $result = pg_query($sql);
+      $ln     =pg_num_rows($result);
+
+     if ($ln==0)
+     {
+        echo "<option value=''>Nada Encontrado!!</option>";
+     }
+     else
+     {
+
+       while ($a = pg_fetch_array($result))
+       {
+
+         $this->id        = $a['id_inst'];
+         $this->instituto = $a['instituto'];
+
+         if ($id==$this->id)
+         {
+           print "<option selected value='{$this->id}'>{$this->instituto}</option>";
+         }
+         else
+         {
+           print "<option value='{$this->id}'>{$this->instituto}</option>";
+         }
+       }
+     }
+   }
+
 
 }
 ?>

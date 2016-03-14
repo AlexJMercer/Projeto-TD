@@ -117,9 +117,9 @@ if(empty($_SESSION['email']) && empty($_SESSION['senha']) && empty($_SESSION['ti
                         </div>
                       </div>
                       <div class="form-group">
-                        <label for="resumo" class="col-sm-2 control-label">Resumo:</label>
+                        <label for="linha" class="col-sm-2 control-label">Linha de apoio:</label>
                         <div class="col-sm-10">
-                          <textarea class="form-control"  name="resumo" id="resumo" rows="2" cols="40" required><?php echo $comp->resumo; ?></textarea>
+                          <textarea class="form-control" name="linha_apoio" id="linha" rows="2" cols="40"><?php echo $comp->linha_apoio; ?></textarea>
                         </div>
                       </div>
                       <div class="form-group">
@@ -144,6 +144,12 @@ if(empty($_SESSION['email']) && empty($_SESSION['senha']) && empty($_SESSION['ti
                               $catSelected->categoriaMultiSelected($comp->categoria);
                             ?>
                           </select>
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label for="url" class="col-sm-2 control-label">URL do site:</label>
+                        <div class="col-sm-10">
+                          <input type="text" class='form-control' name="url" id='url' value="<?php echo $comp->url; ?>" placeholder="Coloque aqui o link da noticia do website">
                         </div>
                       </div>
                       <div class="form-group">

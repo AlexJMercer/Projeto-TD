@@ -68,6 +68,18 @@ include_once "../../class/Carrega.class.php";
                         </div>
                       </div>
                       <div class="form-group">
+                         <label for="inst" class="col-sm-2 control-label">Instituto:</label>
+                         <div class="col-sm-10">
+                            <select class="form-control" name="instituto" id='inst' required>
+                              <option value=""></option>
+                              <?php
+                                  $instituto = new Select();
+                                  $instituto->institutoSelect();
+                              ?>
+                            </select>
+                         </div>
+                      </div>
+                      <div class="form-group">
                          <label for="desc" class="col-sm-2 control-label">Descrição:</label>
                          <div class="col-sm-10">
                             <textarea class="form-control" name="texto" id="desc" rows="14" placeholder="Digite aqui..."></textarea>

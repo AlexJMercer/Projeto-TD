@@ -75,6 +75,8 @@ include_once "../../class/Carrega.class.php";
     $exib = new Noticias();
     $comp = $exib->showNoticia($id);
 
+    //print_r($comp);
+
     if ($exib != null)
     {
 ?>
@@ -124,9 +126,11 @@ include_once "../../class/Carrega.class.php";
                     <dt>Titulo:</dt>
                     <dd><?php echo $comp->titulo; ?></dd>
                     <dt>Linha de apoio:</dt>
-                    <dd><?php echo $comp->resumo; ?></dd>
+                    <dd><?php echo $comp->linha_apoio; ?></dd>
                     <dt>Status:</dt>
                     <dd><?php echo $comp->status; ?></dd>
+                    <dt>URL do site:</dt>
+                    <dd><?php echo $comp->url; ?></dd>
                   </dl>
                 </div><!-- /.box-body -->
               </div><!-- /.box -->

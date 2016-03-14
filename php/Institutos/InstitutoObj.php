@@ -41,7 +41,7 @@ include_once "../../class/Carrega.class.php";
         <!-- Content Header (Page header) -->
         <section class="content-header">
           <h1>
-            Locais
+            Instituição de ensino
           </h1>
         </section>
 
@@ -52,41 +52,24 @@ include_once "../../class/Carrega.class.php";
               <!-- Horizontal Form -->
               <div class="box box-success">
                 <div class="box-header with-border">
-                  <h3 class="box-title">Cadastro de locais</h3>
+                  <h3 class="box-title">Cadastro de instituição </h3>
                 </div><!-- /.box-header -->
                 <!-- form start -->
-                <?php
-
-                  $id = $_POST["id"];
-
-                  if (isset($_POST["editar"]))
-                  {
-                    $edit = new Local();
-                    $comp = $edit->editar($id);
-
-                      if ($edit != null)
-                      {
-                ?>
-                <form class="form-horizontal" id="form" method="post" action="CrudLocal.php">
+                <form class="form-horizontal" id="form" method="post" action="CrudInstituto.php">
                   <div class="box-body">
                       <div class="form-group">
-                        <label for="local" class="col-sm-2 control-label">Local:</label>
+                        <label for="nome" class="col-sm-2 control-label">Nome do instituto:</label>
                         <div class="col-sm-10">
-                          <input type="text" class="form-control" name="sala" id='local' value="<?php echo $comp->sala; ?>" placeholder="Digite a sala aqui" autofocus required>
+                          <input type="text" class="form-control" name="instituto" id="nome" placeholder="Digite aqui" autofocus required>
                         </div>
                       </div>
                   </div><!-- /.box-body -->
                   <div class="box-footer">
-                    <input type="hidden" name="id" value="<?php echo $comp->id; ?>"/>
-                    <button type="submit" name="atualizar" value="atualizar" class="btn btn-success btn-flat btn-block"><i class="fa fa-check"></i> Atualizar </button>
+                    <button type="submit" name="enviar" value="enviar" class="btn btn-success btn-flat btn-block"><i class="fa fa-check"></i> Enviar </button>
                     <br>
-                    <button type="button" name="cancelar" value="cancelar" onclick="location.href='ViewLocalObj.php'" class="btn btn-default btn-flat btn-block btn-sm"><i class="fa fa-magic"></i> Cancelar </button>
+                    <button type="reset" class="btn btn-default btn-flat btn-block btn-sm"><i class="fa fa-magic"></i> Limpar </button>
                   </div><!-- /.box-footer -->
                 </form>
-                <?php
-                      }
-                    }
-                ?>
               </div><!-- /.box -->
               <!-- general form elements disabled -->
             </div><!--/.col (right) -->
@@ -99,7 +82,6 @@ include_once "../../class/Carrega.class.php";
       ?>
 
     </div><!-- ./wrapper -->
-
     <!-- jQuery 2.1.4 -->
     <script src="../../plugins/jQuery/jQuery-2.1.4.min.js"></script>
     <!-- Bootstrap 3.3.5 -->

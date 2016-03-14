@@ -39,13 +39,13 @@
 
       function listar()
       {
-         $sql              = "SELECT * from alimentos Order by id";
+         $sql              = "SELECT * from alimentos Order by id_ali";
          $result           = pg_query($sql);
 
          while ($reg       = pg_fetch_assoc($result))
          {
             $obj           = new Alimentos();
-            $obj->id       = $reg["id"];
+            $obj->id       = $reg["id_ali"];
             $obj->alimento = $reg["alimento"];
 
             $return[]      = $obj;
@@ -55,7 +55,7 @@
 
       public function excluir()
       {
-         $sql    = "DELETE from alimentos where id =$this->id";
+         $sql    = "DELETE from alimentos where id_ali =$this->id";
          $return = pg_query($sql);
          return $return;
       }
@@ -63,7 +63,7 @@
       public function atualizar()
       {
 
-         $sql    = "UPDATE alimentos set alimento ='$this->alimento' where id =$this->id";
+         $sql    = "UPDATE alimentos set alimento ='$this->alimento' where id_ali =$this->id";
          $return = pg_query($sql);
 
          return $return;
@@ -71,14 +71,14 @@
 
       public function editar($id = "")
       {
-        $sql    = "SELECT * FROM alimentos WHERE alimentos.id =$id";
+        $sql    = "SELECT * FROM alimentos WHERE alimentos.id_ali =$id";
         $result = pg_query($sql);
         $return = NULL;
 
         while ($reg = pg_fetch_assoc($result))
         {
            $obj           = new Alimentos();
-           $obj->id       = $reg["id"];
+           $obj->id       = $reg["id_ali"];
            $obj->alimento = $reg["alimento"];
 
            $return = $obj;
@@ -90,8 +90,7 @@
       {
         $sql    = "SELECT * from alimentos";
         $result = pg_query($sql);
-
-        $ln = pg_num_rows($result);
+        $ln     = pg_num_rows($result);
 
         if ($ln==0)
         {
@@ -101,7 +100,7 @@
         {
            while ($a = pg_fetch_assoc($result))
            {
-             $this->id       = $a['id'];
+             $this->id       = $a['id_ali'];
              $this->alimento = $a['alimento'];
 
 

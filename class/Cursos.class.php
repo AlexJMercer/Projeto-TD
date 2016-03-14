@@ -8,6 +8,7 @@
     private $id;
     private $nome;
     private $texto;
+    private $instituto;
     private $logo;
     private $bd;
 
@@ -34,7 +35,7 @@
 
     public function Inserir()
     {
-      $sql    = "INSERT INTO cursos (nome, texto, logo) VALUES ('$this->nome', '$this->texto', '$this->logo')";
+      $sql    = "INSERT INTO cursos (nome, inst_id, texto, logo) VALUES ('$this->nome', '$this->instituto', '$this->texto', '$this->logo')";
       $return = pg_query($sql);
       return $return;
     }
@@ -67,7 +68,7 @@
 
     public function Atualizar()
     {
-      $sql    = "UPDATE cursos set nome ='$this->nome', texto ='$this->texto', logo ='$this->logo' where id_curso =$this->id";
+      $sql    = "UPDATE cursos set nome ='$this->nome', inst_id='$this->instituto', texto ='$this->texto', logo ='$this->logo' where id_curso =$this->id";
       $return = pg_query($sql);
       return $return;
     }
@@ -80,11 +81,12 @@
 
       while ($reg = pg_fetch_assoc($result))
       {
-         $object        = new Cursos();
-         $object->id    = $reg["id_curso"];
-         $object->nome  = $reg["nome"];
-         $object->texto = $reg["texto"];
-         $object->logo  = $reg["logo"];
+         $object            = new Cursos();
+         $object->id        = $reg["id_curso"];
+         $object->nome      = $reg["nome"];
+         $object->instituto = $reg['inst_id'];
+         $object->texto     = $reg["texto"];
+         $object->logo      = $reg["logo"];
 
          $return = $object;
       }
@@ -93,17 +95,18 @@
 
     public function Exibir($id = "")
     {
-      $sql    = "SELECT * FROM cursos c WHERE c.id_curso =$id";
+      $sql    = "SELECT * FROM cursos c, instituto i WHERE c.inst_id=i.id_inst AND c.id_curso =$id";
       $result = pg_query($sql);
       $return = null;
 
       while ($reg = pg_fetch_assoc($result))
       {
-         $object        = new Cursos();
-         $object->id    = $reg["id_curso"];
-         $object->nome  = $reg["nome"];
-         $object->texto = $reg["texto"];
-         $object->logo  = $reg["logo"];
+         $object            = new Cursos();
+         $object->id        = $reg["id_curso"];
+         $object->nome      = $reg["nome"];
+         $object->instituto = $reg['instituto'];
+         $object->texto     = $reg["texto"];
+         $object->logo      = $reg["logo"];
 
          $return = $object;
       }
