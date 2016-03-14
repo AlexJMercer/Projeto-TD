@@ -68,7 +68,7 @@
 
     public function Atualizar()
     {
-      $sql    = "UPDATE cursos set nome ='$this->nome', inst_id='$this->instituto', texto ='$this->texto', logo ='$this->logo' where id_curso =$this->id";
+      $sql    = "UPDATE cursos set nome ='$this->nome', instituto='$this->instituto', texto ='$this->texto', logo ='$this->logo' where id_curso =$this->id";
       $return = pg_query($sql);
       return $return;
     }
@@ -95,7 +95,7 @@
 
     public function Exibir($id = "")
     {
-      $sql    = "SELECT * FROM cursos c, instituto i WHERE c.inst_id=i.id_inst AND c.id_curso =$id";
+      $sql    = "SELECT * FROM cursos c WHERE c.id_curso =$id";
       $result = pg_query($sql);
       $return = null;
 

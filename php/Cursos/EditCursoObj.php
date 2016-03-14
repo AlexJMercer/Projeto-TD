@@ -68,6 +68,7 @@ include_once "../../class/Carrega.class.php";
   {
     $edit = new Cursos();
     $comp = $edit->Editar($id);
+    print_r($comp);
 
     if ($edit != null)
     {
@@ -83,14 +84,14 @@ include_once "../../class/Carrega.class.php";
                       <div class="form-group">
                          <label for="inst" class="col-sm-2 control-label">Instituto:</label>
                          <div class="col-sm-10">
-                            <select class="form-control" name="instituto" id='inst' required>
+                           <select class="form-control" name="instituto" id='inst' required>
                               <option value=""></option>
                               <?php
                                   $instituto = new Select();
                                   $instituto->institutoSelect($comp->instituto);
                               ?>
                             </select>
-                         </div>
+                      </div>
                       <div class="form-group">
                          <label for="desc" class="col-sm-2 control-label">Descrição:</label>
                          <div class="col-sm-10">
@@ -140,9 +141,9 @@ include_once "../../class/Carrega.class.php";
     <script src="../../dist/js/demo.js"></script>
 
     <?php
-        if ($comp->imagem != null)
+        if ($comp->logo != null)
         {
-          $show = $comp->imagem;
+          $show = $comp->logo;
         }
         else
         {

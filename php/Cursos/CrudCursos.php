@@ -9,6 +9,7 @@ include_once "../../class/Carrega.class.php";
       $object->instituto = $_POST['instituto'];
       $object->texto     = $_POST['texto'];
 
+      //print_r($object);
       $object->Inserir();
 
       $myUpload = new Upload($_FILES["logo"]);

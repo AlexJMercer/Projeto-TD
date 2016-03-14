@@ -94,7 +94,7 @@ include_once 'Carrega.class.php';
 
   public function ShowMonitoria($id='')
   {
-    $sql    ="SELECT * FROM monitorias as m, disciplinas as d, cursos as c, local as l, semestre as s WHERE m.curso_m =c.id_curso AND m.disciplina_m =d.id_disc AND s.id_sem =m.semestre_m AND l.id =m.sala_m AND m.id_monit =$id";
+    $sql    ="SELECT * FROM monitorias as m, disciplinas as d, cursos as c, local as l, semestre as s WHERE m.curso_m =c.id_curso AND m.disciplina_m =d.id_disc AND s.id_sem =m.semestre_m AND l.id_lo =m.sala_m AND m.id_monit =$id";
     $result = pg_query($sql);
 
     while ($reg = pg_fetch_assoc($result))

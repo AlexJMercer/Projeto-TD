@@ -73,7 +73,7 @@ class Select
 
     public function localSelect($sala="")
     {
-      $sql    = "SELECT * from local Order by id";
+      $sql    = "SELECT * from local Order by id_lo";
       $result = pg_query($sql);
       $ln     = pg_num_rows($result);
 
@@ -85,7 +85,7 @@ class Select
       {
         while ($a = pg_fetch_array($result))
         {
-         $this->id   = $a['id'];
+         $this->id   = $a['id_lo'];
          $this->sala = $a['sala'];
 
          if ($sala==$this->id)

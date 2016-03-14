@@ -70,6 +70,8 @@ create table eventos(
 	event_cat integer not null,
 	dataInicio date not null,
 	dataFim date default(null),
+	horarioInicio time default(null),
+	horarioFim time default(null),
 	texto text not null,
 	imagem text,
 	primary key(id_event),
@@ -87,12 +89,6 @@ create table estagios(
 	exigencias text not null,
 	info_est text,
 	primary key(id_est)
-);
-
-create table instituto(
-	id_inst serial not null,
-	instituto text not null,
-	primary key(id_inst)
 );
 
 create table cardapios(
@@ -183,16 +179,22 @@ create table programacao(
 	ON UPDATE CASCADE ON DELETE CASCADE
 );
 
+create table instituto(
+	id_inst serial not null,
+	instituto text not null,
+	primary key(id_inst)
+);
+
+INSERT INTO instituto (instituto) VALUES ('IFSul - Campus Pelotas');
+
 create table cursos(
 	id_curso serial not null,
 	nome text not null,
-	inst_id integer,
+	inst_id integer default(1),
 	texto text,
 	logo text,
 	primary key(id_curso),
 	foreign key(inst_id) references instituto
-
-	ON UPDATE CASCADE ON DELETE CASCADE
 );
 
 create table disciplinas(
