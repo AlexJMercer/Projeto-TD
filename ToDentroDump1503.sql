@@ -1211,13 +1211,14 @@ SELECT pg_catalog.setval('instituto_id_inst_seq', 2, true);
 
 INSERT INTO local VALUES (1, 'Lab-5 (319-a) -  TSI');
 INSERT INTO local VALUES (2, 'Laboratórios Telecomunicações');
+INSERT INTO local VALUES (3, 'Sala de desenho técnico do Design');
 
 
 --
 -- Name: local_id_lo_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('local_id_lo_seq', 2, true);
+SELECT pg_catalog.setval('local_id_lo_seq', 3, true);
 
 
 --
@@ -1246,13 +1247,14 @@ SELECT pg_catalog.setval('miniscri_id_seq', 1, false);
 --
 
 INSERT INTO monitorias VALUES (1, 1, 2, 1, 1, 'Todos os dias as 14h!!');
+INSERT INTO monitorias VALUES (2, 2, 5, 3, 2, 'Todos os dias a partir das 15h30');
 
 
 --
 -- Name: monitorias_id_monit_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('monitorias_id_monit_seq', 1, true);
+SELECT pg_catalog.setval('monitorias_id_monit_seq', 2, true);
 
 
 --
@@ -1358,13 +1360,16 @@ SELECT pg_catalog.setval('semestre_id_sem_seq', 12, true);
 -- Data for Name: setores; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
+INSERT INTO setores VALUES (1, 'Cosie - Setor de Estágios do IFSul (Campus Pelotas)', 'Divulgação de oportunidades de estágio e emprego.
+
+53 2123-1132');
 
 
 --
 -- Name: setores_id_set_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('setores_id_set_seq', 1, false);
+SELECT pg_catalog.setval('setores_id_set_seq', 1, true);
 
 
 --

@@ -7,19 +7,7 @@ include_once 'Carrega.class.php';
 
   class Connection
   {
-    private $id;
-    private $noticia;
-    private $data;
-    private $titulo;
-    private $texto;
-    private $curso;
-    private $disciplina;
-    private $categoria;
-    private $semestre;
-    private $local;
-    private $info;
-    private $sala;
-    private $setor;
+    
     private $bd;
 
     function __construct()
@@ -44,6 +32,8 @@ include_once 'Carrega.class.php';
 
     function getAllCursos()
     {
+      //Função Ok
+      //Listas todos os cursos do Ifsul
       $sql       = "SELECT * FROM cursos c WHERE c.inst_id=1 Order by nome";
       $res       = pg_query($sql);
       $resultado = array();
@@ -60,6 +50,8 @@ include_once 'Carrega.class.php';
 
     function getCursoById($id)
     {
+      //Função Ok
+      //Exibe o curso de acordo com sua Id
       $sql       = "SELECT * FROM cursos c, instituto i WHERE c.inst_id =i.id_inst AND c.id_curso =$id";
       $res       = pg_query($sql);
       $resultado = array();
@@ -78,15 +70,9 @@ include_once 'Carrega.class.php';
       echo json_encode(array("result"=>$resultado), JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);
     }
 
-    function getCardapios()
-    {
-      $sql       ="";
-      $res       = pg_query($sql);
-      $resultado = array();
-    }
-
     function getAllEventos()
     {
+      //Em andamento
       $sql       = "SELECT * FROM eventos";
       $res       = pg_query($sql);
       $resultado = array();
@@ -103,12 +89,12 @@ include_once 'Carrega.class.php';
 
          array_push($resultado, array("Id"=>$object->id, "evento"=>$object->evento, "dataInicio"=>$object->dataInicio, "dataFim"=>$object->dataFim, "horarioInicio"=>$object->horarioInicio, "horarioFim"=>$object->horarioFim));
       }
-
       echo json_encode(array("result"=>$resultado), JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);
     }
 
     function getEventosById($id='')
     {
+      //Em andamento
       $sql    = "SELECT * FROM eventos e, categorias c WHERE c.id=e.event_cat AND e.id_event = $id";
       $res = pg_query($sql);
       $resultado = array();
@@ -128,6 +114,9 @@ include_once 'Carrega.class.php';
 
     function getAllCardapiosByDay($id='')
     {
+      //Função Ok
+      //Esta função apenas realiza a consulta pelos dados referentes aos cardápios pela id do dia
+
       //$sql     = "SELECT * FROM cardapios c JOIN dia d ON d.id_dia=c.dia JOIN alimentos_cardapios ac ON ac.card_id =c.id_card";
       $sql     = "SELECT * FROM cardapios c, dia d, alimentos_cardapios ac WHERE d.id_dia=c.dia AND ac.card_id=c.id_card AND c.dia=$id";
       $sql2    = "SELECT a.alimento FROM alimentos a, cardapios c, alimentos_cardapios ac WHERE ac.card_id = c.id_card AND a.id_ali = ac.ali_id AND c.dia=$id";
@@ -159,6 +148,9 @@ include_once 'Carrega.class.php';
 
     function ShowAllCardapios($id='')
     {
+      //Função Ok
+      //Esta função utiliza os dados retornados pela função getAllCardapiosByDay
+      //evitando a geração de multiplos registros de um mesmo cardapio
       $cardapios = new Connection();
       $showAll   = $cardapios->getAllCardapiosByDay($id);
       $resultado = array();
@@ -178,25 +170,26 @@ include_once 'Carrega.class.php';
 
     function getAllSetores()
     {
-      $sql = "SELECT * FROM setores";
+      //Função Ok
+      $sql       = "SELECT * FROM setores";
       $res       = pg_query($sql);
       $resultado = array();
 
       while ($row = pg_fetch_assoc($res))
       {
-         $object        = new Connection();
+         $object        = new Setores();
          $object->id    = $row['id_set'];
          $object->setor = $row['setor'];
          $object->texto = $row['texto'];
          array_push($resultado, array("Id"=>$object->id, "setor"=>$object->setor,"texto"=>$object->texto));
       }
-
       echo json_encode(array("result"=>$resultado), JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);
-
     }
 
     function getAllMonitoriasByCurso($id)
     {
+      //Função Ok
+      //Realiza uma listagem de todas as monitorias de acordo com a id do curso para melhor filtragem
       $sql       = "SELECT * FROM monitorias as m, disciplinas as d, cursos as c WHERE m.curso_m =c.id_curso AND m.disciplina_m =d.id_disc AND m.curso_m =$id";
       $res       = pg_query($sql);
       $resultado = array();
@@ -215,6 +208,8 @@ include_once 'Carrega.class.php';
 
     function getMonitoriaById($id)
     {
+      //Função Ok
+      // Exibe todas as informações da monitoria de acordo com sua id
       $sql    ="SELECT * FROM monitorias as m, disciplinas as d, cursos as c, local as l, semestre as s WHERE m.curso_m =c.id_curso AND m.disciplina_m =d.id_disc AND s.id_sem =m.semestre_m AND l.id_lo =m.sala_m AND m.id_monit =$id";
       $res       = pg_query($sql);
       $resultado = array();
@@ -235,30 +230,30 @@ include_once 'Carrega.class.php';
 
     function getAllCategorias()
     {
-      $sql = "SELECT * FROM categorias";
+      //Função Ok
+      //Realiza uma listagem de todas as categorias
+      $sql       = "SELECT * FROM categorias";
       $res       = pg_query($sql);
       $resultado = array();
 
       while ($row = pg_fetch_assoc($res))
       {
-          $object            = new Connection();
-          $object->id        = $row['id'];
+          $object            = new Categorias();
+          $object->id        = $row['id_cat'];
           $object->categoria = $row['categoria'];
           array_push($resultado, array("Id"=>$object->id, "categoria"=>$object->categoria));
       }
-
       echo json_encode(array("result"=>$resultado), JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);
-
     }
 
     function getProcessoSeletivo()
     {
-
     }
-
 
     function getAllNoticias()
     {
+      //Função Ok
+      //Realiza uma listagem geral das noticias
       $sql = "SELECT * FROM noticias";
       $res = pg_query($sql);
       $resultado = array();
@@ -277,9 +272,10 @@ include_once 'Carrega.class.php';
 
     function getObjNoticiaById($id)
     {
+      //Realiza a consulta pelos dados da noticia de acordo com a id da noticia
       $sql    = "SELECT * FROM noticias n, imagens_noticias ino, usuarios u, categorias_noticias cn
                   WHERE n.id_not = ino.noticia AND n.autor = u.id_user AND cn.not_id = n.id_not AND n.id_not = $id";
-      $sql2   = "SELECT c.id_cat FROM categorias c, categorias_noticias cn WHERE cn.not_id = $id AND c.id_cat = cn.cat_id";
+      $sql2   = "SELECT c.categoria FROM categorias c, categorias_noticias cn WHERE cn.not_id = $id AND c.id_cat = cn.cat_id";
 
       $res  = pg_query($sql);
       $res2 = pg_query($sql2);
@@ -312,6 +308,8 @@ include_once 'Carrega.class.php';
 
     function ShowNoticiaById($id)
     {
+      //Função Ok
+      //Exibe a noticia sem problemas de exibição de multiplas categorias
       $noticia   = new Connection();
       $show      = $noticia->getObjNoticiaById($id);
       $resultado = array();
@@ -333,6 +331,7 @@ include_once 'Carrega.class.php';
 
     function getAllEstagios($id='')
     {
+      //Em andamento
       $sql = "SELECT * FROM noticias n, categorias_noticias cn WHERE n.id_not=cn.not_id AND cn.cat_id = $id ";
       $res = pg_query($sql);
       $resultado = array();
@@ -353,22 +352,22 @@ include_once 'Carrega.class.php';
 
     function getAllAssistencias()
     {
+      //Função Ok
+      //
       $sql = "SELECT * FROM assistencias";
       $res = pg_query($sql);
       $resultado = array();
 
       while($row = pg_fetch_array($res))
       {
-        $object         = new Connection();
+        $object         = new Assistencias();
         $object->id     = $row['id_assist'];
         $object->assist = $row['assist'];
         $object->texto  = $row['texto'];
         array_push($resultado,
         array('id'=>$object->id,'Nome'=>$object->assist,'Descricao'=>$object->texto));
       }
-
-       echo json_encode(array("result"=>$resultado), JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT );
-
+     echo json_encode(array("result"=>$resultado), JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT );
     }
   }
 

@@ -8,28 +8,38 @@ echo "<h1>Página de testes</h1><br>";
 
 $n = new Connection();
 echo "<pre>";
-//$n->getAllCardapios(5);
+//$n->getAllCategorias();
 //$n->getAllNoticias();
-//$n->ShowNoticiaById();
-//$n->getAllMonitoriasByCurso();
+//$n->ShowNoticiaById(1);
+//$n->getAllMonitoriasByCurso(1);
 //$n->getMonitoriaById(1);
-$n->ShowAllCardapios(1);
-echo "</pre><br>";
-$m = new Connection();
+//$n->getAllCursos();
+//$n->getCursoById(1);
+//$n->getAllAssistencias();
+//$n->getAllSetores();
+
+/*
 echo "<pre>";
-$m->ShowAllCardapios(2);
+$segunda = new Connection();
 echo "</pre><br>";
-$b = new Connection();
-echo "<pre>";
-$b->ShowAllCardapios(3);
+$segunda->ShowAllCardapios(1);
 echo "</pre><br>";
-$c = new Connection();
+$terca = new Connection();
 echo "<pre>";
-$c->ShowAllCardapios(4);
+$terca->ShowAllCardapios(2);
 echo "</pre><br>";
-$x = new Connection();
+$quarta = new Connection();
 echo "<pre>";
-$x->ShowAllCardapios(5);
+$quarta->ShowAllCardapios(3);
+echo "</pre><br>";
+$quinta = new Connection();
+echo "<pre>";
+$quinta->ShowAllCardapios(4);
+echo "</pre><br>";
+$sexta = new Connection();
+echo "<pre>";
+$sexta->ShowAllCardapios(5);
+*/
 echo "</pre><br>";
 
 

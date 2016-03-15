@@ -160,7 +160,7 @@ class Select
 
     public function cursoSelect($curso="")
     {
-        $sql    = "SELECT * from cursos Order by id_curso";
+        $sql    = "SELECT * from cursos c WHERE c.inst_id=1 Order by id_curso";
         $result = pg_query($sql);
         $ln     = pg_num_rows($result);
 
