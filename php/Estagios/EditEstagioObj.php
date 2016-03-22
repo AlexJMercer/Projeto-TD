@@ -8,7 +8,7 @@ include_once "../../class/Carrega.class.php";
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>AdminLTE 2 | General Form Elements</title>
+    <title>AdminLTE 2</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <!-- Bootstrap 3.3.5 -->
@@ -63,8 +63,8 @@ include_once "../../class/Carrega.class.php";
 
                   if (isset($_POST["editar"]))
                   {
-                    $edit = new Local();
-                    $comp = $edit->editar($id);
+                    $edit = new Estagios();
+                    $comp = $edit->Editar($id);
 
                       if ($edit != null)
                       {
@@ -74,31 +74,32 @@ include_once "../../class/Carrega.class.php";
                     <div class="form-group">
                       <label for="titulo" class="col-sm-2 control-label">Título:</label>
                       <div class="col-sm-10">
-                        <input type="text" class="form-control" name="titulo" id="titulo" placeholder="Digite aqui" required>
+                        <input type="text" class="form-control" name="titulo" id="titulo" value="<?php echo $comp->titulo; ?>" placeholder="Digite aqui" required>
                       </div>
+                      <?php  ?>
                     </div>
                     <div class="form-group">
                       <label for="atividade" class="col-sm-2 control-label">Atividades:</label>
                       <div class="col-sm-10">
-                        <input type="text" class="form-control" name="atividade" id="atividade" placeholder="Digite aqui" required>
+                        <input type="text" class="form-control" name="atividade" id="atividade" value="<?php echo $comp->atividade; ?>" placeholder="Digite aqui" required>
                       </div>
                     </div>
                     <div class="form-group">
                       <label for="salario" class="col-sm-2 control-label">Salário:</label>
                       <div class="col-sm-10">
-                        <input type="text" class="form-control" name="salario" id="salario" placeholder="Digite aqui" required>
+                        <input type="text" class="form-control" name="salario" id="salario" value="<?php echo $comp->salario; ?>" placeholder="Digite aqui" required>
                       </div>
                     </div>
                     <div class="form-group">
                       <label for="condicoes" class="col-sm-2 control-label">Condições:</label>
                       <div class="col-sm-10">
-                        <input type="text" class="form-control" name="condicoes" id="condicoes" placeholder="Digite aqui" required>
+                        <input type="text" class="form-control" name="condicoes" id="condicoes" value="<?php echo $comp->condicoes; ?>" placeholder="Digite aqui" required>
                       </div>
                     </div>
                     <div class="form-group">
                       <label for="exigencias" class="col-sm-2 control-label">Exigências:</label>
                       <div class="col-sm-10">
-                        <input type="text" class="form-control" name="exigencias" id="exigencias" placeholder="Digite aqui" required>
+                        <input type="text" class="form-control" name="exigencias" id="exigencias" value="<?php echo $comp->exigencias; ?>" placeholder="Digite aqui" required>
                       </div>
                     </div>
                     <div class="form-group">
@@ -107,7 +108,7 @@ include_once "../../class/Carrega.class.php";
                         <select class="form-control select2" name="curso[]" multiple style="width: 100%;" required>
                           <option value=""></option>
                           <?php $cursoSelect = new Select();
-                                $cursoSelect->cursoSelect();
+                                $cursoSelect->cursoGeneralMultiSelect($comp->curso);
                           ?>
                         </select>
                       </div>
@@ -115,7 +116,7 @@ include_once "../../class/Carrega.class.php";
                     <div class="form-group">
                       <label for="info" class="col-sm-2 control-label">Informações adicionais:</label>
                       <div class="col-sm-10">
-                        <textarea class="form-control" name="info" id="info" rows="8" cols="40"></textarea>
+                        <textarea class="form-control" name="info" id="info" rows="8" cols="40"><?php echo $comp->info; ?></textarea>
                       </div>
                     </div>
                   </div><!-- /.box-body -->
@@ -123,7 +124,7 @@ include_once "../../class/Carrega.class.php";
                     <input type="hidden" name="id" value="<?php echo $comp->id; ?>"/>
                     <button type="submit" name="atualizar" value="atualizar" class="btn btn-success btn-flat btn-block"><i class="fa fa-check"></i> Atualizar </button>
                     <br>
-                    <button type="button" name="cancelar" value="cancelar" onclick="location.href='ViewLocalObj.php'" class="btn btn-default btn-flat btn-block btn-sm"><i class="fa fa-magic"></i> Cancelar </button>
+                    <button type="button" name="cancelar" value="cancelar" onclick="location.href='ViewEstagiosObj.php'" class="btn btn-default btn-flat btn-block btn-sm"><i class="fa fa-magic"></i> Cancelar </button>
                   </div><!-- /.box-footer -->
                 </form>
                 <?php

@@ -66,9 +66,9 @@ include_once "../../class/Carrega.class.php";
                         </div>
                       </div>
                       <div class="form-group">
-                        <label for="atividade" class="col-sm-2 control-label">Atividades:</label>
+                        <label for="atividades" class="col-sm-2 control-label">Atividades:</label>
                         <div class="col-sm-10">
-                          <input type="text" class="form-control" name="atividade" id="atividade" placeholder="Digite aqui" required>
+                          <input type="text" class="form-control" name="atividades" id="atividades" placeholder="Digite aqui" required>
                         </div>
                       </div>
                       <div class="form-group">
@@ -84,9 +84,9 @@ include_once "../../class/Carrega.class.php";
                         </div>
                       </div>
                       <div class="form-group">
-                        <label for="exigencia" class="col-sm-2 control-label">Exigências:</label>
+                        <label for="exigencias" class="col-sm-2 control-label">Exigências:</label>
                         <div class="col-sm-10">
-                          <input type="text" class="form-control" name="exigencia" id="exigencia" placeholder="Digite aqui" required>
+                          <input type="text" class="form-control" name="exigencias" id="exigencias" placeholder="Digite aqui" required>
                         </div>
                       </div>
                       <div class="form-group">
@@ -158,8 +158,7 @@ include_once "../../class/Carrega.class.php";
 
       $("#salario").maskMoney({
         prefix:'R$ ',
-        thousands:'.',
-        decimal:',',
+        decimal:'.',
         affixesStay: false});
     });
     </script>

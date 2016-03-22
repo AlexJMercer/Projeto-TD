@@ -430,6 +430,36 @@ class Select
      }
    }
 
+   public function cursoGeneralMultiSelect($curso='')
+   {
+      $sql = "SELECT * FROM cursos Order By nome";
+      $result = pg_query($sql);
+
+      $ln = pg_num_rows($result);
+
+      if ($ln==0)
+      {
+         echo "<option value=''>Nada encontrado!!</option>";
+      }
+      else
+      {
+         while ($reg = pg_fetch_assoc($result))
+         {
+            $object = new Cursos();
+            $object->id = $reg['id_curso'];
+            $object->nome = $reg['nome'];
+
+            if (in_array($object->id, $curso))
+            {
+               echo "<option selected value='{$object->id}'>{$object->nome}</option>";
+            }
+            else
+            {
+               echo "<option value='{$object->id}'>{$object->nome}</option>";
+            }
+         }
+      }
+   }
 
 }
 ?>

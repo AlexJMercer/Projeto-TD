@@ -6,10 +6,10 @@ include_once "../../class/Carrega.class.php";
     {
       $object            = new Estagios();
       $object->titulo    = $_POST['titulo'];
-      $object->atividade = $_POST['atividade'];
+      $object->atividades = $_POST['atividades'];
       $object->salario   = $_POST['salario'];
       $object->condicoes = $_POST['condicoes'];
-      $object->exigencia = $_POST['exigencia'];
+      $object->exigencias = $_POST['exigencias'];
       $object->curso     = $_POST['curso'];
       $object->info      = $_POST['info'];
       //print_r($object);

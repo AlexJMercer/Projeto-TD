@@ -52,6 +52,7 @@ include_once 'Carrega.class.php';
      $sql    = "INSERT INTO estagios (titulo, salario, condicoes, atividades, exigencias, info_est)
                  VALUES ('$this->titulo', '$this->salario', '$this->condicoes', '$this->atividades', '$this->exigencias', '$this->info')";
      $return = pg_query($sql);
+     print_r($return);
 
        if($return)
        {
@@ -156,13 +157,13 @@ include_once 'Carrega.class.php';
       while ($reg = pg_fetch_assoc($result1))
       {
         $object            = new Estagios();
-        $object->id        = $reg['id'];
+        $object->id        = $reg['id_est'];
         $object->titulo    = $reg['titulo'];
-        $object->atividade = $reg['atividade'];
+        $object->atividade = $reg['atividades'];
         $object->salario   = $reg['salario'];
         $object->condicoes = $reg['condicoes'];
-        $object->exigencia = $reg['exigencia'];
-        $object->info      = $reg['info'];
+        $object->exigencias = $reg['exigencias'];
+        $object->info      = $reg['info_est'];
 
         foreach (pg_fetch_assoc($result2) as $value)
         {

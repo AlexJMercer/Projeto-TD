@@ -83,7 +83,7 @@ include_once "../../class/Carrega.class.php";
 
                           <button type="submit" name="editar" value="editar" class="btn btn-flat btn-warning"><i class="fa fa-edit"></i> Editar </button>
 
-                          <button type="submit" name="excluir" value="excluir" formaction="CrudLocal.php" class='btn btn-flat btn-danger'><i class="fa fa-times"></i> Excluir </button>
+                          <button type="submit" name="excluir" value="excluir" formaction="CrudEstagios.php" class='btn btn-flat btn-danger'><i class="fa fa-times"></i> Excluir </button>
                         </td>
                       </tr>
                       </form>
@@ -139,8 +139,8 @@ include_once "../../class/Carrega.class.php";
 
           "ordering": false,
           "oLanguage": { "sSearch": "",
-                         "sInfo": "Um total de _TOTAL_ locais (_START_ de _END_)",
-                         "sLengthMenu": "Listar _MENU_ locais"},
+                         "sInfo": "Um total de _TOTAL_ estágios (_START_ de _END_)",
+                         "sLengthMenu": "Listar _MENU_ estágios"},
         });
         $('.dataTables_filter input').attr("placeholder", "Pesquise aqui");
       });
