@@ -120,7 +120,7 @@ if(empty($_SESSION['email']) && empty($_SESSION['senha']) && empty($_SESSION['ti
                       </div>
                       <div class="form-group">
                         <label for="categoria" class="col-sm-2 control-label">Categorias da noticia:</label>
-                        <div class="col-sm-10">
+                        <div class="col-sm-9">
                           <select class="form-control select2" id="categoria" name="categoria[]" multiple="multiple" placeholder="Selecione a(s) categoria(s)" required>
                             <option value=""></option>
                             <?php
@@ -128,6 +128,10 @@ if(empty($_SESSION['email']) && empty($_SESSION['senha']) && empty($_SESSION['ti
                               $catSelect->categoriaSelect();
                             ?>
                           </select>
+
+                        </div>
+                        <div class="col-sm-1">
+                          <button type="button" class="btn btn-info btn-flat pull-right" id="cadCat" name="button"><i class="fa fa-plus"></i> Categoria </button>
                         </div>
                       </div>
                       <div class="form-group">
@@ -157,6 +161,10 @@ if(empty($_SESSION['email']) && empty($_SESSION['senha']) && empty($_SESSION['ti
                   </div><!-- /.box-footer -->
                 </form>
               </div><!-- /.box -->
+              <br>
+              <div class="element">
+
+              </div>
               <!-- general form elements disabled -->
             </div><!--/.col (right) -->
           </div>   <!-- /.row -->
@@ -212,6 +220,11 @@ if(empty($_SESSION['email']) && empty($_SESSION['senha']) && empty($_SESSION['ti
       });
 
       CKEDITOR.replace('noticia');
+
+      $("#cadCat").click(function()
+      {
+        $(".element").load("../Categoria/CategoriaObj.php #cadCat")
+      });
 });
       $('.file').fileinput({
           browseClass: "btn btn-info btn-flat btn-block",

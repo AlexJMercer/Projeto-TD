@@ -188,6 +188,36 @@ class Select
         }
     }
 
+    public function cursoGeneralSelect($curso="")
+    {
+        $sql    = "SELECT * from cursos c Order by id_curso";
+        $result = pg_query($sql);
+        $ln     = pg_num_rows($result);
+
+        if ($ln==0)
+        {
+          echo "<option value=''>Nada Encontrado!!</option>";
+        }
+        else
+        {
+
+          while ($a = pg_fetch_array($result))
+          {
+            $this->id    = $a['id_curso'];
+            $this->curso = $a['nome'];
+
+            if ($curso==$this->id)
+            {
+              print "<option selected value='{$this->id}'>{$this->curso}</option>";
+            }
+            else
+            {
+              print "<option value='{$this->id}'>{$this->curso}</option>";
+            }
+          }
+        }
+    }
+
     public function categoriaSelect($categoria='')
     {
       $sql    = "SELECT * from categorias Order by id_cat";

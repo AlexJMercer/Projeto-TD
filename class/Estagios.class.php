@@ -58,8 +58,7 @@ include_once 'Carrega.class.php';
          $sql_id_est = "SELECT CURRVAL('estagios_id_est_seq')";
          $last       = pg_query($sql_id_est);
          $idest      = pg_fetch_array($last);
-
-         $this->id    = $idest[0];
+         $this->id   = $idest[0];
 
          foreach ($this->curso as $value)
          {
@@ -97,7 +96,44 @@ include_once 'Carrega.class.php';
 
     public function Atualizar()
     {
-      # code...
+      $this->transacao("BEGIN");
+
+      $sql    = "UPDATE estagios SET titulo = '$this->titulo',
+                                 salario    = '$this->salario',
+                                 condicoes  = '$this->condicoes',
+                                 atividades = '$this->atividades',
+                                 exigencias = '$this->exigencias',
+                                 info_est   = '$this->info'
+                              WHERE id_est  =  $this->id";
+      $return = pg_query($sql);
+
+        if($return)
+        {
+          $sql2    = "DELETE FROM estagio_cursos WHERE est_id = $this->id";
+          $return2 = pg_query($sql2);
+
+          if ($return2)
+          {
+            foreach ($this->curso as $value)
+            {
+              $sql3    = "INSERT INTO estagio_cursos (est_id, curso_id) VALUES ('$this->id', '$value')";
+              $return3 = pg_query($sql3);
+            }
+            if ($return3)
+            {
+              $this->transacao("COMMIT");
+            }
+            else
+            {
+              $this->transacao("ROLLBACK");
+            }
+          }
+        }
+        else
+        {
+          $this->transacao("ROLLBACK");
+        }
+        $this->transacao("ROLLBACK");
     }
 
     public function Excluir()
@@ -107,12 +143,37 @@ include_once 'Carrega.class.php';
       return $retorno;
     }
 
-    public function Editar($id='')
+    public function Editar($id)
     {
       $sql1 = "SELECT * FROM estagios e, estagio_cursos ec WHERE e.id_est=ec.est_id AND e.id_est=$id";
       $sql2 = "SELECT c.id_curso FROM cursos c, estagio_cursos ec WHERE ec.est_id=$id AND c.id_curso=ec.curso_id";
+
+      $result1 = pg_query($sql1);
+      $result2 = pg_query($sql2);
+
+      $retorno = null;
+
+      while ($reg = pg_fetch_assoc($result1))
+      {
+        $object            = new Estagios();
+        $object->id        = $reg['id'];
+        $object->titulo    = $reg['titulo'];
+        $object->atividade = $reg['atividade'];
+        $object->salario   = $reg['salario'];
+        $object->condicoes = $reg['condicoes'];
+        $object->exigencia = $reg['exigencia'];
+        $object->info      = $reg['info'];
+
+        foreach (pg_fetch_assoc($result2) as $value)
+        {
+          $temp[] = $value;
+        }
+        $object->curso = $temp;
+
+        $retorno = $object;
+      }
+      return $retorno;
     }
 
   }
-
 ?>

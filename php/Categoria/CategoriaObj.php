@@ -31,6 +31,25 @@ include_once "../../class/Carrega.class.php";
         <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
         <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
+    <!--script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script type="text/javascript">
+	   jQuery(document).ready(function(){
+		jQuery('#form_cat').submit(function(){
+			var dados = jQuery(this).serialize();
+
+			jQuery.ajax({
+				type: "POST",
+				url: "CadCategoria.php",
+				data: dados,
+				success: function(data)
+				{
+					alert(data);
+				}
+			});
+			return false;
+		});
+	});
+</script-->
   </head>
   <body class="hold-transition skin-green sidebar-mini">
     <div class="wrapper">
@@ -55,12 +74,13 @@ include_once "../../class/Carrega.class.php";
             <!-- right column -->
             <div class="col-lg-12">
               <!-- Horizontal Form -->
+              <div id="cadCat">
               <div class="box box-success">
                 <div class="box-header with-border">
                   <h3 class="box-title">Cadastro de categorias</h3>
                 </div><!-- /.box-header -->
                 <!-- form start -->
-                <form class="form-horizontal" id="form" method="post" action="CrudCategoria.php">
+                <form class="form-horizontal" id="form_cat" action="CrudCategoria.php" method="post">
                   <div class="box-body">
                       <div class="form-group">
                         <label for="dia" class="col-sm-2 control-label">Categoria:</label>
@@ -79,6 +99,7 @@ include_once "../../class/Carrega.class.php";
 
               </div><!-- /.box -->
               <!-- general form elements disabled -->
+              </div>
             </div><!--/.col (right) -->
           </div>   <!-- /.row -->
         </section><!-- /.content -->

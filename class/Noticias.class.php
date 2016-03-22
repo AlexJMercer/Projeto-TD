@@ -116,7 +116,7 @@ class Noticias
                                       status      = '$this->status',
                                       texto       = '$this->noticia',
                                       url         = '$this->url'
-                                WHERE id_not      = $this->id";
+                                WHERE id_not      =  $this->id";
         $return = pg_query($sql);
 
           if($return)
@@ -133,7 +133,7 @@ class Noticias
               }
               if ($return3)
               {
-               $this->transacao("COMMIT");
+                $this->transacao("COMMIT");
               }
               else
               {
@@ -219,6 +219,7 @@ class Noticias
            {
              $temp[] = $value;
            }
+
            $object->categoria = $temp;
 
            $retorno = $object;

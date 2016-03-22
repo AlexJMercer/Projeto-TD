@@ -12,8 +12,8 @@ include_once "../../class/Carrega.class.php";
       $object->exigencia = $_POST['exigencia'];
       $object->curso     = $_POST['curso'];
       $object->info      = $_POST['info'];
-
-      $object->inserir();
+      //print_r($object);
+      $object->Inserir();
 
       header("Location:ViewEstagiosObj.php");
     }
