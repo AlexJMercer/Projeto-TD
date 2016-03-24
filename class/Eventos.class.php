@@ -11,8 +11,10 @@ include_once 'Carrega.class.php';
     private $evento;
     private $categoria;
     private $texto;
-    //private $dataInicio;
-    //private $dataFinal;
+    private $dataInicio;
+    private $dataFim;
+    private $horarioInicio;
+    private $horarioFim;
     private $imagem;
     private $bd;
 
@@ -38,10 +40,10 @@ include_once 'Carrega.class.php';
 
     public function Inserir()
     {
-      $sql    = "INSERT INTO eventos (evento, event_cat, texto) VALUES ('$this->evento', '$this->categoria', '$this->texto')";
+      $sql    = "INSERT INTO eventos (evento, dataInicio, dataFim, horarioInicio, horarioFim, event_cat, texto)
+                  VALUES ('$this->evento', '$this->dataInicio', '$this->dataFim', '$this->horarioInicio', '$this->horarioFim', '$this->categoria', '$this->texto')";
       $return = pg_query($sql);
       return $return;
-
     }
 
     public function Listar()
@@ -84,18 +86,33 @@ include_once 'Carrega.class.php';
 
       while ($reg=pg_fetch_assoc($result))
       {
-        $object            = new Eventos();
-        $object->id        = $reg["id_event"];
-        $object->evento    = $reg['evento'];
-        $object->categoria = $reg['event_cat'];
-        $object->texto     = $reg['texto'];
-        $object->imagem    = $reg['imagem'];
+        $object                = new Eventos();
+        $object->id            = $reg["id_event"];
+        $object->evento        = $reg['evento'];
+        $object->categoria     = $reg['event_cat'];
+        $object->dataInicio    = $reg['dataInicio'];
+        $object->dataFim       = $reg['dataFim'];
+        $object->horarioInicio = $reg['horarioInicio'];
+        $object->horarioFim    = $reg['horarioFim'];
+        $object->texto         = $reg['texto'];
+        $object->imagem        = $reg['imagem'];
 
         $return = $object;
+        //print_r($object);
       }
       return $return;
     }
 
+    public function noImageUp()
+    {
+      $noImage  = "../../dist/img/todentro_logo.png";
+      $sqlEvent = "SELECT CURRVAL('eventos_id_event_seq')";
+      $last     = pg_query($sqlEvent);
+      $idevent  = pg_fetch_array($last);
+      $this->id = $idevent[0];
+      $sql      = "UPDATE eventos set imagem = '$noImage' WHERE id_event = $this->id";
+      $return   = pg_query($sql);
+      return $return;
+    }
   }
-
 ?>

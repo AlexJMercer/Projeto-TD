@@ -50,7 +50,7 @@
         <section class="content">
           <div class="row">
             <div class="col-xs-12">
-              <div class="box">
+              <div class="box box-info">
                 <div class="box-header">
                   <h3 class="box-title">Listagem de estágios</h3>
                 </div><!-- /.box-header -->
@@ -92,7 +92,18 @@ include_once "../../class/Carrega.class.php";
                           }
                           else
                           {
-                            echo "<h2> Nada cadastrado!!</h2>";
+                    ?>
+                    <tr class="odd gradeX">
+                      <td>
+                        <p> Nada cadastrado!!</p>
+                      </td>
+                      <td>
+                        <button type="button" class="btn btn-flat btn-warning" disabled><i class="fa fa-edit"></i> Editar </button>
+
+                        <button type="button" class='btn btn-flat btn-danger' disabled><i class="fa fa-times"></i> Excluir </button>
+                      </td>
+                    </tr>
+                    <?php
                           }
 
                     ?>

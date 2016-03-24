@@ -8,7 +8,7 @@ include_once "../../class/Carrega.class.php";
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>AdminLTE 2 | General Form Elements</title>
+    <title>AdminLTE 2</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <!-- Bootstrap 3.3.5 -->
@@ -25,15 +25,11 @@ include_once "../../class/Carrega.class.php";
     <link rel="stylesheet" href="../../plugins/select2/select2.min.css">
     <!--FileInput-->
     <link rel="stylesheet" href="../../plugins/fileinput/css/fileinput.min.css">
-
-
-    <!--link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.css" /-->
     <!-- Theme style -->
     <link rel="stylesheet" href="../../dist/css/AdminLTE.min.css">
     <!-- AdminLTE Skins. Choose a skin from the css/skins
          folder instead of downloading all of them to reduce the load. -->
-    <link rel="stylesheet" href="../../dist/css/skins/_all-skins.min.css">
-
+    <link rel="stylesheet" href="../../dist/css/skins/skin-green-light.min.css">
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -41,7 +37,7 @@ include_once "../../class/Carrega.class.php";
         <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
   </head>
-  <body class="hold-transition skin-green sidebar-mini">
+  <body class="hold-transition skin-green-light sidebar-mini">
     <div class="wrapper">
       <?php include '../inc/topotime.html';
 
@@ -70,13 +66,13 @@ include_once "../../class/Carrega.class.php";
                       <div class="form-group">
                         <label class="col-sm-2 control-label" for="evento"> Evento: </label>
                         <div class="col-sm-10">
-                           <input type="text" class="form-control" id="evento" name="evento" placeholder="Nome do Evento" required>
+                           <input type="text" class="form-control" title="Campo Obrigatório!" id="evento" name="evento" placeholder="Nome do Evento" required>
                         </div>
                       </div>
                       <div class="form-group">
                         <label for="categoria" class="col-sm-2 control-label">Categorias do evento:</label>
                         <div class="col-sm-10">
-                          <select class="form-control select2" id="categoria" name="categoria" placeholder="Selecione a(s) categoria(s)" required>
+                          <select class="form-control select2" title="Campo Obrigatório!" id="categoria" name="categoria" placeholder="Selecione a(s) categoria(s)" required>
                             <option value=""></option>
                             <?php
                               $catSelect = new Select();
@@ -86,9 +82,33 @@ include_once "../../class/Carrega.class.php";
                         </div>
                       </div>
                       <div class="form-group">
+                         <label for="dataInicio" class="col-sm-2 control-label">Data de inicio do evento:</label>
+                         <div class="col-sm-10">
+                           <input type="text" class="form-control" title="Campo Obrigatório!" name="dataInicio" id="dataInicio" required placeholder="dd/mm/yyyy" data-inputmask="'alias': 'dd/mm/yyyy'" data-mask>
+                         </div>
+                      </div>
+                      <div class="form-group">
+                         <label for="dataFim" class="col-sm-2 control-label">Data de término do evento:</label>
+                         <div class="col-sm-10">
+                           <input type="text" class="form-control" name="dataFim" id="dataFim" placeholder="dd/mm/yyyy" data-inputmask="'alias': 'dd/mm/yyyy'" data-mask>
+                         </div>
+                      </div>
+                      <div class="form-group">
+                        <label for="horarioInicio" class="col-sm-2 control-label">Horário de inicio:</label>
+                        <div class="col-sm-10 bootstrap-timepicker">
+                          <input type="text" name="horarioInicio" class="form-control timepicker" maxLenght pattern="[0-9]{2}:[0-9]{2}" placeholder="00:00">
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label for="horarioFim" class="col-sm-2 control-label">Horario do término:</label>
+                        <div class="col-sm-10 bootstrap-timepicker">
+                          <input type="time" name="horarioFim" class="form-control timepicker" placeholder="00:00">
+                        </div>
+                      </div>
+                      <div class="form-group">
                         <label for="texto" class="col-sm-2 control-label"> Descrição: </label>
                         <div class="col-sm-10">
-                          <textarea class="form-control" name="texto" id="texto" rows="8" cols="40"></textarea>
+                          <textarea class="form-control" title="Campo Obrigatório!" name="texto" id="texto" rows="8" cols="40" placeholder="Descrição do evento" required></textarea>
                         </div>
                       </div>
                       <div class="form-group">
@@ -124,6 +144,12 @@ include_once "../../class/Carrega.class.php";
     <script src="../../plugins/select2/select2.full.min.js"></script>
     <!-- FastClick -->
     <script src="../../plugins/fastclick/fastclick.min.js"></script>
+    <!-- bootstrap time picker -->
+    <script src="../../plugins/timepicker/bootstrap-timepicker.min.js"></script>
+    <!-- InputMask -->
+    <script src="../../plugins/input-mask/jquery.inputmask.js"></script>
+    <script src="../../plugins/input-mask/jquery.inputmask.date.extensions.js"></script>
+    <script src="../../plugins/input-mask/jquery.inputmask.extensions.js"></script>
     <!--FileInput-->
     <script src="../../plugins/fileinput/js/fileinput.min.js" type="text/javascript"></script>
     <script src="../../plugins/fileinput/js/fileinput_locale_pt-BR.js" type="text/javascript"></script>
@@ -134,7 +160,21 @@ include_once "../../class/Carrega.class.php";
 
     <script type="text/javascript">
     $(function(){
-      $(".select2").select2();
+      $(".select2").select2({
+        placeholder: "Selecione a categoria do evento!"
+      });
+
+      //InputMask
+      $("#datemask").inputmask("dd/mm/yyyy", {"placeholder": "dd/mm/yyyy"});
+      //Money Euro
+      $("[data-mask]").inputmask();
+
+      //Timepicker
+      $(".timepicker").timepicker({
+        showInputs: false,
+        showMeridian: false,
+        defaultTime: false
+      });
     });
 
     $('.file').fileinput({
@@ -144,6 +184,7 @@ include_once "../../class/Carrega.class.php";
         showUpload: false,
         language: 'pt-BR',
         overwriteInitial: true,
+        maxFileSize: '500KB',
         allowedFileExtensions : ['jpg', 'png','gif']
     });
     </script>

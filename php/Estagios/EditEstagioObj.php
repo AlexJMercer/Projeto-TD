@@ -79,9 +79,9 @@ include_once "../../class/Carrega.class.php";
                       <?php  ?>
                     </div>
                     <div class="form-group">
-                      <label for="atividade" class="col-sm-2 control-label">Atividades:</label>
+                      <label for="atividades" class="col-sm-2 control-label">Atividades:</label>
                       <div class="col-sm-10">
-                        <input type="text" class="form-control" name="atividade" id="atividade" value="<?php echo $comp->atividade; ?>" placeholder="Digite aqui" required>
+                        <input type="text" class="form-control" name="atividades" id="atividades" value="<?php echo $comp->atividades; ?>" placeholder="Digite aqui" required>
                       </div>
                     </div>
                     <div class="form-group">

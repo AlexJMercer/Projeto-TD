@@ -156,14 +156,14 @@ include_once 'Carrega.class.php';
 
       while ($reg = pg_fetch_assoc($result1))
       {
-        $object            = new Estagios();
-        $object->id        = $reg['id_est'];
-        $object->titulo    = $reg['titulo'];
-        $object->atividade = $reg['atividades'];
-        $object->salario   = $reg['salario'];
-        $object->condicoes = $reg['condicoes'];
+        $object             = new Estagios();
+        $object->id         = $reg['id_est'];
+        $object->titulo     = $reg['titulo'];
+        $object->atividades = $reg['atividades'];
+        $object->salario    = $reg['salario'];
+        $object->condicoes  = $reg['condicoes'];
         $object->exigencias = $reg['exigencias'];
-        $object->info      = $reg['info_est'];
+        $object->info       = $reg['info_est'];
 
         foreach (pg_fetch_assoc($result2) as $value)
         {

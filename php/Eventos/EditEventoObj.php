@@ -8,7 +8,7 @@ include_once "../../class/Carrega.class.php";
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>AdminLTE 2 | General Form Elements</title>
+    <title>AdminLTE 2</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <!-- Bootstrap 3.3.5 -->
@@ -17,21 +17,17 @@ include_once "../../class/Carrega.class.php";
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
     <!-- Ionicons -->
     <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
-    <!-- daterange picker-->
-    <link rel="stylesheet" href="../../plugins/daterangepicker/daterangepicker-bs3.css">
     <!-- Bootstrap time Picker -->
     <link rel="stylesheet" href="../../plugins/timepicker/bootstrap-timepicker.min.css">
     <!-- Select2 -->
     <link rel="stylesheet" href="../../plugins/select2/select2.min.css">
     <!--FileInput-->
     <link rel="stylesheet" href="../../plugins/fileinput/css/fileinput.min.css">
-
-    <!--link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.css" /-->
     <!-- Theme style -->
     <link rel="stylesheet" href="../../dist/css/AdminLTE.min.css">
     <!-- AdminLTE Skins. Choose a skin from the css/skins
          folder instead of downloading all of them to reduce the load. -->
-    <link rel="stylesheet" href="../../dist/css/skins/_all-skins.min.css">
+         <link rel="stylesheet" href="../../dist/css/skins/skin-green-light.min.css">
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -69,6 +65,7 @@ include_once "../../class/Carrega.class.php";
                   {
                     $edit = new Eventos();
                     $comp = $edit->editar($id);
+                    print_r($comp);
 
                       if ($edit != null)
                       {
@@ -85,13 +82,37 @@ include_once "../../class/Carrega.class.php";
                       <div class="form-group">
                         <label for="categoria" class="col-sm-2 control-label">Categorias do evento:</label>
                         <div class="col-sm-10">
-                          <select class="form-control select2" id="categoria" name="categoria" placeholder="Selecione a(s) categoria(s)" required>
+                          <select class="form-control select2" id="categoria" name="categoria" placeholder="Selecione a categoria" required>
                             <option value=""></option>
                             <?php
                               $catSelect = new Select();
                               $catSelect->categoriaSelect($comp->categoria);
                             ?>
                           </select>
+                        </div>
+                      </div>
+                      <div class="form-group">
+                         <label for="dataInicio" class="col-sm-2 control-label">Data de inicio do evento:</label>
+                         <div class="col-sm-10">
+                           <input type="text" class="form-control" name="dataInicio" id="dataInicio" value="<?php echo date('d/m/Y', strtotime($comp->dataInicio)); ?>" required data-inputmask="'alias': 'dd/mm/yyyy'" data-mask>
+                         </div>
+                      </div>
+                      <div class="form-group">
+                         <label for="dataFim" class="col-sm-2 control-label">Data de término do evento:</label>
+                         <div class="col-sm-10">
+                           <input type="text" class="form-control" name="dataFim" id="dataFim" value="<?php echo date('d/m/Y', strtotime($comp->dataFim)); ?>" data-inputmask="'alias': 'dd/mm/yyyy'" data-mask>
+                         </div>
+                      </div>
+                      <div class="form-group">
+                        <label for="horarioInicio" class="col-sm-2 control-label">Horário de inicio:</label>
+                        <div class="col-sm-10 bootstrap-timepicker">
+                          <input type="text" name="horarioInicio" id="horarioInicio" value="<?php echo date('H:i', strtotime($comp->horarioInicio)); ?>" class="form-control timepicker">
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label for="horarioFim" class="col-sm-2 control-label">Horario do término:</label>
+                        <div class="col-sm-10 bootstrap-timepicker">
+                          <input type="text" name="horarioFim" id="horarioFim" value="<?php echo date('H:i', strtotime($comp->horarioFim)); ?>" class="form-control timepicker">
                         </div>
                       </div>
                       <div class="form-group">
@@ -133,6 +154,12 @@ include_once "../../class/Carrega.class.php";
     <script src="../../bootstrap/js/bootstrap.min.js"></script>
     <!-- Select2 -->
     <script src="../../plugins/select2/select2.full.min.js"></script>
+    <!-- bootstrap time picker -->
+    <script src="../../plugins/timepicker/bootstrap-timepicker.min.js"></script>
+    <!-- InputMask -->
+    <script src="../../plugins/input-mask/jquery.inputmask.js"></script>
+    <script src="../../plugins/input-mask/jquery.inputmask.date.extensions.js"></script>
+    <script src="../../plugins/input-mask/jquery.inputmask.extensions.js"></script>
     <!--FileInput-->
     <script src="../../plugins/fileinput/js/fileinput.min.js" type="text/javascript"></script>
     <script src="../../plugins/fileinput/js/fileinput_locale_pt-BR.js" type="text/javascript"></script>
@@ -147,7 +174,21 @@ include_once "../../class/Carrega.class.php";
 
     <script type="text/javascript">
     $(function(){
-      $(".select2").select2();
+      $(".select2").select2({
+        placeholder: "Selecione a categoria do evento!"
+      });
+
+      //InputMask
+      $("#datemask").inputmask("dd/mm/yyyy", {"placeholder": "dd/mm/yyyy"});
+      //Money Euro
+      $("[data-mask]").inputmask();
+
+      //Timepicker
+      $(".timepicker").timepicker({
+        showInputs: false,
+        showMeridian: false,
+        defaultTime: false
+      });
     });
 
     $('.file').fileinput({
