@@ -29,6 +29,15 @@ include_once "../../class/Carrega.class.php";
         <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
         <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
+    <style type="text/css">
+      a {
+          color: #000000;
+        }
+      a:hover {
+                color: #3c8dbc;
+                font-weight: bold;
+              }
+    </style>
   </head>
   <body class="hold-transition skin-green sidebar-mini">
     <div class="wrapper">
@@ -44,6 +53,29 @@ include_once "../../class/Carrega.class.php";
             Página Inicial
             <small>Em construção!!!</small>
           </h1>
+        </section>
+        <section class="content">
+          <div class="row">
+            <div class="col-md-3 col-sm-6 col-xs-12">
+              <div class="info-box">
+                <span class="info-box-icon bg-aqua"><i class="fa fa-newspaper-o"></i></span>
+                <div class="info-box-content">
+                  <span class="info-box-text">Notícias</span>
+                  <span class="info-box-number">90<small>%</small></span>
+                </div><!-- /.info-box-content -->
+              </div><!-- /.info-box -->
+            </div><!-- /.col -->
+
+            <a href="#" class="col-md-3 col-sm-6 col-xs-12">
+              <div class="info-box">
+                <span class="info-box-icon bg-aqua"><i class="ion ion-ios-gear-outline"></i></span>
+                <div class="info-box-content">
+                  <span class="info-box-text"><h5>Notícias</h5></span>
+                  <span class="info-box-text">Listar notícias</span>
+                </div><!-- /.info-box-content -->
+              </div><!-- /.info-box -->
+            </a><!-- /.col -->
+          </div>
         </section>
       </div><!-- /.content-wrapper -->
       <?php

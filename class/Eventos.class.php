@@ -13,8 +13,7 @@ include_once 'Carrega.class.php';
     private $texto;
     private $dataInicio;
     private $dataFim;
-    private $horarioInicio;
-    private $horarioFim;
+    private $horario;
     private $imagem;
     private $bd;
 
@@ -40,8 +39,8 @@ include_once 'Carrega.class.php';
 
     public function Inserir()
     {
-      $sql    = "INSERT INTO eventos (evento, dataInicio, dataFim, horarioInicio, horarioFim, event_cat, texto)
-                  VALUES ('$this->evento', '$this->dataInicio', '$this->dataFim', '$this->horarioInicio', '$this->horarioFim', '$this->categoria', '$this->texto')";
+      $sql    = "INSERT INTO eventos (evento, data_inicio, data_fim, horario, event_cat, texto)
+                  VALUES ('$this->evento', '$this->dataInicio', '$this->dataFim', '$this->horario', '$this->categoria', '$this->texto')";
       $return = pg_query($sql);
       return $return;
     }
@@ -73,7 +72,7 @@ include_once 'Carrega.class.php';
 
     public function Excluir()
     {
-      $sql    = "DELETE from eventos where id_event = $this->id ";
+      $sql    = "DELETE FROM eventos WHERE id_event = $this->id ";
       $return = pg_query($sql);
       return $return;
     }
@@ -86,16 +85,15 @@ include_once 'Carrega.class.php';
 
       while ($reg=pg_fetch_assoc($result))
       {
-        $object                = new Eventos();
-        $object->id            = $reg["id_event"];
-        $object->evento        = $reg['evento'];
-        $object->categoria     = $reg['event_cat'];
-        $object->dataInicio    = $reg['dataInicio'];
-        $object->dataFim       = $reg['dataFim'];
-        $object->horarioInicio = $reg['horarioInicio'];
-        $object->horarioFim    = $reg['horarioFim'];
-        $object->texto         = $reg['texto'];
-        $object->imagem        = $reg['imagem'];
+        $object             = new Eventos();
+        $object->id         = $reg["id_event"];
+        $object->evento     = $reg['evento'];
+        $object->categoria  = $reg['event_cat'];
+        $object->dataInicio = $reg['data_inicio'];
+        $object->dataFim    = $reg['data_fim'];
+        $object->horario    = $reg['horario'];
+        $object->texto      = $reg['texto'];
+        $object->imagem     = $reg['imagem'];
 
         $return = $object;
         //print_r($object);

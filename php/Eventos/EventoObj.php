@@ -17,10 +17,6 @@ include_once "../../class/Carrega.class.php";
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
     <!-- Ionicons -->
     <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
-    <!-- daterange picker-->
-    <link rel="stylesheet" href="../../plugins/daterangepicker/daterangepicker-bs3.css">
-    <!-- Bootstrap time Picker -->
-    <link rel="stylesheet" href="../../plugins/timepicker/bootstrap-timepicker.min.css">
     <!-- Select2 -->
     <link rel="stylesheet" href="../../plugins/select2/select2.min.css">
     <!--FileInput-->
@@ -70,7 +66,7 @@ include_once "../../class/Carrega.class.php";
                         </div>
                       </div>
                       <div class="form-group">
-                        <label for="categoria" class="col-sm-2 control-label">Categorias do evento:</label>
+                        <label for="categoria" class="col-sm-2 control-label"> Categorias do evento: </label>
                         <div class="col-sm-10">
                           <select class="form-control select2" title="Campo Obrigatório!" id="categoria" name="categoria" placeholder="Selecione a(s) categoria(s)" required>
                             <option value=""></option>
@@ -82,27 +78,21 @@ include_once "../../class/Carrega.class.php";
                         </div>
                       </div>
                       <div class="form-group">
-                         <label for="dataInicio" class="col-sm-2 control-label">Data de inicio do evento:</label>
+                         <label for="dataInicio" class="col-sm-2 control-label"> Data de inicio do evento: </label>
                          <div class="col-sm-10">
                            <input type="text" class="form-control" title="Campo Obrigatório!" name="dataInicio" id="dataInicio" required placeholder="dd/mm/yyyy" data-inputmask="'alias': 'dd/mm/yyyy'" data-mask>
                          </div>
                       </div>
                       <div class="form-group">
-                         <label for="dataFim" class="col-sm-2 control-label">Data de término do evento:</label>
+                         <label for="dataFim" class="col-sm-2 control-label"> Data de término do evento: </label>
                          <div class="col-sm-10">
                            <input type="text" class="form-control" name="dataFim" id="dataFim" placeholder="dd/mm/yyyy" data-inputmask="'alias': 'dd/mm/yyyy'" data-mask>
                          </div>
                       </div>
                       <div class="form-group">
-                        <label for="horarioInicio" class="col-sm-2 control-label">Horário de inicio:</label>
-                        <div class="col-sm-10 bootstrap-timepicker">
-                          <input type="text" name="horarioInicio" class="form-control timepicker" maxLenght pattern="[0-9]{2}:[0-9]{2}" placeholder="00:00">
-                        </div>
-                      </div>
-                      <div class="form-group">
-                        <label for="horarioFim" class="col-sm-2 control-label">Horario do término:</label>
-                        <div class="col-sm-10 bootstrap-timepicker">
-                          <input type="time" name="horarioFim" class="form-control timepicker" placeholder="00:00">
+                        <label for="horario" class="col-sm-2 control-label"> Horário do evento: </label>
+                        <div class="col-sm-10">
+                          <input type="text" name="horario" id="horario" title="Campo Obrigatório!" class="form-control" placeholder="Digite aqui os horários do evento. Exemplos: 14h; 17h30 - 23h." required>
                         </div>
                       </div>
                       <div class="form-group">
@@ -144,8 +134,6 @@ include_once "../../class/Carrega.class.php";
     <script src="../../plugins/select2/select2.full.min.js"></script>
     <!-- FastClick -->
     <script src="../../plugins/fastclick/fastclick.min.js"></script>
-    <!-- bootstrap time picker -->
-    <script src="../../plugins/timepicker/bootstrap-timepicker.min.js"></script>
     <!-- InputMask -->
     <script src="../../plugins/input-mask/jquery.inputmask.js"></script>
     <script src="../../plugins/input-mask/jquery.inputmask.date.extensions.js"></script>
@@ -165,16 +153,10 @@ include_once "../../class/Carrega.class.php";
       });
 
       //InputMask
-      $("#datemask").inputmask("dd/mm/yyyy", {"placeholder": "dd/mm/yyyy"});
+      $("#datemask").inputmask("dd/mm/yyyy");
       //Money Euro
       $("[data-mask]").inputmask();
 
-      //Timepicker
-      $(".timepicker").timepicker({
-        showInputs: false,
-        showMeridian: false,
-        defaultTime: false
-      });
     });
 
     $('.file').fileinput({
@@ -185,6 +167,8 @@ include_once "../../class/Carrega.class.php";
         language: 'pt-BR',
         overwriteInitial: true,
         maxFileSize: '500KB',
+        maxImageWidth: 800,
+        maxImageHeight: 600,
         allowedFileExtensions : ['jpg', 'png','gif']
     });
     </script>

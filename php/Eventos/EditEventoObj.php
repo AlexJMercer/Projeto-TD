@@ -104,15 +104,9 @@ include_once "../../class/Carrega.class.php";
                          </div>
                       </div>
                       <div class="form-group">
-                        <label for="horarioInicio" class="col-sm-2 control-label">Horário de inicio:</label>
+                        <label for="horario" class="col-sm-2 control-label">Horário do evento:</label>
                         <div class="col-sm-10 bootstrap-timepicker">
-                          <input type="text" name="horarioInicio" id="horarioInicio" value="<?php echo date('H:i', strtotime($comp->horarioInicio)); ?>" class="form-control timepicker">
-                        </div>
-                      </div>
-                      <div class="form-group">
-                        <label for="horarioFim" class="col-sm-2 control-label">Horario do término:</label>
-                        <div class="col-sm-10 bootstrap-timepicker">
-                          <input type="text" name="horarioFim" id="horarioFim" value="<?php echo date('H:i', strtotime($comp->horarioFim)); ?>" class="form-control timepicker">
+                          <input type="text" name="horario" id="horario" value="<?php echo $comp->horario; ?>" class="form-control timepicker">
                         </div>
                       </div>
                       <div class="form-group">
@@ -183,12 +177,6 @@ include_once "../../class/Carrega.class.php";
       //Money Euro
       $("[data-mask]").inputmask();
 
-      //Timepicker
-      $(".timepicker").timepicker({
-        showInputs: false,
-        showMeridian: false,
-        defaultTime: false
-      });
     });
 
     $('.file').fileinput({
