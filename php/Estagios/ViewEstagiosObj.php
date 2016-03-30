@@ -80,9 +80,8 @@ include_once "../../class/Carrega.class.php";
                         <td><?php echo $line->titulo; ?></td>
                         <td>
                           <input type='hidden' name='id' value='<?php echo $line->id; ?>'>
-
+                          <button type="submit" name="exibir" value="exibir" formaction="ShowEstagioObj.php" class="btn btn-flat btn-info"><i class="fa fa-expand"></i> Exibir </button>
                           <button type="submit" name="editar" value="editar" class="btn btn-flat btn-warning"><i class="fa fa-edit"></i> Editar </button>
-
                           <button type="submit" name="excluir" value="excluir" formaction="CrudEstagios.php" class='btn btn-flat btn-danger'><i class="fa fa-times"></i> Excluir </button>
                         </td>
                       </tr>
@@ -98,6 +97,7 @@ include_once "../../class/Carrega.class.php";
                         <p> Nada cadastrado!!</p>
                       </td>
                       <td>
+
                         <button type="button" class="btn btn-flat btn-warning" disabled><i class="fa fa-edit"></i> Editar </button>
 
                         <button type="button" class='btn btn-flat btn-danger' disabled><i class="fa fa-times"></i> Excluir </button>

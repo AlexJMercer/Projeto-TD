@@ -66,6 +66,12 @@ if(empty($_SESSION['email']) && empty($_SESSION['senha']) && empty($_SESSION['ti
             <h1>Notícias</h1>
         </section>
         <!-- Main content -->
+        <?php
+        $teste = new Noticias();
+        echo $teste->numNoticias();
+
+        //echo $num;
+         ?>
         <section class="content">
           <div class="row">
             <div class="col-lg-12">
@@ -87,11 +93,11 @@ if(empty($_SESSION['email']) && empty($_SESSION['senha']) && empty($_SESSION['ti
                       <div class="form-group">
                         <label for="data" class="col-sm-2 control-label">Data:</label>
                         <div class="col-sm-5">
-                          <input type="text" name="data" class="form-control" value="<?php echo date('d/m/Y'); ?>" data-inputmask="'alias': 'dd/mm/yyyy'" data-mask>
+                          <input type="text" name="data" class="form-control" value="<?php echo date('d/m/Y'); ?>" data-inputmask="'alias': 'dd/mm/yyyy'" data-mask disabled>
                         </div>
                         <label for="hora" class="col-sm-1 control-label">Hora:</label>
                         <div class="col-sm-4 bootstrap-timepicker pull-right">
-                          <input type="text" name="hora" value="<?php echo date('H:i');?>" class="form-control">
+                          <input type="text" name="hora" value="<?php echo date('H:i');?>" class="form-control" disabled>
                         </div>
                       </div>
                       <div class="form-group">
@@ -125,7 +131,7 @@ if(empty($_SESSION['email']) && empty($_SESSION['senha']) && empty($_SESSION['ti
                             <option value=""></option>
                             <?php
                               $catSelect = new Select();
-                              $catSelect->categoriaSelect();
+                              $catSelect->categoriaMultiSelected();
                             ?>
                           </select>
 

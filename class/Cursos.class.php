@@ -114,5 +114,30 @@
       return $return;
     }
 
+    public function labelCategorias($categoria = "")
+    {
+      $sql    = "SELECT * from categorias";
+      $result = pg_query($sql);
+      $ln     = pg_num_rows($result);
+
+      if ($ln==0)
+      {
+         echo "<small class='label bg-red'>ERRO</small>";
+      }
+      else
+      {
+         while ($a = pg_fetch_assoc($result))
+         {
+           $this->id        = $a['id_cat'];
+           $this->categoria = $a['categoria'];
+
+
+          if(in_array($this->id, $categoria))
+          {
+            print "<small class='label bg-blue'>{$this->categoria}</small>  ";
+          }
+         }
+       }
+    }
 }
 ?>

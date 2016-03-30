@@ -56,25 +56,222 @@ include_once "../../class/Carrega.class.php";
         </section>
         <section class="content">
           <div class="row">
-            <div class="col-md-3 col-sm-6 col-xs-12">
-              <div class="info-box">
-                <span class="info-box-icon bg-aqua"><i class="fa fa-newspaper-o"></i></span>
-                <div class="info-box-content">
-                  <span class="info-box-text">Notícias</span>
-                  <span class="info-box-number">90<small>%</small></span>
-                </div><!-- /.info-box-content -->
-              </div><!-- /.info-box -->
-            </div><!-- /.col -->
-
-            <a href="#" class="col-md-3 col-sm-6 col-xs-12">
-              <div class="info-box">
-                <span class="info-box-icon bg-aqua"><i class="ion ion-ios-gear-outline"></i></span>
-                <div class="info-box-content">
-                  <span class="info-box-text"><h5>Notícias</h5></span>
-                  <span class="info-box-text">Listar notícias</span>
-                </div><!-- /.info-box-content -->
-              </div><!-- /.info-box -->
-            </a><!-- /.col -->
+            <!--Bloco-->
+            <div class="col-lg-3 col-xs-6">
+              <!-- small box -->
+              <div class="small-box bg-aqua">
+                <div class="inner">
+                  <?php
+                    $teste = new Noticias();
+                  ?>
+                  <h3><?php echo $teste->numNoticias(); ?></h3>
+                  <p>Notícias</p>
+                </div>
+                <div class="icon">
+                  <i class="fa fa-newspaper-o"></i>
+                </div>
+                <a href="#" class="small-box-footer">Ir para notícias <i class="fa fa-arrow-circle-right"></i></a>
+              </div>
+            </div><!-- ./col -->
+            <!--Fim do Bloco-->
+            <!--Bloco-->
+            <div class="col-lg-3 col-xs-6">
+              <!-- small box -->
+              <div class="small-box bg-red">
+                <div class="inner">
+                  <?php
+                    $teste = new Noticias();
+                  ?>
+                  <h3><?php echo $teste->numNoticias(); ?></h3>
+                  <p>Cardápios</p>
+                </div>
+                <div class="icon">
+                  <i class="fa fa-cutlery"></i>
+                </div>
+                <a href="#" class="small-box-footer">Ir para cardápios <i class="fa fa-arrow-circle-right"></i></a>
+              </div>
+            </div><!-- ./col -->
+            <!--Fim do Bloco-->
+            <!--Bloco-->
+            <div class="col-lg-3 col-xs-6">
+              <!-- small box -->
+              <div class="small-box bg-orange">
+                <div class="inner">
+                  <?php
+                    $teste = new Noticias();
+                  ?>
+                  <h3><?php echo $teste->numNoticias(); ?></h3>
+                  <p>Monitorias</p>
+                </div>
+                <div class="icon">
+                  <i class="fa fa-laptop"></i>
+                </div>
+                <a href="#" class="small-box-footer">Ir para monitorias <i class="fa fa-arrow-circle-right"></i></a>
+              </div>
+            </div><!-- ./col -->
+            <!--Fim do Bloco-->
+            <!--Bloco-->
+            <div class="col-lg-3 col-xs-6">
+              <!-- small box -->
+              <div class="small-box bg-green">
+                <div class="inner">
+                  <?php
+                    $teste = new Noticias();
+                  ?>
+                  <h3><?php echo $teste->numNoticias(); ?></h3>
+                  <p>Notícias</p>
+                </div>
+                <div class="icon">
+                  <i class="ion ion-bag"></i>
+                </div>
+                <a href="#" class="small-box-footer">Ir para notícias <i class="fa fa-arrow-circle-right"></i></a>
+              </div>
+            </div><!-- ./col -->
+            <!--Fim do Bloco-->
+            <!--Bloco-->
+            <div class="col-lg-3 col-xs-6">
+              <!-- small box -->
+              <div class="small-box bg-primary">
+                <div class="inner">
+                  <?php
+                    $teste = new Noticias();
+                  ?>
+                  <h3><?php echo $teste->numNoticias(); ?></h3>
+                  <p>Notícias</p>
+                </div>
+                <div class="icon">
+                  <i class="ion ion-bag"></i>
+                </div>
+                <a href="#" class="small-box-footer">Ir para notícias <i class="fa fa-arrow-circle-right"></i></a>
+              </div>
+            </div><!-- ./col -->
+            <!--Fim do Bloco-->
+            <!--Bloco-->
+            <div class="col-lg-3 col-xs-6">
+              <!-- small box -->
+              <div class="small-box bg-purple">
+                <div class="inner">
+                  <?php
+                    $teste = new Noticias();
+                  ?>
+                  <h3><?php echo $teste->numNoticias(); ?></h3>
+                  <p>Notícias</p>
+                </div>
+                <div class="icon">
+                  <i class="ion ion-bag"></i>
+                </div>
+                <a href="#" class="small-box-footer">Ir para notícias <i class="fa fa-arrow-circle-right"></i></a>
+              </div>
+            </div><!-- ./col -->
+            <!--Fim do Bloco-->
+            <!--Bloco-->
+            <div class="col-lg-3 col-xs-6">
+              <!-- small box -->
+              <div class="small-box bg-maroon">
+                <div class="inner">
+                  <?php
+                    $teste = new Noticias();
+                  ?>
+                  <h3><?php echo $teste->numNoticias(); ?></h3>
+                  <p>Notícias</p>
+                </div>
+                <div class="icon">
+                  <i class="ion ion-bag"></i>
+                </div>
+                <a href="#" class="small-box-footer">Ir para notícias <i class="fa fa-arrow-circle-right"></i></a>
+              </div>
+            </div><!-- ./col -->
+            <!--Fim do Bloco-->
+            <!--Bloco-->
+            <div class="col-lg-3 col-xs-6">
+              <!-- small box -->
+              <div class="small-box bg-aqua">
+                <div class="inner">
+                  <?php
+                    $teste = new Noticias();
+                  ?>
+                  <h3><?php echo $teste->numNoticias(); ?></h3>
+                  <p>Notícias</p>
+                </div>
+                <div class="icon">
+                  <i class="ion ion-bag"></i>
+                </div>
+                <a href="#" class="small-box-footer">Ir para notícias <i class="fa fa-arrow-circle-right"></i></a>
+              </div>
+            </div><!-- ./col -->
+            <!--Fim do Bloco-->
+            <!--Bloco-->
+            <div class="col-lg-3 col-xs-6">
+              <!-- small box -->
+              <div class="small-box bg-aqua">
+                <div class="inner">
+                  <?php
+                    $teste = new Noticias();
+                  ?>
+                  <h3><?php echo $teste->numNoticias(); ?></h3>
+                  <p>Notícias</p>
+                </div>
+                <div class="icon">
+                  <i class="ion ion-bag"></i>
+                </div>
+                <a href="#" class="small-box-footer">Ir para notícias <i class="fa fa-arrow-circle-right"></i></a>
+              </div>
+            </div><!-- ./col -->
+            <!--Fim do Bloco-->
+            <!--Bloco-->
+            <div class="col-lg-3 col-xs-6">
+              <!-- small box -->
+              <div class="small-box bg-aqua">
+                <div class="inner">
+                  <?php
+                    $teste = new Noticias();
+                  ?>
+                  <h3><?php echo $teste->numNoticias(); ?></h3>
+                  <p>Notícias</p>
+                </div>
+                <div class="icon">
+                  <i class="ion ion-bag"></i>
+                </div>
+                <a href="#" class="small-box-footer">Ir para notícias <i class="fa fa-arrow-circle-right"></i></a>
+              </div>
+            </div><!-- ./col -->
+            <!--Fim do Bloco-->
+            <!--Bloco-->
+            <div class="col-lg-3 col-xs-6">
+              <!-- small box -->
+              <div class="small-box bg-aqua">
+                <div class="inner">
+                  <?php
+                    $teste = new Noticias();
+                  ?>
+                  <h3><?php echo $teste->numNoticias(); ?></h3>
+                  <p>Notícias</p>
+                </div>
+                <div class="icon">
+                  <i class="ion ion-bag"></i>
+                </div>
+                <a href="#" class="small-box-footer">Ir para notícias <i class="fa fa-arrow-circle-right"></i></a>
+              </div>
+            </div><!-- ./col -->
+            <!--Fim do Bloco-->
+            <!--Bloco-->
+            <div class="col-lg-3 col-xs-6">
+              <!-- small box -->
+              <div class="small-box bg-aqua">
+                <div class="inner">
+                  <?php
+                    $teste = new Noticias();
+                  ?>
+                  <h3><?php echo $teste->numNoticias(); ?></h3>
+                  <p>Notícias</p>
+                </div>
+                <div class="icon">
+                  <i class="ion ion-bag"></i>
+                </div>
+                <a href="#" class="small-box-footer">Ir para notícias <i class="fa fa-arrow-circle-right"></i></a>
+              </div>
+            </div><!-- ./col -->
+            <!--Fim do Bloco-->
           </div>
         </section>
       </div><!-- /.content-wrapper -->

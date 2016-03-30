@@ -93,6 +93,12 @@ include_once "../../class/Carrega.class.php";
                                   $label = new Categorias();
                                   $label->labelCategorias($comp->categoria);
                         ?></dd>
+                        <dt>Data e hora:</dt>
+                        <dd><?php
+                                  echo date('d/m/Y', strtotime($comp->data));
+                                  echo " - ";
+                                  echo date('H:i', strtotime($comp->hora));
+                            ?></dd>
                       </dl>
                     </div>
                     <div class="col-sm-5" style="align: center;">
@@ -130,7 +136,7 @@ include_once "../../class/Carrega.class.php";
                     <dt>Status:</dt>
                     <dd><?php echo $comp->status; ?></dd>
                     <dt>URL do site:</dt>
-                    <dd><?php echo $comp->url; ?></dd>
+                    <dd> <a href="<?php echo $comp->url; ?>"><?php echo $comp->url; ?></a> </dd>
                   </dl>
                 </div><!-- /.box-body -->
               </div><!-- /.box -->
@@ -139,7 +145,6 @@ include_once "../../class/Carrega.class.php";
     }
   }
 ?>
-
               <!-- general form elements disabled -->
             </div>
           </div>   <!-- /.row -->

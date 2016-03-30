@@ -312,7 +312,7 @@ class Select
     {
 
          //print_r($categoria);
-         $sql    = "SELECT * from categorias";
+         $sql    = "SELECT * from categorias Order By id_cat";
          $result = pg_query($sql);
 
          $ln = pg_num_rows($result);
@@ -325,7 +325,7 @@ class Select
          {
             while ($a = pg_fetch_assoc($result))
             {
-              $this->id        = $a['id'];
+              $this->id        = $a['id_cat'];
               $this->categoria = $a['categoria'];
 
               if(in_array($this->id, $categoria))
@@ -445,8 +445,8 @@ class Select
       {
          while ($reg = pg_fetch_assoc($result))
          {
-            $object = new Cursos();
-            $object->id = $reg['id_curso'];
+            $object       = new Cursos();
+            $object->id   = $reg['id_curso'];
             $object->nome = $reg['nome'];
 
             if (in_array($object->id, $curso))
@@ -461,5 +461,56 @@ class Select
       }
    }
 
+   public function labelCategorias($categoria = "")
+   {
+     $sql    = "SELECT * from categorias";
+     $result = pg_query($sql);
+     $ln     = pg_num_rows($result);
+
+     if ($ln==0)
+     {
+        echo "<small class='label bg-red'>ERRO</small>";
+     }
+     else
+     {
+        while ($a = pg_fetch_assoc($result))
+        {
+          $this->id        = $a['id_cat'];
+          $this->categoria = $a['categoria'];
+
+
+         if(in_array($this->id, $categoria))
+         {
+           print "<small class='label bg-blue'>{$this->categoria}</small>  ";
+         }
+        }
+      }
+   }
+
+   public function labelCursos($cursos = "")
+   {
+     $sql    = "SELECT id_curso, nome from cursos ORDER BY nome";
+     $result = pg_query($sql);
+     $ln     = pg_num_rows($result);
+
+     if ($ln==0)
+     {
+        echo "<small class='label bg-red'>ERRO</small>";
+     }
+     else
+     {
+        while ($a = pg_fetch_assoc($result))
+        {
+          $object       = new Cursos();
+          $object->id   = $a['id_curso'];
+          $object->nome = $a['nome'];
+
+         if(in_array($object->id, $cursos))
+         {
+           print "<small class='label bg-blue'>{$object->nome}</small>  ";
+         }
+        }
+      }
+   }
 }
 ?>
