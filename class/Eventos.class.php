@@ -96,7 +96,7 @@ include_once 'Carrega.class.php';
         $object->imagem     = $reg['imagem'];
 
         $return = $object;
-        //print_r($object);
+        
       }
       return $return;
     }

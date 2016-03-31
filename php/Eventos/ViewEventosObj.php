@@ -77,7 +77,7 @@ include_once "../../class/Carrega.class.php";
                            <td>
                               <input type='hidden' name='id' value='<?php echo $line->id; ?>'>
 
-                              <button type="submit" name="exibir" value="exibir" class="btn btn-flat btn-info" disabled><i class="fa fa-edit"></i> Exibir </button>
+                              <button type="submit" name="exibir" value="exibir" class="btn btn-flat btn-info" formaction="ShowEventoObj.php"><i class="fa fa-edit"></i> Exibir </button>
 
                               <button type="submit" name="editar" value="editar" class="btn btn-flat btn-warning"><i class="fa fa-edit"></i> Editar </button>
 
@@ -85,14 +85,24 @@ include_once "../../class/Carrega.class.php";
                            </td>
                         </form>
                      </tr>
-
                     <?php
                             }
                           }
                           else
                           {
-                            echo "<h2> Nada cadastrado!!</h2>";
-                          }
+                             ?>
+                           <tr class="odd gradeX">
+                             <td>
+                               <p> Nada cadastrado!!</p>
+                             </td>
+                             <td>
+                               <button type="button" class="btn btn-flat btn-warning" disabled><i class="fa fa-edit"></i> Editar </button>
+
+                               <button type="button" class='btn btn-flat btn-danger' disabled><i class="fa fa-times"></i> Excluir </button>
+                             </td>
+                           </tr>
+                     <?php
+                           }
 
                     ?>
                     </tbody>

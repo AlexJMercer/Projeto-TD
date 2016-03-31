@@ -479,10 +479,21 @@ class Select
           $this->categoria = $a['categoria'];
 
 
-         if(in_array($this->id, $categoria))
+         if (is_array($categoria))
          {
-           print "<small class='label bg-blue'>{$this->categoria}</small>  ";
+            if(in_array($this->id, $categoria))
+            {
+              print "<small class='label bg-blue'>{$this->categoria}</small>  ";
+            }
          }
+         else
+         {
+            if($this->id==$categoria)
+            {
+               print "<small class='label bg-blue'>{$this->categoria}</small>  ";
+            }
+         }
+
         }
       }
    }
