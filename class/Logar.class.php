@@ -40,38 +40,15 @@ class Logar
       session_start();
       while ($reg = pg_fetch_assoc($result))
       {
-        $_SESSION['nome']  = $reg['nome'];
-        $_SESSION['email'] = $reg['email'];
-        $_SESSION['senha'] = $reg['senha'];
-        $_SESSION['tipo']  = $reg['usertype'];
-
+        $_SESSION['id']           = $reg['id_user'];
+        $_SESSION['nome']         = $reg['nome'];
+        $_SESSION['email']        = $reg['email'];
+        $_SESSION['tipo_usuario'] = $reg['type_id'];
+        $_SESSION['senha']        = $reg['senha'];
       }
       //header('location:/Categoria/CategoriaObj.php');
       //print_r($_SESSION);
-      if ($_SESSION['tipo']==1)
-      {
-        echo "Administrador!!";
-        echo $_SESSION['nome'];
-        echo $_SESSION['email'];
-        echo $_SESSION['senha'];
-        echo $_SESSION['tipo'];
-      }
-      elseif ($_SESSION['tipo']==2)
-      {
-        echo "Editor!!";
-        echo $_SESSION['nome'];
-        echo $_SESSION['email'];
-        echo $_SESSION['senha'];
-        echo $_SESSION['tipo'];
-      }
-      elseif ($_SESSION['tipo']==3)
-      {
-        echo "Autor!!";
-        echo $_SESSION['nome'];
-        echo $_SESSION['email'];
-        echo $_SESSION['senha'];
-        echo $_SESSION['tipo'];
-      }
+      //var_dump($_SESSION);
     }
   }
 }

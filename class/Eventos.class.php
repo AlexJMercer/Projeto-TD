@@ -47,15 +47,16 @@ include_once 'Carrega.class.php';
 
     public function Listar()
     {
-      $sql    = "SELECT id_event, evento FROM eventos ORDER BY id_event DESC";
+      $sql    = "SELECT id_event, evento, data_inicio FROM eventos ORDER BY data_inicio ASC";
       $result = pg_query($sql);
       $return = null;
 
       while ($reg=pg_fetch_assoc($result))
       {
-        $object         = new Eventos();
-        $object->id     = $reg["id_event"];
-        $object->evento = $reg["evento"];
+        $object             = new Eventos();
+        $object->id         = $reg["id_event"];
+        $object->dataInicio = $reg["data_inicio"];
+        $object->evento     = $reg["evento"];
 
         $return[] = $object;
       }
@@ -96,7 +97,7 @@ include_once 'Carrega.class.php';
         $object->imagem     = $reg['imagem'];
 
         $return = $object;
-        
+
       }
       return $return;
     }

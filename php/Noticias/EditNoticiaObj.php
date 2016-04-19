@@ -11,7 +11,6 @@ if(empty($_SESSION['email']) && empty($_SESSION['senha']) && empty($_SESSION['ti
    exit;
 }*/
 
-
 ?>
 <!DOCTYPE html>
 <html>
@@ -59,7 +58,7 @@ if(empty($_SESSION['email']) && empty($_SESSION['senha']) && empty($_SESSION['ti
     <div class="wrapper">
       <?php include '../inc/topotime.html';
 
-            include '../inc/menutime.html';
+            include '../inc/menutime.php';
       ?>
       <div class="content-wrapper">
         <!-- Content Header (Page header) -->

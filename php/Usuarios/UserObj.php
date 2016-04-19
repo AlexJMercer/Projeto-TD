@@ -35,7 +35,7 @@ include_once "../../class/Carrega.class.php";
     <div class="wrapper">
       <?php include '../inc/topotime.html';
 
-            include '../inc/menutime.html';
+            include '../inc/menutime.php';
 
       ?>
       <div class="content-wrapper">
@@ -56,7 +56,7 @@ include_once "../../class/Carrega.class.php";
                   <h3 class="box-title">Cadastro de usuários</h3>
                 </div><!-- /.box-header -->
                 <!-- form start -->
-                <form class="form-horizontal" id="form" method="post" action="CrudUsers.php">
+                <form class="form-horizontal" name="formuser" id="form" method="post" action="CrudUsers.php">
                   <div class="box-body">
                       <div class="form-group">
                         <label for="nome" class="col-sm-2 control-label">Nome:</label>
@@ -71,26 +71,27 @@ include_once "../../class/Carrega.class.php";
                         </div>
                       </div>
                       <div class="form-group">
-                        <label for="type" class="col-sm-2 control-label">Tipo de usuário:</label>
-                        <div class="col-sm-10">
-                          <select class="form-control select2" name="tipo" id='type' required>
-                            <option value=""></option>
-                          <?php $typeSelect = new Type();
-                                $typeSelect->typeSelect();
-                          ?>
-                          </select>
-                        </div>
-                      </div>
-                      <div class="form-group">
                         <label for="senha" class="col-sm-2 control-label">Senha:</label>
                         <div class="col-sm-10">
-                          <input type="password" class="form-control" name="senha" id="senha" required>
+                          <input type="password" class="form-control" name="senha" id="senha" data-language="pt-BR" required>
                         </div>
                       </div>
                       <div class="form-group">
                         <label for="csenha" class="col-sm-2 control-label">Confirmar senha:</label>
                         <div class="col-sm-10">
-                          <input type="password" class="form-control" name="csenha" id="csenha" oninput="validaSenha(this)" required>
+                          <input type="password" class="form-control" name="csenha" id="csenha" onchange="validaSenha()" data-language="pt-BR" required>
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label for="type" class="col-sm-2 control-label">Tipo de usuário:</label>
+                        <div class="col-sm-10">
+                          <select class="form-control select2" name="tipo" id='type' required>
+                            <option value=""></option>
+                          <?php
+                                $typeSelect = new Select();
+                                $typeSelect->typeSelect();
+                          ?>
+                          </select>
                         </div>
                       </div>
                   </div><!-- /.box-body -->
@@ -126,26 +127,22 @@ include_once "../../class/Carrega.class.php";
     <!-- AdminLTE for demo purposes -->
     <script src="../../dist/js/demo.js"></script>
 
-    <script type="text/javascript">
+    <!--script type="text/javascript">
     $(function(){
 
       $("#senha").strength({showMeter: true, toggleMask: false});
       $("#csenha").strength({showMeter: true, toggleMask: false});
 
     });
-    </script>
+  </script-->
 
     <script type="text/javascript">
-    function validaSenha (input)
+    function validaSenha ()
     {
-	     if (input.value != document.getElementById('senha').value)
-       {
-         input.setCustomValidity('Repita a senha corretamente');
-       }
-       else
-       {
-         input.setCustomValidity('');
-       }
+      if(document.formuser.csenha.value != document.formuser.senha.value)
+      {
+        alert("Ta diferente, digite um igual!!");
+      }
     }
 </script>
 

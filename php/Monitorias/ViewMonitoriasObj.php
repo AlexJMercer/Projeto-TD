@@ -38,7 +38,7 @@
       <?php
             include '../inc/topotime.html';
 
-            include '../inc/menutime.html';
+            include '../inc/menutime.php';
       ?>
       <!-- Content Wrapper. Contains page content -->
       <div class="content-wrapper">
@@ -144,7 +144,7 @@ include_once "../../class/Carrega.class.php";
       $(function ()
       {
         $("#dataT").DataTable({
-          
+
           "ordering": false,
           "oLanguage": { "sSearch": "",
                          "sInfo": "Um total de _TOTAL_ monitorias (_START_ de _END_)",

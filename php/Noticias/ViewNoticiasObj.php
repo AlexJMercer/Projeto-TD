@@ -47,7 +47,7 @@ if(empty($_SESSION['email']) && empty($_SESSION['senha']) && empty($_SESSION['ti
 
       <?php include '../inc/topotime.html';
 
-            include '../inc/menutime.html';
+            include '../inc/menutime.php';
 
       ?>
       <!-- Content Wrapper. Contains page content -->

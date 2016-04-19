@@ -35,23 +35,24 @@
 
       public function inserir()
       {
-         $sql = "INSERT INTO usuarios (nome, email, senha, usertype) VALUES ('$this->nome', '$this->email', '$this->senha', '$this->tipo')";
+         $sql    = "INSERT INTO usuarios (nome, email, senha, type_id) VALUES ('$this->nome', '$this->email', '$this->senha', '$this->tipo')";
          $return = pg_query($sql);
          return $return;
       }
 
-      public function listar()
+      public function listarUsuarios()
       {
-         $sql = "SELECT * FROM usuarios, usertype WHERE usuarios.usertype=usertype.id Order by usuarios.id";
+         $sql    = "SELECT * FROM usuarios, usertype WHERE usuarios.type_id =usertype.id_type Order by usuarios.id_user";
          $result = pg_query($sql);
          $return = null;
+
          while ($reg = pg_fetch_assoc($result))
          {
-            $object = new Usuarios();
-            $object->cod = $reg["id"];
+            $object       = new Usuarios();
+            $object->id   = $reg["id_user"];
             $object->nome = $reg["nome"];
-            $object->email = $reg["email"];
-            $object->type = $reg["type"];
+            $object->tipo = $reg["type"];
+
             $return[] = $object;
          }
          return $return;
@@ -59,7 +60,7 @@
 
       public function excluir()
       {
-         $sql = "DELETE from usuarios where id=$this->cod";
+         $sql    = "DELETE from usuarios where id_user =$this->id";
          $return = pg_query($sql);
          return $return;
       }
@@ -96,15 +97,15 @@
          return $return;
       }
 
-      public function editar($cod = "")
+      public function editar($id = "")
       {
-         $sql = "SELECT * FROM usuarios, usertype WHERE usuarios.usertype=usertype.id AND usuarios.id=$cod ";
+         $sql = "SELECT * FROM usuarios, usertype WHERE usuarios.usertype=usertype.id AND usuarios.id=$id ";
          $result = pg_query($sql);
          $return = null;
          while ($reg = pg_fetch_assoc($result))
          {
             $object = new Usuarios();
-            $object->cod = $reg["id"];
+            $object->id = $reg["id"];
             $object->nome = $reg["nome"];
             $object->email = $reg["email"];
             $object->type = $reg["usertype"];
@@ -142,6 +143,30 @@
             echo $result;die();
             header('location:index.php');
          }
+      }
+
+      public function permissionsUser($id='')
+      {
+        $sql    = "SELECT * FROM usuarios, usertype WHERE usuarios.type_id =usertype.id_type AND usuarios.id_user=$id";
+        $result = pg_query($sql);
+        $return = null;
+
+        while ($reg = pg_fetch_assoc($result))
+        {
+           $object        = new Usuarios();
+           $object->id    = $reg["id_user"];
+           $object->nome  = $reg["nome"];
+           $object->email = $reg['email'];
+           $object->tipo  = $reg["type"];
+
+           $return = $object;
+        }
+        return $return;
+      }
+
+      public function inserirPermissions()
+      {
+        $sql = "INSERT INTO permissaoteste ()";
       }
 }
 ?>

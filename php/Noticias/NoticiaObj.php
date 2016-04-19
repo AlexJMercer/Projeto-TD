@@ -3,6 +3,8 @@
 include_once "../../class/Carrega.class.php";
 date_default_timezone_set('America/Sao_Paulo');
 
+include "../testesession.php";
+
 
 /*session_start();
 
@@ -58,7 +60,7 @@ if(empty($_SESSION['email']) && empty($_SESSION['senha']) && empty($_SESSION['ti
     <div class="wrapper">
       <?php include '../inc/topotime.html';
 
-            include '../inc/menutime.html';
+            include '../inc/menutime.php';
       ?>
       <div class="content-wrapper">
         <!-- Content Header (Page header) -->

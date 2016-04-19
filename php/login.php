@@ -6,8 +6,9 @@ if (isset($_POST['logar']) && !empty($_POST['login']) && !empty($_POST['senha'])
 {
   $object = new Logar();
 
-
   $object->logon($_POST['login'], $_POST['senha']);
+
+  header('Location:print.php');
 }
 
 ?>

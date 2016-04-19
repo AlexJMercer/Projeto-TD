@@ -119,15 +119,61 @@ create table alimentos_cardapios(
 	ON UPDATE CASCADE ON DELETE CASCADE
 );
 
+create table usertype(
+	id_type serial not null,
+	type varchar(50) not null,
+	primary key(id_type)
+);
+
+INSERT INTO usertype (type) VALUES('Autor');
+INSERT INTO usertype (type) VALUES('Editor');
+INSERT INTO usertype (type) VALUES('Administrador');
+
 create table usuarios(
 	id_user serial not null,
 	nome varchar(200) not null,
-	email varchar(200) not null,
+	email varchar(200) not null unique,
 	senha varchar(500) not null,
-	primary key(id_user)
+	type_id integer default(1) not null,
+	primary key(id_user),
+	foreign key(type_id) references usertype
+
+	ON UPDATE CASCADE ON DELETE CASCADE
 );
 
-INSERT INTO usuarios (nome, email, senha) VALUES ('Administrador','admin','admin');
+INSERT INTO usuarios (nome, email, senha, type_id) VALUES ('Administrador','admin@admin.com','admin', '3');
+
+create table permissaoteste(
+	id_perm serial not null,
+	user_id integer not null,
+	noticias boolean not null default false,
+	cardapios boolean not null default false,
+	cursos boolean not null default false,
+	primary key(id_perm),
+	foreign key(user_id) references usuarios
+
+	ON UPDATE CASCADE ON DELETE CASCADE
+);
+
+
+create table permissions(
+  id_perm serial not null,
+  user_id integer not null,
+  noticias boolean not null default false,
+  cardapios boolean not null default false,
+  cursos boolean not null default false,
+  monitorias boolean not null default false,
+  eventos boolean not null default false,
+  setores boolean not null default false,
+  assistencia boolean not null default false,
+  categorias boolean not null default false,
+  locais boolean not null default false,
+  estagios boolean not null default false,
+  primary key(id_perm),
+  foreign key(user_id) references usuarios
+
+  ON UPDATE CASCADE ON DELETE CASCADE
+);
 
 create table noticias(
 	id_not serial not null,

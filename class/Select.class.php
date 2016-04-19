@@ -523,5 +523,34 @@ class Select
         }
       }
    }
+
+   public function typeSelect($type ="")
+   {
+      $sql    = "SELECT * from usertype Order by id_type";
+      $result = pg_query($sql);
+      $ln     = pg_num_rows($result);
+
+      if ($ln==0)
+      {
+        echo "<option value=''>Nada Encontrado!!</option>";
+      }
+      else
+      {
+        while ($a = pg_fetch_array($result))
+        {
+          $id   = $a['id_type'];
+          $type = $a['type'];
+
+          if ($type==$this->id)
+          {
+            print "<option selected value='{$id}'>{$type}</option>";
+          }
+          else
+          {
+            print "<option value='{$id}'>{$type}</option>";
+          }
+        }
+      }
+   }
 }
 ?>

@@ -40,7 +40,7 @@ include_once "../../class/Carrega.class.php";
       <?php
             include '../inc/topotime.html';
 
-            include '../inc/menutime.html';
+            include '../inc/menutime.php';
       ?>
       <div class="content-wrapper">
         <!-- Content Header (Page header) -->

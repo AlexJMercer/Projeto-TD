@@ -32,7 +32,7 @@
 
       <?php include '../inc/topotime.html';
 
-            include '../inc/menutime.html';
+            include '../inc/menutime.php';
       ?>
       <!-- Content Wrapper. Contains page content -->
       <div class="content-wrapper">
@@ -55,6 +55,7 @@
                     <thead>
                       <tr>
                         <th>Evento</th>
+                        <th>Data de inicio</th>
                         <th>Opções</th>
                       </tr>
                     </thead>
@@ -74,6 +75,7 @@ include_once "../../class/Carrega.class.php";
                      <tr class="odd gradeX">
                         <form name="view" action="EditEventoObj.php" method="post">
                            <td><?php echo $line->evento; ?></td>
+                           <td><?php echo date('d/m/Y',strtotime($line->dataInicio)); ?></td>
                            <td>
                               <input type='hidden' name='id' value='<?php echo $line->id; ?>'>
 

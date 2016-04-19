@@ -43,7 +43,7 @@ date_default_timezone_set('America/Sao_Paulo');
     <div class="wrapper">
       <?php
          include '../inc/topotime.html';
-         include '../inc/menutime.html';
+         include '../inc/menutime.php';
       ?>
       <div class="content-wrapper">
         <!-- Content Header (Page header) -->
