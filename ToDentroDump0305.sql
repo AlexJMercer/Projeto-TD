@@ -348,10 +348,9 @@ CREATE TABLE eventos (
     id_event integer NOT NULL,
     evento character varying(300) NOT NULL,
     event_cat integer NOT NULL,
-    datainicio date NOT NULL,
-    datafim date,
-    horarioinicio time without time zone,
-    horariofim time without time zone,
+    data_inicio date NOT NULL,
+    data_fim date,
+    horario character varying(100) NOT NULL,
     texto text NOT NULL,
     imagem text
 );
@@ -413,20 +412,6 @@ ALTER TABLE public.imagens_noticias_id_im_seq OWNER TO postgres;
 
 ALTER SEQUENCE imagens_noticias_id_im_seq OWNED BY imagens_noticias.id_im;
 
-
---
--- Name: inscricao_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
---
-
-CREATE SEQUENCE inscricao_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
-ALTER TABLE public.inscricao_id_seq OWNER TO postgres;
 
 --
 -- Name: instituto; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
@@ -495,48 +480,6 @@ ALTER SEQUENCE local_id_lo_seq OWNED BY local.id_lo;
 
 
 --
--- Name: minicursos_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
---
-
-CREATE SEQUENCE minicursos_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
-ALTER TABLE public.minicursos_id_seq OWNER TO postgres;
-
---
--- Name: miniscri_confirmacao_seq; Type: SEQUENCE; Schema: public; Owner: postgres
---
-
-CREATE SEQUENCE miniscri_confirmacao_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
-ALTER TABLE public.miniscri_confirmacao_seq OWNER TO postgres;
-
---
--- Name: miniscri_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
---
-
-CREATE SEQUENCE miniscri_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
-ALTER TABLE public.miniscri_id_seq OWNER TO postgres;
-
---
 -- Name: monitorias; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
 --
 
@@ -582,8 +525,8 @@ CREATE TABLE noticias (
     titulo character varying(200) NOT NULL,
     linha_apoio character varying(350),
     texto text NOT NULL,
-    data date DEFAULT now() NOT NULL,
-    hora time without time zone DEFAULT now() NOT NULL,
+    data date NOT NULL,
+    hora time without time zone NOT NULL,
     autor integer NOT NULL,
     status integer NOT NULL,
     url text
@@ -614,10 +557,25 @@ ALTER SEQUENCE noticias_id_not_seq OWNED BY noticias.id_not;
 
 
 --
--- Name: pagamentos_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+-- Name: permissaoteste; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
 --
 
-CREATE SEQUENCE pagamentos_id_seq
+CREATE TABLE permissaoteste (
+    id_perm integer NOT NULL,
+    user_id integer NOT NULL,
+    noticias text,
+    cardapios text,
+    cursos text
+);
+
+
+ALTER TABLE public.permissaoteste OWNER TO postgres;
+
+--
+-- Name: permissaoteste_id_perm_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE permissaoteste_id_perm_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -625,13 +583,42 @@ CREATE SEQUENCE pagamentos_id_seq
     CACHE 1;
 
 
-ALTER TABLE public.pagamentos_id_seq OWNER TO postgres;
+ALTER TABLE public.permissaoteste_id_perm_seq OWNER TO postgres;
 
 --
--- Name: palestrantes_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+-- Name: permissaoteste_id_perm_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
 
-CREATE SEQUENCE palestrantes_id_seq
+ALTER SEQUENCE permissaoteste_id_perm_seq OWNED BY permissaoteste.id_perm;
+
+
+--
+-- Name: permissions; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE permissions (
+    id_perm integer NOT NULL,
+    user_id integer NOT NULL,
+    noticias character varying(20) DEFAULT NULL::character varying,
+    cardapios character varying(20) DEFAULT NULL::character varying,
+    cursos character varying(20) DEFAULT NULL::character varying,
+    monitorias character varying(20) DEFAULT NULL::character varying,
+    estagios character varying(20) DEFAULT NULL::character varying,
+    eventos character varying(20) DEFAULT NULL::character varying,
+    categorias character varying(20) DEFAULT NULL::character varying,
+    locais character varying(20) DEFAULT NULL::character varying,
+    assistencias character varying(20) DEFAULT NULL::character varying,
+    setores character varying(20) DEFAULT NULL::character varying
+);
+
+
+ALTER TABLE public.permissions OWNER TO postgres;
+
+--
+-- Name: permissions_id_perm_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE permissions_id_perm_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -639,7 +626,14 @@ CREATE SEQUENCE palestrantes_id_seq
     CACHE 1;
 
 
-ALTER TABLE public.palestrantes_id_seq OWNER TO postgres;
+ALTER TABLE public.permissions_id_perm_seq OWNER TO postgres;
+
+--
+-- Name: permissions_id_perm_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE permissions_id_perm_seq OWNED BY permissions.id_perm;
+
 
 --
 -- Name: programacao; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
@@ -775,24 +769,22 @@ ALTER SEQUENCE status_id_sta_seq OWNED BY status.id_sta;
 
 
 --
--- Name: usuarios; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+-- Name: usertype; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
 --
 
-CREATE TABLE usuarios (
-    id_user integer NOT NULL,
-    nome character varying(200) NOT NULL,
-    email character varying(200) NOT NULL,
-    senha character varying(500) NOT NULL
+CREATE TABLE usertype (
+    id_type integer NOT NULL,
+    type character varying(50) NOT NULL
 );
 
 
-ALTER TABLE public.usuarios OWNER TO postgres;
+ALTER TABLE public.usertype OWNER TO postgres;
 
 --
--- Name: usuarios_codigo_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+-- Name: usertype_id_type_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
-CREATE SEQUENCE usuarios_codigo_seq
+CREATE SEQUENCE usertype_id_type_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -800,7 +792,29 @@ CREATE SEQUENCE usuarios_codigo_seq
     CACHE 1;
 
 
-ALTER TABLE public.usuarios_codigo_seq OWNER TO postgres;
+ALTER TABLE public.usertype_id_type_seq OWNER TO postgres;
+
+--
+-- Name: usertype_id_type_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE usertype_id_type_seq OWNED BY usertype.id_type;
+
+
+--
+-- Name: usuarios; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE usuarios (
+    id_user integer NOT NULL,
+    nome character varying(200) NOT NULL,
+    email character varying(200) NOT NULL,
+    senha character varying(500) NOT NULL,
+    type_id integer DEFAULT 1 NOT NULL
+);
+
+
+ALTER TABLE public.usuarios OWNER TO postgres;
 
 --
 -- Name: usuarios_id_user_seq; Type: SEQUENCE; Schema: public; Owner: postgres
@@ -922,6 +936,20 @@ ALTER TABLE ONLY noticias ALTER COLUMN id_not SET DEFAULT nextval('noticias_id_n
 
 
 --
+-- Name: id_perm; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY permissaoteste ALTER COLUMN id_perm SET DEFAULT nextval('permissaoteste_id_perm_seq'::regclass);
+
+
+--
+-- Name: id_perm; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY permissions ALTER COLUMN id_perm SET DEFAULT nextval('permissions_id_perm_seq'::regclass);
+
+
+--
 -- Name: id_prog; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
@@ -947,6 +975,13 @@ ALTER TABLE ONLY setores ALTER COLUMN id_set SET DEFAULT nextval('setores_id_set
 --
 
 ALTER TABLE ONLY status ALTER COLUMN id_sta SET DEFAULT nextval('status_id_sta_seq'::regclass);
+
+
+--
+-- Name: id_type; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY usertype ALTER COLUMN id_type SET DEFAULT nextval('usertype_id_type_seq'::regclass);
 
 
 --
@@ -1140,32 +1175,37 @@ SELECT pg_catalog.setval('disciplinas_id_disc_seq', 3, true);
 -- Data for Name: estagio_cursos; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
+INSERT INTO estagio_cursos VALUES (1, 2);
+INSERT INTO estagio_cursos VALUES (1, 1);
 
 
 --
 -- Data for Name: estagios; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
+INSERT INTO estagios VALUES (1, 'Teste3', 364.00, 'teste2', 'teste22', 'teste2', 'teste2');
 
 
 --
 -- Name: estagios_id_est_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('estagios_id_est_seq', 1, false);
+SELECT pg_catalog.setval('estagios_id_est_seq', 1, true);
 
 
 --
 -- Data for Name: eventos; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
+INSERT INTO eventos VALUES (1, 'Brainstorm 2 - Semana Acadêmica Design IFSul', 6, '2016-05-10', '2016-05-15', '18h - 22h30', 'Teste', 'files/_2680_4f6006e6b3e365d90b6166f926b8f868.png');
+INSERT INTO eventos VALUES (2, 'SASPI - Semana acadêmica de Sistemas para Internet', 6, '2016-12-10', '2015-12-15', '19h15 - 23h15', 'Teste', 'files/_7672_12207711_902318969849047_2083681106_n.jpg');
 
 
 --
 -- Name: eventos_id_event_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('eventos_id_event_seq', 1, false);
+SELECT pg_catalog.setval('eventos_id_event_seq', 2, true);
 
 
 --
@@ -1181,13 +1221,6 @@ INSERT INTO imagens_noticias VALUES (2, 'files/_4943_nnjGHk0.jpg', 2);
 --
 
 SELECT pg_catalog.setval('imagens_noticias_id_im_seq', 2, true);
-
-
---
--- Name: inscricao_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
---
-
-SELECT pg_catalog.setval('inscricao_id_seq', 1, false);
 
 
 --
@@ -1219,27 +1252,6 @@ INSERT INTO local VALUES (3, 'Sala de desenho técnico do Design');
 --
 
 SELECT pg_catalog.setval('local_id_lo_seq', 3, true);
-
-
---
--- Name: minicursos_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
---
-
-SELECT pg_catalog.setval('minicursos_id_seq', 1, false);
-
-
---
--- Name: miniscri_confirmacao_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
---
-
-SELECT pg_catalog.setval('miniscri_confirmacao_seq', 1, false);
-
-
---
--- Name: miniscri_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
---
-
-SELECT pg_catalog.setval('miniscri_id_seq', 1, false);
 
 
 --
@@ -1305,17 +1317,34 @@ SELECT pg_catalog.setval('noticias_id_not_seq', 2, true);
 
 
 --
--- Name: pagamentos_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+-- Data for Name: permissaoteste; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('pagamentos_id_seq', 1, false);
+INSERT INTO permissaoteste VALUES (2, 5, '/editor/noticias.html', '/editor/cardapios.html', '');
+INSERT INTO permissaoteste VALUES (3, 6, '', '/editor/cardapios.html', '/editor/cursos.html');
+INSERT INTO permissaoteste VALUES (4, 4, '', '/editor/cardapios.html', '');
 
 
 --
--- Name: palestrantes_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+-- Name: permissaoteste_id_perm_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('palestrantes_id_seq', 1, false);
+SELECT pg_catalog.setval('permissaoteste_id_perm_seq', 4, true);
+
+
+--
+-- Data for Name: permissions; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+INSERT INTO permissions VALUES (1, 21, 'Permitido', '', 'Permitido', 'Permitido', '', 'Permitido', 'Permitido', '', 'Permitido', '');
+INSERT INTO permissions VALUES (2, 22, 'Permitido', 'Permitido', 'Permitido', 'Permitido', 'Permitido', 'Permitido', 'Permitido', 'Permitido', 'Permitido', 'Permitido');
+
+
+--
+-- Name: permissions_id_perm_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('permissions_id_perm_seq', 2, true);
 
 
 --
@@ -1391,25 +1420,40 @@ SELECT pg_catalog.setval('status_id_sta_seq', 5, true);
 
 
 --
+-- Data for Name: usertype; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+INSERT INTO usertype VALUES (1, 'Autor');
+INSERT INTO usertype VALUES (2, 'Editor');
+INSERT INTO usertype VALUES (3, 'Administrador');
+
+
+--
+-- Name: usertype_id_type_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('usertype_id_type_seq', 3, true);
+
+
+--
 -- Data for Name: usuarios; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-INSERT INTO usuarios VALUES (1, 'Administrador', 'admin', 'admin');
-INSERT INTO usuarios VALUES (2, 'Mercer', 'Mercer@mercer.com', 'd0302fc5147d39ec8db3eb006b8aea9dc86ba124');
-
-
---
--- Name: usuarios_codigo_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
---
-
-SELECT pg_catalog.setval('usuarios_codigo_seq', 1, false);
+INSERT INTO usuarios VALUES (1, 'Administrador', 'admin@admin.com', 'admin', 3);
+INSERT INTO usuarios VALUES (3, 'Autor', 'autor@autor.com', 'senha5', 1);
+INSERT INTO usuarios VALUES (4, 'Hazard', 'hazard@hazard.com', 'senha5', 2);
+INSERT INTO usuarios VALUES (5, 'Messi', 'messi@messi.com', 'senha5', 2);
+INSERT INTO usuarios VALUES (6, 'Neymar', 'neymar@neymar.com', 'senha5', 2);
+INSERT INTO usuarios VALUES (20, 'Cech', 'cech@cech.com', 'senha5', 2);
+INSERT INTO usuarios VALUES (21, 'Iniesta', 'iniesta@iniesta.com', 'senha5', 2);
+INSERT INTO usuarios VALUES (22, 'Mercer', 'mercer@mercer.com', 'senha5', 2);
 
 
 --
 -- Name: usuarios_id_user_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('usuarios_id_user_seq', 2, true);
+SELECT pg_catalog.setval('usuarios_id_user_seq', 22, true);
 
 
 --
@@ -1533,6 +1577,22 @@ ALTER TABLE ONLY noticias
 
 
 --
+-- Name: permissaoteste_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY permissaoteste
+    ADD CONSTRAINT permissaoteste_pkey PRIMARY KEY (id_perm);
+
+
+--
+-- Name: permissions_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY permissions
+    ADD CONSTRAINT permissions_pkey PRIMARY KEY (id_perm);
+
+
+--
 -- Name: programacao_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
 --
 
@@ -1562,6 +1622,22 @@ ALTER TABLE ONLY setores
 
 ALTER TABLE ONLY status
     ADD CONSTRAINT status_pkey PRIMARY KEY (id_sta);
+
+
+--
+-- Name: usertype_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY usertype
+    ADD CONSTRAINT usertype_pkey PRIMARY KEY (id_type);
+
+
+--
+-- Name: usuarios_email_key; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY usuarios
+    ADD CONSTRAINT usuarios_email_key UNIQUE (email);
 
 
 --
@@ -1621,6 +1697,14 @@ ALTER TABLE ONLY cursos
 
 
 --
+-- Name: estagio_cursos_curso_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY estagio_cursos
+    ADD CONSTRAINT estagio_cursos_curso_id_fkey FOREIGN KEY (curso_id) REFERENCES cursos(id_curso) ON UPDATE CASCADE ON DELETE CASCADE;
+
+
+--
 -- Name: estagio_cursos_est_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -1669,19 +1753,27 @@ ALTER TABLE ONLY monitorias
 
 
 --
--- Name: noticias_autor_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
---
-
-ALTER TABLE ONLY noticias
-    ADD CONSTRAINT noticias_autor_fkey FOREIGN KEY (autor) REFERENCES usuarios(id_user) ON UPDATE CASCADE ON DELETE CASCADE;
-
-
---
 -- Name: noticias_status_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY noticias
     ADD CONSTRAINT noticias_status_fkey FOREIGN KEY (status) REFERENCES status(id_sta) ON UPDATE CASCADE ON DELETE CASCADE;
+
+
+--
+-- Name: permissaoteste_user_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY permissaoteste
+    ADD CONSTRAINT permissaoteste_user_id_fkey FOREIGN KEY (user_id) REFERENCES usuarios(id_user) ON UPDATE CASCADE ON DELETE CASCADE;
+
+
+--
+-- Name: usuarios_type_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY usuarios
+    ADD CONSTRAINT usuarios_type_id_fkey FOREIGN KEY (type_id) REFERENCES usertype(id_type) ON UPDATE CASCADE ON DELETE CASCADE;
 
 
 --
