@@ -1,17 +1,3 @@
-<?php
-
-include_once "../class/Carrega.class.php";
-
-if (isset($_POST['logar']) && !empty($_POST['login']) && !empty($_POST['senha']))
-{
-  $object = new Logar();
-
-  $object->login($_POST['login'], $_POST['senha']);
-
-  header('Location:print.php');
-}
-
-?>
 <!DOCTYPE html>
 <html>
   <head>
@@ -21,15 +7,15 @@ if (isset($_POST['logar']) && !empty($_POST['login']) && !empty($_POST['senha'])
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <!-- Bootstrap 3.3.5 -->
-    <link rel="stylesheet" href="../bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../../bootstrap/css/bootstrap.min.css">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
     <!-- Ionicons -->
     <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
     <!-- Theme style -->
-    <link rel="stylesheet" href="../dist/css/AdminLTE.min.css">
+    <link rel="stylesheet" href="../../dist/css/AdminLTE.min.css">
     <!-- iCheck -->
-    <link rel="stylesheet" href="../plugins/iCheck/square/blue.css">
+    <link rel="stylesheet" href="../../plugins/iCheck/square/blue.css">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -41,11 +27,11 @@ if (isset($_POST['logar']) && !empty($_POST['login']) && !empty($_POST['senha'])
   <body class="hold-transition login-page">
     <div class="login-box">
       <div class="login-logo">
-        <a href="../../index2.html"><img src="../dist/img/to_dentro_logo_mini.png" alt="Tô Dentro" /></a>
+        <a href="../../index2.html"><img src="../../dist/img/to_dentro_logo_mini.png" alt="Tô Dentro" /></a>
       </div><!-- /.login-logo -->
       <div class="login-box-body">
         <p class="login-box-msg">Logue para iniciar sua sessão</p>
-        <form action="<?php $SELF_PHP;?>" method="post">
+        <form action="LoginObj.php" method="post">
           <div class="form-group has-feedback">
             <input type="email" class="form-control" name='login' placeholder="Email">
             <span class="glyphicon glyphicon-user form-control-feedback"></span>
@@ -56,7 +42,7 @@ if (isset($_POST['logar']) && !empty($_POST['login']) && !empty($_POST['senha'])
           </div>
           <div class="row">
             <div class="col-xs-12">
-              <button type="submit" name="login" class="btn btn-info btn-block btn-flat"> Login <span class="glyphicon glyphicon-log-in"></span></button>
+              <button type="submit" name="entrar" class="btn btn-info btn-block btn-flat"> Entrar <span class="glyphicon glyphicon-log-in"></span></button>
             </div><!-- /.col -->
             <div class="col-xs-8">
               <div class="checkbox icheck">
@@ -67,13 +53,37 @@ if (isset($_POST['logar']) && !empty($_POST['login']) && !empty($_POST['senha'])
         </form>
         <a href="#">Esqueci minha senha</a><br>
       </div><!-- /.login-box-body -->
+      <?php
+        if (isset($_GET['error']))
+        {
+      ?>
+          <br>
+          <div class="alert alert-danger alert-dismissable">
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+            <h4><i class="icon fa fa-ban"></i> Erro!</h4>
+            Email ou senha incorretos!
+          </div>
+      <?php
+        }
+        elseif (isset($_GET['notlogged']))
+        {
+      ?>
+        <br>
+        <div class="alert alert-danger alert-dismissable">
+          <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+          <h4><i class="icon fa fa-ban"></i> Não logado!</h4>
+          É preciso realizar o login para acessar está página.
+        </div>
+      <?php
+        }
+      ?>
     </div><!-- /.login-box -->
     <!-- jQuery 2.1.4 -->
-    <script src="../plugins/jQuery/jQuery-2.1.4.min.js"></script>
+    <script src="../../plugins/jQuery/jQuery-2.1.4.min.js"></script>
     <!-- Bootstrap 3.3.5 -->
-    <script src="../bootstrap/js/bootstrap.min.js"></script>
+    <script src="../../bootstrap/js/bootstrap.min.js"></script>
     <!-- iCheck -->
-    <script src="../plugins/iCheck/icheck.min.js"></script>
+    <script src="../../plugins/iCheck/icheck.min.js"></script>
     <script>
       $(function () {
         $('input').iCheck({

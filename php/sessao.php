@@ -7,3 +7,5 @@ if(empty($_SESSION['email']) && empty($_SESSION['senha']) && empty($_SESSION['ti
    header('Location:../login.php');
    exit;
 }
+
+?>

@@ -2,12 +2,10 @@
 /**
  *
  */
-
 include_once 'Carrega.class.php';
 
   class Connection
   {
-    
     private $bd;
 
     function __construct()
@@ -65,7 +63,7 @@ include_once 'Carrega.class.php';
         $object->texto     = $row["texto"];
         $object->logo      = $row["logo"];
 
-        array_push($resultado, array("Id"=>$object->id, "Nome do Curso"=>$object->nome, "instituto"=>$object->instituto, "texto"=>$object->texto, "logo"=>$object->logo));
+        array_push($resultado, array("id"=>$object->id, "Nome do Curso"=>$object->nome, "instituto"=>$object->instituto, "texto"=>$object->texto, "logo"=>$object->logo));
       }
       echo json_encode(array("result"=>$resultado), JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);
     }
@@ -87,7 +85,7 @@ include_once 'Carrega.class.php';
          $object->horarioInicio = $row['horarioInicio'];
          $object->horarioFim    = $row['horarioFim'];
 
-         array_push($resultado, array("Id"=>$object->id, "evento"=>$object->evento, "dataInicio"=>$object->dataInicio, "dataFim"=>$object->dataFim, "horarioInicio"=>$object->horarioInicio, "horarioFim"=>$object->horarioFim));
+         array_push($resultado, array("id"=>$object->id, "evento"=>$object->evento, "dataInicio"=>$object->dataInicio, "dataFim"=>$object->dataFim, "horarioInicio"=>$object->horarioInicio, "horarioFim"=>$object->horarioFim));
       }
       echo json_encode(array("result"=>$resultado), JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);
     }
@@ -167,7 +165,6 @@ include_once 'Carrega.class.php';
       }
     }
 
-
     function getAllSetores()
     {
       //Função Ok
@@ -181,7 +178,7 @@ include_once 'Carrega.class.php';
          $object->id    = $row['id_set'];
          $object->setor = $row['setor'];
          $object->texto = $row['texto'];
-         array_push($resultado, array("Id"=>$object->id, "setor"=>$object->setor,"texto"=>$object->texto));
+         array_push($resultado, array("id"=>$object->id, "setor"=>$object->setor,"texto"=>$object->texto));
       }
       echo json_encode(array("result"=>$resultado), JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);
     }
@@ -241,7 +238,7 @@ include_once 'Carrega.class.php';
           $object            = new Categorias();
           $object->id        = $row['id_cat'];
           $object->categoria = $row['categoria'];
-          array_push($resultado, array("Id"=>$object->id, "categoria"=>$object->categoria));
+          array_push($resultado, array("id"=>$object->id, "categoria"=>$object->categoria));
       }
       echo json_encode(array("result"=>$resultado), JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);
     }
@@ -255,6 +252,24 @@ include_once 'Carrega.class.php';
       //Função Ok
       //Realiza uma listagem geral das noticias
       $sql = "SELECT * FROM noticias";
+      $res = pg_query($sql);
+      $resultado = array();
+
+      while($row = pg_fetch_array($res))
+      {
+         $object              = new Noticias();
+         $object->id          = $row['id_not'];
+         $object->titulo      = $row['titulo'];
+         $object->linha_apoio = $row['linha_apoio'];
+         $object->data        = date('d/m/Y', strtotime($row['data']));
+         array_push($resultado, array("id"=>$object->id, "Texto"=>$object->titulo, "linha_apoio"=>$object->linha_apoio, "Data"=>$object->data));
+      }
+       echo json_encode(array("result"=>$resultado), JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
+    }
+
+    function searchAllNoticias($search)
+    {
+      $sql = "SELECT * FROM noticias n WHERE n.titulo ILIKE '%$search%' ORDER BY n.id_not DESC";
       $res = pg_query($sql);
       $resultado = array();
 
@@ -370,5 +385,6 @@ include_once 'Carrega.class.php';
      echo json_encode(array("result"=>$resultado), JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT );
     }
   }
+
 
 ?>

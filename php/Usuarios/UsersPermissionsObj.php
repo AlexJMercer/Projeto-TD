@@ -1,7 +1,7 @@
 <?php
 
 include_once "../../class/Carrega.class.php";
-
+session_start();
 ?>
 <!DOCTYPE html>
 <html>
@@ -62,12 +62,14 @@ include_once "../../class/Carrega.class.php";
                 </div><!-- /.box-header -->
 <?php
 
-  $id = $_POST["id"];
+  //if (isset($_POST["permissions"]))
+  //{
 
-  if (isset($_POST["permissions"]))
-  {
     $exib = new Usuarios();
-    $comp = $exib->permissionsUser($id);
+    $comp = $exib->newUserPermission($_SESSION['novo_usuario']);
+    //unset($_SESSION['novo_usuario']);
+    //print_r($_SESSION);
+
 
     if ($exib != null)
     {
@@ -83,10 +85,8 @@ include_once "../../class/Carrega.class.php";
                       <dd><?php echo $comp->tipo; ?></dd>
                     </dl>
                   </div>
-<?php
-    }
-  }
-?>
+
+
               <div class="col-sm-12">
               <div class="box box-success">
                 <div class="box-header with-border">
@@ -96,64 +96,63 @@ include_once "../../class/Carrega.class.php";
                     <div class="box-body">
                       <div class="form-group">
                         <div class="col-sm-3">
-                          <input type="checkbox" id="noticia">
-                          <label for="noticia">Notícias</label>
-                        </div>
-                        <div class="col-sm-3">
-                          <input type="checkbox" id="noticia">
-                          <label for="noticia">Notícias</label>
-                        </div>
-                        <div class="col-sm-3">
-                          <input type="checkbox" id="noticia">
-                          <label for="noticia">Notícias</label>
-                        </div>
-                        <div class="col-sm-3">
-                          <input type="checkbox" id="noticia">
-                          <label for="noticia">Notícias</label>
-                        </div>
-                      </div>
-                      <div class="form-group">
-                        <div class="col-sm-3">
-                          <input type="checkbox" id="noticia">
-                          <label for="noticia">Notícias</label>
-                        </div>
-                        <div class="col-sm-3">
-                          <input type="checkbox" id="noticia">
-                          <label for="noticia">Notícias</label>
-                        </div>
-                        <div class="col-sm-3">
-                          <input type="checkbox" id="noticia">
-                          <label for="noticia">Notícias</label>
-                        </div>
-                        <div class="col-sm-3">
-                          <input type="checkbox" id="noticia" >
-                          <label for="noticia">Notícias</label>
-                        </div>
-                      </div>
-                      <div class="form-group">
-                        <div class="col-sm-3">
-                          <input type="checkbox" name="noticias" value="1">
+                          <input type="checkbox" name="noticias" value="Permitido">
                           <label> Notícias </label>
                         </div>
                         <div class="col-sm-3">
-                          <input type="checkbox" name="cardapios" value="1">
+                          <input type="checkbox" name="cardapios" value="Permitido">
                           <label> Cardápios </label>
                         </div>
                         <div class="col-sm-3">
-                          <input type="checkbox" name="cursos" value="1">
+                          <input type="checkbox" name="cursos" value="Permitido">
                           <label> Cursos </label>
+                        </div>
+                        <div class="col-sm-3">
+                          <input type="checkbox" name="monitorias" value="Permitido">
+                          <label>Monitorias</label>
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <div class="col-sm-3">
+                          <input type="checkbox" name="estagios" value="Permitido">
+                          <label>Estágios</label>
+                        </div>
+                        <div class="col-sm-3">
+                          <input type="checkbox" name="eventos" value="Permitido">
+                          <label>Eventos</label>
+                        </div>
+                        <div class="col-sm-3">
+                          <input type="checkbox" name="categorias" value="Permitido">
+                          <label>Categorias</label>
+                        </div>
+                        <div class="col-sm-3">
+                          <input type="checkbox" name="locais" value="Permitido">
+                          <label>Locais</label>
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <div class="col-sm-3">
+                          <input type="checkbox" name="assistencias" value="Permitido">
+                          <label> Assistência Estudantil </label>
+                        </div>
+                        <div class="col-sm-3">
+                          <input type="checkbox" name="setores" value="Permitido">
+                          <label>Setores</label>
                         </div>
                       </div>
                     </div><!-- /.box-body -->
                     <div class="box-footer">
-                        <input type="hidden" name="usuario" value="<?php echo $id; ?>"/>
-                        <input type="hidden" name="teste" value="false">
+                        <input type="hidden" name="usuario" value="<?php echo $comp->id; ?>"/>
                         <br>
                         <button type="submit" name="enviar" value="enviar" class="btn btn-success btn-flat btn-block"><i class="fa fa-check"></i> Enviar </button>
                         <br>
                         <button type="reset" class="btn btn-default btn-flat btn-block btn-sm"><i class="fa fa-magic"></i> Limpar </button>
                     </div><!-- /.box-footer -->
                   </form>
+                  <?php
+                      }
+                    //}
+                  ?>
               </div><!-- /.box -->
               </div>
               <!-- general form elements disabled -->

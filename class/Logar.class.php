@@ -29,7 +29,7 @@ class Logar
     $this->$key = $value;
   }
 
-  public function Logon($login='', $senha='')
+  public function Login($login='', $senha='')
   {
     $sql    = "SELECT * FROM usuarios WHERE usuarios.email ='$login' AND usuarios.senha ='$senha'";
     $result = pg_query($sql);
@@ -45,11 +45,22 @@ class Logar
         $_SESSION['email']        = $reg['email'];
         $_SESSION['tipo_usuario'] = $reg['type_id'];
         $_SESSION['senha']        = $reg['senha'];
+
+        if ($_SESSION['tipo_usuario']==2)
+        {
+          $object = new Permissions();
+          $object->loadPermissions($_SESSION['id']);
+        }
       }
-      //header('location:/Categoria/CategoriaObj.php');
-      //print_r($_SESSION);
-      //var_dump($_SESSION);
     }
+    return $_SESSION;
+  }
+
+  public function Logout()
+  {
+    session_start();
+    session_unset();
+    session_destroy();
   }
 }
- ?>
+?>

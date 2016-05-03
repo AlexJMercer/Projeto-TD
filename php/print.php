@@ -17,29 +17,21 @@ include 'testesession.php';
   if($_SESSION['tipo_usuario']==3)
   {
     echo "Administrador";
+    print_r($_SESSION);
   }
   elseif($_SESSION['tipo_usuario']==2)
   {
     echo "<br>Editor<br>";
+    print_r($_SESSION);
 
-    $object = new Permissions();
-    $pages = $object->loadPermissions($_SESSION['id']);
-
-    if ($object != null)
-    {
-      $_SESSION['permissao_id']   = $pages->id;
-      $_SESSION['perm_noticias']  = $pages->noticias;
-      $_SESSION['perm_cardapios'] = $pages->cardapios;
-      $_SESSION['perm_cursos']    = $pages->cursos;
-    }
-    else
-    {
-      echo "Falha no carregamento!!";
-    }
   }
   else
   {
     echo "Autor";
-  }
     print_r($_SESSION);
+  }
+
+  echo "<br>";
+
+
 ?>

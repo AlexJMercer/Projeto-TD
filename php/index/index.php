@@ -2,6 +2,16 @@
 
 include_once "../../class/Carrega.class.php";
 
+session_start();
+
+if(empty($_SESSION['email']) && empty($_SESSION['senha']) && empty($_SESSION['tipo_usuario']) && empty($_SESSION['nome']) && empty($_SESSION['id']))
+{
+   header('Location:login_page.php?notlogged');
+   exit;
+}
+
+//include "../testesession.php";
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -56,6 +66,10 @@ include_once "../../class/Carrega.class.php";
         </section>
         <section class="content">
           <div class="row">
+            <?php
+              print_r($_SESSION);
+              ?>
+
             <!--Bloco-->
             <div class="col-lg-3 col-xs-6">
               <!-- small box -->
@@ -277,7 +291,6 @@ include_once "../../class/Carrega.class.php";
       </div><!-- /.content-wrapper -->
       <?php
         include '../inc/footer.html';
-        include '../inc/control-sidebar.html';
       ?>
 
     </div><!-- ./wrapper -->

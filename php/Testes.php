@@ -1,6 +1,4 @@
 <?php
-
-
 echo "<meta charset='UTF-8'>";
 include_once "../class/Carrega.class.php";
 
@@ -8,6 +6,8 @@ echo "<h1>Página de testes</h1><br>";
 
 $n = new Connection();
 echo "<pre>";
+$pesquisa = "câmpus";
+$n->searchAllNoticias($pesquisa);
 //$n->getAllCategorias();
 //$n->getAllNoticias();
 //$n->ShowNoticiaById(1);
@@ -41,8 +41,4 @@ echo "<pre>";
 $sexta->ShowAllCardapios(5);
 */
 echo "</pre><br>";
-
-
-
-
 ?>

@@ -12,9 +12,16 @@ include_once 'Carrega.class.php';
     private $noticias;
     private $cardapios;
     private $cursos;
+    private $categorias;
+    private $locais;
+    private $eventos;
+    private $estagios;
+    private $assistencias;
+    private $monitorias;
+    private $setores;
     private $bd;
 
-    function __construct()
+    public function __construct()
     {
       $this->bd = new BD();
     }
@@ -34,9 +41,18 @@ include_once 'Carrega.class.php';
        $this->$key = $value;
     }
 
-    public function InserirPermissions()
+    public function Inserir()
     {
       $sql       = "INSERT INTO permissaoteste (user_id, noticias, cardapios, cursos) VALUES ('$this->usuario', '$this->noticias', '$this->cardapios', '$this->cursos')";
+      $resultado = pg_query($sql);
+      return $resultado;
+    }
+
+    public function InserirPermissions()
+    {
+      $sql       = "INSERT INTO permissions (user_id, noticias, cardapios, cursos, monitorias, estagios, eventos, categorias, locais, assistencias, setores)
+                          VALUES ('$this->usuario', '$this->noticias', '$this->cardapios', '$this->cursos', '$this->monitorias', '$this->estagios',
+                                  '$this->eventos', '$this->categorias', '$this->locais', '$this->assistencias', '$this->setores')";
       $resultado = pg_query($sql);
       return $resultado;
     }
@@ -61,22 +77,39 @@ include_once 'Carrega.class.php';
       # code...
     }
 
-    public function loadPermissions($id)
+    public function loadPermissionsTESTE($id)
     {
       $sql       = "SELECT * FROM permissaoteste pt WHERE pt.user_id = $id";
       $resultado = pg_query($sql);
 
-      while ($registro = pg_fetch_assoc($resultado))
-      {
-        $object = new Permissions();
-        $object->id = $registro['id_perm'];
-        $object->noticias = $registro['noticias'];
-        $object->cardapios = $registro['cardapios'];
-        $object->cursos = $registro['cursos'];
+        while ($registro = pg_fetch_assoc($resultado))
+        {
+          $_SESSION['permissao_id']   = $registro['id_perm'];
+          $_SESSION['perm_noticias']  = $registro['noticias'];
+          $_SESSION['perm_cardapios'] = $registro['cardapios'];
+          $_SESSION['perm_cursos']    = $registro['cursos'];
+        }
+    }
 
-        $retorno = $object;
-      }
-      return $retorno;
+    public function loadPermissions($id)
+    {
+      $sql       = "SELECT * FROM permissions p WHERE p.user_id = $id";
+      $resultado = pg_query($sql);
+
+        while ($registro = pg_fetch_assoc($resultado))
+        {
+          $_SESSION['permissao_id']      = $registro['id_perm'];
+          $_SESSION['perm_noticias']     = $registro['noticias'];
+          $_SESSION['perm_cardapios']    = $registro['cardapios'];
+          $_SESSION['perm_cursos']       = $registro['cursos'];
+          $_SESSION['perm_monitorias']   = $registro['monitorias'];
+          $_SESSION['perm_estagios']     = $registro['estagios'];
+          $_SESSION['perm_eventos']      = $registro['eventos'];
+          $_SESSION['perm_categorias']   = $registro['categorias'];
+          $_SESSION['perm_locais']       = $registro['locais'];
+          $_SESSION['perm_assistencias'] = $registro['assistencias'];
+          $_SESSION['perm_setores']      = $registro['setores'];
+        }
     }
 
   }

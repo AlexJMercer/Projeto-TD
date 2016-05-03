@@ -146,9 +146,9 @@ INSERT INTO usuarios (nome, email, senha, type_id) VALUES ('Administrador','admi
 create table permissaoteste(
 	id_perm serial not null,
 	user_id integer not null,
-	noticias boolean not null default false,
-	cardapios boolean not null default false,
-	cursos boolean not null default false,
+	noticias text DEFAULT(NULL),
+	cardapios text DEFAULT(NULL),
+	cursos text DEFAULT(NULL),
 	primary key(id_perm),
 	foreign key(user_id) references usuarios
 
