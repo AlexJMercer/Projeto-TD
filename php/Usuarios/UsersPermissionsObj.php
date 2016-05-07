@@ -1,7 +1,14 @@
 <?php
 
 include_once "../../class/Carrega.class.php";
+
 session_start();
+
+if(empty($_SESSION['email']) && empty($_SESSION['senha']) && empty($_SESSION['tipo_usuario']) && empty($_SESSION['nome']) && empty($_SESSION['id']))
+{
+   header('Location:../index/login_page.php?notlogged');
+   exit;
+}
 ?>
 <!DOCTYPE html>
 <html>
@@ -13,20 +20,12 @@ session_start();
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <!-- Bootstrap 3.3.5 -->
     <link rel="stylesheet" href="../../bootstrap/css/bootstrap.min.css">
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
-    <!-- Ionicons -->
-    <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
-    <!-- daterange picker -->
-    <link rel="stylesheet" href="../../plugins/daterangepicker/daterangepicker-bs3.css">
+    <!--Font Awesome-->
+    <link rel="stylesheet" href="../../plugins/font-awesome-4.5.0/font-awesome-4.5.0/css/font-awesome.min.css">
+    <!--Ionicons-->
+    <link rel="stylesheet" href="../../plugins/ionicons-2.0.1/ionicons-2.0.1/css/ionicons.min.css">
     <!-- iCheck for checkboxes and radio inputs -->
     <link rel="stylesheet" href="../../plugins/iCheck/all.css">
-    <!-- Bootstrap Color Picker -->
-    <link rel="stylesheet" href="../../plugins/colorpicker/bootstrap-colorpicker.min.css">
-    <!-- Bootstrap time Picker -->
-    <link rel="stylesheet" href="../../plugins/timepicker/bootstrap-timepicker.min.css">
-    <!-- Select2 -->
-    <link rel="stylesheet" href="../../plugins/select2/select2.min.css">
     <!-- Theme style -->
     <link rel="stylesheet" href="../../dist/css/AdminLTE.min.css">
     <!-- AdminLTE Skins. Choose a skin from the css/skins
@@ -62,14 +61,10 @@ session_start();
                 </div><!-- /.box-header -->
 <?php
 
-  //if (isset($_POST["permissions"]))
-  //{
-
     $exib = new Usuarios();
     $comp = $exib->newUserPermission($_SESSION['novo_usuario']);
-    //unset($_SESSION['novo_usuario']);
+    unset($_SESSION['novo_usuario']);
     //print_r($_SESSION);
-
 
     if ($exib != null)
     {
@@ -85,7 +80,6 @@ session_start();
                       <dd><?php echo $comp->tipo; ?></dd>
                     </dl>
                   </div>
-
 
               <div class="col-sm-12">
               <div class="box box-success">

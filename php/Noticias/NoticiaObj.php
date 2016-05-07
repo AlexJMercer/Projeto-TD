@@ -3,17 +3,13 @@
 include_once "../../class/Carrega.class.php";
 date_default_timezone_set('America/Sao_Paulo');
 
-include "../testesession.php";
+session_start();
 
-
-/*session_start();
-
-if(empty($_SESSION['email']) && empty($_SESSION['senha']) && empty($_SESSION['tipo']) && empty($_SESSION['nome']))
+if(empty($_SESSION['email']) && empty($_SESSION['senha']) && empty($_SESSION['tipo_usuario']) && empty($_SESSION['nome']) && empty($_SESSION['id']))
 {
-   header('Location:../login.php');
+   header('Location:../index/login_page.php?notlogged');
    exit;
-}*/
-
+}
 
 ?>
 <!DOCTYPE html>
@@ -26,17 +22,10 @@ if(empty($_SESSION['email']) && empty($_SESSION['senha']) && empty($_SESSION['ti
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <!-- Bootstrap 3.3.5 -->
     <link rel="stylesheet" href="../../bootstrap/css/bootstrap.min.css">
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
-    <!-- Ionicons -->
-    <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
-
-    <link rel="stylesheet" href="../../plugins/font-awesome.min.css">
-    <link rel="stylesheet" href="../../plugins/ionicons.min.css">
-    <!-- daterange picker-->
-    <link rel="stylesheet" href="../../plugins/daterangepicker/daterangepicker-bs3.css">
-    <!-- Bootstrap time Picker -->
-    <link rel="stylesheet" href="../../plugins/timepicker/bootstrap-timepicker.min.css">
+    <!--Font Awesome-->
+    <link rel="stylesheet" href="../../plugins/font-awesome-4.5.0/font-awesome-4.5.0/css/font-awesome.min.css">
+    <!--Ionicons-->
+    <link rel="stylesheet" href="../../plugins/ionicons-2.0.1/ionicons-2.0.1/css/ionicons.min.css">
     <!-- Select2 -->
     <link rel="stylesheet" href="../../plugins/select2/select2.min.css">
     <!--FileInput-->
@@ -48,6 +37,7 @@ if(empty($_SESSION['email']) && empty($_SESSION['senha']) && empty($_SESSION['ti
     <!-- AdminLTE Skins. Choose a skin from the css/skins
          folder instead of downloading all of them to reduce the load. -->
     <link rel="stylesheet" href="../../dist/css/skins/_all-skins.min.css">
+
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -68,12 +58,6 @@ if(empty($_SESSION['email']) && empty($_SESSION['senha']) && empty($_SESSION['ti
             <h1>Notícias</h1>
         </section>
         <!-- Main content -->
-        <?php
-        $teste = new Noticias();
-        echo $teste->numNoticias();
-
-        //echo $num;
-         ?>
         <section class="content">
           <div class="row">
             <div class="col-lg-12">
@@ -98,7 +82,7 @@ if(empty($_SESSION['email']) && empty($_SESSION['senha']) && empty($_SESSION['ti
                           <input type="text" name="data" class="form-control" value="<?php echo date('d/m/Y'); ?>" data-inputmask="'alias': 'dd/mm/yyyy'" data-mask disabled>
                         </div>
                         <label for="hora" class="col-sm-1 control-label">Hora:</label>
-                        <div class="col-sm-4 bootstrap-timepicker pull-right">
+                        <div class="col-sm-4">
                           <input type="text" name="hora" value="<?php echo date('H:i');?>" class="form-control" disabled>
                         </div>
                       </div>
@@ -127,21 +111,12 @@ if(empty($_SESSION['email']) && empty($_SESSION['senha']) && empty($_SESSION['ti
                         </div>
                       </div>
                       <div class="form-group">
-                        <label for="categoria" class="col-sm-2 control-label">Categorias da noticia:</label>
-                        <div class="col-sm-9">
-                          <select class="form-control select2" id="categoria" name="categoria[]" multiple="multiple" placeholder="Selecione a(s) categoria(s)" required>
-                            <option value=""></option>
-                            <?php
-                              $catSelect = new Select();
-                              $catSelect->categoriaMultiSelected();
-                            ?>
-                          </select>
-
-                        </div>
-                        <div class="col-sm-1">
-                          <button type="button" class="btn btn-info btn-flat pull-right" id="cadCat" name="button"><i class="fa fa-plus"></i> Categoria </button>
+                        <span id="listagemCategorias"></span>
+                        <div class="col-sm-2">
+                         <button type="button" class="btn btn-info btn-flat" id="cadCat" name="button"><i class="fa fa-plus"></i> Adicionar Categoria </button>
                         </div>
                       </div>
+                      <div id="resposta"></div>
                       <div class="form-group">
                         <label for="url" class="col-sm-2 control-label">URL do site:</label>
                         <div class="col-sm-10">
@@ -168,6 +143,7 @@ if(empty($_SESSION['email']) && empty($_SESSION['senha']) && empty($_SESSION['ti
                     <button type="reset" class="btn btn-default btn-flat btn-block btn-sm"><i class="fa fa-magic"></i> Limpar </button>
                   </div><!-- /.box-footer -->
                 </form>
+
               </div><!-- /.box -->
               <br>
               <div class="element">
@@ -185,6 +161,7 @@ if(empty($_SESSION['email']) && empty($_SESSION['senha']) && empty($_SESSION['ti
     </div><!-- ./wrapper -->
     <!-- jQuery 2.1.4 -->
     <script src="../../plugins/jQuery/jQuery-2.1.4.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
     <!-- Bootstrap 3.3.5 -->
     <script src="../../bootstrap/js/bootstrap.min.js"></script>
     <!-- Select2 -->
@@ -208,13 +185,9 @@ if(empty($_SESSION['email']) && empty($_SESSION['senha']) && empty($_SESSION['ti
     <script src="../../dist/js/demo.js"></script>
 
     <script type="text/javascript">
-    $(function(){
+    $(document).ready(function(){
       $("#status").select2({
         placeholder:"Selecione o status"
-      });
-
-      $("#categoria").select2({
-        placeholder:"Selecione a(s) categoria(s)"
       });
 
       $("#datemask").inputmask("dd/mm/yyyy", {"placeholder": "dd/mm/yyyy"});
@@ -229,10 +202,11 @@ if(empty($_SESSION['email']) && empty($_SESSION['senha']) && empty($_SESSION['ti
 
       CKEDITOR.replace('noticia');
 
-      $("#cadCat").click(function()
+      /*$("#cadCat").click(function()
       {
         $(".element").load("../Categoria/CategoriaObj.php #cadCat")
-      });
+     });*/
+
 });
       $('.file').fileinput({
           browseClass: "btn btn-info btn-flat btn-block",
@@ -241,10 +215,34 @@ if(empty($_SESSION['email']) && empty($_SESSION['senha']) && empty($_SESSION['ti
           showUpload: false,
           language: 'pt-BR',
           overwriteInitial: true,
+          maxFileSize: '500KB',
+          maxImageWidth: 400,
+          maxImageHeight: 200,
           allowedFileExtensions : ['jpg', 'png','gif']
       });
-
-
     </script>
+
+    <script type="text/javascript">
+      $(document).ready(function(){
+         $("#cadCat").click(function(){
+             $.ajax({
+                 type: 'post',
+                 url: 'newCategoriaObj.php',
+                 dataType: 'html',
+                 success: function (txt) {
+                     $('#resposta').html(txt);
+                 }
+             });
+         });
+         atualiza();
+
+         function atualiza()
+         {
+             $.get('listagem_categoria.php', function (resultado){
+                  $('#listagemCategorias').html(resultado);
+             })
+         }
+    });
+   </script>
   </body>
 </html>

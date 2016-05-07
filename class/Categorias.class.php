@@ -30,18 +30,14 @@
         $this->$key = $value;
       }
 
-      public function inserir()
+      public function InserirCategoria()
       {
         $sql    = "INSERT INTO categorias (categoria) VALUES ('$this->categoria')";
         $return = pg_query($sql);
 
         if($return)
         {
-          return true;
-        }
-        else
-        {
-          return false;
+          return $return;
         }
       }
 

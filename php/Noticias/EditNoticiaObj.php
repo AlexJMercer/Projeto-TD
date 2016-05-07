@@ -3,13 +3,13 @@
 include_once "../../class/Carrega.class.php";
 date_default_timezone_set('America/Sao_Paulo');
 
-/*session_start();
+session_start();
 
-if(empty($_SESSION['email']) && empty($_SESSION['senha']) && empty($_SESSION['tipo']) && empty($_SESSION['nome']))
+if(empty($_SESSION['email']) && empty($_SESSION['senha']) && empty($_SESSION['tipo_usuario']) && empty($_SESSION['nome']) && empty($_SESSION['id']))
 {
-   header('Location:../login.php');
+   header('Location:../index/login_page.php?notlogged');
    exit;
-}*/
+}
 
 ?>
 <!DOCTYPE html>
@@ -22,14 +22,10 @@ if(empty($_SESSION['email']) && empty($_SESSION['senha']) && empty($_SESSION['ti
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <!-- Bootstrap 3.3.5 -->
     <link rel="stylesheet" href="../../bootstrap/css/bootstrap.min.css">
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
-    <!-- Ionicons -->
-    <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
-    <!-- daterange picker-->
-    <link rel="stylesheet" href="../../plugins/daterangepicker/daterangepicker-bs3.css">
-    <!-- Bootstrap time Picker -->
-    <link rel="stylesheet" href="../../plugins/timepicker/bootstrap-timepicker.min.css">
+    <!--Font Awesome-->
+    <link rel="stylesheet" href="../../plugins/font-awesome-4.5.0/font-awesome-4.5.0/css/font-awesome.min.css">
+    <!--Ionicons-->
+    <link rel="stylesheet" href="../../plugins/ionicons-2.0.1/ionicons-2.0.1/css/ionicons.min.css">
     <!-- Select2 -->
     <link rel="stylesheet" href="../../plugins/select2/select2.min.css">
     <!--FileInput-->

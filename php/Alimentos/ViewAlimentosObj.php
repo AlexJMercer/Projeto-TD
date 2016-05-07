@@ -1,3 +1,15 @@
+<?php
+
+include_once "../../class/Carrega.class.php";
+
+session_start();
+
+if(empty($_SESSION['email']) && empty($_SESSION['senha']) && empty($_SESSION['tipo_usuario']) && empty($_SESSION['nome']) && empty($_SESSION['id']))
+{
+   header('Location:../index/login_page.php?notlogged');
+   exit;
+}
+?>
 <!DOCTYPE html>
 <html>
   <head>
@@ -8,13 +20,10 @@
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <!-- Bootstrap 3.3.5 -->
     <link rel="stylesheet" href="../../bootstrap/css/bootstrap.min.css">
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
-    <!-- Ionicons -->
-    <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
-
-    <link rel="stylesheet" href="../../plugins/font-awesome.min.css">
-    <link rel="stylesheet" href="../../plugins/ionicons.min.css">
+    <!--Font Awesome-->
+    <link rel="stylesheet" href="../../plugins/font-awesome-4.5.0/font-awesome-4.5.0/css/font-awesome.min.css">
+    <!--Ionicons-->
+    <link rel="stylesheet" href="../../plugins/ionicons-2.0.1/ionicons-2.0.1/css/ionicons.min.css">
     <!-- DataTables -->
     <link rel="stylesheet" href="../../plugins/datatables/dataTables.bootstrap.css">
     <!-- Theme style -->
@@ -24,8 +33,6 @@
     <link rel="stylesheet" href="../../dist/css/skins/_all-skins.min.css">
 
     <link rel="stylesheet" href="../../bootstrap/css/center.css">
-
-
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -35,21 +42,16 @@
   </head>
   <body class="hold-transition skin-green sidebar-mini">
     <div class="wrapper">
-
-      <?php include '../inc/topotime.html';
-
+      <?php
+            include '../inc/topotime.html';
             include '../inc/menutime.php';
-
       ?>
       <!-- Content Wrapper. Contains page content -->
       <div class="content-wrapper">
         <!-- Content Header (Page header) -->
         <section class="content-header">
-          <h1>
-            Alimentos
-          </h1>
+          <h1>Alimentos</h1>
         </section>
-
         <!-- Main content -->
         <section class="content">
           <div class="row">
@@ -69,8 +71,6 @@
                     <tbody>
 <?php
 
-include_once "../../class/Carrega.class.php";
-
   $listar = new Alimentos();
   $list = $listar->listar();
 
@@ -84,15 +84,11 @@ include_once "../../class/Carrega.class.php";
                         <td><?php echo $line->alimento; ?></td>
                         <td>
                           <input type='hidden' name='id' value='<?php echo $line->id; ?>'>
-
                           <button type="submit" name="editar" value="editar" class="btn btn-flat btn-warning"><i class="fa fa-edit"></i> Editar </button>
-
                           <button type="submit" name="excluir" value="excluir" formaction="CrudAlimento.php" class='btn btn-flat btn-danger'><i class="fa fa-times"></i> Excluir </button>
                         </td>
                       </tr>
                       </form>
-
-
                     <?php
                             }
                           }
@@ -100,7 +96,6 @@ include_once "../../class/Carrega.class.php";
                           {
                             echo "<h2> Nada cadastrado!!</h2>";
                           }
-
                     ?>
                     </tbody>
                   </table>
@@ -110,14 +105,11 @@ include_once "../../class/Carrega.class.php";
           </div><!-- /.row -->
         </section><!-- /.content -->
       </div><!-- /.content-wrapper -->
-
       <?php
         include '../inc/footer.html';
         include '../inc/control-sidebar.html';
       ?>
-
     </div><!-- ./wrapper -->
-
     <!-- jQuery 2.1.4 -->
     <script src="../../plugins/jQuery/jQuery-2.1.4.min.js"></script>
     <!-- Bootstrap 3.3.5 -->

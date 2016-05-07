@@ -7,7 +7,7 @@ include_once "../../class/Carrega.class.php";
       $object            = new Categorias();
       $object->categoria = $_POST['categoria'];
 
-      $object->inserir();
+      $object->InserirCategoria();
 
       header("Location:ViewCategoriasObj.php");
   }
