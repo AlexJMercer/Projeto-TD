@@ -53,11 +53,10 @@ class Upload {
 					$sqlImg    = "INSERT INTO imagens_noticias (imagem, noticia) VALUES ('$fileName', '$this->id')";
           $returnImg = pg_query($sqlImg);
 
-					return true;
-				}
-				else
-				{
-					return false;
+					if ($returnImg)
+					{
+						return $returnImg;
+					}
 				}
 			}
 		}
@@ -184,7 +183,7 @@ class Upload {
 				if(move_uploaded_file($this->_file["tmp_name"], $fileName))
 				{
 					$this->id = $id;
-					
+
 					$sqlImg    = "UPDATE eventos set imagem = '$fileName' WHERE id_event = $this->id";
 					$returnImg = pg_query($sqlImg);
 

@@ -73,17 +73,19 @@ if(empty($_SESSION['email']) && empty($_SESSION['senha']) && empty($_SESSION['ti
                         <label class="col-sm-2 control-label"> Autor: </label>
                         <div class="col-sm-10">
                            <input type="text" value="Mercer" class="form-control" disabled>
-                           <input type="hidden" name="autor" value="2">
+                           <input type="hidden" name="autor" value="1">
                         </div>
                       </div>
                       <div class="form-group">
-                        <label for="data" class="col-sm-2 control-label">Data:</label>
+                        <label class="col-sm-2 control-label">Data:</label>
                         <div class="col-sm-5">
-                          <input type="text" name="data" class="form-control" value="<?php echo date('d/m/Y'); ?>" data-inputmask="'alias': 'dd/mm/yyyy'" data-mask disabled>
+                          <input type="text" class="form-control" value="<?php echo date('d/m/Y'); ?>" disabled>
+                          <input type="hidden" name="data" value="<?php echo date('d/m/Y'); ?>">
                         </div>
-                        <label for="hora" class="col-sm-1 control-label">Hora:</label>
+                        <label class="col-sm-1 control-label">Hora:</label>
                         <div class="col-sm-4">
-                          <input type="text" name="hora" value="<?php echo date('H:i');?>" class="form-control" disabled>
+                          <input type="text" value="<?php echo date('H:i');?>" class="form-control" disabled>
+                          <input type="hidden" name="hora" value="<?php echo date('H:i');?>">
                         </div>
                       </div>
                       <div class="form-group">
@@ -101,7 +103,7 @@ if(empty($_SESSION['email']) && empty($_SESSION['senha']) && empty($_SESSION['ti
                       <div class="form-group">
                         <label for="status" class="col-sm-2 control-label">Status:</label>
                         <div class="col-sm-10">
-                          <select class="form-control select2" name="status" id="status" required>
+                          <select class="form-control select2" name="status" id="status" style="width:100%;" required>
                             <option value=""></option>
                             <?php
                                 $staSelect = new Select();
@@ -111,9 +113,15 @@ if(empty($_SESSION['email']) && empty($_SESSION['senha']) && empty($_SESSION['ti
                         </div>
                       </div>
                       <div class="form-group">
+                        <?php
+                          if (isset($_SESSION['categoria_edit']))
+                          {
+                            unset($_SESSION['categoria_edit']);
+                          }
+                        ?>
                         <span id="listagemCategorias"></span>
                         <div class="col-sm-2">
-                         <button type="button" class="btn btn-info btn-flat" id="cadCat" name="button"><i class="fa fa-plus"></i> Adicionar Categoria </button>
+                         <button type="button" class="btn btn-info btn-flat" id="cadCat" name="button" style="width:100%;"><i class="fa fa-plus"></i> Adicionar Categoria </button>
                         </div>
                       </div>
                       <div id="resposta"></div>
@@ -190,23 +198,7 @@ if(empty($_SESSION['email']) && empty($_SESSION['senha']) && empty($_SESSION['ti
         placeholder:"Selecione o status"
       });
 
-      $("#datemask").inputmask("dd/mm/yyyy", {"placeholder": "dd/mm/yyyy"});
-      //Money Euro
-      $("[data-mask]").inputmask();
-
-      //Timepicker
-      $(".timepicker").timepicker({
-        showInputs: false,
-        showMeridian: false
-      });
-
       CKEDITOR.replace('noticia');
-
-      /*$("#cadCat").click(function()
-      {
-        $(".element").load("../Categoria/CategoriaObj.php #cadCat")
-     });*/
-
 });
       $('.file').fileinput({
           browseClass: "btn btn-info btn-flat btn-block",

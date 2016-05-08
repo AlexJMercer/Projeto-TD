@@ -17,25 +17,25 @@ include_once "../../class/Carrega.class.php";
       $object->noticia     = $_POST['noticia'];
       $object->url         = $_POST['url'];
       //print_r($object);
-      $object->Inserir();
-      //$myUpload = new Upload($_FILES["imagem"]);
-      //print_r($myUpload);
-
-
-      if (!empty($_FILES["imagem"]["name"]))
+      if ($object->InserirNoticia())
       {
-        $myUpload = new Upload($_FILES["imagem"]);
-
-        $Up = $myUpload->noticiaUpload();
+        if (!empty($_FILES["imagem"]["name"]))
+        {
+          $myUpload = new Upload($_FILES["imagem"]);
+          //print_r($myUpload);
+          $Up = $myUpload->noticiaUpload();
+        }
+        else
+        {
+          $noImage = new Noticias();
+          $noImage->noImageUp();
+        }
+        header("Location:ViewNoticiasObj.php?success");
       }
       else
       {
-        $noImage = new Noticias();
-
-        $noImage->noImageUp();
+        header("Location:NoticiaObj.php?erro");
       }
-
-      header("Location:ViewNoticiasObj.php");
    }
 
    elseif (isset($_POST['excluir']))

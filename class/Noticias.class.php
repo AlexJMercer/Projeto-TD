@@ -46,7 +46,7 @@ class Noticias
          return $retorno;
       }
 
-      public function Inserir()
+      public function InserirNoticia()
       {
          $this->transacao("BEGIN");
 
@@ -71,6 +71,7 @@ class Noticias
              if ($return2)
              {
               $this->transacao("COMMIT");
+              return $return2;
              }
              else
              {

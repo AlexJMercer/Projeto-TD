@@ -35,14 +35,6 @@ if(empty($_SESSION['email']) && empty($_SESSION['senha']) && empty($_SESSION['ti
     <!-- AdminLTE Skins. Choose a skin from the css/skins
          folder instead of downloading all of them to reduce the load. -->
     <link rel="stylesheet" href="../../dist/css/skins/_all-skins.min.css">
-
-    <!--style type="text/css">
-      input[type=file]
-      {
-        border: none;
-      }
-    </style-->
-
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -52,16 +44,14 @@ if(empty($_SESSION['email']) && empty($_SESSION['senha']) && empty($_SESSION['ti
   </head>
   <body class="hold-transition skin-green sidebar-mini">
     <div class="wrapper">
-      <?php include '../inc/topotime.html';
-
+      <?php
+            include '../inc/topotime.html';
             include '../inc/menutime.php';
       ?>
       <div class="content-wrapper">
         <!-- Content Header (Page header) -->
         <section class="content-header">
-            <h1>
-              Noticias
-            </h1>
+            <h1>Noticias</h1>
         </section>
         <!-- Main content -->
         <section class="content">
@@ -96,13 +86,15 @@ if(empty($_SESSION['email']) && empty($_SESSION['senha']) && empty($_SESSION['ti
                         </div>
                       </div>
                       <div class="form-group">
-                        <label for="data" class="col-sm-2 control-label">Data:</label>
+                        <label class="col-sm-2 control-label">Data:</label>
                         <div class="col-sm-5">
-                          <input type="text" name="data" value="<?php echo date('d/m/Y'); ?>" class="form-control" data-inputmask="'alias': 'dd/mm/yyyy'" data-mask>
+                          <input type="text" class="form-control" value="<?php echo date('d/m/Y'); ?>" disabled>
+                          <input type="hidden" name="data" value="<?php echo date('d/m/Y'); ?>">
                         </div>
-                        <label for="hora" class="col-sm-1 control-label">Hora:</label>
-                        <div class="col-sm-4 pull-right">
-                          <input type="text" name="hora" value="<?php echo date('H:i');?>" class="form-control pull-right">
+                        <label class="col-sm-1 control-label">Hora:</label>
+                        <div class="col-sm-4">
+                          <input type="text" value="<?php echo date('H:i');?>" class="form-control" disabled>
+                          <input type="hidden" name="hora" value="<?php echo date('H:i');?>">
                         </div>
                       </div>
                       <div class="form-group">
@@ -120,7 +112,7 @@ if(empty($_SESSION['email']) && empty($_SESSION['senha']) && empty($_SESSION['ti
                       <div class="form-group">
                         <label for="status" class="col-sm-2 control-label">Status:</label>
                         <div class="col-sm-10">
-                          <select class="form-control select2" name="status" id="status" required>
+                          <select class="form-control select2" name="status" id="status" style="width:100%;" required>
                             <option value=""></option>
                             <?php
                                 $staSelect = new Select();
@@ -130,17 +122,13 @@ if(empty($_SESSION['email']) && empty($_SESSION['senha']) && empty($_SESSION['ti
                         </div>
                       </div>
                       <div class="form-group">
-                        <label for="categoria" class="col-sm-2 control-label">Categorias da noticia:</label>
-                        <div class="col-sm-10">
-                          <select class="form-control select2" id="categoria" name="categoria[]" multiple="multiple" placeholder="Selecione a(s) categoria(s)">
-                            <option value=""></option>
-                            <?php
-                              $catSelected = new Select();
-                              $catSelected->categoriaMultiSelected($comp->categoria);
-                            ?>
-                          </select>
+                        <?php $_SESSION['categoria_edit']=$comp->categoria; ?>
+                        <span id="listagemCategorias"></span>
+                        <div class="col-sm-2">
+                         <button type="button" class="btn btn-info btn-flat" id="cadCat" name="button" style="width:100%;"><i class="fa fa-plus"></i> Adicionar Categoria </button>
                         </div>
                       </div>
+                      <div id="resposta"></div>
                       <div class="form-group">
                         <label for="url" class="col-sm-2 control-label">URL do site:</label>
                         <div class="col-sm-10">
@@ -218,17 +206,9 @@ if(empty($_SESSION['email']) && empty($_SESSION['senha']) && empty($_SESSION['ti
 
       $("#scategoria").select2();
 
-      $("#datemask").inputmask("dd/mm/yyyy", {"placeholder": "dd/mm/yyyy"});
-      //Money Euro
-      $("[data-mask]").inputmask();
-
-      //Timepicker
-      $(".timepicker").timepicker({
-        showInputs: false,
-        showMeridian: false
-      });
-
       CKEDITOR.replace('noticia');
+
+      $("#mydiv").load(location.href + " #mydiv");
 });
 
     </script>
@@ -256,10 +236,35 @@ if(empty($_SESSION['email']) && empty($_SESSION['senha']) && empty($_SESSION['ti
                 showUpload: false,
                 language: 'pt-BR',
                 overwriteInitial: true,
+                maxFileSize: '500KB',
+                maxImageWidth: 400,
+                maxImageHeight: 200,
                 allowedFileExtensions : ['jpg', 'png','gif']
             });
 
     </script>
+    <script type="text/javascript">
+      $(document).ready(function(){
+         $("#cadCat").click(function(){
+             $.ajax({
+                 type: 'post',
+                 url: 'newCategoriaObj.php',
+                 dataType: 'html',
+                 success: function (txt) {
+                     $('#resposta').html(txt);
+                 }
+             });
+         });
+         atualiza();
+
+         function atualiza()
+         {
+           $.get('listagem_categoria.php', function (resultado){
+                $('#listagemCategorias').html(resultado);
+           })
+         }
+    });
+   </script>
   </body>
 </html>
 <?php

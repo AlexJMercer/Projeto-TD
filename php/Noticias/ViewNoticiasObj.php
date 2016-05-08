@@ -31,40 +31,60 @@ if(empty($_SESSION['email']) && empty($_SESSION['senha']) && empty($_SESSION['ti
     <!-- AdminLTE Skins. Choose a skin from the css/skins
          folder instead of downloading all of them to reduce the load. -->
     <link rel="stylesheet" href="../../dist/css/skins/_all-skins.min.css">
-
     <link rel="stylesheet" href="../../bootstrap/css/center.css">
-
-
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
         <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
         <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
+    <script>
+    if(typeof window.history.pushState == 'function') {
+        window.history.pushState({}, "Hide", "http://localhost/AdminTest/php/Noticias/ViewNoticiasObj.php");
+    }
+    </script>
   </head>
   <body class="hold-transition skin-green  sidebar-mini">
     <div class="wrapper">
-
-      <?php include '../inc/topotime.html';
-
+      <?php
+            include '../inc/topotime.html';
             include '../inc/menutime.php';
-
       ?>
       <!-- Content Wrapper. Contains page content -->
       <div class="content-wrapper">
         <!-- Content Header (Page header) -->
         <section class="content-header">
-          <h1>
-          Notícias
-          <a class="btn btn-info btn-flat pull-right" href="NoticiaObj.php"><i class="fa fa-plus"></i>  ADD Notícias </a>
-          </h1>
+          <h1>Notícias<a class="btn btn-info btn-flat pull-right" href="NoticiaObj.php"><i class="fa fa-plus"></i>  ADD Notícias </a></h1>
         </section>
-
         <!-- Main content -->
         <section class="content">
+          <?php
+            if (isset($_GET['success']))
+            {
+          ?>
+          <div class='alert alert-success alert-dismissable'>
+                   <button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button>
+                   <h4>	<i class='icon fa fa-check'></i> Cadastro!</h4>
+                   Notícia cadastrada com sucesso!!
+          </div>
+          <?php
+            }
+          ?>
+          <?php
+            if (isset($_GET['excluirOK']))
+            {
+          ?>
+          <div class='alert alert-success alert-dismissable'>
+                   <button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button>
+                   <h4>	<i class='icon fa fa-check'></i> Exclusão!</h4>
+                   Notícia excluída com sucesso!!
+          </div>
+          <?php
+            }
+          ?>
           <div class="row">
             <div class="col-xs-12">
-              <div class="box">
+              <div class="box box-info">
                 <div class="box-header">
                   <h3 class="box-title">Listagem de notícias</h3>
                 </div><!-- /.box-header -->

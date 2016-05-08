@@ -17,7 +17,7 @@
         <input type="text" class="form-control" name="new" placeholder="Digite a categoria aqui" autofocus required>
    </div>
    <div class="col-sm-2">
-      <button class="btn btn-success btn-flat" type="submit" name="cadastrar" value="cadastrar" style="width:100%;"><i class="fa fa-check"></i> Cadastrar </button>
+      <button class="btn btn-success btn-flat" type="submit" name="cadastrar" id="cadastrar" value="cadastrar" style="width:100%;"><i class="fa fa-check"></i> Cadastrar </button>
    </div>
 </div>
 </form>
@@ -27,7 +27,7 @@
 		jQuery('#formcat').submit(function(){
 			var dados = jQuery( this ).serialize();
 			jQuery.ajax(
-      {
+         {
 				type: "POST",
 				url: "cadCategoria.php",
 				data: dados,
@@ -39,8 +39,8 @@
 
                function atualiza()
                {
-                  jQuery.get('listagem_categoria.php', function (resultado){
-                     jQuery('#listagemCategorias').html(resultado);
+                  jQuery.get('#listagemCategorias', function (resultado){
+                    jQuery("#listagemCategorias").load(location.href + " #listagemCategorias");
                   })
                }
             }

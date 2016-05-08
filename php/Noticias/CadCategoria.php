@@ -2,26 +2,26 @@
 
 include_once "../../class/Carrega.class.php";
 
-  if (!empty($_POST['categoria']))
+  if (!empty($_POST['new']))
   {
       $object            = new Categorias();
-      $object->categoria = $_POST['categoria'];
+      $object->categoria = $_POST['new'];
 
       if ($object->InserirCategoria())
       {
-         echo "<div class='alert alert-success alert-dismissable'>
-                  <button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button>
-                  <h4>	<i class='icon fa fa-check'></i> Alert!</h4>
-                  Success alert preview. This alert is dismissable.
-               </div>";
+        echo "<div class='alert alert-success alert-dismissable'>
+                 <button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button>
+                 <h4>	<i class='icon fa fa-check'></i> Alerta!</h4>
+                 Categoria cadastrada com sucesso!!
+              </div>";
       }
       else
       {
-         echo "<div class='alert alert-danger alert-dismissable'>
-                  <button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button>
-                  <h4><i class='icon fa fa-ban'></i> Alert!</h4>
-                  Danger alert preview. This alert is dismissable. A wonderful serenity has taken possession of my entire soul, like these sweet mornings of spring which I enjoy with my whole heart.
-               </div>";
+        echo "<div class='alert alert-danger alert-dismissable'>
+                 <button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button>
+                 <h4><i class='icon fa fa-ban'></i> Alerta!</h4>
+                 Erro no cadastro!!
+              </div>";
       }
 
   }

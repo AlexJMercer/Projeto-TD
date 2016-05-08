@@ -411,10 +411,8 @@ class Select
      }
      else
      {
-
        while ($a = pg_fetch_array($result))
        {
-
          $this->id        = $a['id_inst'];
          $this->instituto = $a['instituto'];
 
@@ -432,10 +430,9 @@ class Select
 
    public function cursoGeneralMultiSelect($curso='')
    {
-      $sql = "SELECT * FROM cursos Order By nome";
+      $sql    = "SELECT * FROM cursos Order By nome";
       $result = pg_query($sql);
-
-      $ln = pg_num_rows($result);
+      $ln     = pg_num_rows($result);
 
       if ($ln==0)
       {
@@ -478,22 +475,20 @@ class Select
           $this->id        = $a['id_cat'];
           $this->categoria = $a['categoria'];
 
-
-         if (is_array($categoria))
-         {
+          if (is_array($categoria))
+          {
             if(in_array($this->id, $categoria))
             {
               print "<small class='label bg-blue'>{$this->categoria}</small>  ";
             }
-         }
-         else
-         {
+          }
+          else
+          {
             if($this->id==$categoria)
             {
                print "<small class='label bg-blue'>{$this->categoria}</small>  ";
             }
-         }
-
+          }
         }
       }
    }
@@ -521,10 +516,10 @@ class Select
            print "<small class='label bg-blue'>{$object->nome}</small>  ";
          }
         }
-      }
+     }
    }
 
-   public function typeSelect($type ="")
+   public function typeSelect($type="")
    {
       $sql    = "SELECT * from usertype Order by id_type";
       $result = pg_query($sql);
