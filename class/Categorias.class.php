@@ -12,7 +12,6 @@
       function __construct()
       {
          $this->bd = new BD();
-
       }
 
       function __destruct()

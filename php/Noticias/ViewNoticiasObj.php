@@ -38,11 +38,11 @@ if(empty($_SESSION['email']) && empty($_SESSION['senha']) && empty($_SESSION['ti
         <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
         <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
-    <script>
+    <!--script >
     if(typeof window.history.pushState == 'function') {
         window.history.pushState({}, "Hide", "http://localhost/AdminTest/php/Noticias/ViewNoticiasObj.php");
     }
-    </script>
+</script-->
   </head>
   <body class="hold-transition skin-green  sidebar-mini">
     <div class="wrapper">

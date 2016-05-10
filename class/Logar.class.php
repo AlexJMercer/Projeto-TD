@@ -35,7 +35,7 @@ class Logar
     $result = pg_query($sql);
     $usr    = pg_num_rows($result);
 
-    if ($usr = 1)
+    if ($usr == 1)
     {
       session_start();
       while ($reg = pg_fetch_assoc($result))

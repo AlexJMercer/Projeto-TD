@@ -92,6 +92,7 @@ if(empty($_SESSION['email']) && empty($_SESSION['senha']) && empty($_SESSION['ti
                                   $instituto->institutoSelect($comp->instituto);
                               ?>
                             </select>
+                         </div>
                       </div>
                       <div class="form-group">
                          <label for="desc" class="col-sm-2 control-label">Descrição:</label>

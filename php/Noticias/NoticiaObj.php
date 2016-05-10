@@ -46,8 +46,8 @@ if(empty($_SESSION['email']) && empty($_SESSION['senha']) && empty($_SESSION['ti
   </head>
   <body class="hold-transition skin-green-light sidebar-mini">
     <div class="wrapper">
-      <?php include '../inc/topotime.html';
-
+      <?php
+            include '../inc/topotime.html';
             include '../inc/menutime.php';
       ?>
       <div class="content-wrapper">
