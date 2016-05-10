@@ -32,7 +32,7 @@ include_once 'Carrega.class.php';
        $this->$key = $value;
     }
 
-    public function Inserir()
+    public function InserirAssistencias()
     {
       $sql    = "INSERT INTO assistencias (assist, texto) VALUES ('$this->assist', '$this->texto')";
       $return = pg_query($sql);
@@ -47,7 +47,7 @@ include_once 'Carrega.class.php';
       }
     }
 
-    public function Listar()
+    public function ListarAssistencias()
     {
       $sql    = "SELECT * FROM assistencias ORDER BY id_assist";
       $result = pg_query($sql);
@@ -61,25 +61,24 @@ include_once 'Carrega.class.php';
 
         $retorno[]   = $obj;
       }
-
       return $retorno;
     }
 
-    public function Atualizar()
+    public function AtualizarAssistencias()
     {
         $sql     = "UPDATE assistencias set assist ='$this->assist', texto ='$this->texto' where id_assist =$this->id";
         $retorno = pg_query($sql);
         return $retorno;
     }
 
-    public function Excluir()
+    public function ExcluirAssistencias()
     {
         $sql     = "DELETE from assistencias where id_assist =$this->id";
         $retorno = pg_query($sql);
         return $retorno;
     }
 
-    public function Editar($id='')
+    public function EditarAssistencias($id='')
     {
       $sql    = "SELECT * FROM assistencias WHERE assistencias.id_assist=$id";
       $result = pg_query($sql);

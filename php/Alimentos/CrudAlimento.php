@@ -7,7 +7,7 @@ include_once "../../class/Carrega.class.php";
       $object           = new Alimentos();
       $object->alimento = $_POST['alimento'];
 
-      $object->inserir();
+      $object->InserirAlimentos();
 
       header("Location:ViewAlimentosObj.php");
     }
@@ -18,7 +18,7 @@ include_once "../../class/Carrega.class.php";
       $object->id       = $_POST['id'];
       $object->alimento = $_POST['alimento'];
 
-      $object->atualizar();
+      $object->AtualizarAlimentos();
 
       header("Location:ViewAlimentosObj.php");
     }
@@ -28,7 +28,7 @@ include_once "../../class/Carrega.class.php";
       $object     = new Alimentos();
       $object->id = $_POST['id'];
 
-      $object->excluir();
+      $object->ExcluirAlimentos();
 
       header("Location:ViewAlimentosObj.php");
     }

@@ -31,14 +31,14 @@
        $this->$key = $value;
     }
 
-    public function Inserir()
+    public function InserirDisciplinas()
     {
       $sql    = "INSERT INTO disciplinas (disciplina, curso) VALUES ('$this->disciplina', '$this->curso')";
       $return = pg_query($sql);
       return $return;
     }
 
-    public function ListarEspecify($curso="")
+    public function ListarEspecifyDisciplinas($curso="")
     {
       $sql    = "SELECT * FROM disciplinas as d, cursos as c WHERE d.curso =c.id_curso AND d.curso =$curso";
       $result = pg_query($sql);
@@ -54,21 +54,21 @@
       return $return;
     }
 
-    public function Excluir()
+    public function ExcluirDisciplinas()
     {
       $sql    = "DELETE from disciplinas where id_disc =$this->id";
       $return = pg_query($sql);
       return $return;
     }
 
-    public function Atualizar()
+    public function AtualizarDisciplinas()
     {
       $sql    = "UPDATE disciplinas SET disciplina ='$this->disciplina', curso ='$this->curso' WHERE id_disc =$this->id";
       $return = pg_query($sql);
       return $return;
     }
 
-    public function Editar($id = "")
+    public function EditarDisciplinas($id = "")
     {
       $sql    = "SELECT * FROM disciplinas as d, cursos as c WHERE d.curso =c.id_curso AND d.id_disc =$id";
       $result = pg_query($sql);
@@ -85,7 +85,7 @@
       return $return;
     }
 
-    public function ShowDisciplina($id='')
+    public function ShowDisciplinas($id='')
     {
       $sql    = "SELECT * FROM disciplinas as d, cursos as c WHERE d.curso =c.id_curso AND d.id_disc =$id";
       $result = pg_query($sql);

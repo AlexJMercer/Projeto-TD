@@ -8,7 +8,7 @@ include_once "../../class/Carrega.class.php";
     $object->assist = $_POST['assist'];
     $object->texto  = $_POST['texto'];
 
-    $object->Inserir();
+    $object->InserirAssistencias();
 
     header("Location:ViewAssistenciasObj.php");
   }
@@ -18,7 +18,7 @@ include_once "../../class/Carrega.class.php";
       $object     = new Assistencias();
       $object->id = $_POST['id'];
 
-      $object->excluir();
+      $object->ExcluirAssistencias();
 
       header("Location:ViewAssistenciasObj.php");
   }
@@ -30,7 +30,7 @@ include_once "../../class/Carrega.class.php";
     $object->assist = $_POST['assist'];
     $object->texto  = $_POST['texto'];
 
-    $object->Atualizar();
+    $object->AtualizarAssistencias();
 
     header("Location:ViewAssistenciasObj.php");
   }

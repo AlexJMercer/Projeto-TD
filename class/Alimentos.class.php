@@ -29,7 +29,7 @@
         $this->$key = $value;
       }
 
-      public function inserir()
+      public function InserirAlimentos()
       {
         $sql    = "INSERT INTO alimentos (alimento) VALUES ('$this->alimento')";
         $return = pg_query($sql);
@@ -37,7 +37,7 @@
         return $return;
       }
 
-      function listar()
+      function ListarAlimentos()
       {
          $sql              = "SELECT * from alimentos Order by id_ali";
          $result           = pg_query($sql);
@@ -53,14 +53,14 @@
          return $return;
       }
 
-      public function excluir()
+      public function ExcluirAlimentos()
       {
-         $sql    = "DELETE from alimentos where id_ali =$this->id";
+         $sql    = "DELETE from alimentos where id_ali = $this->id";
          $return = pg_query($sql);
          return $return;
       }
 
-      public function atualizar()
+      public function AtualizarAlimentos()
       {
 
          $sql    = "UPDATE alimentos set alimento ='$this->alimento' where id_ali =$this->id";
@@ -69,7 +69,7 @@
          return $return;
       }
 
-      public function editar($id = "")
+      public function EditarAlimentos($id = "")
       {
         $sql    = "SELECT * FROM alimentos WHERE alimentos.id_ali =$id";
         $result = pg_query($sql);

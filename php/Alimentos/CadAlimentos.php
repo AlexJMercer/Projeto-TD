@@ -4,15 +4,15 @@ include_once "../../class/Carrega.class.php";
 
   if (!empty($_POST['new']))
   {
-      $object            = new Categorias();
-      $object->categoria = $_POST['new'];
+      $object           = new Alimentos();
+      $object->alimento = $_POST['new'];
 
-      if ($object->InserirCategorias())
+      if ($object->InserirAlimentos())
       {
         echo "<div class='alert alert-success alert-dismissable'>
                  <button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button>
                  <h4>	<i class='icon fa fa-check'></i> Alerta!</h4>
-                 Categoria cadastrada com sucesso!!
+                 Alimento cadastrado com sucesso!!
               </div>";
       }
       else

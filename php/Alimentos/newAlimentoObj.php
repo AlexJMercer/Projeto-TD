@@ -1,8 +1,8 @@
-<form id="formcat">
+<form id="formali">
 <div class="form-group">
-   <label for="categoria" class="col-sm-2 control-label">Categoria:</label>
+   <label for="alimento" class="col-sm-2 control-label">Alimento:</label>
    <div class="col-sm-8">
-        <input type="text" class="form-control" name="new" placeholder="Digite a categoria aqui" autofocus required>
+        <input type="text" class="form-control" name="new" placeholder="Digite a alimento aqui" autofocus required>
    </div>
    <div class="col-sm-2">
       <button class="btn btn-success btn-flat" type="submit" name="cadastrar" value="cadastrar" style="width:100%;"><i class="fa fa-check"></i> Cadastrar </button>
@@ -12,12 +12,12 @@
 <div id="resposta"></div>
 <script type="text/javascript">
 	jQuery(document).ready(function(){
-		jQuery('#formcat').submit(function(){
+		jQuery('#formali').submit(function(){
 			var dados = jQuery( this ).serialize();
 			jQuery.ajax(
       {
 				type: "POST",
-				url: "cadCategoria.php",
+				url: "cadAlimento.php",
 				data: dados,
             success: function (data)
             {
@@ -27,8 +27,8 @@
 
                function atualiza()
                {
-                  jQuery.get('../Categoria/listagem_categoria.php', function (resultado){
-                     jQuery('#listagemCategorias').html(resultado);
+                  jQuery.get('../Alimento/listagem_alimento.php', function (resultado){
+                     jQuery('#listagemAlimentos').html(resultado);
                   })
                }
             }

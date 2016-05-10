@@ -30,8 +30,7 @@ if(empty($_SESSION['email']) && empty($_SESSION['senha']) && empty($_SESSION['ti
     <link rel="stylesheet" href="../../dist/css/AdminLTE.min.css">
     <!-- AdminLTE Skins. Choose a skin from the css/skins
          folder instead of downloading all of them to reduce the load. -->
-    <link rel="stylesheet" href="../../dist/css/skins/_all-skins.min.css">
-
+    <link rel="stylesheet" href="../../dist/css/skins/skin-green-light.min.css">
       <link rel="stylesheet" href="../../bootstrap/css/center.css">
 
       <link rel="stylesheet" href="https://cdn.datatables.net/1.10.10/css/dataTables.bootstrap.min.css">
@@ -45,23 +44,18 @@ if(empty($_SESSION['email']) && empty($_SESSION['senha']) && empty($_SESSION['ti
         <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
   </head>
-  <body class="hold-transition skin-green sidebar-mini">
+  <body class="hold-transition skin-green-light sidebar-mini">
     <div class="wrapper">
-
-      <?php include '../inc/topotime.html';
-
+      <?php
+            include '../inc/topotime.html';
             include '../inc/menutime.php';
-
       ?>
       <!-- Content Wrapper. Contains page content -->
       <div class="content-wrapper">
         <!-- Content Header (Page header) -->
         <section class="content-header">
-          <h1>
-            Cursos
-          </h1>
+          <h1>Cursos</h1>
         </section>
-
         <!-- Main content -->
         <section class="content">
           <div class="row">
@@ -82,7 +76,7 @@ if(empty($_SESSION['email']) && empty($_SESSION['senha']) && empty($_SESSION['ti
 <?php
 
     $listar = new Cursos();
-    $list = $listar->Listar();
+    $list = $listar->ListarCursos();
 
     if ($list != null)
     {
@@ -94,17 +88,12 @@ if(empty($_SESSION['email']) && empty($_SESSION['senha']) && empty($_SESSION['ti
                         <td><?php echo $line->nome; ?></td>
                         <td>
                           <input type='hidden' name='id' value='<?php echo $line->id; ?>'>
-
                           <button type="submit" name="exibir" value="exibir" formaction="ShowCursosObj.php" class="btn btn-flat btn-info"><i class="fa fa-expand"></i> Exibir </button>
-
                           <button type="submit" name="editar" value="editar" class="btn btn-flat btn-warning"><i class="fa fa-edit"></i> Editar </button>
-
                           <button type="submit" name="excluir" value="excluir" formaction="CrudCursos.php" class='btn btn-flat btn-danger'><i class="fa fa-times"></i> Excluir </button>
                         </td>
                       </tr>
                       </form>
-
-
                     <?php
                             }
                           }
@@ -112,7 +101,6 @@ if(empty($_SESSION['email']) && empty($_SESSION['senha']) && empty($_SESSION['ti
                           {
                             echo "<h2> Nada cadastrado!!</h2>";
                           }
-
                     ?>
                     </tbody>
                   </table>
@@ -122,15 +110,11 @@ if(empty($_SESSION['email']) && empty($_SESSION['senha']) && empty($_SESSION['ti
           </div><!-- /.row -->
         </section><!-- /.content -->
       </div><!-- /.content-wrapper -->
-
       <?php
         include '../inc/footer.html';
         include '../inc/control-sidebar.html';
       ?>
-
-
     </div><!-- ./wrapper -->
-
     <!-- jQuery 2.1.4 -->
     <script src="../../plugins/jQuery/jQuery-2.1.4.min.js"></script>
     <!-- Bootstrap 3.3.5 -->

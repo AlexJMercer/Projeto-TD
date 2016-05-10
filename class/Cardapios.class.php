@@ -37,7 +37,7 @@ include_once "Carrega.class.php";
          return $retorno;
       }
 
-      public function Inserir()
+      public function InserirCardapios()
       {
 
         $this->transacao("BEGIN");
@@ -70,7 +70,7 @@ include_once "Carrega.class.php";
           $this->transacao("ROLLBACK");
       }
 
-      public function Listar()
+      public function ListarCardapios()
       {
          $sql     = "SELECT * FROM cardapios c, dia d WHERE d.id_dia =c.dia ORDER BY d.id_dia";
          $result  = pg_query($sql);
@@ -88,14 +88,14 @@ include_once "Carrega.class.php";
         return $retorno;
       }
 
-      public function Excluir()
+      public function ExcluirCardapios()
       {
          $sql     = "DELETE from cardapios where id_card = $this->id";
          $retorno = pg_query($sql);
          return $retorno;
       }
 
-      public function Editar($id = "")
+      public function EditarCardapios($id = "")
       {
         $sql     = "SELECT * FROM cardapios c JOIN dia d ON d.id_dia=c.dia JOIN alimentos_cardapios ac ON ac.card_id =c.id_card WHERE c.id_card =$id";
         $sql2    = "SELECT a.id_ali FROM alimentos a, alimentos_cardapios ac WHERE ac.card_id = $id AND a.id_ali = ac.ali_id";
@@ -123,7 +123,7 @@ include_once "Carrega.class.php";
       }
 
 
-      public function showCardapio($id = "")
+      public function ShowCardapios($id = "")
       {
         $sql     = "SELECT * FROM cardapios c JOIN dia d ON d.id_dia=c.dia JOIN alimentos_cardapios ac ON ac.card_id =c.id_card WHERE c.id_card =$id";
         $sql2    = "SELECT a.id_ali FROM alimentos a, alimentos_cardapios ac WHERE ac.card_id = $id AND a.id_ali = ac.ali_id";

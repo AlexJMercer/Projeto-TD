@@ -21,7 +21,7 @@
    </div>
 </div>
 </form>
-<div id="resposta"></div> <br/>
+<div id="resposta"></div>
 <script type="text/javascript">
 	jQuery(document).ready(function(){
 		jQuery('#formcat').submit(function(){

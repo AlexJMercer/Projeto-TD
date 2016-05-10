@@ -30,7 +30,7 @@
         $this->$key = $value;
       }
 
-      public function InserirCategoria()
+      public function InserirCategorias()
       {
         $sql    = "INSERT INTO categorias (categoria) VALUES ('$this->categoria')";
         $return = pg_query($sql);
@@ -41,7 +41,7 @@
         }
       }
 
-      function listar()
+      function ListarCategorias()
       {
          $sql    = "SELECT * from categorias Order by id_cat";
          $result = pg_query($sql);
@@ -57,21 +57,21 @@
          return $return;
       }
 
-      public function excluir()
+      public function ExcluirCategorias()
       {
          $sql    = "DELETE from categorias where id_cat =$this->id";
          $return = pg_query($sql);
          return $return;
       }
 
-      public function atualizar()
+      public function AtualizarCategorias()
       {
          $sql    = "UPDATE categorias set categoria ='$this->categoria' where id_cat =$this->id";
          $return = pg_query($sql);
          return $return;
       }
 
-      public function editar($id = "")
+      public function EditarCategorias($id = "")
       {
         $sql    = "SELECT * FROM categorias WHERE categorias.id_cat =$id ";
         $result = pg_query($sql);

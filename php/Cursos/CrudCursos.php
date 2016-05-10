@@ -10,7 +10,7 @@ include_once "../../class/Carrega.class.php";
       $object->texto     = $_POST['texto'];
 
       //print_r($object);
-      $object->Inserir();
+      $object->InserirCursos();
 
       $myUpload = new Upload($_FILES["logo"]);
 
@@ -27,7 +27,7 @@ include_once "../../class/Carrega.class.php";
       $object->instituto = $_POST['instituto'];
       $object->texto     = $_POST['texto'];
 
-      $object->Atualizar();
+      $object->AtualizarCursos();
 
       $myUpload = new Upload($_FILES["logo"]);
 
@@ -41,7 +41,7 @@ include_once "../../class/Carrega.class.php";
       $object     = new Cursos();
       $object->id = $_POST['id'];
 
-      $object->Excluir();
+      $object->ExcluirCursos();
 
       header("Location:ViewCursosObj.php");
   }

@@ -33,14 +33,14 @@
        $this->$key = $value;
     }
 
-    public function Inserir()
+    public function InserirCursos()
     {
       $sql    = "INSERT INTO cursos (nome, inst_id, texto, logo) VALUES ('$this->nome', '$this->instituto', '$this->texto', '$this->logo')";
       $return = pg_query($sql);
       return $return;
     }
 
-    public function Listar()
+    public function ListarCursos()
     {
       $sql    = "SELECT * FROM cursos Order by cursos.id_curso";
       $result = pg_query($sql);
@@ -59,21 +59,21 @@
 
     }
 
-    public function Excluir()
+    public function ExcluirCursos()
     {
       $sql    = "DELETE from cursos where id_curso =$this->id";
       $return = pg_query($sql);
       return $return;
     }
 
-    public function Atualizar()
+    public function AtualizarCursos()
     {
       $sql    = "UPDATE cursos set nome ='$this->nome', instituto='$this->instituto', texto ='$this->texto', logo ='$this->logo' where id_curso =$this->id";
       $return = pg_query($sql);
       return $return;
     }
 
-    public function Editar($id = "")
+    public function EditarCursos($id = "")
     {
       $sql    = "SELECT * FROM cursos c WHERE c.id_curso =$id";
       $result = pg_query($sql);
@@ -93,7 +93,7 @@
       return $return;
     }
 
-    public function Exibir($id = "")
+    public function ExibirCursos($id = "")
     {
       $sql    = "SELECT * FROM cursos c WHERE c.id_curso =$id";
       $result = pg_query($sql);
@@ -114,30 +114,5 @@
       return $return;
     }
 
-    public function labelCategorias($categoria = "")
-    {
-      $sql    = "SELECT * from categorias";
-      $result = pg_query($sql);
-      $ln     = pg_num_rows($result);
-
-      if ($ln==0)
-      {
-         echo "<small class='label bg-red'>ERRO</small>";
-      }
-      else
-      {
-         while ($a = pg_fetch_assoc($result))
-         {
-           $this->id        = $a['id_cat'];
-           $this->categoria = $a['categoria'];
-
-
-          if(in_array($this->id, $categoria))
-          {
-            print "<small class='label bg-blue'>{$this->categoria}</small>  ";
-          }
-         }
-       }
-    }
 }
 ?>

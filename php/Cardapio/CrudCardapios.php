@@ -9,7 +9,7 @@ include_once "../../class/Carrega.class.php";
       $object->data     = $_POST['data'];
       $object->alimento = $_POST['alimento'];
       /*var_dump($object);*/
-      $object->Inserir();
+      $object->InserirCardapios();
 
       header("Location:ViewCardapiosObj.php");
   }
@@ -19,7 +19,7 @@ include_once "../../class/Carrega.class.php";
       $object     = new Cardapios();
       $object->id = $_POST['id'];
 
-      $object->excluir();
+      $object->ExcluirCardapios();
 
       header("Location:ViewCardapiosObj.php");
   }
@@ -30,14 +30,14 @@ include_once "../../class/Carrega.class.php";
       $object        = new Cardapios();
       $object->id    = $_POST['id'];
 
-      $object->excluir();
+      $object->ExcluirCardapios();
 
       $obj           = new Cardapios();
       $obj->dia      = $_POST['dia'];
       $obj->data     = $_POST['data'];
       $obj->alimento = $_POST['alimento'];
 
-      $obj->Inserir();
+      $obj->InserirCardapios();
 
       header("Location:ViewCardapiosObj.php");
   }

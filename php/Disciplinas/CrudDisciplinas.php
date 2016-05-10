@@ -8,7 +8,7 @@ include_once "../../class/Carrega.class.php";
       $object->disciplina = $_POST['disciplina'];
       $object->curso      = $_POST['curso'];
 
-      $object->Inserir();
+      $object->InserirDisciplinas();
 
       header("Location:PreviewDisciplinasObj.php");
     }
@@ -20,7 +20,7 @@ include_once "../../class/Carrega.class.php";
       $object->disciplina = $_POST['disciplina'];
       $object->curso      = $_POST['curso'];
 
-      $object->Atualizar();
+      $object->AtualizarDisciplinas();
 
       header("Location:PreviewDisciplinasObj.php");
     }
@@ -30,7 +30,7 @@ include_once "../../class/Carrega.class.php";
       $object     = new Disciplinas();
       $object->id = $_POST['id'];
 
-      $object->Excluir();
+      $object->ExcluirDisciplinas();
 
       header("Location:PreviewDisciplinasObj.php");
     }

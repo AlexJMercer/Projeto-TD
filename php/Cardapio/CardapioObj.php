@@ -38,7 +38,7 @@ if(empty($_SESSION['email']) && empty($_SESSION['senha']) && empty($_SESSION['ti
     <link rel="stylesheet" href="../../dist/css/AdminLTE.min.css">
     <!-- AdminLTE Skins. Choose a skin from the css/skins
          folder instead of downloading all of them to reduce the load. -->
-    <link rel="stylesheet" href="../../dist/css/skins/_all-skins.min.css">
+    <link rel="stylesheet" href="../../dist/css/skins/skin-green-light.min.css">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -47,27 +47,20 @@ if(empty($_SESSION['email']) && empty($_SESSION['senha']) && empty($_SESSION['ti
         <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
   </head>
-  <body class="hold-transition skin-green sidebar-mini">
+  <body class="hold-transition skin-green-light sidebar-mini">
     <div class="wrapper">
-      <?php include '../inc/topotime.html';
-
+      <?php
+            include '../inc/topotime.html';
             include '../inc/menutime.php';
-
       ?>
       <div class="content-wrapper">
         <!-- Content Header (Page header) -->
         <section class="content-header">
-          <h1>
-            Cardápios
-          </h1>
+          <h1>Cardápios</h1>
         </section>
-
         <!-- Main content -->
         <section class="content">
           <div class="row">
-            <!-- left column -->
-
-            <!-- right column -->
             <div class="col-lg-12">
               <!-- Horizontal Form -->
               <div class="box box-success">
@@ -110,7 +103,6 @@ if(empty($_SESSION['email']) && empty($_SESSION['senha']) && empty($_SESSION['ti
                     <button type="submit" name="enviar" value="enviar" class="btn btn-success btn-flat btn-block">Enviar</button>
                     <br>
                     <button type="reset" class="btn btn-default btn-flat btn-block btn-sm ">Limpar</button>
-
                   </div><!-- /.box-footer -->
                 </form>
               </div><!-- /.box -->
@@ -124,7 +116,6 @@ if(empty($_SESSION['email']) && empty($_SESSION['senha']) && empty($_SESSION['ti
         include '../inc/control-sidebar.html';
       ?>
     </div><!-- ./wrapper -->
-
     <!-- jQuery 2.1.4 -->
     <script src="../../plugins/jQuery/jQuery-2.1.4.min.js"></script>
     <!-- Bootstrap 3.3.5 -->
@@ -137,9 +128,6 @@ if(empty($_SESSION['email']) && empty($_SESSION['senha']) && empty($_SESSION['ti
     <script src="../../dist/js/demo.js"></script>
     <!-- Select2 -->
     <script src="../../plugins/select2/select2.full.min.js"></script>
-    <!-- bootstrap time picker -->
-    <script src="../../plugins/timepicker/bootstrap-timepicker.min.js"></script>
-
     <!-- date-range-picker -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.2/moment.min.js"></script>
     <script src="../../plugins/daterangepicker/daterangepicker.js"></script>

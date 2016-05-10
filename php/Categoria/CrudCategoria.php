@@ -7,7 +7,7 @@ include_once "../../class/Carrega.class.php";
       $object            = new Categorias();
       $object->categoria = $_POST['categoria'];
 
-      $object->InserirCategoria();
+      $object->InserirCategorias();
 
       header("Location:ViewCategoriasObj.php");
   }
@@ -17,7 +17,7 @@ include_once "../../class/Carrega.class.php";
       $object     = new Categorias();
       $object->id = $_POST['id'];
 
-      $object->excluir();
+      $object->ExcluirCategorias();
 
       header("Location:ViewCategoriasObj.php");
   }
@@ -28,7 +28,7 @@ include_once "../../class/Carrega.class.php";
       $object->id        = $_POST['id'];
       $object->categoria = $_POST['categoria'];
 
-      $object->atualizar();
+      $object->AtualizarCategorias();
 
       header("Location:ViewCategoriasObj.php");
   }
