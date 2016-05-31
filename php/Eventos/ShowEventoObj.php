@@ -94,7 +94,7 @@ if(empty($_SESSION['email']) && empty($_SESSION['senha']) && empty($_SESSION['ti
       <dt>Logo:</dt>
       <dd> <img class="img-responsive-pad" src="<?php echo $comp->imagem; ?>" alt="Logo do Evento" width="25%" height="25%" /> </dd>
     </dl>
-    <form action="EditEstagioObj.php" method="post">
+    <form action="EditEventoObj.php" method="post">
       <input type="hidden" name="id" value="<?php echo $id; ?>"/>
       <div class="col-sm-6">
         <button type="submit" name="retornar" value="retornar" class="btn bg-maroon btn-flat btn-block margin" formaction="ViewEstagiosObj.php"><i class="fa fa-edit"></i> Retornar para lista </button>
@@ -117,7 +117,6 @@ if(empty($_SESSION['email']) && empty($_SESSION['senha']) && empty($_SESSION['ti
       </div><!-- /.content-wrapper -->
       <?php
         include '../inc/footer.html';
-        include '../inc/control-sidebar.html';
       ?>
     </div><!-- ./wrapper -->
     <!-- jQuery 2.1.4 -->
@@ -130,5 +129,5 @@ if(empty($_SESSION['email']) && empty($_SESSION['senha']) && empty($_SESSION['ti
     <script src="../../dist/js/app.min.js"></script>
     <!-- AdminLTE for demo purposes -->
     <script src="../../dist/js/demo.js"></script>
-      </body>
+</body>
 </html>

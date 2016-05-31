@@ -68,7 +68,7 @@ include_once 'Carrega.class.php';
       echo json_encode(array("result"=>$resultado), JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);
     }
 
-    function getAllEventos()
+    function getAllEventos1()
     {
       //Em andamento
       $sql       = "SELECT * FROM eventos";
@@ -384,7 +384,24 @@ include_once 'Carrega.class.php';
       }
      echo json_encode(array("result"=>$resultado), JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT );
     }
+
+    function getAllEventos()
+    {
+      $sql = "SELECT * FROM eventos WHERE data_inicio BETWEEN NOW() AND CURRENT_DATE + INTERVAL '2 MONTH'";
+      $res = pg_query($sql);
+      $resultado = array();
+
+      while ($row = pg_fetch_array($res))
+      {
+         $object = new Eventos();
+         $object->id = $row['id_event'];
+         $object->evento = $row['evento'];
+         $object->dataInicio = $row['data_inicio'];
+         $object->dataFim = $row['data_fim'];
+         array_push($resultado, array('id'=>$object->id, 'evento'=>$object->evento, 'data de inicio'=>$object->dataInicio, 'data de fim'=>$object->dataFim));
+      }
+      echo json_encode(array("result"=>$resultado), JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT );
+    }
+
   }
-
-
 ?>
