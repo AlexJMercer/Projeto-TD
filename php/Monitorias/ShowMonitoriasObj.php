@@ -30,7 +30,7 @@ if(empty($_SESSION['email']) && empty($_SESSION['senha']) && empty($_SESSION['ti
     <link rel="stylesheet" href="../../dist/css/AdminLTE.min.css">
     <!-- AdminLTE Skins. Choose a skin from the css/skins
          folder instead of downloading all of them to reduce the load. -->
-    <link rel="stylesheet" href="../../dist/css/skins/_all-skins.min.css">
+    <link rel="stylesheet" href="../../dist/css/skins/skin-green-light.min.css">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -39,19 +39,17 @@ if(empty($_SESSION['email']) && empty($_SESSION['senha']) && empty($_SESSION['ti
         <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
   </head>
-  <body class="hold-transition skin-green sidebar-mini">
+  <body class="hold-transition skin-green-light sidebar-mini">
     <div class="wrapper">
-      <?php include '../inc/topotime.html';
-
+      <?php
+            include '../inc/topotime.html';
             include '../inc/menutime.php';
-
       ?>
       <div class="content-wrapper">
         <!-- Content Header (Page header) -->
         <section class="content-header">
           <h1>Monitorias</h1>
         </section>
-
         <!-- Main content -->
         <section class="content">
           <div class="row">
@@ -63,7 +61,7 @@ if(empty($_SESSION['email']) && empty($_SESSION['senha']) && empty($_SESSION['ti
                 </div><!-- /.box-header -->
 <?php
 
-  $id = $_POST["id"];
+  $id    = $_POST["id"];
   $curso = $_POST['curso'];
 
   if (isset($_POST["exibir"]))
@@ -89,7 +87,6 @@ if(empty($_SESSION['email']) && empty($_SESSION['senha']) && empty($_SESSION['ti
                       <dd> <textarea class="form-control"  rows="8" cols="40" disabled><?php echo $comp->info; ?></textarea></dd>
                     </dl>
                     <form action="EditMonitoriasObj.php" method="post">
-
                       <input type="hidden" name="id" value="<?php echo $id; ?>"/>
                       <input type="hidden" name="curso" value="<?php echo $curso; ?>">
                       <div class="col-sm-6">
@@ -116,7 +113,6 @@ if(empty($_SESSION['email']) && empty($_SESSION['senha']) && empty($_SESSION['ti
         include '../inc/control-sidebar.html';
       ?>
     </div><!-- ./wrapper -->
-
     <!-- jQuery 2.1.4 -->
     <script src="../../plugins/jQuery/jQuery-2.1.4.min.js"></script>
     <!-- Bootstrap 3.3.5 -->

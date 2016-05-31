@@ -30,7 +30,7 @@ if(empty($_SESSION['email']) && empty($_SESSION['senha']) && empty($_SESSION['ti
     <link rel="stylesheet" href="../../dist/css/AdminLTE.min.css">
     <!-- AdminLTE Skins. Choose a skin from the css/skins
          folder instead of downloading all of them to reduce the load. -->
-    <link rel="stylesheet" href="../../dist/css/skins/_all-skins.min.css">
+    <link rel="stylesheet" href="../../dist/css/skins/skin-green-light.min.css">
 
     <style type="text/css">
     .carregando
@@ -47,19 +47,17 @@ if(empty($_SESSION['email']) && empty($_SESSION['senha']) && empty($_SESSION['ti
         <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
   </head>
-  <body class="hold-transition skin-green sidebar-mini">
+  <body class="hold-transition skin-green-light sidebar-mini">
     <div class="wrapper">
-      <?php include '../inc/topotime.html';
-
+      <?php
+            include '../inc/topotime.html';
             include '../inc/menutime.php';
-
       ?>
       <div class="content-wrapper">
         <!-- Content Header (Page header) -->
         <section class="content-header">
           <h1>Monitorias</h1>
         </section>
-
         <!-- Main content -->
         <section class="content">
           <div class="row">
@@ -125,7 +123,6 @@ if(empty($_SESSION['email']) && empty($_SESSION['senha']) && empty($_SESSION['ti
                     <button type="submit" name="enviar" value="enviar" class="btn btn-success btn-flat btn-block">Enviar</button>
                     <br>
                     <button type="reset" class="btn btn-default btn-flat btn-block btn-sm ">Limpar</button>
-
                   </div><!-- /.box-footer -->
                 </form>
               </div><!-- /.box -->
@@ -139,7 +136,6 @@ if(empty($_SESSION['email']) && empty($_SESSION['senha']) && empty($_SESSION['ti
         include '../inc/control-sidebar.html';
       ?>
     </div><!-- ./wrapper -->
-
     <!-- jQuery 2.1.4 -->
     <script src="../../plugins/jQuery/jQuery-2.1.4.min.js"></script>
     <!-- Bootstrap 3.3.5 -->

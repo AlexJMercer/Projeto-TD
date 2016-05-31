@@ -30,11 +30,9 @@ if(empty($_SESSION['email']) && empty($_SESSION['senha']) && empty($_SESSION['ti
     <link rel="stylesheet" href="../../dist/css/AdminLTE.min.css">
     <!-- AdminLTE Skins. Choose a skin from the css/skins
          folder instead of downloading all of them to reduce the load. -->
-    <link rel="stylesheet" href="../../dist/css/skins/_all-skins.min.css">
+    <link rel="stylesheet" href="../../dist/css/skins/skin-green-light.min.css">
 
     <link rel="stylesheet" href="../../bootstrap/css/center.css">
-
-
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -44,11 +42,9 @@ if(empty($_SESSION['email']) && empty($_SESSION['senha']) && empty($_SESSION['ti
   </head>
   <body class="hold-transition skin-green-light sidebar-mini">
     <div class="wrapper">
-
-      <?php include '../inc/topotime.html';
-
+      <?php
+            include '../inc/topotime.html';
             include '../inc/menutime.php';
-
       ?>
       <!-- Content Wrapper. Contains page content -->
       <div class="content-wrapper">
@@ -59,7 +55,6 @@ if(empty($_SESSION['email']) && empty($_SESSION['senha']) && empty($_SESSION['ti
           <a class="btn btn-info btn-flat pull-right" href="CategoriaObj.php"><i class="fa fa-plus"></i>  ADD Categorias </a>
           </h1>
         </section>
-
         <!-- Main content -->
         <section class="content">
           <div class="row">
@@ -92,9 +87,7 @@ if(empty($_SESSION['email']) && empty($_SESSION['senha']) && empty($_SESSION['ti
                         <td><?php echo $line->setor; ?></td>
                         <td>
                           <input type='hidden' name='id' value='<?php echo $line->id; ?>'>
-
                           <button type="submit" name="editar" value="editar" class="btn btn-flat btn-warning"><i class="fa fa-edit"></i> Editar </button>
-
                           <button type="submit" name="excluir" value="excluir" formaction="CrudSetores.php" class='btn btn-flat btn-danger'><i class="fa fa-times"></i> Excluir </button>
                         </td>
                       </tr>
@@ -121,14 +114,11 @@ if(empty($_SESSION['email']) && empty($_SESSION['senha']) && empty($_SESSION['ti
           </div><!-- /.row -->
         </section><!-- /.content -->
       </div><!-- /.content-wrapper -->
-
       <?php
         include '../inc/footer.html';
         include '../inc/control-sidebar.html';
       ?>
-
     </div><!-- ./wrapper -->
-
     <!-- jQuery 2.1.4 -->
     <script src="../../plugins/jQuery/jQuery-2.1.4.min.js"></script>
     <!-- Bootstrap 3.3.5 -->

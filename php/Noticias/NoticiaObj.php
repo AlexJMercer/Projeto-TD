@@ -32,6 +32,8 @@ if(empty($_SESSION['email']) && empty($_SESSION['senha']) && empty($_SESSION['ti
     <link rel="stylesheet" href="../../plugins/fileinput/css/fileinput.min.css">
     <!-- Bootstrap time Picker -->
     <link rel="stylesheet" href="../../plugins/timepicker/bootstrap-timepicker.min.css">
+    <!--Loader-->
+    <link rel="stylesheet" href="../../dist/css/loader.css">
     <!-- Theme style -->
     <link rel="stylesheet" href="../../dist/css/AdminLTE.min.css">
     <!-- AdminLTE Skins. Choose a skin from the css/skins
@@ -46,11 +48,14 @@ if(empty($_SESSION['email']) && empty($_SESSION['senha']) && empty($_SESSION['ti
   </head>
   <body class="hold-transition skin-green-light sidebar-mini">
     <div class="wrapper">
+      <div id="container">
       <?php
             include '../inc/topotime.html';
             include '../inc/menutime.php';
       ?>
       <div class="content-wrapper">
+
+        <div id="loader"></div>
         <!-- Content Header (Page header) -->
         <section class="content-header">
             <h1>Notícias</h1>
@@ -151,25 +156,25 @@ if(empty($_SESSION['email']) && empty($_SESSION['senha']) && empty($_SESSION['ti
                 </form>
 
               </div><!-- /.box -->
-              <br>
-              <div class="element">
-
-              </div>
               <!-- general form elements disabled -->
             </div><!--/.col (right) -->
           </div>   <!-- /.row -->
         </section><!-- /.content -->
+
       </div><!-- /.content-wrapper -->
       <?php
         include '../inc/footer.html';
         include '../inc/control-sidebar.html';
       ?>
+      </div>
     </div><!-- ./wrapper -->
     <!-- jQuery 2.1.4 -->
     <script src="../../plugins/jQuery/jQuery-2.1.4.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
     <!-- Bootstrap 3.3.5 -->
     <script src="../../bootstrap/js/bootstrap.min.js"></script>
+    <!--Loader-->
+    <script src="../../plugins/fakeloader/fakeloader.min.js"></script>
     <!-- Select2 -->
     <script src="../../plugins/select2/select2.full.min.js"></script>
     <!--FileInput-->
@@ -189,6 +194,14 @@ if(empty($_SESSION['email']) && empty($_SESSION['senha']) && empty($_SESSION['ti
     <script src="../../dist/js/app.min.js"></script>
     <!-- AdminLTE for demo purposes -->
     <script src="../../dist/js/demo.js"></script>
+
+    <script type="text/javascript">
+		// Este evendo é acionado após o carregamento da página
+		jQuery(window).load(function() {
+			//Após a leitura da pagina o evento fadeOut do loader é acionado, esta com delay para ser perceptivo em ambiente fora do servidor.
+			jQuery("#loader").delay(2600).fadeOut();
+		});
+	</script>
 
     <script type="text/javascript">
     $(document).ready(function(){
@@ -234,5 +247,8 @@ if(empty($_SESSION['email']) && empty($_SESSION['senha']) && empty($_SESSION['ti
          }
     });
    </script>
+
+
+
   </body>
 </html>
