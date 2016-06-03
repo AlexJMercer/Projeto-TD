@@ -68,48 +68,6 @@ include_once 'Carrega.class.php';
       echo json_encode(array("result"=>$resultado), JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);
     }
 
-    function getAllEventos1()
-    {
-      //Em andamento
-      $sql       = "SELECT * FROM eventos";
-      $res       = pg_query($sql);
-      $resultado = array();
-
-      while ($row = pg_fetch_assoc($res))
-      {
-         $object                = new Eventos();
-         $object->id            = $row['id_event'];
-         $object->evento        = $row['evento'];
-         $object->dataInicio    = $row['dataInicio'];
-         $object->dataFim       = $row['dataFim'];
-         $object->horarioInicio = $row['horarioInicio'];
-         $object->horarioFim    = $row['horarioFim'];
-
-         array_push($resultado, array("id"=>$object->id, "evento"=>$object->evento, "dataInicio"=>$object->dataInicio, "dataFim"=>$object->dataFim, "horarioInicio"=>$object->horarioInicio, "horarioFim"=>$object->horarioFim));
-      }
-      echo json_encode(array("result"=>$resultado), JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);
-    }
-
-    function getEventosById($id='')
-    {
-      //Em andamento
-      $sql    = "SELECT * FROM eventos e, categorias c WHERE c.id=e.event_cat AND e.id_event = $id";
-      $res = pg_query($sql);
-      $resultado = array();
-
-      while ($row=pg_fetch_assoc($res))
-      {
-        $object            = new Connection();
-        $object->id        = $reg["id_event"];
-        $object->evento    = $reg['evento'];
-        $object->categoria = $reg['categoria'];
-        $object->texto     = $reg['texto'];
-        $object->imagem    = $reg['imagem'];
-        array_push($resultado, array("id"=>$object->id, "evento"=>$object->evento, "categoria"=>$object->categoria, "texto"=>$object->texto, "imagem"=>$object->imagem));
-      }
-      echo json_encode(array("result"=>$resultado), JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);
-    }
-
     function getAllCardapiosByDay($id='')
     {
       //Função Ok
@@ -200,7 +158,7 @@ include_once 'Carrega.class.php';
         array_push($resultado, array("id"=>$object->id, "curso"=>$object->curso, "disciplina"=>$object->disciplina));
       }
       echo json_encode(array("result"=>$resultado), JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);
-  }
+    }
 
 
     function getMonitoriaById($id)
@@ -387,20 +345,43 @@ include_once 'Carrega.class.php';
 
     function getAllEventos()
     {
-      $sql = "SELECT * FROM eventos WHERE data_inicio BETWEEN NOW() AND CURRENT_DATE + INTERVAL '2 MONTH'";
+      $sql = "SELECT * FROM eventos WHERE data_inicio BETWEEN NOW() AND CURRENT_DATE + INTERVAL '2 MONTH' ORDER BY data_inicio ASC";
       $res = pg_query($sql);
       $resultado = array();
 
       while ($row = pg_fetch_array($res))
       {
-         $object = new Eventos();
-         $object->id = $row['id_event'];
-         $object->evento = $row['evento'];
+         $object             = new Eventos();
+         $object->id         = $row['id_event'];
+         $object->evento     = $row['evento'];
          $object->dataInicio = $row['data_inicio'];
-         $object->dataFim = $row['data_fim'];
+         $object->dataFim    = $row['data_fim'];
          array_push($resultado, array('id'=>$object->id, 'evento'=>$object->evento, 'data de inicio'=>$object->dataInicio, 'data de fim'=>$object->dataFim));
       }
       echo json_encode(array("result"=>$resultado), JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT );
+    }
+
+    function getEventosById($id='')
+    {
+      //Em andamento
+      $sql    = "SELECT * FROM eventos e, categorias c WHERE c.id=e.event_cat AND e.id_event = $id";
+      $res = pg_query($sql);
+      $resultado = array();
+
+      while ($row=pg_fetch_assoc($res))
+      {
+        $object             = new Connection();
+        $object->id         = $row["id_event"];
+        $object->evento     = $row['evento'];
+        $object->dataInicio = date('d/m/Y', strtotime($row['data_inicio']));
+        $object->dataFim    = date('d/m/Y', strtotime($row['dataFim']));
+        $object->horario    = $row['horario'];
+        $object->categoria  = $row['categoria'];
+        $object->texto      = $row['texto'];
+        $object->imagem     = $row['imagem'];
+        array_push($resultado, array("id"=>$object->id, "evento"=>$object->evento, "categoria"=>$object->categoria, "texto"=>$object->texto, "imagem"=>$object->imagem));
+      }
+      echo json_encode(array("result"=>$resultado), JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);
     }
 
   }
