@@ -54,7 +54,6 @@ if(empty($_SESSION['email']) && empty($_SESSION['senha']) && empty($_SESSION['ti
             include '../inc/menutime.php';
       ?>
       <div class="content-wrapper">
-
         <div id="loader"></div>
         <!-- Content Header (Page header) -->
         <section class="content-header">
@@ -154,7 +153,6 @@ if(empty($_SESSION['email']) && empty($_SESSION['senha']) && empty($_SESSION['ti
                     <button type="reset" class="btn btn-default btn-flat btn-block btn-sm"><i class="fa fa-magic"></i> Limpar </button>
                   </div><!-- /.box-footer -->
                 </form>
-
               </div><!-- /.box -->
               <!-- general form elements disabled -->
             </div><!--/.col (right) -->
@@ -196,12 +194,12 @@ if(empty($_SESSION['email']) && empty($_SESSION['senha']) && empty($_SESSION['ti
     <script src="../../dist/js/demo.js"></script>
 
     <script type="text/javascript">
-		// Este evendo é acionado após o carregamento da página
-		jQuery(window).load(function() {
+		  // Este evendo é acionado após o carregamento da página
+		    jQuery(window).load(function() {
 			//Após a leitura da pagina o evento fadeOut do loader é acionado, esta com delay para ser perceptivo em ambiente fora do servidor.
-			jQuery("#loader").delay(2600).fadeOut();
-		});
-	</script>
+			    jQuery("#loader").delay(2600).fadeOut();
+		    });
+	  </script>
 
     <script type="text/javascript">
     $(document).ready(function(){

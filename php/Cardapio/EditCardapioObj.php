@@ -69,8 +69,6 @@ if(empty($_SESSION['email']) && empty($_SESSION['senha']) && empty($_SESSION['ti
     $edit = new Cardapios();
     $comp = $edit->EditarCardapios($id);
 
-    //print_r($comp->alimento);
-
     if ($edit != null)
     {
 ?>
@@ -88,21 +86,17 @@ if(empty($_SESSION['email']) && empty($_SESSION['senha']) && empty($_SESSION['ti
                         </div>
                       </div>
                       <div class="form-group">
-                        <label class="col-sm-2 control-label" for="reservation">Data:</label>
+                        <label class="col-sm-2 control-label" for="date">Data:</label>
                         <div class="col-sm-10">
-                          <input type="text" class="form-control" name="data" id="reservation" value="<?php echo date('d/m/Y',strtotime($comp->data)); ?>">
+                          <input type="text" class="form-control" name="data" id="date" placeholder="dd/mm/yyyy" value="<?php echo date('d/m/Y',strtotime($comp->data)); ?>" data-inputmask="'alias': 'dd/mm/yyyy'" data-mask required>
                         </div>
                       </div>
                       <div class="form-group">
-                        <label for="alimentosSEL" class="col-sm-2 control-label">Alimentos selecionados:</label>
-                          <div class="col-sm-10">
-                            <select class="form-control select2" id="alimentosSEL" name="alimento[]" multiple="multiple" style="width: 100%;">
-                              <option value=""></option>
-                              <?php $alimentoSelect = new Select();
-                                    $alimentoSelect->alimentoMulti($comp->alimento);
-                              ?>
-                            </select>
-                          </div>
+                        <?php $_SESSION['alimento_edit']=$comp->alimento; ?>
+                        <span id="listagemAlimentos"></span>
+                        <div class="col-sm-2">
+                         <button type="button" class="btn btn-info btn-flat" id="cadAli" name="button" style="width:100%;"><i class="fa fa-plus"></i> Adicionar Alimento </button>
+                        </div>
                       </div>
                   </div><!-- /.box-body -->
                   <div class="box-footer">

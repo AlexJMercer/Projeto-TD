@@ -279,10 +279,9 @@ class Select
 
     public function alimentoMulti($alimento ="")
     {
-       $sql = "SELECT * from alimentos";
+       $sql    = "SELECT * from alimentos";
        $result = pg_query($sql);
-
-       $ln=pg_num_rows($result);
+       $ln     = pg_num_rows($result);
 
        if ($ln==0)
        {
@@ -294,7 +293,6 @@ class Select
           {
             $this->id       = $a['id_ali'];
             $this->alimento = $a['alimento'];
-            //$count=count($a);
 
             if(in_array($this->id, $alimento))
             {
@@ -310,12 +308,10 @@ class Select
 
     public function categoriaMultiSelected($categoria ="")
     {
-
          //print_r($categoria);
          $sql    = "SELECT * from categorias Order By id_cat";
          $result = pg_query($sql);
-
-         $ln = pg_num_rows($result);
+         $ln     = pg_num_rows($result);
 
          if ($ln==0)
          {
