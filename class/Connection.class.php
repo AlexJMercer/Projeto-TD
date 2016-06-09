@@ -302,25 +302,75 @@ include_once 'Carrega.class.php';
       }
     }
 
-    function getAllEstagios($id='')
+    function getAllEstagios()
     {
-      //Em andamento
-      $sql = "SELECT * FROM noticias n, categorias_noticias cn WHERE n.id_not=cn.not_id AND cn.cat_id = $id ";
-      $res = pg_query($sql);
+      $sql       = "SELECT * FROM estagios ";
+      $res       = pg_query($sql);
       $resultado = array();
 
       while($row = pg_fetch_array($res))
       {
-        $object         = new Connection();
-        $object->id     = $row['id_not'];
+        $object         = new Estagios();
+        $object->id     = $row['id_est'];
         $object->titulo = $row['titulo'];
-        $object->data   = date('d/m/Y', strtotime($row['data']));
         array_push($resultado,
-        array('id'=>$object->id,'Descricao'=>$object->titulo,'Data'=>$object->data));
+        array('id'=>$object->id,'Titulo'=>$object->titulo));
       }
-
        echo json_encode(array("result"=>$resultado), JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT );
+    }
 
+    function getEstagioById($id = '')
+    {
+      $sql1 = "SELECT * FROM estagios e, estagio_cursos ec WHERE e.id_est=ec.est_id AND e.id_est=$id";
+      $sql2 = "SELECT c.nome FROM cursos c, estagio_cursos ec WHERE ec.est_id=$id AND c.id_curso=ec.curso_id";
+
+      $res1 = pg_query($sql1);
+      $res2 = pg_query($sql2);
+
+      $retorno = null;
+
+      while ($row = pg_fetch_assoc($res1))
+      {
+        $object             = new Estagios();
+        $object->id         = $row['id_est'];
+        $object->titulo     = $row['titulo'];
+        $object->atividades = $row['atividades'];
+        $object->salario    = $row['salario'];
+        $object->condicoes  = $row['condicoes'];
+        $object->exigencias = $row['exigencias'];
+        $object->info       = $row['info_est'];
+
+        foreach (pg_fetch_assoc($res2) as $value)
+        {
+          $temp[] = $value;
+        }
+        $object->curso = $temp;
+
+        $retorno = $object;
+      }
+      return $retorno;
+    }
+
+    function ShowEstagiosById($id='')
+    {
+       $estagios  = new Connection();
+       $show      = $estagios->getEstagioById($id);
+       $resultado = array();
+
+       if($show != null)
+       {
+          $titulo     = $show->titulo;
+          $atividades = $show->atividades;
+          $salario    = $show->salario;
+          $condicoes  = $show->condicoes;
+          $exigencias = $show->exigencias;
+          $info       = $show->info;
+          $cursos     = $show->curso;
+
+          array_push($resultado, array("titulo"=>$titulo, "atividades"=>$atividades, "salario"=>$salario, "condicoes"=>$condicoes, "exigencias"=>$exigencias, "informacoes"=>$info, "cursos"=>$cursos));
+
+          echo json_encode(array("result"=>$resultado), JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT );
+       }
     }
 
     function getAllAssistencias()
@@ -345,7 +395,8 @@ include_once 'Carrega.class.php';
 
     function getAllEventos()
     {
-      $sql = "SELECT * FROM eventos WHERE data_inicio BETWEEN NOW() AND CURRENT_DATE + INTERVAL '2 MONTH' ORDER BY data_inicio ASC";
+      $sql = "SELECT * FROM eventos WHERE data_inicio BETWEEN NOW() AND CURRENT_DATE + INTERVAL '2 MONTH'
+               OR data_fim BETWEEN NOW() AND CURRENT_DATE + INTERVAL '2 MONTH' ORDER BY data_inicio ASC";
       $res = pg_query($sql);
       $resultado = array();
 
@@ -354,8 +405,8 @@ include_once 'Carrega.class.php';
          $object             = new Eventos();
          $object->id         = $row['id_event'];
          $object->evento     = $row['evento'];
-         $object->dataInicio = $row['data_inicio'];
-         $object->dataFim    = $row['data_fim'];
+         $object->dataInicio = date('d/m/Y', strtotime($row['data_inicio']));
+         $object->dataFim    = date('d/m/Y', strtotime($row['data_fim']));
          array_push($resultado, array('id'=>$object->id, 'evento'=>$object->evento, 'data de inicio'=>$object->dataInicio, 'data de fim'=>$object->dataFim));
       }
       echo json_encode(array("result"=>$resultado), JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT );

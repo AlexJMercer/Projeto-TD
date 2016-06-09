@@ -6,7 +6,7 @@ echo "<h1>Página de testes</h1><br>";
 
 $n = new Connection();
 echo "<pre>";
-$n->getAllEventos();
+$n->ShowEstagiosById(1);
 //$pesquisa = "câmpus";
 //$n->searchAllNoticias($pesquisa);
 //$n->getAllCategorias();
