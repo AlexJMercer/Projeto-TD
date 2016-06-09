@@ -41,11 +41,13 @@ if(empty($_SESSION['email']) && empty($_SESSION['senha']) && empty($_SESSION['ti
   </head>
   <body class="hold-transition skin-green-light sidebar-mini">
     <div class="wrapper">
+      <div id="container">
       <?php
             include '../inc/topotime.html';
             include '../inc/menutime.php';
       ?>
       <div class="content-wrapper">
+        <div id="loader"></div>
         <!-- Content Header (Page header) -->
         <section class="content-header">
           <h1>Cardápios</h1>
@@ -80,16 +82,18 @@ if(empty($_SESSION['email']) && empty($_SESSION['senha']) && empty($_SESSION['ti
                         </div>
                       </div>
                       <div class="form-group">
-                          <label for="alimentos" class="col-sm-2 control-label">Alimentos:</label>
-                          <div class="col-sm-10">
-                            <select class="form-control select2" id="alimentos" name="alimento[]" multiple="multiple" style="width: 100%;" required>
-                              <option value=""></option>
-                              <?php $alimentoSelect = new Select();
-                                    $alimentoSelect->alimentoSelect();
-                              ?>
-                            </select>
+                          <?php
+                            if (isset($_SESSION['alimento_edit']))
+                            {
+                              unset($_SESSION['alimento_edit'])
+                            }
+                          ?>
+                          <span id="listagemAlimentos"></span>
+                          <div class="col-sm-2">
+                            <button type="button" class="btn btn-info btn-flat" id="cadAli" name="button" style="width:100%;"><i class="fa fa-plus"></i> Adicionar Alimento </button>
                           </div>
-                        </div>
+                          <div id="resposta"></div>
+                      </div>
                   </div><!-- /.box-body -->
                   <div class="box-footer">
                     <button type="submit" name="enviar" value="enviar" class="btn btn-success btn-flat btn-block">Enviar</button>
@@ -105,8 +109,8 @@ if(empty($_SESSION['email']) && empty($_SESSION['senha']) && empty($_SESSION['ti
       </div><!-- /.content-wrapper -->
       <?php
         include '../inc/footer.html';
-        include '../inc/control-sidebar.html';
       ?>
+      </div>
     </div><!-- ./wrapper -->
     <!-- jQuery 2.1.4 -->
     <script src="../../plugins/jQuery/jQuery-2.1.4.min.js"></script>
@@ -124,6 +128,14 @@ if(empty($_SESSION['email']) && empty($_SESSION['senha']) && empty($_SESSION['ti
     <script src="../../dist/js/demo.js"></script>
     <!-- Select2 -->
     <script src="../../plugins/select2/select2.full.min.js"></script>
+
+    <script type="text/javascript">
+		  // Este evendo é acionado após o carregamento da página
+		    jQuery(window).load(function() {
+			//Após a leitura da pagina o evento fadeOut do loader é acionado, esta com delay para ser perceptivo em ambiente fora do servidor.
+			    jQuery("#loader").delay(2600).fadeOut();
+		    });
+	  </script>
 
     <script type="text/javascript">
     $(function(){

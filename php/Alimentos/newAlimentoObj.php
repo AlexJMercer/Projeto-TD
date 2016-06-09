@@ -27,7 +27,7 @@
 
                function atualiza()
                {
-                  jQuery.get('../Alimento/listagem_alimento.php', function (resultado){
+                  jQuery.get('../Alimentos/listagem_alimentos.php', function (resultado){
                      jQuery('#listagemAlimentos').html(resultado);
                   })
                }
