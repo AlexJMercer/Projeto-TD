@@ -17,7 +17,7 @@ include_once "../../class/Carrega.class.php";
       $object->noticia     = $_POST['noticia'];
       $object->url         = $_POST['url'];
       //print_r($object);
-      if ($object->InserirNoticia())
+      if ($object->InserirNoticias())
       {
         if (!empty($_FILES["imagem"]["name"]))
         {
@@ -44,7 +44,7 @@ include_once "../../class/Carrega.class.php";
       $object->id = $_POST['id'];
 
       //print_r($object);
-      $object->Excluir();
+      $object->ExcluirNoticias();
 
       header("Location:ViewNoticiasObj.php");
    }
@@ -63,7 +63,7 @@ include_once "../../class/Carrega.class.php";
       $object->noticia     = $_POST['noticia'];
       $object->url         = $_POST['url'];
 
-      $object->Atualizar();
+      $object->AtualizarNoticias();
 
       $myUpload = new Upload($_FILES["imagem"]);
 

@@ -44,11 +44,13 @@ if(empty($_SESSION['email']) && empty($_SESSION['senha']) && empty($_SESSION['ti
   </head>
   <body class="hold-transition skin-green-light sidebar-mini">
     <div class="wrapper">
+      <div id="container">
       <?php
             include '../inc/topotime.html';
             include '../inc/menutime.php';
       ?>
       <div class="content-wrapper">
+        <div id="loader"></div>
         <!-- Content Header (Page header) -->
         <section class="content-header">
             <h1>Noticias</h1>
@@ -69,7 +71,7 @@ if(empty($_SESSION['email']) && empty($_SESSION['senha']) && empty($_SESSION['ti
                   if (isset($_POST["editar"]))
                   {
                     $edit = new Noticias();
-                    $comp = $edit->editar($id);
+                    $comp = $edit->EditarNoticias($id);
                     //print_r($comp);
                     //var_dump($comp);
                       if ($edit != null)
@@ -164,8 +166,8 @@ if(empty($_SESSION['email']) && empty($_SESSION['senha']) && empty($_SESSION['ti
       </div><!-- /.content-wrapper -->
       <?php
         include '../inc/footer.html';
-        //include '../inc/control-sidebar.html';
       ?>
+    </div><!-- /.container -->
     </div><!-- ./wrapper -->
     <!-- jQuery 2.1.4 -->
     <script src="../../plugins/jQuery/jQuery-2.1.4.min.js"></script>
@@ -180,8 +182,6 @@ if(empty($_SESSION['email']) && empty($_SESSION['senha']) && empty($_SESSION['ti
     <script src="../../plugins/input-mask/jquery.inputmask.js"></script>
     <script src="../../plugins/input-mask/jquery.inputmask.date.extensions.js"></script>
     <script src="../../plugins/input-mask/jquery.inputmask.extensions.js"></script>
-    <!-- bootstrap time picker -->
-    <script src="../../plugins/timepicker/bootstrap-timepicker.min.js"></script>
     <!-- FastClick -->
     <script src="../../plugins/fastclick/fastclick.min.js"></script>
     <!-- CK Editor -->
@@ -191,9 +191,15 @@ if(empty($_SESSION['email']) && empty($_SESSION['senha']) && empty($_SESSION['ti
     <!-- AdminLTE for demo purposes -->
     <script src="../../dist/js/demo.js"></script>
 
+    <script type="text/javascript">
+		  // Este evendo é acionado após o carregamento da página
+		    jQuery(window).load(function() {
+			//Após a leitura da pagina o evento fadeOut do loader é acionado, esta com delay para ser perceptivo em ambiente fora do servidor.
+			    jQuery("#loader").delay(2600).fadeOut();
+		    });
+	  </script>
 
     <script type="text/javascript">
-
     $(function(){
 
       $("#status").select2({
@@ -248,7 +254,7 @@ if(empty($_SESSION['email']) && empty($_SESSION['senha']) && empty($_SESSION['ti
          $("#cadCat").click(function(){
              $.ajax({
                  type: 'post',
-                 url: 'newCategoriaObj.php',
+                 url: '../Categoria/newCategoriaObj.php',
                  dataType: 'html',
                  success: function (txt) {
                      $('#resposta').html(txt);
@@ -259,7 +265,7 @@ if(empty($_SESSION['email']) && empty($_SESSION['senha']) && empty($_SESSION['ti
 
          function atualiza()
          {
-           $.get('listagem_categoria.php', function (resultado){
+           $.get('../Categoria/Listagem_Categorias_Multiple.php', function (resultado){
                 $('#listagemCategorias').html(resultado);
            })
          }

@@ -26,6 +26,8 @@ if(empty($_SESSION['email']) && empty($_SESSION['senha']) && empty($_SESSION['ti
     <link rel="stylesheet" href="../../plugins/ionicons-2.0.1/ionicons-2.0.1/css/ionicons.min.css">
     <!-- Select2 -->
     <link rel="stylesheet" href="../../plugins/select2/select2.min.css">
+    <!--Loader-->
+    <link rel="stylesheet" href="../../dist/css/loader.css">
     <!-- Theme style -->
     <link rel="stylesheet" href="../../dist/css/AdminLTE.min.css">
     <!-- AdminLTE Skins. Choose a skin from the css/skins
@@ -65,9 +67,9 @@ if(empty($_SESSION['email']) && empty($_SESSION['senha']) && empty($_SESSION['ti
                 <form class="form-horizontal" name="cadcardapio" id="form" method="post" action="CrudCardapios.php">
                   <div class="box-body">
                       <div class="form-group">
-                        <label for="day" class="col-sm-2 control-label">Dia:</label>
+                        <label for="dia" class="col-sm-2 control-label">Dia:</label>
                         <div class="col-sm-10">
-                          <select class="form-control" id="day" name="dia" style="width: 100%;" required>
+                          <select class="form-control" id="dia" name="dia" style="width: 100%;" required>
                             <option value=""></option>
                             <?php $diaSelect = new Dia();
                                   $diaSelect->diaSelect();
@@ -85,7 +87,7 @@ if(empty($_SESSION['email']) && empty($_SESSION['senha']) && empty($_SESSION['ti
                           <?php
                             if (isset($_SESSION['alimento_edit']))
                             {
-                              unset($_SESSION['alimento_edit'])
+                              unset($_SESSION['alimento_edit']);
                             }
                           ?>
                           <span id="listagemAlimentos"></span>
@@ -110,7 +112,7 @@ if(empty($_SESSION['email']) && empty($_SESSION['senha']) && empty($_SESSION['ti
       <?php
         include '../inc/footer.html';
       ?>
-      </div>
+     </div><!-- /.container -->
     </div><!-- ./wrapper -->
     <!-- jQuery 2.1.4 -->
     <script src="../../plugins/jQuery/jQuery-2.1.4.min.js"></script>
@@ -139,13 +141,35 @@ if(empty($_SESSION['email']) && empty($_SESSION['senha']) && empty($_SESSION['ti
 
     <script type="text/javascript">
     $(function(){
-      $(".select2").select2();
-
       //InputMask
       $("#datemask").inputmask("dd/mm/yyyy");
       //Money Euro
       $("[data-mask]").inputmask();
     });
     </script>
+
+    <script type="text/javascript">
+      $(document).ready(function(){
+         $("#cadAli").click(function(){
+             $.ajax({
+                 type: 'post',
+                 url: '../Alimentos/newAlimentoObj.php',
+                 dataType: 'html',
+                 success: function (txt) {
+                     $('#resposta').html(txt);
+                 }
+             });
+         });
+         atualiza();
+
+         function atualiza()
+         {
+             $.get('../Alimentos/Listagem_Alimentos.php', function (resultado){
+                  $('#listagemAlimentos').html(resultado);
+             })
+         }
+    });
+   </script>
+
   </body>
 </html>

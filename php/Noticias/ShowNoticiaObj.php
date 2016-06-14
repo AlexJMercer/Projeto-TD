@@ -70,9 +70,7 @@ if(empty($_SESSION['email']) && empty($_SESSION['senha']) && empty($_SESSION['ti
   if (isset($_POST["exibir"]))
   {
     $exib = new Noticias();
-    $comp = $exib->showNoticia($id);
-
-    //print_r($comp);
+    $comp = $exib->ShowNoticias($id);
 
     if ($exib != null)
     {
@@ -142,17 +140,14 @@ if(empty($_SESSION['email']) && empty($_SESSION['senha']) && empty($_SESSION['ti
     }
   }
 ?>
-              <!-- general form elements disabled -->
             </div>
           </div>   <!-- /.row -->
         </section><!-- /.content -->
       </div><!-- /.content-wrapper -->
       <?php
         include '../inc/footer.html';
-        include '../inc/control-sidebar.html';
       ?>
     </div><!-- ./wrapper -->
-
     <!-- jQuery 2.1.4 -->
     <script src="../../plugins/jQuery/jQuery-2.1.4.min.js"></script>
     <!-- Bootstrap 3.3.5 -->

@@ -143,7 +143,7 @@ if(empty($_SESSION['email']) && empty($_SESSION['senha']) && empty($_SESSION['ti
                       <div class="form-group">
                         <label for="imagem" class="col-sm-2 control-label">Adicionar imagem:</label>
                         <div class="col-sm-10">
-                              <input class="file" type="file" id="imagem" name="imagem" data-show-upload="false" data-min-file-count="0"/>
+                          <input class="file" type="file" id="imagem" name="imagem" data-show-upload="false" data-min-file-count="0"/>
                         </div>
                       </div>
                   </div><!-- /.box-body -->
@@ -158,21 +158,17 @@ if(empty($_SESSION['email']) && empty($_SESSION['senha']) && empty($_SESSION['ti
             </div><!--/.col (right) -->
           </div>   <!-- /.row -->
         </section><!-- /.content -->
-
       </div><!-- /.content-wrapper -->
       <?php
         include '../inc/footer.html';
-        include '../inc/control-sidebar.html';
       ?>
-      </div>
+      </div><!-- /.container -->
     </div><!-- ./wrapper -->
     <!-- jQuery 2.1.4 -->
     <script src="../../plugins/jQuery/jQuery-2.1.4.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
     <!-- Bootstrap 3.3.5 -->
     <script src="../../bootstrap/js/bootstrap.min.js"></script>
-    <!--Loader-->
-    <script src="../../plugins/fakeloader/fakeloader.min.js"></script>
     <!-- Select2 -->
     <script src="../../plugins/select2/select2.full.min.js"></script>
     <!--FileInput-->
@@ -208,7 +204,8 @@ if(empty($_SESSION['email']) && empty($_SESSION['senha']) && empty($_SESSION['ti
       });
 
       CKEDITOR.replace('noticia');
-});
+    });
+
       $('.file').fileinput({
           browseClass: "btn btn-info btn-flat btn-block",
           showCaption: false,
@@ -239,7 +236,7 @@ if(empty($_SESSION['email']) && empty($_SESSION['senha']) && empty($_SESSION['ti
 
          function atualiza()
          {
-             $.get('../Categoria/listagem_categoria.php', function (resultado){
+             $.get('../Categoria/Listagem_Categorias_Multiple.php', function (resultado){
                   $('#listagemCategorias').html(resultado);
              })
          }

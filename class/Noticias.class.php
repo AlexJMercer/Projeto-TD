@@ -46,11 +46,11 @@ class Noticias
          return $retorno;
       }
 
-      public function InserirNoticia()
+      public function InserirNoticias()
       {
          $this->transacao("BEGIN");
 
-         $sql    = "INSERT INTO noticias (autor, data, hora, titulo, linha_apoio, status, texto, url)
+         $sql    = "INSERT INTO noticias (autor, data, hora, titulo, linha_apoio, status_id, texto, url)
                     VALUES ('$this->autor', '$this->data', '$this->hora', '$this->titulo', '$this->linha_apoio', '$this->status', '$this->noticia', '$this->url')";
          $return = pg_query($sql);
 
@@ -81,7 +81,7 @@ class Noticias
            $this->transacao("ROLLBACK");
       }
 
-      public function listar()
+      public function ListarNoticias()
       {
          $sql    = "SELECT id_not, titulo, data FROM noticias Order by id_not desc";
          $result = pg_query($sql);
@@ -98,14 +98,14 @@ class Noticias
          return $return;
       }
 
-      public function Excluir()
+      public function ExcluirNoticias()
       {
          $sql    = "DELETE from noticias where id_not = $this->id";
          $return = pg_query($sql);
          return $return;
       }
 
-      public function Atualizar()
+      public function AtualizarNoticias()
       {
         $this->transacao("BEGIN");
 
@@ -114,7 +114,7 @@ class Noticias
                                       hora        = '$this->hora',
                                       titulo      = '$this->titulo',
                                       linha_apoio = '$this->linha_apoio',
-                                      status      = '$this->status',
+                                      status_id   = '$this->status',
                                       texto       = '$this->noticia',
                                       url         = '$this->url'
                                 WHERE id_not      =  $this->id";
@@ -149,10 +149,10 @@ class Noticias
           $this->transacao("ROLLBACK");
       }
 
-      public function Editar($id='')
+      public function EditarNoticias($id='')
       {
          $sql    = "SELECT * FROM noticias n, status s, imagens_noticias ino, usuarios u, categorias_noticias cn
-                     WHERE n.id_not = ino.noticia AND n.status = s.id_sta AND n.autor = u.id_user AND cn.not_id = n.id_not AND n.id_not = $id";
+                     WHERE n.id_not = ino.noticia AND n.status_id = s.id_sta AND n.autor = u.id_user AND cn.not_id = n.id_not AND n.id_not = $id";
          $sql2   = "SELECT c.id_cat FROM categorias c, categorias_noticias cn WHERE cn.not_id = $id AND c.id_cat = cn.cat_id";
 
          $result  = pg_query($sql);
@@ -195,10 +195,10 @@ class Noticias
         return $return;
       }
 
-      public function showNoticia($id="")
+      public function ShowNoticias($id="")
       {
         $sql     = "SELECT * FROM noticias n, status s, imagens_noticias ino, usuarios u, categorias_noticias cn
-                    WHERE n.id_not = ino.noticia AND n.status = s.id_sta AND n.autor = u.id_user AND cn.not_id = n.id_not AND n.id_not = $id";
+                    WHERE n.id_not = ino.noticia AND n.status_id = s.id_sta AND n.autor = u.id_user AND cn.not_id = n.id_not AND n.id_not = $id";
         $sql2    = "SELECT c.id_cat FROM categorias c, categorias_noticias cn WHERE cn.not_id = $id AND c.id_cat = cn.cat_id";
         $result  = pg_query($sql);
         $result2 = pg_query($sql2);
@@ -211,7 +211,7 @@ class Noticias
            $object->autor       = $reg['nome'];
            $object->titulo      = $reg['titulo'];
            $object->linha_apoio = $reg['linha_apoio'];
-           $object->status      = $reg['status'];
+           $object->status      = $reg['status_id'];
            $object->texto       = $reg['texto'];
            $object->url         = $reg['url'];
            $object->imagem      = $reg['imagem'];

@@ -8,19 +8,13 @@ class Select
 {
     public $id;
     public $semestre;
-    public $sala;
     public $dia;
     public $alimento;
-    public $curso;
-    public $categoria;
     public $status;
-    public $evento;
-    public $instituto;
     //public $;
     //public $;
     //public $;
     public $bd;
-
 
     function __construct()
     {
@@ -68,12 +62,12 @@ class Select
            print "<option value='{$this->id}'>{$this->semestre}</option>";
          }
        }
-     }
+      }
     }
 
     public function localSelect($sala="")
     {
-      $sql    = "SELECT * from local Order by id_lo";
+      $sql    = "SELECT * FROM local ORDER BY id_lo";
       $result = pg_query($sql);
       $ln     = pg_num_rows($result);
 
@@ -85,16 +79,17 @@ class Select
       {
         while ($a = pg_fetch_array($result))
         {
-         $this->id   = $a['id_lo'];
-         $this->sala = $a['sala'];
+          $object       = new Local();
+          $object->id   = $a['id_lo'];
+          $object->sala = $a['sala'];
 
-         if ($sala==$this->id)
+         if ($sala==$object->id)
          {
-           print "<option selected value='{$this->id}'>{$this->sala}</option>";
+           print "<option selected value='{$object->id}'>{$object->sala}</option>";
          }
          else
          {
-           print "<option value='{$this->id}'>{$this->sala}</option>";
+           print "<option value='{$object->id}'>{$object->sala}</option>";
          }
        }
      }
@@ -129,7 +124,7 @@ class Select
       }
     }
 
-    public function alimentoSelect($alimento="")
+    public function alimentoSelectOFF($alimento="")
     {
       $sql    = "SELECT * from alimentos Order by id_ali";
       $result = pg_query($sql);
@@ -250,7 +245,7 @@ class Select
 
     public function statusSelect($status="")
     {
-      $sql    = "SELECT * from status Order by id_sta";
+      $sql    = "SELECT * FROM status Order by id_sta";
       $result = pg_query($sql);
       $ln     = pg_num_rows($result);
 
@@ -277,9 +272,9 @@ class Select
       }
     }
 
-    public function alimentoMulti($alimento ="")
+    public function alimentoSelect($alimento ="")
     {
-       $sql    = "SELECT * from alimentos";
+       $sql    = "SELECT * FROM alimentos";
        $result = pg_query($sql);
        $ln     = pg_num_rows($result);
 
@@ -291,16 +286,31 @@ class Select
        {
           while ($a = pg_fetch_array($result))
           {
-            $this->id       = $a['id_ali'];
-            $this->alimento = $a['alimento'];
+            $object           = new Alimentos();
+            $object->id       = $a['id_ali'];
+            $object->alimento = $a['alimento'];
 
-            if(in_array($this->id, $alimento))
+            if (is_array($alimento))
             {
-               print "<option selected value='{$this->id}'>{$this->alimento}</option>";
+              if(in_array($object->id, $alimento))
+              {
+                 print "<option selected value='{$object->id}'>{$object->alimento}</option>";
+              }
+              else
+              {
+                 print "<option value='{$object->id}'>{$object->alimento}</option>";
+              }
             }
             else
             {
-               print "<option value='{$this->id}'>{$this->alimento}</option>";
+              if($object->id==$alimento)
+              {
+                 print "<option selected value='{$object->id}'>{$object->alimento}</option>";
+              }
+              else
+              {
+                 print "<option value='{$object->id}'>{$object->alimento}</option>";
+              }
             }
           }
         }
@@ -308,8 +318,7 @@ class Select
 
     public function categoriaMultiSelected($categoria ="")
     {
-         //print_r($categoria);
-         $sql    = "SELECT * from categorias Order By id_cat";
+         $sql    = "SELECT * FROM categorias ORDER BY id_cat";
          $result = pg_query($sql);
          $ln     = pg_num_rows($result);
 
@@ -321,54 +330,39 @@ class Select
          {
             while ($a = pg_fetch_assoc($result))
             {
-              $this->id        = $a['id_cat'];
-              $this->categoria = $a['categoria'];
+              $object            = new Categorias();
+              $object->id        = $a['id_cat'];
+              $object->categoria = $a['categoria'];
 
-              if(in_array($this->id, $categoria))
+              if (is_array($categoria))
               {
-                 print "<option selected value='{$this->id}'>{$this->categoria}</option>";
+                if(in_array($object->id, $categoria))
+                {
+                   print "<option selected value='{$object->id}'>{$object->categoria}</option>";
+                }
+                else
+                {
+                   print "<option value='{$object->id}'>{$object->categoria}</option>";
+                }
               }
               else
               {
-                 print "<option value='{$this->id}'>{$this->categoria}</option>";
+                if($object->id == $categoria)
+                {
+                   print "<option selected value='{$object->id}'>{$object->categoria}</option>";
+                }
+                else
+                {
+                   print "<option value='{$object->id}'>{$object->categoria}</option>";
+                }
               }
             }
           }
       }
 
-   public function categoriaUnselected($categoria ="")
-   {
-      $sql    = "SELECT * from categorias";
-      $result = pg_query($sql);
-
-      $ln = pg_num_rows($result);
-
-      if ($ln==0)
-      {
-         echo "<option value=''>Nada Encontrado!!</option>";
-      }
-      else
-      {
-         while ($a = pg_fetch_assoc($result))
-         {
-           $this->id        = $a['id'];
-           $this->categoria = $a['categoria'];
-           //$count=count($a);
-
-          // foreach ($categoria as $key)
-           //{
-            // if ($this->id!=$key)
-            // {
-               print "<option value='{$this->id}'>{$this->categoria}</option>";
-             //}
-           //}
-         }
-      }
-   }
-
    public function eventoSelect($evento='')
    {
-      $sql    = "SELECT * from eventos Order by id_event";
+      $sql    = "SELECT * FROM eventos ORDER BY id_event";
       $result = pg_query($sql);
       $ln     = pg_num_rows($result);
 
@@ -380,16 +374,17 @@ class Select
       {
          while ($a  = pg_fetch_array($result))
          {
-            $this->id     = $a['id_event'];
-            $this->evento = $a['evento'];
+            $object         = new Eventos();
+            $object->id     = $a['id_event'];
+            $object->evento = $a['evento'];
 
-            if ($evento==$this->id)
+            if ($evento==$object->id)
             {
-               print "<option selected value='{$this->id}'>{$this->evento}</option>";
+               print "<option selected value='{$object->id}'>{$object->evento}</option>";
             }
             else
             {
-               print "<option value='{$this->id}'>{$this->evento}</option>";
+               print "<option value='{$object->id}'>{$object->evento}</option>";
             }
          }
       }
@@ -397,9 +392,9 @@ class Select
 
    public function institutoSelect($id ="")
    {
-      $sql    = "SELECT * from instituto Order by id_inst";
+      $sql    = "SELECT * FROM instituto ORDER BY id_inst";
       $result = pg_query($sql);
-      $ln     =pg_num_rows($result);
+      $ln     = pg_num_rows($result);
 
      if ($ln==0)
      {
@@ -409,16 +404,17 @@ class Select
      {
        while ($a = pg_fetch_array($result))
        {
-         $this->id        = $a['id_inst'];
-         $this->instituto = $a['instituto'];
+         $object            = new Instituto();
+         $object->id        = $a['id_inst'];
+         $object->instituto = $a['instituto'];
 
-         if ($id==$this->id)
+         if ($id==$object->id)
          {
-           print "<option selected value='{$this->id}'>{$this->instituto}</option>";
+           print "<option selected value='{$object->id}'>{$object->instituto}</option>";
          }
          else
          {
-           print "<option value='{$this->id}'>{$this->instituto}</option>";
+           print "<option value='{$object->id}'>{$object->instituto}</option>";
          }
        }
      }
@@ -456,7 +452,7 @@ class Select
 
    public function labelCategorias($categoria = "")
    {
-     $sql    = "SELECT * from categorias";
+     $sql    = "SELECT * FROM categorias";
      $result = pg_query($sql);
      $ln     = pg_num_rows($result);
 
@@ -468,21 +464,22 @@ class Select
      {
         while ($a = pg_fetch_assoc($result))
         {
-          $this->id        = $a['id_cat'];
-          $this->categoria = $a['categoria'];
+          $object            = new Categorias();
+          $object->id        = $a['id_cat'];
+          $object->categoria = $a['categoria'];
 
           if (is_array($categoria))
           {
-            if(in_array($this->id, $categoria))
+            if(in_array($object->id, $categoria))
             {
-              print "<small class='label bg-blue'>{$this->categoria}</small>  ";
+              print "<small class='label bg-blue'>{$object->categoria}</small>  ";
             }
           }
           else
           {
             if($this->id==$categoria)
             {
-               print "<small class='label bg-blue'>{$this->categoria}</small>  ";
+               print "<small class='label bg-blue'>{$object->categoria}</small>  ";
             }
           }
         }
@@ -542,6 +539,35 @@ class Select
           }
         }
       }
+   }
+
+   public function diaSelectS($dia='')
+   {
+     $sql    = "SELECT * FROM dia ORDER BY id_dia";
+     $result = pg_query($sql);
+     $ln     = pg_num_rows($result);
+
+     if ($ln==0)
+     {
+       echo "<option value=''>Nada Encontrado!!</option>";
+     }
+     else
+     {
+       while ($a = pg_fetch_array($result))
+       {
+         $this->id  = $a['id_dia'];
+         $this->dia = $a['dia'];
+
+         if ($dia==$this->id)
+         {
+           print "<option selected value='{$this->id}'>{$this->dia}</option>";
+         }
+         else
+         {
+           print "<option value='{$this->id}'>{$this->dia}</option>";
+         }
+       }
+     }
    }
 }
 ?>

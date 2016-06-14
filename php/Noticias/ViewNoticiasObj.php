@@ -101,9 +101,7 @@ if(empty($_SESSION['email']) && empty($_SESSION['senha']) && empty($_SESSION['ti
 <?php
 
   $listar = new Noticias();
-  $list   = $listar->listar();
-  //print_r($list);
-
+  $list   = $listar->ListarNoticias();
 
   if ($list != null)
   {
@@ -144,7 +142,6 @@ if(empty($_SESSION['email']) && empty($_SESSION['senha']) && empty($_SESSION['ti
       </div><!-- /.content-wrapper -->
       <?php
         include '../inc/footer.html';
-        include '../inc/control-sidebar.html';
       ?>
     </div><!-- ./wrapper -->
     <!-- jQuery 2.1.4 -->
@@ -163,13 +160,10 @@ if(empty($_SESSION['email']) && empty($_SESSION['senha']) && empty($_SESSION['ti
     <script src="../../dist/js/app.min.js"></script>
     <!-- AdminLTE for demo purposes -->
     <script src="../../dist/js/demo.js"></script>
-    <!-- page script>
-    <script src="https://cdn.datatables.net/responsive/2.0.0/js/responsive.bootstrap.min.js"></script-->
     <script>
       $(function ()
       {
         $("#dataT").DataTable({
-
           "ordering": false,
           "oLanguage": { "sSearch": "",
                          "sInfo": "Um total de _TOTAL_ notícias (_START_ de _END_)",

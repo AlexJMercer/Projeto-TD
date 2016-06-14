@@ -247,7 +247,7 @@ include_once 'Carrega.class.php';
     {
       //Realiza a consulta pelos dados da noticia de acordo com a id da noticia
       $sql    = "SELECT * FROM noticias n, imagens_noticias ino, usuarios u, categorias_noticias cn
-                  WHERE n.id_not = ino.noticia AND n.autor = u.id_user AND cn.not_id = n.id_not AND n.id_not = $id";
+                  WHERE n.id_not = ino.noticia AND n.autor = u.id_user AND cn.not_id = n.id_not AND n.id_not = $id AND ";
       $sql2   = "SELECT c.categoria FROM categorias c, categorias_noticias cn WHERE cn.not_id = $id AND c.id_cat = cn.cat_id";
 
       $res  = pg_query($sql);
@@ -263,6 +263,7 @@ include_once 'Carrega.class.php';
         $object->imagem = $row['imagem'];
         $object->data   = $row['data'];
         $object->hora   = $row['hora'];
+        $object->status = $row['status']
         $object->url    = $row['url'];
 
         foreach (pg_fetch_assoc($res2) as $value)
@@ -294,9 +295,10 @@ include_once 'Carrega.class.php';
         $imagem    = $show->imagem;
         $data      = date('d/m/Y', strtotime($show->data));
         $hora      = date('H:i', strtotime($show->hora));
+        $status = $show->status;
         $url       = $show->url;
 
-        array_push($resultado, array("Imagem"=>$imagem, "hora"=>$hora, "data"=>$data, "Autor"=>$autor, "Categorias"=>$categoria, "url"=>$url, "Texto"=>$texto));
+        array_push($resultado, array("Imagem"=>$imagem, "hora"=>$hora, "data"=>$data, "Autor"=>$autor, "Categorias"=>$categoria, "Status"=>$status, "url"=>$url, "Texto"=>$texto));
 
         echo json_encode(array("result"=>$resultado), JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT );
       }

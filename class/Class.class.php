@@ -33,7 +33,7 @@ include_once 'Carrega.class.php';
        $this->$key = $value;
     }
 
-    public function Inserir($value='')
+    public function InserirClass()
     {
       # code...
     }
@@ -55,7 +55,7 @@ include_once 'Carrega.class.php';
 
     public function Editar($value='')
     {
-      # code...
+      
     }
 
   }

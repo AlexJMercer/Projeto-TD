@@ -26,6 +26,8 @@ if(empty($_SESSION['email']) && empty($_SESSION['senha']) && empty($_SESSION['ti
     <link rel="stylesheet" href="../../plugins/ionicons-2.0.1/ionicons-2.0.1/css/ionicons.min.css">
     <!-- Select2 -->
     <link rel="stylesheet" href="../../plugins/select2/select2.min.css">
+    <!--Loader-->
+    <link rel="stylesheet" href="../../dist/css/loader.css">
     <!-- Theme style -->
     <link rel="stylesheet" href="../../dist/css/AdminLTE.min.css">
     <!-- AdminLTE Skins. Choose a skin from the css/skins
@@ -41,12 +43,14 @@ if(empty($_SESSION['email']) && empty($_SESSION['senha']) && empty($_SESSION['ti
   </head>
   <body class="hold-transition skin-green-light sidebar-mini">
     <div class="wrapper">
+      <div id="container">
       <?php
             include '../inc/topotime.html';
             include '../inc/menutime.php';
       ?>
       <div class="content-wrapper">
         <!-- Content Header (Page header) -->
+        <div id="loader"></div>
         <section class="content-header">
           <h1>Cardápios</h1>
         </section>
@@ -97,6 +101,7 @@ if(empty($_SESSION['email']) && empty($_SESSION['senha']) && empty($_SESSION['ti
                         <div class="col-sm-2">
                          <button type="button" class="btn btn-info btn-flat" id="cadAli" name="button" style="width:100%;"><i class="fa fa-plus"></i> Adicionar Alimento </button>
                         </div>
+                        <div id="resposta"></div>
                       </div>
                   </div><!-- /.box-body -->
                   <div class="box-footer">
@@ -118,8 +123,8 @@ if(empty($_SESSION['email']) && empty($_SESSION['senha']) && empty($_SESSION['ti
       ?>
       <?php
         include '../inc/footer.html';
-        include '../inc/control-sidebar.html';
       ?>
+      </div><!-- /.container -->
     </div><!-- ./wrapper -->
     <!-- jQuery 2.1.4 -->
     <script src="../../plugins/jQuery/jQuery-2.1.4.min.js"></script>
@@ -127,63 +132,56 @@ if(empty($_SESSION['email']) && empty($_SESSION['senha']) && empty($_SESSION['ti
     <script src="../../bootstrap/js/bootstrap.min.js"></script>
     <!-- FastClick -->
     <script src="../../plugins/fastclick/fastclick.min.js"></script>
+    <!-- Select2 -->
+    <script src="../../plugins/select2/select2.full.min.js"></script>
+    <!-- InputMask -->
+    <script src="../../plugins/input-mask/jquery.inputmask.js"></script>
+    <script src="../../plugins/input-mask/jquery.inputmask.date.extensions.js"></script>
+    <script src="../../plugins/input-mask/jquery.inputmask.extensions.js"></script>
     <!-- AdminLTE App -->
     <script src="../../dist/js/app.min.js"></script>
     <!-- AdminLTE for demo purposes -->
     <script src="../../dist/js/demo.js"></script>
-    <!-- Select2 -->
-    <script src="../../plugins/select2/select2.full.min.js"></script>
-    <!-- bootstrap time picker -->
-    <script src="../../plugins/timepicker/bootstrap-timepicker.min.js"></script>
 
-    <!-- date-range-picker -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.2/moment.min.js"></script>
-    <script src="../../plugins/daterangepicker/daterangepicker.js"></script>
+    <script type="text/javascript">
+		  // Este evendo é acionado após o carregamento da página
+		    jQuery(window).load(function() {
+			//Após a leitura da pagina o evento fadeOut do loader é acionado, esta com delay para ser perceptivo em ambiente fora do servidor.
+			    jQuery("#loader").delay(2600).fadeOut();
+		    });
+	  </script>
 
     <script type="text/javascript">
     $(function(){
       $("#dia").select2();
-      $("#alimentosSEL").select2();
-      $("#alimentos").select2();
-
-      $('#reservation').daterangepicker({
-        singleDatePicker: true,
-        format: 'DD/MM/YYYY',
-        "locale": {
-        "format": "DD/MM/YYYY",
-        "separator": " - ",
-        "applyLabel": "Apply",
-        "cancelLabel": "Cancel",
-        "fromLabel": "From",
-        "toLabel": "To",
-        "customRangeLabel": "Custom",
-        "daysOfWeek": [
-            "Dom",
-            "Seg",
-            "Ter",
-            "Qua",
-            "Qui",
-            "Sex",
-            "Sab"
-        ],
-        "monthNames": [
-            "Janeiro",
-            "Feveireiro",
-            "Março",
-            "Abril",
-            "Maio",
-            "Junho",
-            "Julho",
-            "Agosto",
-            "Setembro",
-            "Outubro",
-            "Novembro",
-            "Dezembro"
-        ],
-        "firstDay": 1
-    },
-      });
+      //InputMask
+      $("#datemask").inputmask("dd/mm/yyyy");
+      //Money Euro
+      $("[data-mask]").inputmask();
     });
     </script>
+
+    <script type="text/javascript">
+      $(document).ready(function(){
+         $("#cadAli").click(function(){
+             $.ajax({
+                 type: 'post',
+                 url: '../Alimentos/newAlimentoObj.php',
+                 dataType: 'html',
+                 success: function (txt) {
+                     $('#resposta').html(txt);
+                 }
+             });
+         });
+         atualiza();
+
+         function atualiza()
+         {
+             $.get('../Alimentos/Listagem_Alimentos.php', function (resultado){
+                  $('#listagemAlimentos').html(resultado);
+             })
+         }
+    });
+   </script>
   </body>
 </html>
