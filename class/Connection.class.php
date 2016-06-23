@@ -209,7 +209,7 @@ include_once 'Carrega.class.php';
     {
       //Função Ok
       //Realiza uma listagem geral das noticias
-      $sql = "SELECT * FROM noticias";
+      $sql = "SELECT * FROM noticias n WHERE n.status_id='3' OR n.status_id='4'";
       $res = pg_query($sql);
       $resultado = array();
 
@@ -263,7 +263,7 @@ include_once 'Carrega.class.php';
         $object->imagem = $row['imagem'];
         $object->data   = $row['data'];
         $object->hora   = $row['hora'];
-        $object->status = $row['status']
+        $object->status = $row['status'];
         $object->url    = $row['url'];
 
         foreach (pg_fetch_assoc($res2) as $value)

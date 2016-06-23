@@ -179,7 +179,6 @@ class Noticias
 
             $retorno = $object;
          }
-
          return $retorno;
       }
 
@@ -211,7 +210,7 @@ class Noticias
            $object->autor       = $reg['nome'];
            $object->titulo      = $reg['titulo'];
            $object->linha_apoio = $reg['linha_apoio'];
-           $object->status      = $reg['status_id'];
+           $object->status      = $reg['status'];
            $object->texto       = $reg['texto'];
            $object->url         = $reg['url'];
            $object->imagem      = $reg['imagem'];
