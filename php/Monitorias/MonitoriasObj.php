@@ -37,6 +37,7 @@ if(empty($_SESSION['email']) && empty($_SESSION['senha']) && empty($_SESSION['ti
     {
       color:#666;
       display:none;
+      padding-top: 5px;
     }
     </style>
 
@@ -84,7 +85,13 @@ if(empty($_SESSION['email']) && empty($_SESSION['senha']) && empty($_SESSION['ti
                       <div class="form-group">
                         <label class="col-sm-2 control-label" for="disciplina">Disciplina:</label>
                         <div class="col-sm-10">
-                          <span class="carregando">Aguarde, carregando...</span>
+                          <span class="carregando">
+                          <div class="progress active">
+                            <div class="progress-bar progress-bar-info progress-bar-striped" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%; height:34px;">
+                              <span>Carregando...</span>
+                            </div>
+                          </div>
+                          </span>
                            <select class="form-control select2" name="disciplina" id="disciplina" required>
                               <option value=""></option>
                            </select>
