@@ -318,7 +318,7 @@ class Select
 
     public function categoriaMultiSelected($categoria ="")
     {
-         $sql    = "SELECT * FROM categorias ORDER BY id_cat";
+         $sql    = "SELECT * FROM categorias ORDER BY categoria";
          $result = pg_query($sql);
          $ln     = pg_num_rows($result);
 

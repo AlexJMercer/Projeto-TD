@@ -49,7 +49,11 @@ if(empty($_SESSION['email']) && empty($_SESSION['senha']) && empty($_SESSION['ti
               }
     </style>
   </head>
+<<<<<<< HEAD
   <body class="hold-transition skin-green-light sidebar-mini" id="change-transitions" data-value="slideInDown">
+=======
+  <body class="hold-transition skin-green-light sidebar-mini">
+>>>>>>> origin/master
     <div class="wrapper">
       <?php include '../inc/topotime.html';
 

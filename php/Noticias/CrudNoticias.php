@@ -46,7 +46,7 @@ include_once "../../class/Carrega.class.php";
       //print_r($object);
       $object->ExcluirNoticias();
 
-      header("Location:ViewNoticiasObj.php");
+      header("Location:ViewNoticiasObj.php?excluirOK");
    }
 
    elseif (isset($_POST['atualizar']))

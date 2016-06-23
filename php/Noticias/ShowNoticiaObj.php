@@ -65,38 +65,38 @@ if(empty($_SESSION['email']) && empty($_SESSION['senha']) && empty($_SESSION['ti
                 </div><!-- /.box-header -->
 <?php
 
-  $id = $_POST["id"];
+   $id = $_POST["id"];
 
-  if (isset($_POST["exibir"]))
-  {
-    $exib = new Noticias();
-    $comp = $exib->ShowNoticias($id);
+   if (isset($_POST["exibir"]))
+   {
+      $exib = new Noticias();
+      $comp = $exib->ShowNoticias($id);
 
-    if ($exib != null)
-    {
+      if ($exib != null)
+      {
 ?>
                 <div class="box-body">
                   <div class="form-group">
-                    <div class="col-sm-7">
+                    <div class="col-sm-8">
                       <?php echo $comp->texto; ?>
                       <br>
                       <dl>
                         <dt>Escrito por:</dt>
                         <dd><?php echo $comp->autor; ?></dd>
-                        <dt>Categorias:</dt>
-                        <dd><?php
-                                  $label = new Categorias();
-                                  $label->labelCategorias($comp->categoria);
-                        ?></dd>
                         <dt>Data e hora:</dt>
                         <dd><?php
-                                  echo date('d/m/Y', strtotime($comp->data));
-                                  echo " - ";
-                                  echo date('H:i', strtotime($comp->hora));
+                                 echo date('d/m/Y', strtotime($comp->data));
+                                 echo " - ";
+                                 echo date('H:i', strtotime($comp->hora));
                             ?></dd>
+                        <dt>Categorias:</dt>
+                        <dd><?php
+                                 $label = new Categorias();
+                                 $label->labelCategorias($comp->categoria);
+                        ?></dd>
                       </dl>
                     </div>
-                    <div class="col-sm-5" style="align: center;">
+                    <div class="col-sm-4" style="align: center;">
                       <br>
                       <img class="img-responsive-pad " src="<?php echo $comp->imagem; ?>" alt="Imagem" width="100%" height="100%" />
                     </div>

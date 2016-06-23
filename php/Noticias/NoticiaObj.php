@@ -171,7 +171,7 @@ if(empty($_SESSION['email']) && empty($_SESSION['senha']) && empty($_SESSION['ti
     <script src="../../bootstrap/js/bootstrap.min.js"></script>
     <!-- Select2 -->
     <script src="../../plugins/select2/select2.full.min.js"></script>
-    <!--FileInput-->
+    <!-- FileInput -->
     <script src="../../plugins/fileinput/js/fileinput.min.js" type="text/javascript"></script>
     <script src="../../plugins/fileinput/js/fileinput_locale_pt-BR.js" type="text/javascript"></script>
     <!-- InputMask -->
@@ -236,7 +236,7 @@ if(empty($_SESSION['email']) && empty($_SESSION['senha']) && empty($_SESSION['ti
 
          function atualiza()
          {
-             $.get('../Categoria/Listagem_Categorias_Multiple.php', function (resultado){
+             $.get('../Categoria/listagem_categorias_multiple.php', function (resultado){
                   $('#listagemCategorias').html(resultado);
              })
          }

@@ -5,7 +5,7 @@ date_default_timezone_set('America/Sao_Paulo');
 
 session_start();
 
-if(empty($_SESSION['email']) && empty($_SESSION['senha']) && empty($_SESSION['tipo_usuario']) && empty($_SESSION['nome']) && empty($_SESSION['id']))
+if(empty($_SESSION['email']) && empty($_SESSION['tipo_usuario']) && empty($_SESSION['nome']) && empty($_SESSION['id']))
 {
    header('Location:../index/login_page.php?notlogged');
    exit;
@@ -72,8 +72,8 @@ if(empty($_SESSION['email']) && empty($_SESSION['senha']) && empty($_SESSION['ti
                   {
                     $edit = new Noticias();
                     $comp = $edit->EditarNoticias($id);
-                    //print_r($comp);
-                    //var_dump($comp);
+                    print_r($comp);
+                    var_dump($comp);
                       if ($edit != null)
                       {
                 ?>
