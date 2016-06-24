@@ -1,10 +1,11 @@
 <?php
 
 include_once "../../class/Carrega.class.php";
-
+ini_set('session.save_path', '../tmp');
+//ob_start();
 session_start();
 
-if(empty($_SESSION['email']) && empty($_SESSION['senha']) && empty($_SESSION['tipo_usuario']) && empty($_SESSION['nome']) && empty($_SESSION['id']))
+if(empty($_SESSION['email']) && empty($_SESSION['tipo_usuario']) && empty($_SESSION['nome']) && empty($_SESSION['id']))
 {
    header('Location:login_page.php?notlogged');
    exit;
@@ -49,16 +50,11 @@ if(empty($_SESSION['email']) && empty($_SESSION['senha']) && empty($_SESSION['ti
               }
     </style>
   </head>
-<<<<<<< HEAD
-  <body class="hold-transition skin-green-light sidebar-mini" id="change-transitions" data-value="slideInDown">
-=======
   <body class="hold-transition skin-green-light sidebar-mini">
->>>>>>> origin/master
     <div class="wrapper">
-      <?php include '../inc/topotime.html';
-
+      <?php
+            include '../inc/topotime.html';
             include '../inc/menutime.php';
-
       ?>
       <div class="content-wrapper" >
         <!-- Content Header (Page header) -->
@@ -72,8 +68,7 @@ if(empty($_SESSION['email']) && empty($_SESSION['senha']) && empty($_SESSION['ti
           <div class="row">
             <?php
               print_r($_SESSION);
-              ?>
-
+            ?>
             <!--Bloco-->
             <div class="col-lg-3 col-xs-6">
               <!-- small box -->
@@ -296,7 +291,6 @@ if(empty($_SESSION['email']) && empty($_SESSION['senha']) && empty($_SESSION['ti
       <?php
         include '../inc/footer.html';
       ?>
-
     </div><!-- ./wrapper -->
     <!-- jQuery 2.1.4 -->
     <script src="../../plugins/jQuery/jQuery-2.1.4.min.js"></script>
@@ -304,9 +298,6 @@ if(empty($_SESSION['email']) && empty($_SESSION['senha']) && empty($_SESSION['ti
     <script src="../../bootstrap/js/bootstrap.min.js"></script>
     <!-- FastClick -->
     <script src="../../plugins/fastclick/fastclick.min.js"></script>
-    <!-- Animation -->
-    <script src="../../plugins/animation/animation.js"></script>
-    <script src="../../plugins/animation/jquery.cookie.js"></script>
     <!-- AdminLTE App -->
     <script src="../../dist/js/app.min.js"></script>
     <!-- AdminLTE for demo purposes -->

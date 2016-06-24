@@ -7,7 +7,7 @@
         <img src="../../dist/img/LogoIFSP.jpg" class="img-circle" alt="User Image">
       </div>
       <div class="pull-left info">
-        <p>Teste</p>
+        <p><?php echo $_SESSION['nome']; ?></p>
         <h6><i class="fa fa-circle text-success"></i> Administrador </h6>
       </div>
     </div>

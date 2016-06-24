@@ -1,7 +1,7 @@
 <?php
 
 include_once "../../class/Carrega.class.php";
-
+ini_set('session.save_path', '../tmp');
 session_start();
 
 if(empty($_SESSION['email']) && empty($_SESSION['senha']) && empty($_SESSION['tipo_usuario']) && empty($_SESSION['nome']) && empty($_SESSION['id']))

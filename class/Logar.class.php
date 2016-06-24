@@ -37,6 +37,7 @@ class Logar
 
     if ($usr == 1)
     {
+      ini_set('session.save_path', '../tmp');
       session_start();
       while ($reg = pg_fetch_assoc($result))
       {
