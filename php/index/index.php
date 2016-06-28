@@ -1,7 +1,7 @@
 <?php
 
 include_once "../../class/Carrega.class.php";
-ini_set('session.save_path', '../tmp');
+/*ini_set('session.save_path', '../tmp');
 //ob_start();
 session_start();
 
@@ -9,9 +9,9 @@ if(empty($_SESSION['email']) && empty($_SESSION['tipo_usuario']) && empty($_SESS
 {
    header('Location:login_page.php?notlogged');
    exit;
-}
+}*/
 
-//include "../testesession.php";
+include "../Session.php";
 
 ?>
 <!DOCTYPE html>

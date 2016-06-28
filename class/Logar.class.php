@@ -59,6 +59,7 @@ class Logar
 
   public function Logout()
   {
+    ini_set('session.save_path', '../tmp');
     session_start();
     session_unset();
     session_destroy();
