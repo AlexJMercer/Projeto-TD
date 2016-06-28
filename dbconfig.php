@@ -2,10 +2,10 @@
 
    return array(
 
-      "host" => "localhost",
-      "usuario" => "postgres",
-      "senha" => "senha5",
-      "banco" => "todentro",
+      "host" => "bancotodentro.postgresql.dbaas.com.br",
+      "usuario" => "bancotodentro",
+      "senha" => "todentro2",
+      "banco" => "bancotodentro",
       "port" => "5432",
 
       );
