@@ -2,13 +2,8 @@
 
 include_once "../../class/Carrega.class.php";
 
-session_start();
+include "../Session.php";
 
-if(empty($_SESSION['email']) && empty($_SESSION['senha']) && empty($_SESSION['tipo_usuario']) && empty($_SESSION['nome']) && empty($_SESSION['id']))
-{
-   header('Location:../index/login_page.php?notlogged');
-   exit;
-}
 ?>
 <!DOCTYPE html>
 <html>
@@ -153,7 +148,7 @@ if(empty($_SESSION['email']) && empty($_SESSION['senha']) && empty($_SESSION['ti
          $("#cadAli").click(function(){
              $.ajax({
                  type: 'post',
-                 url: '../Alimentos/newAlimentoObj.php',
+                 url: '../alimentos/newAlimentoObj.php',
                  dataType: 'html',
                  success: function (txt) {
                      $('#resposta').html(txt);
@@ -164,7 +159,7 @@ if(empty($_SESSION['email']) && empty($_SESSION['senha']) && empty($_SESSION['ti
 
          function atualiza()
          {
-             $.get('../Alimentos/Listagem_Alimentos.php', function (resultado){
+             $.get('../alimentos/Listagem_Alimentos.php', function (resultado){
                   $('#listagemAlimentos').html(resultado);
              })
          }

@@ -17,7 +17,7 @@
 			jQuery.ajax(
       {
 				type: "POST",
-				url: "cadAlimento.php",
+				url: "../alimentos/cadAlimentos.php",
 				data: dados,
             success: function (data)
             {
@@ -27,7 +27,7 @@
 
                function atualiza()
                {
-                  jQuery.get('../Alimentos/Listagem_Alimentos.php', function (resultado){
+                  jQuery.get('../alimentos/Listagem_Alimentos.php', function (resultado){
                      jQuery('#listagemAlimentos').html(resultado);
                   })
                }

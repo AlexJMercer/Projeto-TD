@@ -17,7 +17,7 @@
 			jQuery.ajax(
       {
 				type: "POST",
-				url: "../Categoria/cadCategoria.php",
+				url: "../categoria/cadCategoria.php",
 				data: dados,
             success: function (data)
             {
@@ -27,7 +27,7 @@
 
                function atualiza()
                {
-                  jQuery.get('../Categoria/listagem_categorias_multiple.php', function (resultado){
+                  jQuery.get('../categoria/listagem_categorias_multiple.php', function (resultado){
                      jQuery('#listagemCategorias').html(resultado);
                   })
                }

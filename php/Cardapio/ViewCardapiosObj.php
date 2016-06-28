@@ -2,13 +2,8 @@
 
 include_once "../../class/Carrega.class.php";
 
-session_start();
+include "../Session.php";
 
-if(empty($_SESSION['email']) && empty($_SESSION['senha']) && empty($_SESSION['tipo_usuario']) && empty($_SESSION['nome']) && empty($_SESSION['id']))
-{
-   header('Location:../index/login_page.php?notlogged');
-   exit;
-}
 ?>
 <!DOCTYPE html>
 <html>
