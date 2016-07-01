@@ -44,9 +44,8 @@ include "../Session.php";
       <div class="content-wrapper">
         <!-- Content Header (Page header) -->
         <section class="content-header">
-          <h1>
-          Estágios
-          </h1>
+          <h1>Estágios</h1>
+          <a class="btn btn-primary btn-flat pull-right" href="EstagioObj.php"><i class="fa fa-plus"></i>   Cadastrar estágio </a>
         </section>
         <!-- Main content -->
         <section class="content">
@@ -55,6 +54,7 @@ include "../Session.php";
               <div class="box box-info">
                 <div class="box-header">
                   <h3 class="box-title">Listagem de estágios</h3>
+                  <a class="btn btn-info btn-flat pull-right" href="ViewEstagiosObj.php" title="Atualizar resultados" data-toggle="tooltip" data-placement="left"><i class="fa fa-refresh"></i></a>
                 </div><!-- /.box-header -->
                 <div class="box-body">
                   <table id="dataT" class="table table-bordered table-hover">
@@ -97,9 +97,7 @@ include "../Session.php";
                         <p> Nada cadastrado!!</p>
                       </td>
                       <td>
-
                         <button type="button" class="btn btn-flat btn-warning" disabled><i class="fa fa-edit"></i> Editar </button>
-
                         <button type="button" class='btn btn-flat btn-danger' disabled><i class="fa fa-times"></i> Excluir </button>
                       </td>
                     </tr>
@@ -115,16 +113,10 @@ include "../Session.php";
           </div><!-- /.row -->
         </section><!-- /.content -->
       </div><!-- /.content-wrapper -->
-
       <?php
         include '../inc/footer.html';
-        include '../inc/control-sidebar.html';
       ?>
-
-
-
     </div><!-- ./wrapper -->
-
     <!-- jQuery 2.1.4 -->
     <script src="../../plugins/jQuery/jQuery-2.1.4.min.js"></script>
     <!-- Bootstrap 3.3.5 -->
@@ -132,7 +124,7 @@ include "../Session.php";
     <!-- DataTables -->
     <script src="../../plugins/datatables/jquery.dataTables.min.js"></script>
     <script src="../../plugins/datatables/dataTables.bootstrap.min.js"></script>
-      <script src="../../plugins/datatables/extensions/Responsive/js/dataTables.responsive.min.js"></script>
+    <script src="../../plugins/datatables/extensions/Responsive/js/dataTables.responsive.min.js"></script>
     <!-- SlimScroll -->
     <script src="../../plugins/slimScroll/jquery.slimscroll.min.js"></script>
     <!-- FastClick -->

@@ -7,9 +7,15 @@ include_once "../../class/Carrega.class.php";
       $object            = new Categorias();
       $object->categoria = $_POST['categoria'];
 
-      $object->InserirCategorias();
+      if ($object->InserirCategorias())
+      {
+        header("Location:ViewCategoriasObj.php?success=1");
+      }
+      else
+      {
+        header("Location:ViewCategoriasObj.php?erro=1");
+      }
 
-      header("Location:ViewCategoriasObj.php");
   }
 
   else if (isset($_POST['excluir']))
@@ -19,7 +25,7 @@ include_once "../../class/Carrega.class.php";
 
       $object->ExcluirCategorias();
 
-      header("Location:ViewCategoriasObj.php");
+      header("Location:ViewCategoriasObj.php?success=1");
   }
 
   else if (isset($_POST['atualizar']) && !empty($_POST['categoria']))

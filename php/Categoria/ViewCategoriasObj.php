@@ -9,7 +9,7 @@ include "../Session.php";
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>AdminLTE 2 | Data Tables</title>
+    <title>AdminLTE 2</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <!-- Bootstrap 3.3.5 -->
@@ -20,6 +20,8 @@ include "../Session.php";
     <link rel="stylesheet" href="../../plugins/ionicons-2.0.1/ionicons-2.0.1/css/ionicons.min.css">
     <!-- DataTables -->
     <link rel="stylesheet" href="../../plugins/datatables/dataTables.bootstrap.css">
+    <!-- Toast -->
+    <link rel="stylesheet" href="../../plugins/toastr/jquery.toast.css" type="text/css">
     <!-- Theme style -->
     <link rel="stylesheet" href="../../dist/css/AdminLTE.min.css">
     <!-- AdminLTE Skins. Choose a skin from the css/skins
@@ -27,6 +29,7 @@ include "../Session.php";
     <link rel="stylesheet" href="../../dist/css/skins/skin-green-light.min.css">
 
     <link rel="stylesheet" href="../../bootstrap/css/center.css">
+
     <style type='text/css'>
       .alerta{
         /*display: none;*/
@@ -52,16 +55,17 @@ include "../Session.php";
         <section class="content-header">
           <h1>
           Categorias
-          <a class="btn btn-info btn-flat pull-right" href="CategoriaObj.php"><i class="fa fa-plus"></i>  ADD Categorias </a>
+          <a class="btn btn-primary btn-flat pull-right" href="CategoriaObj.php"><i class="fa fa-plus"></i>   Cadastrar Categorias </a>
           </h1>
         </section>
         <!-- Main content -->
         <section class="content">
           <div class="row">
             <div class="col-xs-12">
-              <div class="box">
+              <div class="box box-info">
                 <div class="box-header">
                   <h3 class="box-title">Listagem de categorias</h3>
+                  <a class="btn btn-info btn-flat pull-right" href="ViewCategoriasObj.php" title="Atualizar resultados" data-toggle="tooltip" data-placement="left"><i class="fa fa-refresh"></i></a>
                 </div><!-- /.box-header -->
                 <div class="box-body">
                   <table id="dataT" class="table table-bordered table-hover">
@@ -108,15 +112,17 @@ include "../Session.php";
           </div><!-- /.row -->
         </section><!-- /.content -->
       </div><!-- /.content-wrapper -->
+
       <?php
         include '../inc/footer.html';
-        include '../inc/control-sidebar.html';
       ?>
     </div><!-- ./wrapper -->
     <!-- jQuery 2.1.4 -->
     <script src="../../plugins/jQuery/jQuery-2.1.4.min.js"></script>
     <!-- Bootstrap 3.3.5 -->
     <script src="../../bootstrap/js/bootstrap.min.js"></script>
+    <!-- Toast -->
+    <script src="../../plugins/toastr/jquery.toast.js"></script>
     <!-- DataTables -->
     <script src="../../plugins/datatables/jquery.dataTables.min.js"></script>
     <script src="../../plugins/datatables/dataTables.bootstrap.min.js"></script>
@@ -125,12 +131,13 @@ include "../Session.php";
     <script src="../../plugins/slimScroll/jquery.slimscroll.min.js"></script>
     <!-- FastClick -->
     <script src="../../plugins/fastclick/fastclick.min.js"></script>
+    <!-- page script -->
+    <script src="https://cdn.datatables.net/responsive/2.0.0/js/responsive.bootstrap.min.js"></script>
     <!-- AdminLTE App -->
     <script src="../../dist/js/app.min.js"></script>
     <!-- AdminLTE for demo purposes -->
     <script src="../../dist/js/demo.js"></script>
-    <!-- page script -->
-    <script src="https://cdn.datatables.net/responsive/2.0.0/js/responsive.bootstrap.min.js"></script>
+
     <script>
       $(function ()
       {
@@ -144,5 +151,46 @@ include "../Session.php";
         $('.dataTables_filter input').attr("placeholder", "Pesquise aqui");
       });
     </script>
+
+    <?php
+        if (isset($_GET['success']) && $_GET['success']=='1' )
+        {
+    ?>
+        <script type="text/javascript">
+        $(document).ready(function()
+        {
+          $(window).load(function()
+          {
+            $.toast({
+              text: "Operação Completada!", // Text that is to be shown in the toast
+              heading: 'Sucesso!', // Optional heading to be shown on the toast
+              icon: 'success', // Type of toast icon
+              showHideTransition: 'slide', // fade, slide or plain
+              allowToastClose: true, // Boolean value true or false
+              hideAfter: 3500, // false to make it sticky or number representing the miliseconds as time after which toast needs to be hidden
+              stack: 5, // false if there should be only one toast at a time or a number representing the maximum number of toasts to be shown at a time
+              position: 'bottom-right', // bottom-left or bottom-right or bottom-center or top-left or top-right or top-center or mid-center or an object representing the left, right, top, bottom values
+              textAlign: 'left',  // Text alignment i.e. left, right or center
+              loader: true,  // Whether to show loader or not. True by default
+              loaderBg: '#008548',  // Background color of the toast loader #00ff40
+            })
+          }
+          );
+        });
+        </script>
+    <?php
+        unset($_GET['success']);
+        $_GET['success']=0;
+        }
+        elseif (isset($_GET['erro']) && $_GET['erro']=='1')
+        {
+    ?>
+    <script type="text/javascript">
+
+
+    </script>
+    <?php
+        }
+    ?>
   </body>
 </html>

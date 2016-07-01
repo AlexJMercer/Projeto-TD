@@ -44,10 +44,8 @@ include "../Session.php";
       <div class="content-wrapper">
         <!-- Content Header (Page header) -->
         <section class="content-header">
-          <h1>
-          Setores
-          <a class="btn btn-info btn-flat pull-right" href="CategoriaObj.php"><i class="fa fa-plus"></i>  ADD Categorias </a>
-          </h1>
+          <h1> Setores </h1>
+          <a class="btn btn-info btn-flat pull-right" href="SetoresObj.php"><i class="fa fa-plus"></i>  Cadastrar setor </a>
         </section>
         <!-- Main content -->
         <section class="content">
@@ -56,6 +54,7 @@ include "../Session.php";
               <div class="box">
                 <div class="box-header">
                   <h3 class="box-title">Listagem de setores</h3>
+                  <a class="btn btn-info btn-flat pull-right" href="ViewSetoresObj.php" title="Atualizar resultados" data-toggle="tooltip" data-placement="left"><i class="fa fa-refresh"></i></a>
                 </div><!-- /.box-header -->
                 <div class="box-body">
                   <table id="dataT" class="table table-bordered table-hover">
@@ -66,16 +65,16 @@ include "../Session.php";
                       </tr>
                     </thead>
                     <tbody>
-<?php
+                    <?php
 
-  $listar = new Setores();
-  $list = $listar->listar();
+                      $listar = new Setores();
+                      $list = $listar->listar();
 
-  if ($list != null)
-  {
-    foreach ($list as $line)
-    {
-?>
+                      if ($list != null)
+                      {
+                        foreach ($list as $line)
+                        {
+                    ?>
                       <tr class="odd gradeX">
                         <form name="view" action="EditSetorObj.php" method="post">
                         <td><?php echo $line->setor; ?></td>
@@ -110,7 +109,6 @@ include "../Session.php";
       </div><!-- /.content-wrapper -->
       <?php
         include '../inc/footer.html';
-        include '../inc/control-sidebar.html';
       ?>
     </div><!-- ./wrapper -->
     <!-- jQuery 2.1.4 -->

@@ -9,7 +9,7 @@ include "../Session.php";
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>AdminLTE 2 | Data Tables</title>
+    <title>AdminLTE 2</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <!-- Bootstrap 3.3.5 -->
@@ -45,6 +45,7 @@ include "../Session.php";
         <!-- Content Header (Page header) -->
         <section class="content-header">
           <h1>Institutos</h1>
+          <a class="btn btn-primary btn-flat pull-right" href="InstitutoObj.php"><i class="fa fa-plus"></i>  Cadastrar instituto </a>
         </section>
         <!-- Main content -->
         <section class="content">
@@ -53,6 +54,7 @@ include "../Session.php";
               <div class="box">
                 <div class="box-header">
                   <h3 class="box-title">Listagem de instituições</h3>
+                  <a class="btn btn-info btn-flat pull-right" href="ViewInstitutosObj.php" title="Atualizar resultados" data-toggle="tooltip" data-placement="left"><i class="fa fa-refresh"></i></a>
                 </div><!-- /.box-header -->
                 <div class="box-body">
                   <table id="dataT" class="table table-bordered table-hover">
@@ -103,7 +105,6 @@ include "../Session.php";
       </div><!-- /.content-wrapper -->
       <?php
         include '../inc/footer.html';
-        include '../inc/control-sidebar.html';
       ?>
     </div><!-- ./wrapper -->
     <!-- jQuery 2.1.4 -->
@@ -113,7 +114,7 @@ include "../Session.php";
     <!-- DataTables -->
     <script src="../../plugins/datatables/jquery.dataTables.min.js"></script>
     <script src="../../plugins/datatables/dataTables.bootstrap.min.js"></script>
-      <script src="../../plugins/datatables/extensions/Responsive/js/dataTables.responsive.min.js"></script>
+    <script src="../../plugins/datatables/extensions/Responsive/js/dataTables.responsive.min.js"></script>
     <!-- SlimScroll -->
     <script src="../../plugins/slimScroll/jquery.slimscroll.min.js"></script>
     <!-- FastClick -->

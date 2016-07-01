@@ -50,7 +50,11 @@ include "../Session.php";
         <!-- Content Header (Page header) -->
         <section class="content-header">
           <h1>Monitorias</h1>
+          <a class="btn btn-primary btn-flat pull-right" href="MonitoriasObj.php"><i class="fa fa-plus"></i>   Cadastrar monitoria </a>
         </section>
+        <?php
+          $curso = $_POST["curso"];
+        ?>
         <!-- Main content -->
         <section class="content">
           <div class="row">
@@ -58,30 +62,32 @@ include "../Session.php";
               <div class="box">
                 <div class="box-header">
                   <h3 class="box-title">Listagem de monitorias</h3>
+                  <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
+                    <input type="hidden" name="curso" value="<?php echo $curso; ?>">
+                    <button type="submit" name="recarregar" class="btn btn-info btn-flat pull-right" title="Atualizar resultados" data-toggle="tooltip" data-placement="left"><i class="fa fa-refresh"></i></button>
+                  </form>
                 </div><!-- /.box-header -->
                 <div class="box-body">
                   <table id="dataT" class="table table-bordered table-hover">
                     <thead>
                       <tr>
-                        <th>Disciplina</th>
-                        <th>Opções</th>
+                        <th> Disciplina </th>
+                        <th> Opções </th>
                       </tr>
                     </thead>
                     <tbody>
-<?php
+                    <?php
 
-  $curso = $_POST["curso"];
+                      if (isset($_POST['pesquisar']) || isset($_POST['retornar']) || isset($_POST['recarregar']))
+                      {
+                        $listar = new Monitorias();
+                        $list = $listar->ListarEspecify($curso);
 
-  if (isset($_POST['pesquisar']) || isset($_POST['retornar']))
-  {
-    $listar = new Monitorias();
-    $list = $listar->ListarEspecify($curso);
-
-    if ($list != null)
-    {
-      foreach ($list as $line)
-      {
-?>
+                        if ($list != null)
+                        {
+                          foreach ($list as $line)
+                          {
+                    ?>
                       <tr class="odd gradeX">
                         <form name="view" action="EditMonitoriasObj.php" method="post">
                         <td><?php echo $line->disciplina; ?></td>
@@ -113,7 +119,6 @@ include "../Session.php";
       </div><!-- /.content-wrapper -->
       <?php
         include '../inc/footer.html';
-        include '../inc/control-sidebar.html';
       ?>
     </div><!-- ./wrapper -->
     <!-- jQuery 2.1.4 -->

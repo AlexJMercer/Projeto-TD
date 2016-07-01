@@ -49,39 +49,17 @@ include "../Session.php";
       <div class="content-wrapper">
         <!-- Content Header (Page header) -->
         <section class="content-header">
-          <h1>Notícias <a class="btn btn-info btn-flat pull-right" href="NoticiaObj.php"><i class="fa fa-plus"></i>  ADD Notícias </a></h1>
+          <h1>Notícias </h1>
+          <a class="btn btn-info btn-flat pull-right" href="NoticiaObj.php"><i class="fa fa-plus"></i>  Cadastrar notícias </a>
         </section>
         <!-- Main content -->
         <section class="content">
-          <?php
-            if (isset($_GET['success']))
-            {
-          ?>
-          <div class='alert alert-success alert-dismissable'>
-                   <button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button>
-                   <h4>	<i class='icon fa fa-check'></i> Cadastro!</h4>
-                   Notícia cadastrada com sucesso!!
-          </div>
-          <?php
-            }
-          ?>
-          <?php
-            if (isset($_GET['excluirOK']))
-            {
-          ?>
-          <div class='alert alert-success alert-dismissable'>
-                   <button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button>
-                   <h4>	<i class='icon fa fa-check'></i> Exclusão!</h4>
-                   Notícia excluída com sucesso!!
-          </div>
-          <?php
-            }
-          ?>
           <div class="row">
             <div class="col-xs-12">
               <div class="box box-info">
                 <div class="box-header">
                   <h3 class="box-title">Listagem de notícias</h3>
+                  <a class="btn btn-info btn-flat pull-right" href="ViewNoticiasObj.php" title="Atualizar resultados" data-toggle="tooltip" data-placement="left"><i class="fa fa-refresh"></i></a>
                 </div><!-- /.box-header -->
                 <div class="box-body">
                   <table id="dataT" class="table table-bordered table-hover">
@@ -93,18 +71,18 @@ include "../Session.php";
                       </tr>
                     </thead>
                     <tbody>
-<?php
+                    <?php
 
-  $listar = new Noticias();
-  $list   = $listar->ListarNoticias();
+                      $listar = new Noticias();
+                      $list   = $listar->ListarNoticias();
 
-  if ($list != null)
-  {
-    foreach ($list as $line)
-    {
-?>
-                  <tr class="odd gradeX">
-                     <form name="view" action="EditNoticiaObj.php" method="post">
+                      if ($list != null)
+                      {
+                        foreach ($list as $line)
+                        {
+                    ?>
+                    <tr class="odd gradeX">
+                      <form name="view" action="EditNoticiaObj.php" method="post">
                         <td><?php echo date('d/m/Y',strtotime($line->data)); ?></td>
                         <td><?php echo $line->titulo; ?></td>
                         <td>
@@ -113,8 +91,8 @@ include "../Session.php";
                           <button type="submit" name="editar" value="editar" class="btn btn-flat btn-warning"><i class="fa fa-edit"></i> Editar </button>
                           <button type="submit" name="excluir" value="excluir" formaction="CrudNoticias.php" class='btn btn-flat btn-danger'><i class="fa fa-times"></i> Excluir </button>
                         </td>
-                     </form>
-                  </tr>
+                      </form>
+                    </tr>
                     <?php
                             }
                           }
@@ -155,6 +133,7 @@ include "../Session.php";
     <script src="../../dist/js/app.min.js"></script>
     <!-- AdminLTE for demo purposes -->
     <script src="../../dist/js/demo.js"></script>
+    
     <script>
       $(function ()
       {

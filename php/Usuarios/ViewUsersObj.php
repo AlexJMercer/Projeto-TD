@@ -50,10 +50,8 @@ include "../Session.php";
       <div class="content-wrapper">
         <!-- Content Header (Page header) -->
         <section class="content-header">
-          <h1>
-          Usuários
-          <a class="btn btn-info btn-flat pull-right" href="UserObj.php"><i class="fa fa-plus"></i>  ADD Usuários </a>
-          </h1>
+          <h1> Usuários </h1>
+          <a class="btn btn-info btn-flat pull-right" href="UserObj.php"><i class="fa fa-plus"></i>  Cadastrar usuários </a>
         </section>
         <!-- Main content -->
         <section class="content">
@@ -62,6 +60,7 @@ include "../Session.php";
               <div class="box">
                 <div class="box-header">
                   <h3 class="box-title">Listagem de usuários</h3>
+                  <a class="btn btn-info btn-flat pull-right" href="ViewUsersObj.php" title="Atualizar resultados" data-toggle="tooltip" data-placement="left"><i class="fa fa-refresh"></i></a>
                 </div><!-- /.box-header -->
                 <div class="box-body">
                   <table id="dataT" class="table table-bordered table-hover">
@@ -127,7 +126,6 @@ include "../Session.php";
       </div><!-- /.content-wrapper -->
       <?php
         include '../inc/footer.html';
-        include '../inc/control-sidebar.html';
       ?>
     </div><!-- ./wrapper -->
     <!-- jQuery 2.1.4 -->

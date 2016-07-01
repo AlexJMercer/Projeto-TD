@@ -45,9 +45,9 @@ include "../Session.php";
       <div class="content-wrapper">
         <!-- Content Header (Page header) -->
         <section class="content-header">
-          <h1>Assistência estudantil
-          <a class="btn btn-info btn-flat pull-right" href="CategoriaObj.php"><i class="fa fa-plus"></i>  ADD Categorias </a>
-          </h1></section>
+          <h1>Assistência estudantil</h1>
+          <a class="btn btn-primary btn-flat pull-right" href="AssistenciaObj.php"><i class="fa fa-plus"></i>   Cadastrar assistências </a>
+        </section>
         <!-- Main content -->
         <section class="content">
           <div class="row">
@@ -55,6 +55,7 @@ include "../Session.php";
               <div class="box">
                 <div class="box-header">
                   <h3 class="box-title">Listagem de assistência estudantil</h3>
+                  <a class="btn btn-info btn-flat pull-right" href="ViewAssistenciasObj.php" title="Atualizar resultados" data-toggle="tooltip" data-placement="left"><i class="fa fa-refresh"></i></a>
                 </div><!-- /.box-header -->
                 <div class="box-body">
                   <table id="dataT" class="table table-bordered table-hover">
@@ -112,11 +113,8 @@ include "../Session.php";
 
       <?php
         include '../inc/footer.html';
-        include '../inc/control-sidebar.html';
       ?>
-
     </div><!-- ./wrapper -->
-
     <!-- jQuery 2.1.4 -->
     <script src="../../plugins/jQuery/jQuery-2.1.4.min.js"></script>
     <!-- Bootstrap 3.3.5 -->

@@ -101,9 +101,9 @@ include "../Session.php";
                   </div><!-- /.box-body -->
                   <div class="box-footer">
                     <input type="hidden" name="id" value="<?php echo $comp->id; ?>"/>
-                    <button type="submit" name="atualizar" value="atualizar" class="btn btn-success btn-flat btn-block">Atualizar</button>
+                    <button type="submit" name="atualizar" value="atualizar" class="btn btn-success btn-lg btn-flat btn-block"><i class="fa fa-check"></i> Atualizar </button>
                     <br>
-                    <button type="reset" class="btn btn-default btn-flat btn-block btn-sm ">Limpar</button>
+                    <button type="reset" class="btn btn-default btn-flat btn-block btn-sm"><i class="fa fa-times"></i>Limpar</button>
                   </div><!-- /.box-footer -->
                 </form>
               </div><!-- /.box -->

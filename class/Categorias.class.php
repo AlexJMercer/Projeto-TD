@@ -42,7 +42,7 @@
 
       function ListarCategorias()
       {
-         $sql    = "SELECT * from categorias Order by id_cat";
+         $sql    = "SELECT * from categorias Order by id_cat DESC";
          $result = pg_query($sql);
 
          while ($reg = pg_fetch_assoc($result))

@@ -9,7 +9,7 @@ include "../Session.php";
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>AdminLTE 2 | General Form Elements</title>
+    <title>AdminLTE 2 </title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <!-- Bootstrap 3.3.5 -->
@@ -27,14 +27,14 @@ include "../Session.php";
     <link rel="stylesheet" href="../../dist/css/skins/skin-green-light.min.css">
 
     <style type="text/css">
-    .carregando
+    #carregando
     {
       color:#666;
       display:none;
     }
-    .progress-bar
+    .progress
     {
-      height: 34px;
+      margin-bottom: 0;
     }
     </style>
 
@@ -80,16 +80,16 @@ include "../Session.php";
                         </div>
                       </div>
                       <div class="form-group">
-                        <label class="col-sm-2 control-label" for="disciplina">Disciplina:</label>
+                        <label class="col-sm-2 control-label" for="disciplinas">Disciplina:</label>
                         <div class="col-sm-10">
-                          <span class="carregando">
+                          <span id="carregando">
                           <div class="progress active">
                             <div class="progress-bar progress-bar-info progress-bar-striped" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%;">
                               <span>Carregando...</span>
                             </div>
                           </div>
                           </span>
-                           <select class="form-control select2" name="disciplina" id="disciplina" required>
+                           <select class="form-control" name="disciplina" id="disciplinas" required>
                               <option value=""></option>
                            </select>
                         </div>
@@ -124,9 +124,9 @@ include "../Session.php";
                         </div>
                   </div><!-- /.box-body -->
                   <div class="box-footer">
-                    <button type="submit" name="enviar" value="enviar" class="btn btn-success btn-flat btn-block">Enviar</button>
+                    <button type="submit" name="enviar" value="enviar" class="btn btn-success btn-lg btn-flat btn-block"><i class="fa fa-check"></i> Enviar </button>
                     <br>
-                    <button type="reset" class="btn btn-default btn-flat btn-block btn-sm ">Limpar</button>
+                    <button type="reset" class="btn btn-default btn-flat btn-block btn-sm "> <i class="fa fa-magic"></i> Limpar </button>
                   </div><!-- /.box-footer -->
                 </form>
               </div><!-- /.box -->
@@ -168,8 +168,8 @@ include "../Session.php";
       {
         if( $(this).val() )
         {
-          $('#disciplina').hide();
-          $('.carregando').show();
+          $('#disciplinas').hide();
+          $('#carregando').show();
           $.getJSON('disciplina.ajax.php',{curso: $(this).val(), ajax: 'true'}, function(j)
           {
             var options = '<option value=""></option>';
@@ -177,11 +177,11 @@ include "../Session.php";
             {
               options += '<option value="' + j[i].id_disc + '">' + j[i].disciplina + '</option>';
             }
-            $('#disciplina').html(options).show();
-            $('.carregando').hide();
+            $('#disciplinas').html(options).show();
+            $('#carregando').hide();
           });
         } else {
-          $('#disciplina').html('<option value="">Nada encontrado !!</option>');
+          $('#disciplinas').html('<option value="">Nada encontrado !!</option>');
         }
       });
     });
