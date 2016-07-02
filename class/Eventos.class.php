@@ -37,7 +37,7 @@ include_once 'Carrega.class.php';
        $this->$key = $value;
     }
 
-    public function Inserir()
+    public function InserirEventos()
     {
       $sql    = "INSERT INTO eventos (evento, data_inicio, data_fim, horario, event_cat, texto)
                   VALUES ('$this->evento', '$this->dataInicio', '$this->dataFim', '$this->horario', '$this->categoria', '$this->texto')";

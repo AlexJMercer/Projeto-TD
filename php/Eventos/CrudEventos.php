@@ -14,7 +14,7 @@ include_once "../../class/Carrega.class.php";
       $object->texto      = $_POST['texto'];
 
       //print_r($object);
-      $object->Inserir();
+      $object->InserirEventos();
 
       if (!empty($_FILES["imagem"]["name"]))
       {

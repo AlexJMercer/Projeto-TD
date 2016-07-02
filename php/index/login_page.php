@@ -33,11 +33,11 @@
         <p class="login-box-msg">Logue para iniciar sua sessão</p>
         <form action="LoginObj.php" method="post">
           <div class="form-group has-feedback">
-            <input type="email" class="form-control" name='login' placeholder="Email">
+            <input type="email" class="form-control" name='login' placeholder="Email" required>
             <span class="glyphicon glyphicon-user form-control-feedback"></span>
           </div>
           <div class="form-group has-feedback">
-            <input type="password" class="form-control" name='senha' placeholder="Senha">
+            <input type="password" class="form-control" name='senha' placeholder="Senha" required>
             <span class="glyphicon glyphicon-lock form-control-feedback"></span>
           </div>
           <div class="row">
