@@ -12,20 +12,32 @@ include_once "../../class/Carrega.class.php";
       $object->horario    = $_POST['horario'];
       $object->categoria  = $_POST['categoria'];
       $object->texto      = $_POST['texto'];
+      /*echo "<pre>";
+      print_r($object);
+      //$object->Inserir();
+      echo "</pre>";*/
 
-      //print_r($object);
-      $object->Inserir();
+      if ($object->Inserir())
+      {
+        if (!empty($_FILES["imagem"]["name"]))
+        {
+          $myUpload = new Upload($_FILES["imagem"]);
+          $Up       = $myUpload->eventoUpload();
+          /*echo "<pre>";
+          print_r($myUpload);
+          echo "</pre>";*/
+        }
+        else
+        {
+          $noImage = new Eventos();
+          $noImage->noImageUp();
+          /*echo "<pre>";
+          print_r($noImage);
+          echo "</pre>";*/
 
-      if (!empty($_FILES["imagem"]["name"]))
-      {
-        $myUpload = new Upload($_FILES["imagem"]);
-        $Up       = $myUpload->eventoUpload();
+        }
       }
-      else
-      {
-        $noImage = new Eventos();
-        $noImage->noImageUp();
-      }
+
       header("Location:ViewEventosObj.php");
    }
 

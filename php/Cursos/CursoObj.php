@@ -128,6 +128,8 @@ include "../Session.php";
           showCaption: false,
           showRemove: false,
           showUpload: false,
+          maxImageWidth: 300,
+          maxImageHeight: 180,
           language: 'pt-BR',
           allowedFileExtensions : ['jpg', 'png','gif']
 

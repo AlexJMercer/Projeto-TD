@@ -1,7 +1,6 @@
 <?php
 
 include_once "../../class/Carrega.class.php";
-date_default_timezone_set('America/Sao_Paulo');
 
 include "../Session.php";
 ?>
@@ -19,15 +18,14 @@ include "../Session.php";
     <link rel="stylesheet" href="../../plugins/font-awesome-4.5.0/font-awesome-4.5.0/css/font-awesome.min.css">
     <!--Ionicons-->
     <link rel="stylesheet" href="../../plugins/ionicons-2.0.1/ionicons-2.0.1/css/ionicons.min.css">
-    <!-- Bootstrap time Picker -->
-    <link rel="stylesheet" href="../../plugins/timepicker/bootstrap-timepicker.min.css">
-    <!-- Select2 -->
-    <link rel="stylesheet" href="../../plugins/select2/select2.min.css">
+    <!-- iCheck for checkboxes and radio inputs -->
+    <link rel="stylesheet" href="../../plugins/iCheck/all.css">
     <!-- Theme style -->
     <link rel="stylesheet" href="../../dist/css/AdminLTE.min.css">
     <!-- AdminLTE Skins. Choose a skin from the css/skins
          folder instead of downloading all of them to reduce the load. -->
     <link rel="stylesheet" href="../../dist/css/skins/skin-green-light.min.css">
+
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -38,13 +36,13 @@ include "../Session.php";
   <body class="hold-transition skin-green-light sidebar-mini">
     <div class="wrapper">
       <?php
-         include '../inc/topotime.html';
-         include '../inc/menutime.php';
+            include '../inc/topotime.html';
+            include '../inc/menutime.php';
       ?>
       <div class="content-wrapper">
         <!-- Content Header (Page header) -->
         <section class="content-header">
-          <h1>Eventos</h1>
+          <h1>Usuários</h1>
         </section>
         <!-- Main content -->
         <section class="content">
@@ -53,64 +51,60 @@ include "../Session.php";
               <!-- Horizontal Form -->
               <div class="box box-info">
                 <div class="box-header with-border">
-                  <h3 class="box-title">Eventos</h3>
+                  <h3 class="box-title">Informações do usuário</h3>
                 </div><!-- /.box-header -->
-<?php
+                <?php
 
-  $id = $_POST["id"];
+                    $exib = new Usuarios();
+                    $comp = $exib->ProfileUser($_SESSION['id']);
+                    //print_r($_SESSION);
 
-  if (isset($_POST["exibir"]))
-  {
-    $exib = new Eventos();
-    $comp = $exib->Editar($id);
-    print_r($comp);
-    //var_dump($comp);
-    if ($exib != null)
-    {
-?>
-<div class="box-body">
-  <div class="form-group">
-    <dl class="dl-horizontal">
-      <dt>Evento:</dt>
-      <dd><?php echo $comp->evento; ?></dd>
-      <dt>Categoria:</dt>
-      <dd><?php $categoria = new Select();
-                $categoria->labelCategorias($comp->categoria);
-          ?></dd>
-      <dt>Data do inicio do evento:</dt>
-      <dd><?php echo date('d/M/Y', strtotime($comp->dataInicio)); ?></dd>
-      <dt>Data de fim do evento:</dt>
-      <dd><?php echo date('d/m/Y', strtotime($comp->dataFim)); ?></dd>
-      <dt>Horário do evento:</dt>
-      <dd><?php echo $comp->horario; ?></dd>
-      <dt>Informações:</dt>
-      <dd><textarea class="form-control"  rows="8" cols="40" disabled><?php echo $comp->texto; ?></textarea></dd>
-      <dt>Logo:</dt>
-      <dd> <img class="img-responsive-pad" src="<?php echo $comp->imagem; ?>" alt="Logo do Evento" width="25%" height="25%" /> </dd>
-    </dl>
-    <form action="EditEventoObj.php" method="post">
-      <input type="hidden" name="id" value="<?php echo $id; ?>"/>
-      <div class="col-sm-6">
-        <button type="submit" name="retornar" value="retornar" class="btn bg-maroon btn-flat btn-block margin" formaction="ViewEventosObj.php"><i class="fa fa-edit"></i> Retornar para lista </button>
-      </div>
-      <div class="col-sm-6">
-        <button type="submit" name="editar" value="editar" class="btn btn-warning btn-flat btn-block margin"><i class="fa fa-edit"></i> Editar </button>
-      </div>
-    </form>
-  </div>
-</div>
+                    if ($exib != null)
+                    {
+                ?>
+                  <div class="box-body">
+                    <div class="form-group">
+                      <dl class="dl-horizontal">
+                        <dt>Nome:</dt>
+                        <dd><?php echo $comp->nome; ?></dd>
+                        <dt>E-mail:</dt>
+                        <dd><?php echo $comp->email; ?></dd>
+                        <dt>Tipo de usuário:</dt>
+                        <dd><?php echo $comp->tipo; ?></dd>
+                      </dl>
+                    </div>
+                    <?php
+                        }
+                      //}
+                    ?>
+                </div>
 
-<?php
-    }
-  }
-?>
-              <!-- general form elements disabled -->
+            <div class="col-sm-12">
+              <div class="box box-info">
+                <div class="box-header with-border">
+                  <h3 class="box-title">Permissões do usuário</h3>
+                </div><!-- /.box-header -->
+                <div class="box-body">
+                  <div class="form-group">
+                    <dl class="dl-horizontal">
+                      <dt>Nome:</dt>
+                      <dd><?php echo $comp->nome; ?></dd>
+                      <dt>E-mail:</dt>
+                      <dd><?php echo $comp->email; ?></dd>
+                      <dt>Tipo de usuário:</dt>
+                      <dd><?php echo $comp->tipo; ?></dd>
+                    </dl>
+                  </div>
+                </div>
+            </div><!-- /.box -->
+            <!-- general form elements disabled -->
             </div>
           </div>   <!-- /.row -->
         </section><!-- /.content -->
       </div><!-- /.content-wrapper -->
       <?php
         include '../inc/footer.html';
+        include '../inc/control-sidebar.html';
       ?>
     </div><!-- ./wrapper -->
     <!-- jQuery 2.1.4 -->
@@ -119,9 +113,27 @@ include "../Session.php";
     <script src="../../bootstrap/js/bootstrap.min.js"></script>
     <!-- FastClick -->
     <script src="../../plugins/fastclick/fastclick.min.js"></script>
+    <!-- iCheck 1.0.1 -->
+    <script src="../../plugins/iCheck/icheck.min.js"></script>
     <!-- AdminLTE App -->
     <script src="../../dist/js/app.min.js"></script>
     <!-- AdminLTE for demo purposes -->
     <script src="../../dist/js/demo.js"></script>
-</body>
+
+    <script type="text/javascript">
+    $(document).ready(function(){
+      $('input').each(function(){
+        var self = $(this),
+        label = self.next(),
+        label_text = label.text();
+
+        label.remove();
+        self.iCheck({
+          checkboxClass: 'icheckbox_line-green',
+          insert: '<div class="icheck_line-icon"></div>' + label_text
+    });
+  });
+});
+    </script>
+  </body>
 </html>

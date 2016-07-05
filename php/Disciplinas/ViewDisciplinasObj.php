@@ -49,8 +49,9 @@ include "../Session.php";
       <div class="content-wrapper">
         <!-- Content Header (Page header) -->
         <section class="content-header">
-          <h1>Disciplinas</h1>
+          <h1>Disciplinas
           <a class="btn btn-primary btn-flat pull-right" href="DisciplinaObj.php"><i class="fa fa-plus"></i>   Cadastrar disciplinas </a>
+          </h1>
         </section>
         <!-- Main content -->
         <section class="content">

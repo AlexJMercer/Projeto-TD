@@ -49,8 +49,9 @@ include "../Session.php";
       <div class="content-wrapper">
         <!-- Content Header (Page header) -->
         <section class="content-header">
-          <h1>Monitorias</h1>
+          <h1>Monitorias
           <a class="btn btn-primary btn-flat pull-right" href="MonitoriasObj.php"><i class="fa fa-plus"></i>   Cadastrar monitoria </a>
+          </h1>
         </section>
         <?php
           $curso = $_POST["curso"];

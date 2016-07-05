@@ -44,8 +44,9 @@ include "../Session.php";
       <div class="content-wrapper">
         <!-- Content Header (Page header) -->
         <section class="content-header">
-          <h1>Estágios</h1>
+          <h1>Estágios
           <a class="btn btn-primary btn-flat pull-right" href="EstagioObj.php"><i class="fa fa-plus"></i>   Cadastrar estágio </a>
+          </h1>
         </section>
         <!-- Main content -->
         <section class="content">

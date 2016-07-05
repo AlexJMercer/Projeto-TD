@@ -44,8 +44,9 @@ include "../Session.php";
       <div class="content-wrapper">
         <!-- Content Header (Page header) -->
         <section class="content-header">
-          <h1> Setores </h1>
+          <h1> Setores
           <a class="btn btn-info btn-flat pull-right" href="SetoresObj.php"><i class="fa fa-plus"></i>  Cadastrar setor </a>
+          </h1>
         </section>
         <!-- Main content -->
         <section class="content">

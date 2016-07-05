@@ -42,7 +42,9 @@ include "../Session.php";
       <div class="content-wrapper">
         <!-- Content Header (Page header) -->
         <section class="content-header">
-          <h1>Cárdapios</h1>
+          <h1>Cárdapios
+          <a class="btn btn-primary btn-flat pull-right" href="CardapioObj.php"><i class="fa fa-plus"></i>   Cadastrar cardápio </a>
+          </h1>
         </section>
         <!-- Main content -->
         <section class="content">
@@ -51,6 +53,7 @@ include "../Session.php";
               <div class="box">
                 <div class="box-header">
                   <h3 class="box-title">Listagem de cárdapios</h3>
+                  <a class="btn btn-info btn-flat pull-right" href="ViewCardapiosObj.php" title="Atualizar resultados" data-toggle="tooltip" data-placement="left"><i class="fa fa-refresh"></i></a>
                 </div><!-- /.box-header -->
                 <div class="box-body">
                   <table class="table table-bordered table-hover">

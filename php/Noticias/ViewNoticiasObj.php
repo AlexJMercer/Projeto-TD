@@ -49,8 +49,9 @@ include "../Session.php";
       <div class="content-wrapper">
         <!-- Content Header (Page header) -->
         <section class="content-header">
-          <h1>Notícias </h1>
+          <h1>Notícias
           <a class="btn btn-info btn-flat pull-right" href="NoticiaObj.php"><i class="fa fa-plus"></i>  Cadastrar notícias </a>
+          </h1>
         </section>
         <!-- Main content -->
         <section class="content">
@@ -133,7 +134,7 @@ include "../Session.php";
     <script src="../../dist/js/app.min.js"></script>
     <!-- AdminLTE for demo purposes -->
     <script src="../../dist/js/demo.js"></script>
-    
+
     <script>
       $(function ()
       {

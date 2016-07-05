@@ -203,13 +203,30 @@ include_once 'Carrega.class.php';
 
     function getProcessoSeletivo()
     {
+      //Função OK
+      $sql = "SELECT n.id_not, n.titulo, n.linha_apoio, n.data, cn.not_id, cn.cat_id, c.id_cat, c.categoria FROM noticias n, categorias_noticias cn, categorias c
+              WHERE n.id_not=cn.not_id AND cn.cat_id=c.id_cat AND c.categoria='Processo Seletivo' AND n.status_id IN ('3', '4')";
+      $res  = pg_query($sql);
+      $resultado = array();
+
+      while($row = pg_fetch_array($res))
+      {
+         $object              = new Noticias();
+         $object->id          = $row['id_not'];
+         $object->titulo      = $row['titulo'];
+         $object->linha_apoio = $row['linha_apoio'];
+         $object->data        = date('d/m/Y', strtotime($row['data']));
+         array_push($resultado, array("id"=>$object->id, "Texto"=>$object->titulo, "linha_apoio"=>$object->linha_apoio, "Data"=>$object->data));
+      }
+       echo json_encode(array("result"=>$resultado), JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
+
     }
 
     function getAllNoticias()
     {
       //Função Ok
       //Realiza uma listagem geral das noticias
-      $sql = "SELECT * FROM noticias n WHERE n.status_id='3' OR n.status_id='4'";
+      $sql = "SELECT * FROM noticias n WHERE n.status_id IN ('3', '4')";
       $res = pg_query($sql);
       $resultado = array();
 
@@ -227,6 +244,7 @@ include_once 'Carrega.class.php';
 
     function searchAllNoticias($search)
     {
+      //Função OK
       $sql = "SELECT * FROM noticias n WHERE n.titulo ILIKE '%$search%' ORDER BY n.id_not DESC";
       $res = pg_query($sql);
       $resultado = array();
@@ -245,11 +263,11 @@ include_once 'Carrega.class.php';
 
     function getObjNoticiaById($id)
     {
+      //Função OK
       //Realiza a consulta pelos dados da noticia de acordo com a id da noticia
-      $sql    = "SELECT * FROM noticias n, imagens_noticias ino, usuarios u, categorias_noticias cn
-                  WHERE n.id_not = ino.noticia AND n.autor = u.id_user AND cn.not_id = n.id_not AND n.id_not = $id AND ";
+      $sql    = "SELECT * FROM noticias n, imagens_noticias ino, usuarios u, categorias_noticias cn, status s
+                  WHERE n.id_not = ino.noticia AND n.autor = u.id_user AND cn.not_id = n.id_not AND n.id_not = $id AND s.id_sta = n.status_id";
       $sql2   = "SELECT c.categoria FROM categorias c, categorias_noticias cn WHERE cn.not_id = $id AND c.id_cat = cn.cat_id";
-
       $res  = pg_query($sql);
       $res2 = pg_query($sql2);
       //$resultado = array();
@@ -273,11 +291,8 @@ include_once 'Carrega.class.php';
         $object->categoria = $temp;
 
         $retorno = $object;
-        //print_r($object);
-        //array_push($resultado, array("Texto"=>$object->texto, "Data"=>$object->data, "Imagem"=>$object->imagem, "Hora"=>$object->hora, "Autor"=>$object->autor, "Categorias"=>$object->categoria, "url"=>$object->url));
       }
       return $retorno;
-      //echo json_encode(array("result"=>$resultado), JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT );
     }
 
     function ShowNoticiaById($id)
@@ -306,6 +321,7 @@ include_once 'Carrega.class.php';
 
     function getAllEstagios()
     {
+      //Função OK
       $sql       = "SELECT * FROM estagios ";
       $res       = pg_query($sql);
       $resultado = array();
@@ -323,6 +339,8 @@ include_once 'Carrega.class.php';
 
     function getEstagioById($id = '')
     {
+      //Função OK
+      //Realiza a consulta dos dados do estágio
       $sql1 = "SELECT * FROM estagios e, estagio_cursos ec WHERE e.id_est=ec.est_id AND e.id_est=$id";
       $sql2 = "SELECT c.nome FROM cursos c, estagio_cursos ec WHERE ec.est_id=$id AND c.id_curso=ec.curso_id";
 
@@ -355,6 +373,7 @@ include_once 'Carrega.class.php';
 
     function ShowEstagiosById($id='')
     {
+       //Função OK
        $estagios  = new Connection();
        $show      = $estagios->getEstagioById($id);
        $resultado = array();
@@ -397,8 +416,11 @@ include_once 'Carrega.class.php';
 
     function getAllEventos()
     {
-      $sql = "SELECT * FROM eventos WHERE data_inicio BETWEEN NOW() AND CURRENT_DATE + INTERVAL '2 MONTH'
-               OR data_fim BETWEEN NOW() AND CURRENT_DATE + INTERVAL '2 MONTH' ORDER BY data_inicio ASC";
+      //Função OK
+      // Necessário decidir condições de busca
+      //$sql = "SELECT * FROM eventos WHERE data_inicio BETWEEN NOW() AND CURRENT_DATE + INTERVAL '2 MONTH'
+      //         OR data_fim BETWEEN NOW() AND CURRENT_DATE + INTERVAL '2 MONTH' ORDER BY data_inicio ASC";
+      $sql = "SELECT * FROM eventos ORDER BY id_event DESC";
       $res = pg_query($sql);
       $resultado = array();
 
@@ -416,8 +438,8 @@ include_once 'Carrega.class.php';
 
     function getEventosById($id='')
     {
-      //Em andamento
-      $sql    = "SELECT * FROM eventos e, categorias c WHERE c.id=e.event_cat AND e.id_event = $id";
+      //Função OK
+      $sql    = "SELECT * FROM eventos e, categorias c WHERE c.id_cat=e.event_cat AND e.id_event = $id";
       $res = pg_query($sql);
       $resultado = array();
 
@@ -427,12 +449,19 @@ include_once 'Carrega.class.php';
         $object->id         = $row["id_event"];
         $object->evento     = $row['evento'];
         $object->dataInicio = date('d/m/Y', strtotime($row['data_inicio']));
-        $object->dataFim    = date('d/m/Y', strtotime($row['dataFim']));
+        $object->dataFim    = date('d/m/Y', strtotime($row['data_fim']));
         $object->horario    = $row['horario'];
         $object->categoria  = $row['categoria'];
         $object->texto      = $row['texto'];
         $object->imagem     = $row['imagem'];
-        array_push($resultado, array("id"=>$object->id, "evento"=>$object->evento, "categoria"=>$object->categoria, "texto"=>$object->texto, "imagem"=>$object->imagem));
+        array_push($resultado, array( "id"=>$object->id,
+                                      "evento"=>$object->evento,
+                                      "categoria"=>$object->categoria,
+                                      "texto"=>$object->texto,
+                                      "imagem"=>$object->imagem,
+                                      "Data de inicio"=>$object->dataInicio,
+                                      "Data de fim"=> $object->dataFim,
+                                      "horario"=>$object->horario));
       }
       echo json_encode(array("result"=>$resultado), JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);
     }

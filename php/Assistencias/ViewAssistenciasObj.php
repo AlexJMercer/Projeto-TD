@@ -45,8 +45,9 @@ include "../Session.php";
       <div class="content-wrapper">
         <!-- Content Header (Page header) -->
         <section class="content-header">
-          <h1>Assistência estudantil</h1>
-          <a class="btn btn-primary btn-flat pull-right" href="AssistenciaObj.php"><i class="fa fa-plus"></i>   Cadastrar assistências </a>
+          <h1>Assistência estudantil
+            <a class="btn btn-primary btn-flat pull-right" href="AssistenciaObj.php"><i class="fa fa-plus"></i>   Cadastrar assistências </a>
+          </h1>
         </section>
         <!-- Main content -->
         <section class="content">
