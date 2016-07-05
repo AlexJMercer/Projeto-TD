@@ -488,28 +488,38 @@ class Select
 
    public function labelCursos($cursos = "")
    {
-     $sql    = "SELECT id_curso, nome from cursos ORDER BY nome";
-     $result = pg_query($sql);
-     $ln     = pg_num_rows($result);
+      $sql    = "SELECT id_curso, nome from cursos ORDER BY nome";
+      $result = pg_query($sql);
+      $ln     = pg_num_rows($result);
 
-     if ($ln==0)
-     {
-        echo "<small class='label bg-red'>ERRO</small>";
-     }
-     else
-     {
-        while ($a = pg_fetch_assoc($result))
-        {
-          $object       = new Cursos();
-          $object->id   = $a['id_curso'];
-          $object->nome = $a['nome'];
-
-         if(in_array($object->id, $cursos))
+      if ($ln==0)
+      {
+         echo "<small class='label bg-red'>ERRO</small>";
+      }
+      else
+      {
+         while ($a = pg_fetch_assoc($result))
          {
-           print "<small class='label bg-blue'>{$object->nome}</small>  ";
+            $object       = new Cursos();
+            $object->id   = $a['id_curso'];
+            $object->nome = $a['nome'];
+
+            if (is_array($cursos))
+            {
+               if(in_array($object->id, $cursos))
+               {
+                  print "<small class='label bg-blue'>{$object->nome}</small>  ";
+               }
+            }
+            else
+            {
+               if($object->id==$cursos)
+               {
+                  print "<small class='label bg-blue'>{$object->categoria}</small>  ";
+               }
+            }
          }
-        }
-     }
+      }
    }
 
    public function typeSelect($type="")
@@ -569,5 +579,56 @@ class Select
        }
      }
    }
+
+   public function labelStatus($status = '')
+   {
+      $sql    = "SELECT * FROM status";
+      $result = pg_query($sql);
+      $ln     = pg_num_rows($result);
+
+      if ($ln==0)
+      {
+         echo "<small class='label bg-red'>ERRO!!</small>";
+      }
+      else
+      {
+         while ($reg = pg_fetch_assoc($result))
+         {
+            $this->id     = $reg['id_sta'];
+            $this->status = $reg['status'];
+
+            if ($status==1)
+            {
+               $style = "bg-blue";
+            }
+            elseif ($status==2)
+            {
+               $style = "bg-yellow";
+            }
+            elseif ($status==3)
+            {
+               $style = "bg-green";
+            }
+            elseif ($status==4)
+            {
+               $style = "bg-aqua";
+            }
+            else
+            {
+               $style = "bg-red";
+            }
+
+            if ($status==$this->id)
+            {
+               echo "<small class='label ".$style."'>{$this->status}</small>";
+            }
+            else
+            {
+               echo "<small class='label bg-red'>ERRO!!</small>";
+            }
+        }
+      }
+   }
+
 }
 ?>

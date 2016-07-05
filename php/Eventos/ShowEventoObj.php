@@ -55,55 +55,56 @@ include "../Session.php";
                 <div class="box-header with-border">
                   <h3 class="box-title">Eventos</h3>
                 </div><!-- /.box-header -->
-<?php
+                  <?php
 
-  $id = $_POST["id"];
+                    $id = $_POST["id"];
 
-  if (isset($_POST["exibir"]))
-  {
-    $exib = new Eventos();
-    $comp = $exib->Editar($id);
-    print_r($comp);
-    //var_dump($comp);
-    if ($exib != null)
-    {
-?>
-<div class="box-body">
-  <div class="form-group">
-    <dl class="dl-horizontal">
-      <dt>Evento:</dt>
-      <dd><?php echo $comp->evento; ?></dd>
-      <dt>Categoria:</dt>
-      <dd><?php $categoria = new Select();
-                $categoria->labelCategorias($comp->categoria);
-          ?></dd>
-      <dt>Data do inicio do evento:</dt>
-      <dd><?php echo date('d/M/Y', strtotime($comp->dataInicio)); ?></dd>
-      <dt>Data de fim do evento:</dt>
-      <dd><?php echo date('d/m/Y', strtotime($comp->dataFim)); ?></dd>
-      <dt>Horário do evento:</dt>
-      <dd><?php echo $comp->horario; ?></dd>
-      <dt>Informações:</dt>
-      <dd><textarea class="form-control"  rows="8" cols="40" disabled><?php echo $comp->texto; ?></textarea></dd>
-      <dt>Logo:</dt>
-      <dd> <img class="img-responsive-pad" src="<?php echo $comp->imagem; ?>" alt="Logo do Evento" width="25%" height="25%" /> </dd>
-    </dl>
-    <form action="EditEventoObj.php" method="post">
-      <input type="hidden" name="id" value="<?php echo $id; ?>"/>
-      <div class="col-sm-6">
-        <button type="submit" name="retornar" value="retornar" class="btn bg-maroon btn-flat btn-block margin" formaction="ViewEventosObj.php"><i class="fa fa-edit"></i> Retornar para lista </button>
-      </div>
-      <div class="col-sm-6">
-        <button type="submit" name="editar" value="editar" class="btn btn-warning btn-flat btn-block margin"><i class="fa fa-edit"></i> Editar </button>
-      </div>
-    </form>
-  </div>
-</div>
+                    if (isset($_POST["exibir"]))
+                    {
+                      $exib = new Eventos();
+                      $comp = $exib->Editar($id);
+                      print_r($comp);
+                      //var_dump($comp);
+                      if ($exib != null)
+                      {
+                  ?>
+                  <div class="box-body">
+                    <div class="form-group">
+                      <dl class="dl-horizontal">
+                        <dt>Evento:</dt>
+                        <dd><?php echo $comp->evento; ?></dd>
+                        <dt>Categoria:</dt>
+                        <dd><?php $categoria = new Select();
+                                  $categoria->labelCategorias($comp->categoria);
+                            ?></dd>
+                        <dt>Data do inicio do evento:</dt>
+                        <dd><?php echo date('d/M/Y', strtotime($comp->dataInicio)); ?></dd>
+                        <dt>Data de fim do evento:</dt>
+                        <dd><?php echo date('d/m/Y', strtotime($comp->dataFim)); ?></dd>
+                        <dt>Horário do evento:</dt>
+                        <dd><?php echo $comp->horario; ?></dd>
+                        <dt>Informações:</dt>
+                        <dd><textarea class="form-control"  rows="8" cols="40" disabled><?php echo $comp->texto; ?></textarea></dd>
+                        <br>
+                        <dt>Logo:</dt>
+                        <dd> <img class="img-responsive-pad" src="<?php echo $comp->imagem; ?>" alt="Logo do Evento" width="25%" height="25%" /> </dd>
+                      </dl>
+                      <form action="EditEventoObj.php" method="post">
+                        <input type="hidden" name="id" value="<?php echo $id; ?>"/>
+                        <div class="col-sm-6">
+                          <button type="submit" name="retornar" value="retornar" class="btn bg-maroon btn-flat btn-block margin" formaction="ViewEventosObj.php"><i class="fa fa-edit"></i> Retornar para lista </button>
+                        </div>
+                        <div class="col-sm-6">
+                          <button type="submit" name="editar" value="editar" class="btn btn-warning btn-flat btn-block margin"><i class="fa fa-edit"></i> Editar </button>
+                        </div>
+                      </form>
+                    </div>
+                  </div>
 
-<?php
-    }
-  }
-?>
+                  <?php
+                      }
+                    }
+                  ?>
               <!-- general form elements disabled -->
             </div>
           </div>   <!-- /.row -->

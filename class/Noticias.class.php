@@ -83,17 +83,18 @@ class Noticias
 
       public function ListarNoticias()
       {
-         $sql    = "SELECT id_not, titulo, data FROM noticias Order by id_not desc";
+         $sql    = "SELECT n.id_not, n.titulo, n.data, n.status_id, s.id_sta FROM noticias n, status s WHERE n.status_id=s.id_sta ORDER BY id_not DESC";
          $result = pg_query($sql);
 
          while ($reg = pg_fetch_assoc($result))
          {
-            $obj         = new Noticias();
-            $obj->id     = $reg["id_not"];
-            $obj->titulo = $reg["titulo"];
-            $obj->data   = $reg["data"];
+            $object         = new Noticias();
+            $object->id     = $reg["id_not"];
+            $object->titulo = $reg["titulo"];
+            $object->data   = $reg["data"];
+            $object->status = $reg["status_id"];
 
-            $return[] = $obj;
+            $return[] = $object;
          }
          return $return;
       }

@@ -86,7 +86,7 @@ include "../Session.php";
                       <div class="form-group">
                          <label for="dataFim" class="col-sm-2 control-label"> Data de término do evento: </label>
                          <div class="col-sm-10">
-                           <input type="text" class="form-control" name="dataFim" id="dataFim" placeholder="dd/mm/yyyy" data-inputmask="'alias': 'dd/mm/yyyy'" data-mask>
+                           <input type="text" class="form-control" name="dataFim" id="dataFim" placeholder="dd/mm/yyyy" data-inputmask="'alias': 'dd/mm/yyyy'" data-mask onchange="validar_datas()">
                          </div>
                       </div>
                       <div class="form-group">
@@ -109,7 +109,7 @@ include "../Session.php";
                       </div>
                   </div><!-- /.box-body -->
                   <div class="box-footer">
-                    <button type="submit" name="enviar" value="enviar" class="btn btn-lg btn-success btn-flat btn-block" onclick="validarData()"><i class="fa fa-check"></i> Enviar </button>
+                    <button type="submit" name="enviar" value="enviar" class="btn btn-lg btn-success btn-flat btn-block" ><i class="fa fa-check"></i> Enviar </button>
                     <br>
                     <button type="reset" class="btn btn-default btn-flat btn-block btn-sm"><i class="fa fa-magic"></i> Limpar </button>
                   </div><!-- /.box-footer -->
@@ -122,9 +122,7 @@ include "../Session.php";
       </div><!-- /.content-wrapper -->
       <?php
         include '../inc/footer.html';
-        include '../inc/control-sidebar.html';
       ?>
-
     </div><!-- ./wrapper -->
     <!-- jQuery 2.1.4 -->
     <script src="../../plugins/jQuery/jQuery-2.1.4.min.js"></script>

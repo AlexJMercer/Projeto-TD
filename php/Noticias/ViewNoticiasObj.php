@@ -49,13 +49,8 @@ include "../Session.php";
       <div class="content-wrapper">
         <!-- Content Header (Page header) -->
         <section class="content-header">
-<<<<<<< HEAD
-          <h1>Notícias
-          <a class="btn btn-info btn-flat pull-right" href="NoticiaObj.php"><i class="fa fa-plus"></i>  Cadastrar notícias </a>
-=======
           <h1> Notícias
              <a class="btn btn-default btn-flat pull-right" href="NoticiaObj.php"><i class="fa fa-plus"></i>  Cadastrar notícias </a>
->>>>>>> origin/master
           </h1>
         </section>
         <!-- Main content -->
@@ -73,6 +68,7 @@ include "../Session.php";
                       <tr>
                         <th>Data</th>
                         <th>Notícia</th>
+                        <th>Status</th>
                         <th>Opções</th>
                       </tr>
                     </thead>
@@ -81,6 +77,7 @@ include "../Session.php";
 
                       $listar = new Noticias();
                       $list   = $listar->ListarNoticias();
+                      //print_r($list);
 
                       if ($list != null)
                       {
@@ -91,6 +88,20 @@ include "../Session.php";
                       <form name="view" action="EditNoticiaObj.php" method="post">
                         <td><?php echo date('d/m/Y',strtotime($line->data)); ?></td>
                         <td><?php echo $line->titulo; ?></td>
+                        <td>
+                           <?php if ($line->status==1){ ?>
+                                    <small class='badge bg-blue'>Sob Avaliação!</small>
+                           <?php } ?>
+                           <?php if ($line->status==2){ ?>
+                                    <small class='badge bg-yellow'>Rejeitado!</small>
+                           <?php } ?>
+                           <?php if ($line->status==3){ ?>
+                                    <small class='badge bg-green'>Publicado!</small>
+                           <?php } ?>
+                           <?php if ($line->status==4){ ?>
+                                    <small class='badge bg-aqua'>Publicado e editado!</small>
+                           <?php } ?>
+                        </td>
                         <td>
                           <input type='hidden' name='id' value='<?php echo $line->id; ?>'>
                           <button type="submit" name="exibir" value="exibir" formaction="ShowNoticiaObj.php" class="btn btn-flat btn-info"><i class="fa fa-expand"></i> Exibir </button>
@@ -108,9 +119,9 @@ include "../Session.php";
                             <tr class="odd gradeX">
                                <td><h2>Nada encontrado!!</h2></td>
                             </tr>
-                  <?php
-                  }
-                  ?>
+                     <?php
+                     }
+                     ?>
                     </tbody>
                   </table>
                 </div><!-- /.box-body -->
@@ -140,10 +151,6 @@ include "../Session.php";
     <script src="../../dist/js/app.min.js"></script>
     <!-- AdminLTE for demo purposes -->
     <script src="../../dist/js/demo.js"></script>
-<<<<<<< HEAD
-=======
-    <script src="../../js/teste.js"></script>
->>>>>>> origin/master
 
     <script>
       $(function ()

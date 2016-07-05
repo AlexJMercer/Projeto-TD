@@ -17,39 +17,25 @@ include_once "../../class/Carrega.class.php";
       //$object->Inserir();
       echo "</pre>";*/
 
-<<<<<<< HEAD
-      if ($object->Inserir())
-=======
-      //print_r($object);
-      $object->InserirEventos();
-
-      if (!empty($_FILES["imagem"]["name"]))
+      if ($object->InserirEventos())
       {
-        $myUpload = new Upload($_FILES["imagem"]);
-        $Up       = $myUpload->eventoUpload();
+         if (!empty($_FILES["imagem"]["name"]))
+         {
+            $myUpload = new Upload($_FILES["imagem"]);
+            $Up       = $myUpload->eventoUpload();
+             /*echo "<pre>";
+             print_r($myUpload);
+             echo "</pre>";*/
+         }
+         else
+         {
+            $noImage = new Eventos();
+            $noImage->noImageUp();
+             /*echo "<pre>";
+             print_r($noImage);
+             echo "</pre>";*/
+         }
       }
-      else
->>>>>>> origin/master
-      {
-        if (!empty($_FILES["imagem"]["name"]))
-        {
-          $myUpload = new Upload($_FILES["imagem"]);
-          $Up       = $myUpload->eventoUpload();
-          /*echo "<pre>";
-          print_r($myUpload);
-          echo "</pre>";*/
-        }
-        else
-        {
-          $noImage = new Eventos();
-          $noImage->noImageUp();
-          /*echo "<pre>";
-          print_r($noImage);
-          echo "</pre>";*/
-
-        }
-      }
-
       header("Location:ViewEventosObj.php");
    }
 

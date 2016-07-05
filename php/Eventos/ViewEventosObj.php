@@ -51,7 +51,7 @@ include "../Session.php";
         <section class="content">
           <div class="row">
             <div class="col-xs-12">
-              <div class="box">
+              <div class="box box-info">
                 <div class="box-header">
                   <h3 class="box-title">Listagem de eventos</h3>
                   <a class="btn btn-info btn-flat pull-right" href="ViewEventosObj.php" title="Atualizar resultados" data-toggle="tooltip" data-placement="left"><i class="fa fa-refresh"></i></a>
