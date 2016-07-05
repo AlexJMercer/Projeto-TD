@@ -57,7 +57,7 @@ include "../Session.php";
                   <h3 class="box-title">Eventos</h3>
                 </div><!-- /.box-header -->
                 <!-- form start -->
-                <form class="form-horizontal" id="form" method="post" action="CrudEventos.php" enctype="multipart/form-data">
+                <form class="form-horizontal" name="evento" method="post" action="CrudEventos.php" enctype="multipart/form-data">
                   <div class="box-body">
                       <div class="form-group">
                         <label class="col-sm-2 control-label" for="evento"> Evento: </label>
@@ -109,7 +109,7 @@ include "../Session.php";
                       </div>
                   </div><!-- /.box-body -->
                   <div class="box-footer">
-                    <button type="submit" name="enviar" value="enviar" class="btn btn-lg btn-success btn-flat btn-block"><i class="fa fa-check"></i> Enviar </button>
+                    <button type="submit" name="enviar" value="enviar" class="btn btn-lg btn-success btn-flat btn-block" onclick="validarData()"><i class="fa fa-check"></i> Enviar </button>
                     <br>
                     <button type="reset" class="btn btn-default btn-flat btn-block btn-sm"><i class="fa fa-magic"></i> Limpar </button>
                   </div><!-- /.box-footer -->
@@ -145,6 +145,7 @@ include "../Session.php";
     <script src="../../dist/js/app.min.js"></script>
     <!-- AdminLTE for demo purposes -->
     <script src="../../dist/js/demo.js"></script>
+    <script src="../../js/validar_datas.js"></script>
 
     <script type="text/javascript">
     $(function(){

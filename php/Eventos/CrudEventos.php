@@ -17,7 +17,19 @@ include_once "../../class/Carrega.class.php";
       //$object->Inserir();
       echo "</pre>";*/
 
+<<<<<<< HEAD
       if ($object->Inserir())
+=======
+      //print_r($object);
+      $object->InserirEventos();
+
+      if (!empty($_FILES["imagem"]["name"]))
+      {
+        $myUpload = new Upload($_FILES["imagem"]);
+        $Up       = $myUpload->eventoUpload();
+      }
+      else
+>>>>>>> origin/master
       {
         if (!empty($_FILES["imagem"]["name"]))
         {
