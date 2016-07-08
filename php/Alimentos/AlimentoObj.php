@@ -34,7 +34,7 @@ include "../Session.php";
   <body class="hold-transition skin-green-light sidebar-mini">
     <div class="wrapper">
       <?php
-            include '../inc/topotime.html';
+            include '../inc/topotime.php';
             include '../inc/menutime.php';
       ?>
       <div class="content-wrapper">

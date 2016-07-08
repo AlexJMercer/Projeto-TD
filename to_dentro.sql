@@ -128,6 +128,7 @@ create table usertype(
 INSERT INTO usertype (type) VALUES('Autor');
 INSERT INTO usertype (type) VALUES('Editor');
 INSERT INTO usertype (type) VALUES('Administrador');
+INSERT INTO usertype (type) VALUES('Revisor');
 
 create table usuarios(
 	id_user serial not null,

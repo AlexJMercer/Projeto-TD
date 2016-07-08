@@ -45,7 +45,6 @@ class Logar
         $_SESSION['nome']         = $reg['nome'];
         $_SESSION['email']        = $reg['email'];
         $_SESSION['tipo_usuario'] = $reg['type_id'];
-        $_SESSION['senha']        = $reg['senha'];
 
         if ($_SESSION['tipo_usuario']==2)
         {

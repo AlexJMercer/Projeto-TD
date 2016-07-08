@@ -32,7 +32,7 @@
   </head>
   <body class="hold-transition skin-green  sidebar-mini">
     <div class="wrapper">
-      <?php include '../inc/topotime.html';
+      <?php include '../inc/topotime.php';
 
             include '../inc/menutime.php';
 

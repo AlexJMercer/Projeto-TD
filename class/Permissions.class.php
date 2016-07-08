@@ -95,7 +95,10 @@ include_once 'Carrega.class.php';
     {
       $sql       = "SELECT * FROM permissions p WHERE p.user_id = $id";
       $resultado = pg_query($sql);
+      $num       = pg_num_rows($resultado);
 
+      if ($num==1)
+      {
         while ($registro = pg_fetch_assoc($resultado))
         {
           $_SESSION['permissao_id']      = $registro['id_perm'];
@@ -110,7 +113,14 @@ include_once 'Carrega.class.php';
           $_SESSION['perm_assistencias'] = $registro['assistencias'];
           $_SESSION['perm_setores']      = $registro['setores'];
         }
+        return $_SESSION;
+      }
+      else
+      {
+        header("Location:../index/erro_permission.php");
+      }
     }
+
 
   }
 ?>

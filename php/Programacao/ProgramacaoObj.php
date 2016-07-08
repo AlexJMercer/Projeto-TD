@@ -38,7 +38,7 @@ include_once "../../class/Carrega.class.php";
   <body class="hold-transition skin-green sidebar-mini">
     <div class="wrapper">
       <?php
-            include '../inc/topotime.html';
+            include '../inc/topotime.php';
 
             include '../inc/menutime.php';
       ?>

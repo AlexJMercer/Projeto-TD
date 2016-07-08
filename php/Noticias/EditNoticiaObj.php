@@ -40,7 +40,7 @@ include "../Session.php";
     <div class="wrapper">
       <div id="container">
       <?php
-            include '../inc/topotime.html';
+            include '../inc/topotime.php';
             include '../inc/menutime.php';
       ?>
       <div class="content-wrapper">

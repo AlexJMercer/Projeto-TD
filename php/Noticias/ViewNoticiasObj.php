@@ -42,7 +42,7 @@ include "../Session.php";
   <body class="hold-transition skin-green-light  sidebar-mini">
     <div class="wrapper">
       <?php
-            include '../inc/topotime.html';
+            include '../inc/topotime.php';
             include '../inc/menutime.php';
       ?>
       <!-- Content Wrapper. Contains page content -->
@@ -88,20 +88,8 @@ include "../Session.php";
                       <form name="view" action="EditNoticiaObj.php" method="post">
                         <td><?php echo date('d/m/Y',strtotime($line->data)); ?></td>
                         <td><?php echo $line->titulo; ?></td>
-                        <td>
-                           <?php if ($line->status==1){ ?>
-                                    <small class='badge bg-blue'>Sob Avaliação!</small>
-                           <?php } ?>
-                           <?php if ($line->status==2){ ?>
-                                    <small class='badge bg-yellow'>Rejeitado!</small>
-                           <?php } ?>
-                           <?php if ($line->status==3){ ?>
-                                    <small class='badge bg-green'>Publicado!</small>
-                           <?php } ?>
-                           <?php if ($line->status==4){ ?>
-                                    <small class='badge bg-aqua'>Publicado e editado!</small>
-                           <?php } ?>
-                        </td>
+                        <td><?php $badge = new Select();
+                                  $badge->labelStatus($line->status);  ?></td>
                         <td>
                           <input type='hidden' name='id' value='<?php echo $line->id; ?>'>
                           <button type="submit" name="exibir" value="exibir" formaction="ShowNoticiaObj.php" class="btn btn-flat btn-info"><i class="fa fa-expand"></i> Exibir </button>
@@ -111,17 +99,17 @@ include "../Session.php";
                       </form>
                     </tr>
                     <?php
-                            }
-                          }
-                          else
-                          {
-                            ?>
-                            <tr class="odd gradeX">
-                               <td><h2>Nada encontrado!!</h2></td>
-                            </tr>
-                     <?php
-                     }
-                     ?>
+                        }
+                      }
+                      else
+                      {
+                    ?>
+                      <tr class="odd gradeX">
+                        <td><h2>Nada encontrado!!</h2></td>
+                      </tr>
+                    <?php
+                    }
+                    ?>
                     </tbody>
                   </table>
                 </div><!-- /.box-body -->
@@ -136,7 +124,6 @@ include "../Session.php";
     </div><!-- ./wrapper -->
     <!-- jQuery 2.1.4 -->
     <script src="../../plugins/jQuery/jQuery-2.1.4.min.js"></script>
-
     <!-- Bootstrap 3.3.5 -->
     <script src="../../bootstrap/js/bootstrap.min.js"></script>
     <!-- DataTables -->

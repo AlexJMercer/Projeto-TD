@@ -2,7 +2,7 @@
   <!-- sidebar: style can be found in sidebar.less -->
   <section class="sidebar">
     <!-- Sidebar user panel -->
-    <div class="user-panel">
+    <!--div class="user-panel">
       <div class="pull-left image">
         <img src="../../dist/img/LogoIFSP.jpg" class="img-circle" alt="User Image">
       </div>
@@ -10,7 +10,7 @@
         <p><?php echo $_SESSION['nome']; ?></p>
         <h6><i class="fa fa-circle text-success"></i> Administrador </h6>
       </div>
-    </div>
+    </div-->
     <!-- sidebar menu: : style can be found in sidebar.less -->
     <ul class="sidebar-menu">
       <li class="header">MENU</li>
@@ -20,9 +20,13 @@
           {
             include '/admin/menuadmin.html';
           }
+          elseif($_SESSION['tipo_usuario']==4)
+          {
+            include '/revisor/menurevisor.html';
+          }
           elseif($_SESSION['tipo_usuario']==2)
           {
-            $erro = null;
+            $erro = 0;
             $valida_menu = $erro;
 
             if ($_SESSION['perm_noticias'] != null)
@@ -114,16 +118,8 @@
             {
               $valida_menu = $erro++;
             }
+            echo $valida_menu;
 
-            if($valida_menu==10)
-            {
-              header("Location:../index/erro_permission.php");
-              exit;
-            }
-            else
-            {
-              unset($valida_menu);
-            }
           }
           elseif ($_SESSION['tipo_usuario']==1)
           {

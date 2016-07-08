@@ -582,52 +582,220 @@ class Select
 
    public function labelStatus($status = '')
    {
-      $sql    = "SELECT * FROM status";
-      $result = pg_query($sql);
-      $ln     = pg_num_rows($result);
-
-      if ($ln==0)
+      if ($status==1)
       {
-         echo "<small class='label bg-red'>ERRO!!</small>";
+        echo "<small class='badge bg-blue'>Sob Avaliação!</small>";
       }
-      else
+      if ($status==2)
       {
-         while ($reg = pg_fetch_assoc($result))
-         {
-            $this->id     = $reg['id_sta'];
-            $this->status = $reg['status'];
-
-            if ($status==1)
-            {
-               $style = "bg-blue";
-            }
-            elseif ($status==2)
-            {
-               $style = "bg-yellow";
-            }
-            elseif ($status==3)
-            {
-               $style = "bg-green";
-            }
-            elseif ($status==4)
-            {
-               $style = "bg-aqua";
-            }
-            else
-            {
-               $style = "bg-red";
-            }
-
-            if ($status==$this->id)
-            {
-               echo "<small class='label ".$style."'>{$this->status}</small>";
-            }
-            else
-            {
-               echo "<small class='label bg-red'>ERRO!!</small>";
-            }
-        }
+        echo "<small class='badge bg-yellow'>Rejeitado!</small>";
       }
+      if ($status==3)
+      {
+        echo "<small class='badge bg-green'>Publicado!</small>";
+      }
+      if ($status==4)
+      {
+        echo "<small class='badge bg-aqua'>Publicado e editado!</small>";
+      }
+   }
+
+   public function totalNoticias()
+   {
+     $sql    = "SELECT * FROM noticias";
+     $result = pg_query($sql);
+     $num    = pg_num_rows($result);
+
+     if ($num!=0)
+     {
+       $total = $num;
+       return $total;
+     }
+     else
+     {
+       $total = 0;
+       return $total;
+     }
+   }
+
+   public function totalCardapios()
+   {
+     $sql    = "SELECT * FROM cardapios";
+     $result = pg_query($sql);
+     $num    = pg_num_rows($result);
+
+     if ($num!=0)
+     {
+       $total = $num;
+       return $total;
+     }
+     else
+     {
+       $total = 0;
+       return $total;
+     }
+   }
+
+   public function totalMonitorias()
+   {
+     $sql    = "SELECT * FROM monitorias";
+     $result = pg_query($sql);
+     $num    = pg_num_rows($result);
+
+     if ($num!=0)
+     {
+       $total = $num;
+       return $total;
+     }
+     else
+     {
+       $total = 0;
+       return $total;
+     }
+   }
+
+   public function totalEstagios()
+   {
+     $sql    = "SELECT * FROM estagios";
+     $result = pg_query($sql);
+     $num    = pg_num_rows($result);
+
+     if ($num!=0)
+     {
+       $total = $num;
+       return $total;
+     }
+     else
+     {
+       $total = 0;
+       return $total;
+     }
+   }
+
+   public function totalCursos()
+   {
+     $sql    = "SELECT * FROM cursos";
+     $result = pg_query($sql);
+     $num    = pg_num_rows($result);
+
+     if ($num!=0)
+     {
+       $total = $num;
+       return $total;
+     }
+     else
+     {
+       $total = 0;
+       return $total;
+     }
+   }
+
+   public function totalLocais()
+   {
+     $sql    = "SELECT * FROM local";
+     $result = pg_query($sql);
+     $num    = pg_num_rows($result);
+
+     if ($num!=0)
+     {
+       $total = $num;
+       return $total;
+     }
+     else
+     {
+       $total = 0;
+       return $total;
+     }
+   }
+
+   public function totalEventos()
+   {
+     $sql    = "SELECT * FROM eventos";
+     $result = pg_query($sql);
+     $num    = pg_num_rows($result);
+
+     if ($num!=0)
+     {
+       $total = $num;
+       return $total;
+     }
+     else
+     {
+       $total = 0;
+       return $total;
+     }
+   }
+
+   public function totalCategorias()
+   {
+     $sql    = "SELECT * FROM categorias";
+     $result = pg_query($sql);
+     $num    = pg_num_rows($result);
+
+     if ($num!=0)
+     {
+       $total = $num;
+       return $total;
+     }
+     else
+     {
+       $total = 0;
+       return $total;
+     }
+   }
+
+   public function totalAssistencias()
+   {
+     $sql    = "SELECT * FROM assistencias";
+     $result = pg_query($sql);
+     $num    = pg_num_rows($result);
+
+     if ($num!=0)
+     {
+       $total = $num;
+       return $total;
+     }
+     else
+     {
+       $total = 0;
+       return $total;
+     }
+   }
+
+   public function totalSetores()
+   {
+     $sql    = "SELECT * FROM setores";
+     $result = pg_query($sql);
+     $num    = pg_num_rows($result);
+
+     if ($num!=0)
+     {
+       $total = $num;
+       return $total;
+     }
+     else
+     {
+       $total = 0;
+       return $total;
+     }
+   }
+
+   public function totalUsuarios()
+   {
+     $sql    = "SELECT * FROM usuarios";
+     $result = pg_query($sql);
+     $num    = pg_num_rows($result);
+
+     if ($num!=0)
+     {
+       $total = $num;
+       return $total;
+     }
+     else
+     {
+       $total = 0;
+       return $total;
+     }
    }
 
 }
