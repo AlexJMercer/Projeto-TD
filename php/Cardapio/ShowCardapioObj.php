@@ -9,7 +9,7 @@ include "../Session.php";
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>AdminLTE 2 | General Form Elements</title>
+    <title>Painel de Controle - Tô Dentro IFSul</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <!-- Bootstrap 3.3.5 -->
@@ -45,26 +45,26 @@ include "../Session.php";
         <!-- Main content -->
         <section class="content">
           <div class="row">
-            <div class="col-lg-12">
+            <div class="col-xs-12">
               <!-- Horizontal Form -->
               <div class="box box-info">
                 <div class="box-header with-border">
                   <h3 class="box-title">Cardápio</h3>
                 </div><!-- /.box-header -->
-<?php
+                <?php
 
-  $id = $_POST["id"];
+                  $id = $_POST["id"];
 
-  if (isset($_POST["exibir"]))
-  {
-    $exib = new Cardapios();
-    $comp = $exib->ShowCardapios($id);
+                  if (isset($_POST["exibir"]))
+                  {
+                    $exib = new Cardapios();
+                    $comp = $exib->ShowCardapios($id);
 
-    print_r($comp);
+                    //print_r($comp);
 
-    if ($exib != null)
-    {
-?>
+                    if ($exib != null)
+                    {
+                ?>
                 <div class="box-body">
                   <div class="form-group">
                     <dl class="dl-horizontal">
@@ -80,19 +80,19 @@ include "../Session.php";
                     </dl>
                     <form action="EditCardapioObj.php" method="post">
                       <input type="hidden" name="id" value="<?php echo $id; ?>"/>
-                      <div class="col-sm-6">
+                      <div class="col-lg-6 col-xs-12">
                         <button type="submit" name="retornar" value="retornar" class="btn bg-maroon btn-flat btn-block margin" formaction="ViewCardapiosObj.php"><i class="fa fa-edit"></i> Retornar para lista </button>
                       </div>
-                      <div class="col-sm-6">
+                      <div class="col-lg-6 col-xs-12">
                         <button type="submit" name="editar" value="editar" class="btn btn-warning btn-flat btn-block margin"><i class="fa fa-edit"></i> Editar </button>
                       </div>
                     </form>
                   </div>
                 </div>
-<?php
-    }
-  }
-?>
+              <?php
+                  }
+                }
+              ?>
               </div><!-- /.box -->
               <!-- general form elements disabled -->
             </div>

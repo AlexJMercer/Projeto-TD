@@ -9,7 +9,7 @@ include_once "../../class/Carrega.class.php";
 
       if ($object->InserirCategorias())
       {
-        echo "<div class='alert alert-success alert-dismissable'>
+        echo "<div class='alert alert-success alert-dismissable col-lg-12'>
                  <button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button>
                  <h4>	<i class='icon fa fa-check'></i> Alerta!</h4>
                  Categoria cadastrada com sucesso!!

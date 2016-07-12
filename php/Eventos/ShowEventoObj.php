@@ -10,7 +10,7 @@ include "../Session.php";
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>AdminLTE 2</title>
+    <title>Painel de Controle - Tô Dentro IFSul</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <!-- Bootstrap 3.3.5 -->
@@ -63,7 +63,7 @@ include "../Session.php";
                     {
                       $exib = new Eventos();
                       $comp = $exib->Editar($id);
-                      print_r($comp);
+                      //print_r($comp);
                       //var_dump($comp);
                       if ($exib != null)
                       {
@@ -78,7 +78,7 @@ include "../Session.php";
                                   $categoria->labelCategorias($comp->categoria);
                             ?></dd>
                         <dt>Data do inicio do evento:</dt>
-                        <dd><?php echo date('d/M/Y', strtotime($comp->dataInicio)); ?></dd>
+                        <dd><?php echo date('d/m/Y', strtotime($comp->dataInicio)); ?></dd>
                         <dt>Data de fim do evento:</dt>
                         <dd><?php echo date('d/m/Y', strtotime($comp->dataFim)); ?></dd>
                         <dt>Horário do evento:</dt>

@@ -17,7 +17,7 @@
 			jQuery.ajax(
       {
 				type: "POST",
-				url: "../categoria/cadCategoria.php",
+				url: "../categoria/CadCategoria.php",
 				data: dados,
             success: function (data)
             {

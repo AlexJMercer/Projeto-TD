@@ -4,6 +4,7 @@ include_once "../../class/Carrega.class.php";
 date_default_timezone_set('America/Sao_Paulo');
 
 include "../Session.php";
+include "../Session_editor.php";
 
 ?>
 <!DOCTYPE html>
@@ -11,23 +12,25 @@ include "../Session.php";
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>AdminLTE 2</title>
+    <title>Painel de Controle - Tô Dentro IFSul</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <!-- Bootstrap 3.3.5 -->
     <link rel="stylesheet" href="../../bootstrap/css/bootstrap.min.css">
-    <!--Font Awesome-->
+    <!-- Font Awesome -->
     <link rel="stylesheet" href="../../plugins/font-awesome-4.5.0/font-awesome-4.5.0/css/font-awesome.min.css">
-    <!--Ionicons-->
+    <!-- Ionicons -->
     <link rel="stylesheet" href="../../plugins/ionicons-2.0.1/ionicons-2.0.1/css/ionicons.min.css">
     <!-- Select2 -->
     <link rel="stylesheet" href="../../plugins/select2/select2.min.css">
-    <!--FileInput-->
+    <!-- FileInput -->
     <link rel="stylesheet" href="../../plugins/fileinput/css/fileinput.min.css">
     <!-- Bootstrap time Picker -->
     <link rel="stylesheet" href="../../plugins/timepicker/bootstrap-timepicker.min.css">
     <!--Loader-->
     <link rel="stylesheet" href="../../dist/css/loader.css">
+    <!-- Toast -->
+    <link rel="stylesheet" href="../../plugins/toastr/jquery.toast.css" type="text/css">
     <!-- Theme style -->
     <link rel="stylesheet" href="../../dist/css/AdminLTE.min.css">
     <!-- AdminLTE Skins. Choose a skin from the css/skins
@@ -163,6 +166,8 @@ include "../Session.php";
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
     <!-- Bootstrap 3.3.5 -->
     <script src="../../bootstrap/js/bootstrap.min.js"></script>
+    <!-- Toast -->
+    <script src="../../plugins/toastr/jquery.toast.js"></script>
     <!-- Select2 -->
     <script src="../../plugins/select2/select2.full.min.js"></script>
     <!-- FileInput -->
