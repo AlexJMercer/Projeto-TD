@@ -78,7 +78,7 @@ include "../Session_editor.php";
           </div>
         </section>
         <?php
-          print_r($_SESSION);
+          //print_r($_SESSION);
         ?>
       </div><!-- /.content-wrapper -->
       <?php

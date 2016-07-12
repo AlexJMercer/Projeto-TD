@@ -64,8 +64,8 @@ include "../Session.php";
                   <h3 class="box-title">Listagem de notícias</h3>
                   <a class="btn btn-info btn-flat pull-right" href="ViewNoticiasObj.php" title="Atualizar resultados" data-toggle="tooltip" data-placement="left"><i class="fa fa-refresh"></i></a>
                 </div><!-- /.box-header -->
-                <div class="box-body">
-                  <table id="dataT" class="table table-bordered table-hover">
+                <div class="box-body table-responsive">
+                  <table id="dataT" class="table table-bordered table-hover dt-responsive">
                     <thead>
                       <tr>
                         <th>Data</th>
@@ -96,7 +96,7 @@ include "../Session.php";
                           <input type='hidden' name='id' value='<?php echo $line->id; ?>'>
                           <button type="submit" name="exibir" value="exibir" formaction="ShowNoticiaObj.php" class="btn btn-flat btn-info"><i class="fa fa-expand"></i> Exibir </button>
                           <button type="submit" name="editar" value="editar" class="btn btn-flat btn-warning"><i class="fa fa-edit"></i> Editar </button>
-                          <button type="submit" name="excluir" value="excluir" formaction="CrudNoticias.php" class='btn btn-flat btn-danger'><i class="fa fa-times"></i> Excluir </button>
+                          <button type="submit" name="excluir" value="excluir" formaction="ExcluirNoticiaObj.php" class='btn btn-flat btn-danger'><i class="fa fa-times"></i> Excluir </button>
                         </td>
                       </form>
                     </tr>
@@ -115,6 +115,7 @@ include "../Session.php";
                     </tbody>
                   </table>
                 </div><!-- /.box-body -->
+                <div class="box-footer"></div>
               </div><!-- /.box -->
             </div><!-- /.col -->
           </div><!-- /.row -->
@@ -145,6 +146,9 @@ include "../Session.php";
       $(function ()
       {
         $("#dataT").DataTable({
+          "responsive":{
+             "details":false
+          }
           "ordering": false,
           "oLanguage": { "sSearch": "",
                          "sInfo": "Um total de _TOTAL_ notícias (_START_ de _END_)",

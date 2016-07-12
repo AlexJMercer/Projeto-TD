@@ -52,83 +52,48 @@ include "../Session.php";
               <!-- Horizontal Form -->
               <div class="box box-info">
                 <div class="box-header with-border">
-                  <h3 class="box-title">Notícias</h3>
-                  <!-- tools box -->
-                  <div class="pull-right box-tools">
-                    <button class="btn btn-info btn-sm" data-widget="collapse" data-toggle="tooltip" title="Collapse"><i class="fa fa-minus"></i></button>
-                  </div><!-- /. tools -->
+                  <h3 class="box-title">Confirmar exclusão da notícia</h3>
                 </div><!-- /.box-header -->
-                  <?php
+               <?php
 
-                     $id = $_POST["id"];
+                  $id = $_POST["id"];
 
-                     if (isset($_POST["exibir"]))
+                  if (isset($_POST["excluir"]))
+                  {
+                     $exib = new Noticias();
+                     $comp = $exib->SelectInfoNoticias($id);
+
+                     if ($exib != null)
                      {
-                        $exib = new Noticias();
-                        $comp = $exib->ShowNoticias($id);
-
-                        if ($exib != null)
-                        {
-                  ?>
-                <div class="box-body">
-                  <div class="form-group">
-                    <div class="col-sm-7">
-                      <?php echo $comp->texto; ?>
-                      <br>
-                      <dl>
-                        <dt>Escrito por:</dt>
-                        <dd><?php echo $comp->autor; ?></dd>
-                        <dt>Data e hora:</dt>
-                        <dd><?php
-                                 echo date('d/m/Y', strtotime($comp->data));
-                                 echo " - ";
-                                 echo date('H:i', strtotime($comp->hora));
-                            ?></dd>
-                        <dt>Categorias:</dt>
-                        <dd><?php
-                                 $label = new Categorias();
-                                 $label->labelCategorias($comp->categoria);
-                        ?></dd>
-                      </dl>
-                    </div>
-                    <div class="col-sm-5" style="align: center;">
-                      <br>
-                      <img class="img-responsive-pad " src="<?php echo $comp->imagem; ?>" alt="Imagem" width="100%" height="100%" />
-                    </div>
-
-                    <form action="EditNoticiaObj.php" method="post">
-
+               ?>
+                  <div class="box-body">
+                     <div class="form-group">
+                        <dl class="dl-horizontal">
+                           <dt>Titulo da notícia:</dt>
+                           <dd><?php echo $comp->titulo; ?></dd>
+                           <dt>Status:</dt>
+                           <dd><?php $badge = new Select();
+                                     $badge->labelStatus($comp->status); ?></dd>
+                           <dt>Data e hora:</dt>
+                           <dd><?php
+                                    echo date('d/m/Y', strtotime($comp->data));
+                                    echo " - ";
+                                    echo date('H:i', strtotime($comp->hora));
+                               ?></dd>
+                        </dl>
+                     </div>
+                    <form action="CrudNoticias.php" method="post">
                       <input type="hidden" name="id" value="<?php echo $id; ?>"/>
-
                       <div class="col-sm-6">
-                        <button type="submit" name="retornar" value="retornar" class="btn bg-maroon btn-flat btn-block margin" formaction="ViewNoticiasObj.php"><i class="fa fa-edit"></i> Retornar para lista </button>
+                        <button type="submit" name="retornar" value="retornar" class="btn bg-maroon btn-flat btn-block" formaction="ViewNoticiasObj.php"><i class="fa fa-list"></i> Retornar para lista </button>
                       </div>
+                      <br>
                       <div class="col-sm-6">
-                        <button type="submit" name="editar" value="editar" class="btn btn-warning btn-flat btn-block margin"><i class="fa fa-edit"></i> Editar </button>
+                        <button type="submit" name="excluir" value="excluir" class="btn btn-danger btn-flat btn-block"><i class="fa fa-times"></i> Confirmar exclusão da notícia </button>
                       </div>
                     </form>
                   </div>
                 </div>
-              </div><!-- /.box -->
-              <div class="box box-info collapsed-box">
-                <div class="box-header with-border">
-                  <h3 class="box-title">Informações cadastradas</h3>
-                  <div class="box-tools pull-right">
-                    <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-plus"></i></button>
-                  </div><!-- /.box-tools -->
-                </div><!-- /.box-header -->
-                <div class="box-body">
-                  <dl class="dl-horizontal">
-                    <dt>Titulo:</dt>
-                    <dd><?php echo $comp->titulo; ?></dd>
-                    <dt>Linha de apoio:</dt>
-                    <dd><?php echo $comp->linha_apoio; ?></dd>
-                    <dt>Status:</dt>
-                    <dd><?php echo $comp->status; ?></dd>
-                    <dt>URL do site:</dt>
-                    <dd> <a href="<?php echo $comp->url; ?>"><?php echo $comp->url; ?></a> </dd>
-                  </dl>
-                </div><!-- /.box-body -->
               </div><!-- /.box -->
             <?php
                 }
