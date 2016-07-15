@@ -64,8 +64,8 @@ include "../Session.php";
                   <h3 class="box-title">Listagem de notícias</h3>
                   <a class="btn btn-info btn-flat pull-right" href="ViewNoticiasObj.php" title="Atualizar resultados" data-toggle="tooltip" data-placement="left"><i class="fa fa-refresh"></i></a>
                 </div><!-- /.box-header -->
-                <div class="box-body table-responsive">
-                  <table id="dataT" class="table table-bordered table-hover dt-responsive">
+                <div class="box-body">
+                  <table id="dataT" class="table table-responsive table-bordered table-hover dt-responsive">
                     <thead>
                       <tr>
                         <th>Data</th>
@@ -146,9 +146,7 @@ include "../Session.php";
       $(function ()
       {
         $("#dataT").DataTable({
-          "responsive":{
-             "details":false
-          }
+          "responsive":false,
           "ordering": false,
           "oLanguage": { "sSearch": "",
                          "sInfo": "Um total de _TOTAL_ notícias (_START_ de _END_)",

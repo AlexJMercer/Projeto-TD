@@ -120,7 +120,7 @@ include "../Session_editor.php";
                         ?>
                         <span id="listagemCategorias"></span>
                         <div class="col-sm-2">
-                         <button type="button" class="btn btn-info btn-flat" id="cadCat" name="button" style="width:100%;"><i class="fa fa-plus"></i> Adicionar Categoria </button>
+                         <button type="button" class="btn btn-info btn-flat" id="cadCat" name="button" style="width:100%;"><i class="fa fa-plus"></i> Categorias </button>
                         </div>
                       </div>
                       <div id="resposta"></div>
