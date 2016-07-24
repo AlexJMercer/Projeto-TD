@@ -34,7 +34,14 @@ include "../Session.php";
   <body class="hold-transition skin-green-light sidebar-mini">
     <div class="wrapper">
       <?php
-            include '../inc/topotime.php';
+            if ($_SESSION['tipo_usuario']==3 || $_SESSION['tipo_usuario']==4)
+            {
+              include '../inc/topo_full.php';
+            }
+            else
+            {
+              include '../inc/topo_basic.php';
+            }
             include '../inc/menutime.php';
       ?>
       <div class="content-wrapper">
@@ -92,7 +99,6 @@ include "../Session.php";
       </div><!-- /.content-wrapper -->
       <?php
         include '../inc/footer.html';
-        include '../inc/control-sidebar.html';
       ?>
     </div><!-- ./wrapper -->
     <!-- jQuery 2.1.4 -->

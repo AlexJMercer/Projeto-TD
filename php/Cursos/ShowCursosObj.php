@@ -36,7 +36,14 @@ include "../Session.php";
   <body class="hold-transition skin-gree-light sidebar-mini">
     <div class="wrapper">
       <?php
-            include '../inc/topotime.php';
+            if ($_SESSION['tipo_usuario']==3 || $_SESSION['tipo_usuario']==4)
+            {
+              include '../inc/topo_full.php';
+            }
+            else
+            {
+              include '../inc/topo_basic.php';
+            }
             include '../inc/menutime.php';
       ?>
       <div class="content-wrapper">
@@ -53,19 +60,18 @@ include "../Session.php";
                 <div class="box-header with-border">
                   <h3 class="box-title">Cursos</h3>
                 </div><!-- /.box-header -->
-<?php
+                <?php
 
-  $id = $_POST["id"];
+                  $id = $_POST["id"];
 
+                  if (isset($_POST["exibir"]))
+                  {
+                    $exib = new Cursos();
+                    $comp = $exib->EditarCursos($id);
 
-  if (isset($_POST["exibir"]))
-  {
-    $exib = new Cursos();
-    $comp = $exib->EditarCursos($id);
-
-    if ($exib != null)
-    {
-?>
+                    if ($exib != null)
+                    {
+                ?>
                 <div class="box-body">
                   <div class="form-group">
                     <dl class="dl-horizontal">
@@ -85,10 +91,10 @@ include "../Session.php";
                     </form>
                   </div>
                 </div>
-<?php
-    }
-  }
-?>
+                <?php
+                    }
+                  }
+                ?>
               </div><!-- /.box -->
               <!-- general form elements disabled -->
             </div>
